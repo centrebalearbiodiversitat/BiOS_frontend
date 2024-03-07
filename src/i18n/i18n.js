@@ -1,0 +1,20 @@
+import en from './locales/en.json'
+import es from './locales/es.json'
+import ca from './locales/ca.json'
+
+export const AVAILABLE_LOCALES = process.env.AVAILABLE_LOCALES.split(',')
+export const DEFAULT_LOCALE = process.env.DEFAULT_LOCALE
+
+const dictionaries = {
+  en,
+  es,
+  ca,
+}
+
+export function t(locale, key) {
+  if (!(locale in dictionaries)) {
+    console.error(locale, 'not found in dictionaries')
+    locale = DEFAULT_LOCALE
+  }
+  return key in dictionaries[locale]  ? dictionaries[locale][key] : dictionaries[DEFAULT_LOCALE][key]
+}
