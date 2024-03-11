@@ -1,14 +1,19 @@
-// const languages = ['en', 'de']
-//
-// export async function generateStaticParams() {
-//   return languages.map((lng) => ({ lng }))
-// }
-
-import Map from "@/components/Map";
+"use client"
+import Map from 'react-map-gl/maplibre';
 
 export default function MapPage({}) {
 	return (
-		<Map className="min-w-full h-full">
-		</Map>
+		<div className="min-w-full h-full">
+			<Map
+				initialViewState={{
+					longitude: -122.4,
+					latitude: 37.8,
+					zoom: 14
+				}}
+				style={{width: 600, height: 400}}
+				mapStyle="https://api.maptiler.com/maps/streets/style.json?key=get_your_own_key"
+			/>
+		</div>
+
 	);
 }

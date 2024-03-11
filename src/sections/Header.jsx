@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import {Image} from "@nextui-org/react";
 import LangSelector from "@/components/LangSelector";
+import HoverLink from "@/components/HoverLink";
 
 export default function Header({lang, locales}) {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -38,9 +39,11 @@ export default function Header({lang, locales}) {
 					aria-label={isMenuOpen ? "Close menu" : "Open menu"}
 					className="md:hidden text-black"
 				/>
-				<NavbarBrand className="gap-2">
-					<Image src="/images/cbb-logo.png" width="100px" radius={null}/>
-					<Image className="hidden md:flex" src="/images/cbb-text.png" width="120px" radius={null}/>
+				<NavbarBrand>
+					<HoverLink href={`/${lang}`} className="flex gap-2">
+						<Image src="/images/cbb-logo.png" width="100px" radius={null}/>
+						<Image className="hidden md:flex" src="/images/cbb-text.png" width="120px" radius={null}/>
+					</HoverLink>
 				</NavbarBrand>
 			</NavbarContent>
 

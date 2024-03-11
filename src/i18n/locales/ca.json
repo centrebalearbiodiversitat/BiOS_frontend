@@ -2,5 +2,12 @@
     "web.title": "Centre Balear de Biodiversitat",
     "web.description": "Pàgina web oficial de la base de dades y eines del Centre Balear de Biodiversitat",
 
+    "home.cards.map.title": "Mapa",
+    "home.cards.taxa.title": "Llistat taxonòmic",
+    "home.cards.genetics.title": "Genètica",
+    "home.cards.statistics.title": "Estadístiques",
+
+    "components.searchbar.label": "Cerca biodiversitat...",
+
     "lang": "Català"
 }

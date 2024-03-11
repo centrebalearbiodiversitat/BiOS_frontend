@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.5.4",
     "@nextui-org/react": "^2.2.10",
+    "@nextui-org/use-infinite-scroll": "^2.1.2",
     "framer-motion": "^11.0.8",
     "i18next": "^23.10.0",
-    "negotiator": "^0.6.3",
     "next": "14.1.2",
     "react": "^18",
     "react-dom": "^18",
