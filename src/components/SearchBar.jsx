@@ -2,7 +2,6 @@
 
 import React, {useState} from "react";
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
-import {Truculenta} from "next/dist/compiled/@next/font/dist/google";
 
 
 function SearchBarIcon() {
@@ -15,21 +14,64 @@ function SearchBarIcon() {
 	)
 }
 
-export default function SearchBar({className, label='Search...'}) {
-	const [isFocused, setIsFocused] = useState(false)
-	const elements = [
-		{'key': 1, 'label': 'Sharpia rubida'},
-		{'key': 2, 'label': 'Mus musculus'},
-		{'key': 3, 'label': 'Bela graphica'},
-	]
+const Highlight = ({text, highlight}) => {
+	// Check if the highlight string is empty
+	if (!highlight.trim()) {
+		return <span>{text}</span>;
+	}
+
+	// Split the text into parts around the highlight string
+	const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+
+	return (
+		<span>
+			{parts.map((part, index) =>
+			  part.toLowerCase() === highlight.toLowerCase() ? (
+		        <span key={index} className="bg-primary bg-opacity-80">
+				{part}
+				</span>
+				) : (
+				  part
+				)
+			)}
+	    </span>
+	);
+};
+
+
+export default function SearchBar({className, data, onSelected, onInput, label = 'Search...'}) {
+	const [isFocused, setIsFocused] = useState(false);
+	const [search, setSearch] = useState('');
+
+	function onInputChange(input) {
+		if (input)
+			setSearch(input);
+		else
+			setSearch('');
+
+		onInput(input);
+	}
+
+	function onFocusChange(focus) {
+		setIsFocused(focus);
+		if (!focus) {
+			setSearch('');
+		}
+	}
 
 	return (
 		<div className={`${className}`}>
-			<Autocomplete variant={"faded"} defaultItems={elements} onFocusChange={(focus) => setIsFocused(focus)}
-			              label={label} onSelectionChange={(selected) => console.log(selected)}
-			              className={`w-full ${isFocused ? "" : "opacity-85"} hover:opacity-100 transition-all text-center`}
+			<Autocomplete variant={"faded"} defaultItems={data} onFocusChange={onFocusChange}
+			              label={label} onSelectionChange={onSelected} onInputChange={onInputChange}
+			              className={`w-full transition-all text-center`}
 			              selectorIcon={<SearchBarIcon/>} disableSelectorIconRotation={true}>
-				{(animal) => <AutocompleteItem key={animal.key}>{animal.label}</AutocompleteItem>}
+				{
+					(obj) => (
+						<AutocompleteItem key={obj.id} textValue={obj.name}>
+							<Highlight text={obj.name} highlight={search}/>
+						</AutocompleteItem>
+					)
+				}
 			</Autocomplete>
 		</div>
 	);

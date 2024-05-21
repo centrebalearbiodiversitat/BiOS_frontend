@@ -2,8 +2,8 @@ import en from './locales/en.json'
 import es from './locales/es.json'
 import ca from './locales/ca.json'
 
-export const AVAILABLE_LOCALES = process.env.AVAILABLE_LOCALES.split(',')
-export const DEFAULT_LOCALE = process.env.DEFAULT_LOCALE
+export const AVAILABLE_LOCALES = process.env.LOCALE_AVAILABLES.split(',')
+export const DEFAULT_LOCALE = process.env.LOCALE_DEFAULT
 
 const dictionaries = {
   en,

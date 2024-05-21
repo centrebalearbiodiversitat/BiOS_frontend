@@ -1,9 +1,12 @@
 import {Inter} from "next/font/google";
-import "@/globals.css";
+
 import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
 import Providers from "@/app/providers";
 import {AVAILABLE_LOCALES, t} from "@/i18n/i18n"
+
+import "@/globals.css";
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 const inter = Inter({subsets: ["latin"]});
 
