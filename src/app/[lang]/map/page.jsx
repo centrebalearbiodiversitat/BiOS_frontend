@@ -6,11 +6,14 @@ import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
 import MapLibre from "@/components/MapLibre";
 import MapSearchBar from "@/components/MapSearchBar";
-import {Badge} from "@nextui-org/react";
 
 
 async function fetchOccurrences(taxa, locations) {
 	const layers = [];
+
+	if (locations.length === 0) {
+		locations = [1]
+	}
 
 	if (taxa && locations) {
 		for (const taxon of taxa) {
