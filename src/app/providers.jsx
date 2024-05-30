@@ -2,9 +2,9 @@
 
 import {NextUIProvider} from '@nextui-org/react'
 
-export default function Providers({children}) {
+export default function Providers({children, className}) {
 	return (
-		<NextUIProvider>
+		<NextUIProvider className={className}>
 			{children}
 		</NextUIProvider>
 	)

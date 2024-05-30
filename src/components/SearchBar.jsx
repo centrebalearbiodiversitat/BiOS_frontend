@@ -25,7 +25,7 @@ const Highlight = ({text, highlight}) => {
 
 	return (
 		<span>
-			{parts.map((part, index) =>
+			{parts && parts.map((part, index) =>
 			  part.toLowerCase() === highlight.toLowerCase() ? (
 		        <span key={index} className="bg-primary bg-opacity-80">
 				{part}

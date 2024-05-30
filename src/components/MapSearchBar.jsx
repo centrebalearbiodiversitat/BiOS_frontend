@@ -3,16 +3,11 @@
 import React, {useState} from "react";
 import taxonomy from "@/API/taxonomy"
 import SearchBar from "@/components/SearchBar";
-import {redirect, useRouter} from "next/navigation";
+import {redirect} from "next/navigation";
 
 
-export default function CBBSearchBar({className, label = 'Search...', lang}) {
-	const [query, setQuery] = useState([0])
-	const router = useRouter()
-
-	function onSelected(payload) {
-		router.push(`/${lang}/taxon/${payload}`)
-	}
+export default function MapSearchBar({className, label = 'Search...', onSelected}) {
+	const [query, setQuery] = useState([])
 
 	function parseResults(payload) {
 		setQuery(payload);

@@ -15,7 +15,7 @@ export default function Taxon({params: {id}}) {
 	const [children, setChildren] = useState([]);
 
 	useEffect(() => {
-		taxonomy.taxon(id)
+		taxonomy.get(id)
 			.then((r) => setTaxon(r))
 		taxonomy.parent(id)
 			.then((r) => setHigherTaxonomy(r))

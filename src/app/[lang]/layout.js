@@ -16,20 +16,20 @@ export default function RootLayout({children, params: {lang}}) {
 		<html>
 			<head>
 				<meta charSet="UTF-8"/>
-				<meta name="viewport" content="width=device-width"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
 				{/*<meta name="generator" content={Astro.generator}/>*/}
 				<title>{t(lang,  'web.title')}</title>
 				<meta name="description" content={t(lang,  'web.description')}/>
 			</head>
-			<body className="h-full">
-				<Providers>
-					<main className="h-screen">
-						<Header lang={lang} locales={AVAILABLE_LOCALES}/>
+			<body>
+				<Providers className="flex flex-col h-screen m-0">
+					<Header lang={lang} locales={AVAILABLE_LOCALES}/>
+					<main className="flex flex-1 flex-col">
 						{children}
 					</main>
-					<Footer/>
 				</Providers>
+				<Footer/>
 			</body>
 		</html>
 	);

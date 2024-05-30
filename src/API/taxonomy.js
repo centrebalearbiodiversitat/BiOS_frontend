@@ -10,7 +10,7 @@ function search(name) {
 	return requests.GET(`${TAXONOMY_PATH}/search`, {name})
 }
 
-function taxon(id) {
+function get(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon`, {id})
 }
 
@@ -25,7 +25,7 @@ function children(id) {
 module.exports = {
 	list,
 	search,
-	taxon,
+	get,
 	parent,
 	children,
 }
