@@ -15,7 +15,7 @@ export default function LangSelector({locales, lang}) {
 	return (
 		<Dropdown className="min-w-[100px]">
 			<DropdownTrigger>
-				<Button variant="bordered">
+				<Button radius="full" className="bg-white/60 border-0 backdrop-blur-2xl">
 					{lang}
 				</Button>
 			</DropdownTrigger>

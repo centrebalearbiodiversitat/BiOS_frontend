@@ -1,10 +1,11 @@
 import React from "react";
+import Link from "next/link";
 
-export default function TaxonName({id, name}) {
+export default function TaxonName({id, lang, name}) {
 
 	return (
-		<p>
+		<Link href={`/${lang}/taxon/${id}`} className="first-letter:uppercase">
 			{name}
-		</p>
+		</Link>
 	);
 }

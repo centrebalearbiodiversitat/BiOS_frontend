@@ -26,12 +26,12 @@ const Highlight = ({text, highlight}) => {
 	return (
 		<span>
 			{parts && parts.map((part, index) =>
-			  part.toLowerCase() === highlight.toLowerCase() ? (
-		        <span key={index} className="bg-primary bg-opacity-80">
+				part.toLowerCase() === highlight.toLowerCase() ? (
+					<span key={index} className="bg-primary bg-opacity-80">
 				{part}
 				</span>
 				) : (
-				  part
+					part
 				)
 			)}
 	    </span>
@@ -63,7 +63,13 @@ export default function SearchBar({className, data, onSelected, onInput, label =
 		<div className={`${className}`}>
 			<Autocomplete variant={"faded"} defaultItems={data} onFocusChange={onFocusChange}
 			              label={label} onSelectionChange={onSelected} onInputChange={onInputChange}
-			              className={`w-full transition-all text-center`}
+			              className={`w-full transition-all text-center`} radius="full"
+			              inputProps={{
+				              classNames: {
+					              input: "ml-1",
+					              inputWrapper: "bg-white border-0",
+				              },
+			              }}
 			              selectorIcon={<SearchBarIcon/>} disableSelectorIconRotation={true}>
 				{
 					(obj) => (

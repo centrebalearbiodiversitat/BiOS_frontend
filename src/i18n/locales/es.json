@@ -1,13 +1,28 @@
 {
-    "web.title": "Centro Balear de Biodiversidad",
+    "web.title": "Centre Balear de Biodiversitat",
     "web.description": "Página web oficial de la base de datos y herramientas del Centro Balear de Biodiversidad",
 
-    "home.cards.map.title": "Mapa",
-    "home.cards.taxa.title": "Listado taxonómico",
-    "home.cards.genetics.title": "Genética",
-    "home.cards.statistics.title": "Estadísticas",
+
+	"home.title": "Acceso a los datos de especies de las Islas Baleares",
+	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
+
+
+	"taxon.sidebar.classification": "Clasificación",
+	"taxon.sidebar.children": "Descendientes",
+	"taxon.main.distribution": "Distribución",
+
 
 	"components.searchbar.label": "Busca biodiversidad...",
+    "components.searchbar.filter.map": "Mapa",
+    "components.searchbar.filter.taxonomy": "Taxonomía",
+    "components.searchbar.filter.genetics": "Genética",
+    "components.searchbar.filter.authors": "Autores",
+
+	"components.header.button.home": "Home",
+	"components.header.button.map": "Mapa",
+	"components.header.button.taxonomy": "Taxonomía",
+	"components.header.button.genetics": "Genética",
+
 
     "lang": "Castellano"
 }

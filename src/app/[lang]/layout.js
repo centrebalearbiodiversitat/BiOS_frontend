@@ -23,7 +23,7 @@ export default function RootLayout({children, params: {lang}}) {
 				<meta name="description" content={t(lang,  'web.description')}/>
 			</head>
 			<body>
-				<Providers className="flex flex-col h-screen m-0">
+				<Providers className="flex flex-col min-h-screen m-0">
 					<Header lang={lang} locales={AVAILABLE_LOCALES}/>
 					<main className="flex flex-1 flex-col">
 						{children}

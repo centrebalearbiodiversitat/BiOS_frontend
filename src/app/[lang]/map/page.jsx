@@ -27,6 +27,8 @@ async function fetchOccurrences(taxa, locations) {
 				for (const occurrence of payload) {
 					features.push(
 						{
+							id: occurrence.id,
+							properties: occurrence,
 							geometry: {
 								type: "Point",
 								coordinates: [occurrence.decimalLongitude, occurrence.decimalLatitude]
@@ -63,6 +65,7 @@ export default function MapPage({params: {lang}}) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const [occus, setOccus] = useState([]);
+	const [occuPopup, setOccuPopup] = useState(null);
 	const [taxa, setTaxa] = useState([]);
 
 	useEffect(() => {
@@ -77,7 +80,7 @@ export default function MapPage({params: {lang}}) {
 			taxa,
 		).then(r => setTaxa(r));
 
-	}, [searchParams]);
+	}, [searchParams, setOccus, setTaxa]);
 
 	function onSelected(id) {
 		if (id) {
@@ -87,9 +90,22 @@ export default function MapPage({params: {lang}}) {
 		}
 	}
 
+	function onSelectedOccurrences(feature) {
+		if (feature != null) {
+			const occurrence = feature.properties;
+			console.log(occurrence)
+			taxonomy.get(occurrence.taxonomy).then(r => {
+				console.log(occurrence)
+				console.log(r)
+				occurrence.taxonomy = r;
+				setOccuPopup(occurrence);
+			})
+		}
+	}
+
 	return (
 		<>
-			<MapLibre data={occus}>
+			<MapLibre data={occus} onClick={onSelectedOccurrences}>
 				<div className="h-[100%] grid grid-cols-3 sm:grid-cols-12">
 					<ul className="bg-transparent relative col-span-1 sm:col-span-2 m-2 overflow-y-auto">
 						{
@@ -99,8 +115,23 @@ export default function MapPage({params: {lang}}) {
 								</li>
 							))
 						}
+						{
+							occuPopup && (
+								<div className="rounded-md bg-secondary my-2 p-2 text-center">
+									<p className="text-white">{occuPopup?.taxonomy.name}</p>
+									<p>{occuPopup.id}</p>
+									<p>{occuPopup.sample_id}</p>
+									<p>{occuPopup.voucher}</p>
+									<p>{occuPopup.eventDate}</p>
+									<p>{occuPopup.basisOfRecord}</p>
+									<p>{occuPopup.decimalLatitude}</p>
+									<p>{occuPopup.decimalLongitude}</p>
+								</div>
+							)
+						}
 					</ul>
-					<MapSearchBar className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto" onSelected={onSelected}/>
+					<MapSearchBar className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto"
+					              onSelected={onSelected}/>
 				</div>
 			</MapLibre>
 		</>

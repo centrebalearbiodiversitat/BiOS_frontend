@@ -8,16 +8,16 @@ const style = {
 	sources: {
 		osm: {
 			type: 'raster',
-			tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+			// tiles: ['https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}'],
+			// tiles: ['https://www.ign.es/wmts/pnoa-ma?layer=OI.OrthoimageCoverage&style=default&tilematrixset=EPSG%3A3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fjpeg&TileMatrix={z}&TileCol={x}&TileRow={y}'],
+			tiles: ['https://wmts-mapa-lidar.idee.es/lidar?layer=EL.GridCoverageDSM&style=default&tilematrixset=EPSG%3A3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix={z}&TileCol={x}&TileRow={y}'],
+			// tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
 			tileSize: 256,
-			attribution: '&copy; OpenStreetMap Contributors',
-			maxzoom: 19
 		},
 		terrainSource: {
 			type: 'raster-dem',
 			tiles: ['/PRova/{z}/{x}/{y}.png'],
 			tileSize: 256,
-			maxzoom: 16
 		},
 		hillshadeSource: {
 			type: 'raster-dem',
@@ -45,9 +45,17 @@ const style = {
 			id: 'hills',
 			type: 'hillshade',
 			source: 'hillshadeSource',
-			layout: {visibility: 'visible'},
 			paint: {'hillshade-shadow-color': 'rgba(6,46,98,1)'}
-		}
+		},
+		// {
+		// 	id: 'water-layer',
+		// 	type: 'hillshade',
+		// 	source: 'marSource',
+		// 	paint: {
+		// 		'hillshade-color': '#00ffff',
+		// 		'hillshade-opacity': 0.5
+		// 	}
+		// },
 	],
 	terrain: {
 		source: 'terrainSource',
@@ -56,10 +64,12 @@ const style = {
 };
 
 
-export default function MapLibre({data, children, nav= true}) {
+export default function MapLibre({data, children, onClick = null, nav = true}) {
 	const [lng] = useState(2.75802);
 	const [lat] = useState(39.37029);
-	const [zoom] = useState(8);
+	const [zoom] = useState(7);
+	const [bearing] = useState(-8);
+	const [pitch] = useState(0);
 	const mapRef = useRef();
 
 	function flyTo(layer) {
@@ -83,24 +93,92 @@ export default function MapLibre({data, children, nav= true}) {
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
 				<Layer
 					id={`points-${idx}`}
-					type="circle"
+					type="heatmap"
+					// paint={{
+					// 	'circle-radius': 5,
+					// 	'circle-color': `rgba(${randomColor()},${randomColor()},${randomColor()},.8)`,
+					// 	// 'circle-color': `rgba(252, 186, 3)`,
+					// 	// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
+					// }}
 					paint={{
-						'circle-radius': 5,
-						'circle-color': `rgba(${randomColor()},${randomColor()},${randomColor()},.8)`,
-						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
-					}}
+	                    // Increase the heatmap weight based on frequency and property magnitude
+	                    'heatmap-weight': [
+	                        'interpolate',
+	                        ['linear'],
+	                        ['get', 'mag'],
+	                        0,
+	                        0,
+	                        6,
+	                        1
+	                    ],
+	                    // Increase the heatmap color weight weight by zoom level
+	                    // heatmap-intensity is a multiplier on top of heatmap-weight
+	                    'heatmap-intensity': [
+	                        'interpolate',
+	                        ['linear'],
+	                        ['zoom'],
+	                        0,
+	                        1,
+	                        9,
+	                        3
+	                    ],
+	                    // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+	                    // Begin color ramp at 0-stop with a 0-transparancy color
+	                    // to create a blur-like effect.
+	                    'heatmap-color': [
+	                        'interpolate',
+	                        ['linear'],
+	                        ['heatmap-density'],
+	                        0,
+	                        'rgba(33,102,172,0)',
+	                        0.2,
+	                        'rgb(250,211,211)',
+	                        0.4,
+	                        'rgb(253,186,186)',
+	                        0.6,
+	                        'rgb(255,147,147)',
+	                        0.8,
+	                        'rgb(246,85,85)',
+	                        1,
+	                        'rgb(201,1,26)'
+	                    ],
+	                    // Adjust the heatmap radius by zoom level
+	                    'heatmap-radius': [
+	                        'interpolate',
+	                        ['linear'],
+	                        ['zoom'],
+	                        0,
+	                        2,
+	                        9,
+	                        20
+	                    ],
+						'heatmap-opacity': 0.7
+	                    // Transition from heatmap to circle layer by zoom level
+	                    // 'heatmap-opacity': [
+	                    //     'interpolate',
+	                    //     ['linear'],
+	                    //     ['zoom'],
+	                    //     7,
+	                    //     1,
+	                    //     9,
+	                    //     0
+	                    // ]
+	                }
+	            }
 				/>
 			</Source>
 		);
 	}
 
 	function randomColor() {
-		return Math.floor(Math.random()*255)
+		return Math.floor(Math.random() * 255)
 	}
 
 	return (
-		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom: zoom}} mapStyle={style}
-		     onClick={() => nav && flyTo(0)}>
+		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}} mapStyle={style}
+		     interactiveLayerIds={['points-0', 'points-1']}
+		     doubleClickZoom={false} onDblClick={(e) => nav && flyTo(0)}
+		     onClick={e => onClick && onClick(e.features.length === 0 ? null : e.features[0])}>
 			{/*<Source id="layers" type="geojson" data={map}>*/}
 			{/*	<Layer*/}
 			{/*		id="polygons-layer"*/}
