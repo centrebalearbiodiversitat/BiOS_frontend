@@ -15,6 +15,6 @@ export default function MapSearchBar({className, label = 'Search...', onSelected
 
 	return (
 		<SearchBar data={query} onSelected={onSelected} className={className} label={label}
-		           onInput={input => taxonomy.search(input).then(parseResults)}/>
+		           onInput={input => taxonomy.search(input).then(parseResults)} border={true}/>
 	);
 }

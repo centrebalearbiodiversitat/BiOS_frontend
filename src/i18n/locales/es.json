@@ -12,6 +12,10 @@
 	"taxon.main.distribution": "Distribución",
 
 
+	"map.drawer.close": "Cerrar",
+	"map.drawer.selectedTaxa": "Taxones seleccionados",
+
+
 	"components.searchbar.label": "Busca biodiversidad...",
     "components.searchbar.filter.map": "Mapa",
     "components.searchbar.filter.taxonomy": "Taxonomía",

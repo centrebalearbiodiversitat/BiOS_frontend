@@ -36,6 +36,11 @@ const style = {
 		// }
 	},
 	layers: [
+          {
+            id: 'background',
+            type: 'background',
+            paint: { 'background-color': '#ACD1D2' }
+          },
 		{
 			id: 'osm',
 			type: 'raster',
@@ -89,11 +94,16 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 			return undefined;
 		}
 
+		const rR = Math.floor(Math.random() * 255);
+		const rG = Math.floor(Math.random() * 255);
+		const rB = Math.floor(Math.random() * 255);
+
 		return (
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
 				<Layer
 					id={`points-${idx}`}
 					type="heatmap"
+					// type="heatmap"
 					// paint={{
 					// 	'circle-radius': 5,
 					// 	'circle-color': `rgba(${randomColor()},${randomColor()},${randomColor()},.8)`,
@@ -113,15 +123,15 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 	                    ],
 	                    // Increase the heatmap color weight weight by zoom level
 	                    // heatmap-intensity is a multiplier on top of heatmap-weight
-	                    'heatmap-intensity': [
-	                        'interpolate',
-	                        ['linear'],
-	                        ['zoom'],
-	                        0,
-	                        1,
-	                        9,
-	                        3
-	                    ],
+	                    // 'heatmap-intensity': [
+	                    //     'interpolate',
+	                    //     ['linear'],
+	                    //     ['zoom'],
+	                    //     0,
+	                    //     1,
+	                    //     9,
+	                    //     3
+	                    // ],
 	                    // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
 	                    // Begin color ramp at 0-stop with a 0-transparancy color
 	                    // to create a blur-like effect.
@@ -130,17 +140,17 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 	                        ['linear'],
 	                        ['heatmap-density'],
 	                        0,
-	                        'rgba(33,102,172,0)',
+	                        `rgba(${rR},${rG},${rB},0)`,
 	                        0.2,
-	                        'rgb(250,211,211)',
+	                        `rgba(${rR},${rG},${rB},0.2)`,
 	                        0.4,
-	                        'rgb(253,186,186)',
+	                        `rgba(${rR},${rG},${rB},0.4)`,
 	                        0.6,
-	                        'rgb(255,147,147)',
+	                        `rgba(${rR},${rG},${rB},0.6)`,
 	                        0.8,
-	                        'rgb(246,85,85)',
+	                        `rgba(${rR},${rG},${rB},0.8)`,
 	                        1,
-	                        'rgb(201,1,26)'
+	                        `rgba(${rR},${rG},${rB},1)`,
 	                    ],
 	                    // Adjust the heatmap radius by zoom level
 	                    'heatmap-radius': [
@@ -170,13 +180,9 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 		);
 	}
 
-	function randomColor() {
-		return Math.floor(Math.random() * 255)
-	}
-
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}} mapStyle={style}
-		     interactiveLayerIds={['points-0', 'points-1']}
+		     interactiveLayerIds={['points-0', 'points-1']} style={{flex: 1}}
 		     doubleClickZoom={false} onDblClick={(e) => nav && flyTo(0)}
 		     onClick={e => onClick && onClick(e.features.length === 0 ? null : e.features[0])}>
 			{/*<Source id="layers" type="geojson" data={map}>*/}
@@ -197,7 +203,7 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 					)
 				})
 			}
-			{nav && <NavigationControl showCompass={true} visualizePitch={true} showZoom={true}/>}
+			{nav && <NavigationControl showCompass={true} position="bottom-right" visualizePitch={true} showZoom={true}/>}
 			{children}
 		</Map>
 	);

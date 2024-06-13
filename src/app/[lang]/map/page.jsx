@@ -5,7 +5,12 @@ import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
 import MapLibre from "@/components/MapLibre";
-import MapSearchBar from "@/components/MapSearchBar";
+import Drawer from "@/components/Drawer";
+import CBBSearchBar from "@/components/CBBSearchBar";
+import {t} from "@/i18n/i18n";
+import Figure from "@/components/Figure";
+import {HexColorPicker} from "react-colorful";
+import {PopoverColorPicker} from "@/components/PopoverColorPicker";
 
 
 async function fetchOccurrences(taxa, locations) {
@@ -69,8 +74,9 @@ export default function MapPage({params: {lang}}) {
 	const [taxa, setTaxa] = useState([]);
 
 	useEffect(() => {
-		const taxa = searchParams.getAll('taxon')
-		const locs = searchParams.getAll('loc')
+		const taxa = searchParams.getAll('taxon');
+		const locs = searchParams.getAll('loc');
+
 		fetchOccurrences(
 			taxa,
 			locs,
@@ -90,6 +96,28 @@ export default function MapPage({params: {lang}}) {
 		}
 	}
 
+	const FILTER_BUTTONS = [
+		{
+			textKey: "components.searchbar.filter.taxonomy",
+			onSelected: onSelected,
+			onInput: e => taxonomy.search(e)
+		},
+		{
+			textKey: "components.searchbar.filter.authors",
+			onSelected: () => {
+			},
+			onInput: () => {
+			}
+		},
+		{
+			textKey: "components.searchbar.filter.genetics",
+			onSelected: () => {
+			},
+			onInput: () => {
+			}
+		},
+	]
+
 	function onSelectedOccurrences(feature) {
 		if (feature != null) {
 			const occurrence = feature.properties;
@@ -105,35 +133,49 @@ export default function MapPage({params: {lang}}) {
 
 	return (
 		<>
-			<MapLibre data={occus} onClick={onSelectedOccurrences}>
-				<div className="h-[100%] grid grid-cols-3 sm:grid-cols-12">
-					<ul className="bg-transparent relative col-span-1 sm:col-span-2 m-2 overflow-y-auto">
+			<div className="absolute top-0 h-full w-full">
+				<MapLibre data={occus} onClick={onSelectedOccurrences}/>
+			</div>
+			<Drawer lang={lang}>
+				<div className="h-full p-4">
+					<CBBSearchBar className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto"
+					              lang={lang} rounded={false} filters={FILTER_BUTTONS}/>
+					<h4 className="p-2 border-b-1 border-black m-2">
+						{t(lang, 'map.drawer.selectedTaxa')}
+					</h4>
+					<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2">
 						{
-							taxa && taxa.map((taxon, idx) => (
-								<li className="rounded-xl bg-primary my-2 p-2 text-center" key={idx}>
-									{taxon.name}
+							taxa.map((taxon, idx) => (
+								<li className="bg-white p-3 flex flex-row items-center" key={idx}>
+									<PopoverColorPicker color={"#aabbcc"} onChange={() => {}} />
+									<div>
+										<p className="text-lg font-semibold">
+											{taxon.name}
+										</p>
+										<p className="text-md font-light">
+											{taxon.scientificNameAuthorship}
+										</p>
+									</div>
 								</li>
 							))
 						}
-						{
-							occuPopup && (
-								<div className="rounded-md bg-secondary my-2 p-2 text-center">
-									<p className="text-white">{occuPopup?.taxonomy.name}</p>
-									<p>{occuPopup.id}</p>
-									<p>{occuPopup.sample_id}</p>
-									<p>{occuPopup.voucher}</p>
-									<p>{occuPopup.eventDate}</p>
-									<p>{occuPopup.basisOfRecord}</p>
-									<p>{occuPopup.decimalLatitude}</p>
-									<p>{occuPopup.decimalLongitude}</p>
-								</div>
-							)
-						}
+						{/*	{*/}
+						{/*		occuPopup && (*/}
+						{/*			<div className="rounded-md bg-secondary my-2 p-2 text-center">*/}
+						{/*				<p className="text-white">{occuPopup?.taxonomy.name}</p>*/}
+						{/*				<p>{occuPopup.id}</p>*/}
+						{/*				<p>{occuPopup.sample_id}</p>*/}
+						{/*				<p>{occuPopup.voucher}</p>*/}
+						{/*				<p>{occuPopup.eventDate}</p>*/}
+						{/*				<p>{occuPopup.basisOfRecord}</p>*/}
+						{/*				<p>{occuPopup.decimalLatitude}</p>*/}
+						{/*				<p>{occuPopup.decimalLongitude}</p>*/}
+						{/*			</div>*/}
+						{/*		)*/}
+						{/*	}*/}
 					</ul>
-					<MapSearchBar className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto"
-					              onSelected={onSelected}/>
 				</div>
-			</MapLibre>
+			</Drawer>
 		</>
 	);
 }

@@ -24,7 +24,7 @@ export default function Header({lang, locales}) {
 	];
 
 	return (
-		<Navbar maxWidth="full" className="py-3 shadow-sm backdrop-blur-2xl" >
+		<Navbar maxWidth="full" className="py-3 bg-white/60 shadow-sm backdrop-blur-sm">
 			<NavbarContent>
 				<NavbarMenuToggle
 					className="md:hidden text-black"

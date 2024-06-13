@@ -39,7 +39,7 @@ const Highlight = ({text, highlight}) => {
 };
 
 
-export default function SearchBar({className, data, onSelected, onInput, label = 'Search...'}) {
+export default function SearchBar({className, data, onSelected, onInput, label = 'Search...', border= false}) {
 	const [isFocused, setIsFocused] = useState(false);
 	const [search, setSearch] = useState('');
 
@@ -67,7 +67,7 @@ export default function SearchBar({className, data, onSelected, onInput, label =
 			              inputProps={{
 				              classNames: {
 					              input: "ml-1",
-					              inputWrapper: "bg-white border-0",
+					              inputWrapper: `bg-white border-${border ? 1 : 0}`,
 				              },
 			              }}
 			              selectorIcon={<SearchBarIcon/>} disableSelectorIconRotation={true}>

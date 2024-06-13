@@ -1,6 +1,8 @@
 import {t} from "@/i18n/i18n";
 import CBBSearchBar from "@/components/CBBSearchBar";
-import CBBButton from "@/components/CBBButton";
+import taxonomy from "@/API/taxonomy";
+import {redirect} from "next/navigation";
+import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 
 
 export default function Home({params: {lang}}) {
@@ -8,12 +10,13 @@ export default function Home({params: {lang}}) {
 	return (
 		<div className="h-full w-full grid grid-cols-12 absolute top-0"
 		     style={{
-				 backgroundRepeat: 'no-repeat',
+			     backgroundRepeat: 'no-repeat',
 			     backgroundSize: 'cover',
 			     backgroundPosition: 'center',
-				 backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/9/92/Darter_August_2007-22_edit.jpg')"
+			     backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/9/92/Darter_August_2007-22_edit.jpg')"
 		     }}>
-			<div className="col-start-4 col-span-6 2xl:col-start-5 2xl:col-span-4 flex flex-col justify-center items-center">
+			<div
+				className="col-start-4 col-span-6 2xl:col-start-5 2xl:col-span-4 flex flex-col justify-center items-center">
 				<header className="flex flex-col justify-center items-center mb-[100px] space-y-2">
 					<h3 className="text-white">
 						{t(lang, "home.subtitle")}
@@ -22,7 +25,7 @@ export default function Home({params: {lang}}) {
 						{t(lang, "home.title")}
 					</h2>
 				</header>
-				<CBBSearchBar lang={lang}/>
+				<FullCBBSearchBar lang={lang}/>
 			</div>
 		</div>
 	);

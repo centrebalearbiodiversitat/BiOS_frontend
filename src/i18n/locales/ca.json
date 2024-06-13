@@ -12,6 +12,10 @@
 	"taxon.main.distribution": "Distribució",
 
 
+	"map.drawer.close": "Tanca",
+	"map.drawer.selectedTaxa": "Taxons seleccionats",
+
+
     "components.searchbar.label": "Cerca biodiversitat...",
     "components.searchbar.filter.map": "Mapa",
     "components.searchbar.filter.taxonomy": "Taxonomia",
