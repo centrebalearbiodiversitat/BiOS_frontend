@@ -4,31 +4,34 @@ import {useEffect, useState} from "react";
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
-import MapLibre from "@/components/MapLibre";
 import Drawer from "@/components/Drawer";
 import CBBSearchBar from "@/components/CBBSearchBar";
 import {t} from "@/i18n/i18n";
-import Figure from "@/components/Figure";
-import {HexColorPicker} from "react-colorful";
-import {PopoverColorPicker} from "@/components/PopoverColorPicker";
+import MapLibre from "@/components/maplibre/MapLibre";
+import MapLibreCard from "@/components/maplibre/MapLibreCard";
 
 
-async function fetchOccurrences(taxa, locations) {
-	const layers = [];
+async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
+	const taxaColors = {};
+	const taxaToLoc = {};
 
-	if (locations.length === 0) {
-		locations = [1]
+	if (locations.size === 0) {
+		locations.add(null)
 	}
 
-	if (taxa && locations) {
-		for (const taxon of taxa) {
-			for (const location of locations) {
+	for (const taxon of taxa) {
+		for (const location of locations) {
+			const taxaToLocKey = `${taxon}_${location}`;
+
+			if (savedTaxaToLoc.hasOwnProperty(taxaToLocKey)) {
+				taxaToLoc[taxaToLocKey] = savedTaxaToLoc[taxaToLocKey];
+			} else {
 				const payload = await occurrences.list(
 					taxon,
 					location
 				);
 
-				const features = []
+				const features = [];
 				for (const occurrence of payload) {
 					features.push(
 						{
@@ -41,24 +44,36 @@ async function fetchOccurrences(taxa, locations) {
 						},
 					)
 				}
-				layers.push({
+
+				taxaToLoc[taxaToLocKey] = {
 					type: "FeatureCollection",
+					taxonId: taxon,
 					crs: {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
 					features: features
-				})
+				}
+			}
+
+			if (savedTaxaColors.hasOwnProperty(taxon)) {
+				taxaColors[taxon] = savedTaxaColors[taxon];
+			} else {
+				const randomColor = Math.floor(Math.random()*16777215)
+				taxaColors[taxon] = `#${randomColor.toString(16).padStart(6, '0')}`
 			}
 		}
 	}
 
-	return layers
+	return [taxaToLoc, taxaColors];
 }
 
 
-async function fetchTaxa(taxa) {
-	const taxaList = [];
+async function fetchTaxa(taxa, savedTaxa) {
+	const taxaList = {};
 
 	for (const taxon of taxa) {
-		taxaList.push(await taxonomy.get(taxon));
+		if (savedTaxa.hasOwnProperty(taxon))
+			taxaList[taxon] = savedTaxa[taxon];
+		else
+			taxaList[taxon] = await taxonomy.get(taxon);
 	}
 
 	return taxaList;
@@ -69,29 +84,69 @@ export default function MapPage({params: {lang}}) {
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const router = useRouter();
-	const [occus, setOccus] = useState([]);
 	const [occuPopup, setOccuPopup] = useState(null);
-	const [taxa, setTaxa] = useState([]);
+	const [taxa, setTaxa] = useState({});
+	const [taxaToLoc, setTaxaToLoc] = useState({});
+	const [taxaColors, setTaxaColors] = useState({});
+
+	function setAndSaveTaxaColors(tC) {
+		localStorage.setItem('taxaColors', JSON.stringify(tC));
+		setTaxaColors(tC);
+	}
 
 	useEffect(() => {
-		const taxa = searchParams.getAll('taxon');
-		const locs = searchParams.getAll('loc');
+		// parse saved colors
+		let savedTaxaColors;
+
+		try {
+			savedTaxaColors = JSON.parse(localStorage.getItem('taxaColors'));
+		} catch (e) {
+			savedTaxaColors =  {}
+			localStorage.removeItem('taxaColors');
+		}
+
+		setTaxaColors(savedTaxaColors);
+
+		// parse params
+		const reqTaxa = new Set(searchParams.getAll('taxon'));
+		const locs = new Set(searchParams.getAll('loc'));
+		setTaxa([...reqTaxa].map(() => undefined))
 
 		fetchOccurrences(
-			taxa,
+			reqTaxa,
 			locs,
-		).then(r => setOccus(r));
+			savedTaxaColors,
+			taxaToLoc
+		).then(([newTaxaToLoc, colors]) => {
+			setTaxaToLoc(newTaxaToLoc);
+			setAndSaveTaxaColors(colors);
+		});
 
 		fetchTaxa(
-			taxa,
+			reqTaxa,
+			taxa
 		).then(r => setTaxa(r));
-
-	}, [searchParams, setOccus, setTaxa]);
+	}, [searchParams, setTaxaToLoc, setTaxa]);
 
 	function onSelected(id) {
 		if (id) {
 			const params = new URLSearchParams(searchParams.toString())
 			params.append('taxon', id)
+			router.push(`${pathname}?${params.toString()}`)
+		}
+	}
+
+	function onColorChanged(id, color) {
+		if (id) {
+			const newTaxaColors = {...taxaColors, [id]: color};
+			setAndSaveTaxaColors(newTaxaColors);
+		}
+	}
+
+	function onDeleted(id) {
+		if (id) {
+			const params = new URLSearchParams(searchParams.toString())
+			params.delete('taxon', id)
 			router.push(`${pathname}?${params.toString()}`)
 		}
 	}
@@ -121,10 +176,7 @@ export default function MapPage({params: {lang}}) {
 	function onSelectedOccurrences(feature) {
 		if (feature != null) {
 			const occurrence = feature.properties;
-			console.log(occurrence)
 			taxonomy.get(occurrence.taxonomy).then(r => {
-				console.log(occurrence)
-				console.log(r)
 				occurrence.taxonomy = r;
 				setOccuPopup(occurrence);
 			})
@@ -134,7 +186,7 @@ export default function MapPage({params: {lang}}) {
 	return (
 		<>
 			<div className="absolute top-0 h-full w-full">
-				<MapLibre data={occus} onClick={onSelectedOccurrences}/>
+				<MapLibre data={Object.values(taxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}/>
 			</div>
 			<Drawer lang={lang}>
 				<div className="h-full p-4">
@@ -145,18 +197,9 @@ export default function MapPage({params: {lang}}) {
 					</h4>
 					<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2">
 						{
-							taxa.map((taxon, idx) => (
-								<li className="bg-white p-3 flex flex-row items-center" key={idx}>
-									<PopoverColorPicker color={"#aabbcc"} onChange={() => {}} />
-									<div>
-										<p className="text-lg font-semibold">
-											{taxon.name}
-										</p>
-										<p className="text-md font-light">
-											{taxon.scientificNameAuthorship}
-										</p>
-									</div>
-								</li>
+							Object.values(taxa).map((taxon, idx) => (
+								<MapLibreCard key={idx} color={taxaColors[taxon?.id]} onColorChanged={onColorChanged}
+								              taxon={taxon} onDelete={onDeleted}/>
 							))
 						}
 						{/*	{*/}

@@ -9,7 +9,10 @@
 
 	"taxon.sidebar.classification": "Classification",
 	"taxon.sidebar.children": "Children",
+	"taxon.sidebar.synonyms": "Synonyms",
 	"taxon.main.distribution": "Distribution",
+	"taxon.main.accepted": "Accepted",
+	"taxon.main.synonym": "Synonym",
 
 
 	"map.drawer.close": "Close",
@@ -27,6 +30,7 @@
 	"components.header.button.taxonomy": "Taxonomy",
 	"components.header.button.genetics": "Genetics",
 
+	"components.verticalTaxonomy.empty": "Empty",
 
 	"lang": "English"
 }

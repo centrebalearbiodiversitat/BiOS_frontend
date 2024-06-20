@@ -28,7 +28,7 @@ export default function FullCBBSearchBar({lang, rounded = true}) {
 		},
 		{
 			textKey: "components.searchbar.filter.genetics",
-			onSelected: taxonId => router.push(`/${lang}/taxon/${taxonId}`),
+			onSelected: taxonId => router.push(`/${lang}/genetics/${taxonId}`),
 			onInput: e => taxonomy.search(e)
 		},
 	]

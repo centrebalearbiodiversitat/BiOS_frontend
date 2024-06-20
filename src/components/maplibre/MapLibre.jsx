@@ -3,7 +3,7 @@
 import React, {useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
 
-const style = {
+const MAP_STYLE = {
 	version: 8,
 	sources: {
 		osm: {
@@ -69,41 +69,19 @@ const style = {
 };
 
 
-export default function MapLibre({data, children, onClick = null, nav = true}) {
-	const [lng] = useState(2.75802);
-	const [lat] = useState(39.37029);
-	const [zoom] = useState(7);
-	const [bearing] = useState(-8);
-	const [pitch] = useState(0);
-	const mapRef = useRef();
-
-	function flyTo(layer) {
-		const i = Math.floor(Math.random() * data[layer].features.length);
-		mapRef.current?.flyTo({
-			center: data[layer].features[i].geometry.coordinates,
-			zoom: 13,
-			pitch: 60,
-			bearing: Math.random() * 360,
-			duration: 2000,
-			essential: true
-		})
-	}
-
-	function PointsSource({data, idx}) {
+function PointsSource({data, taxaColors, idx}) {
 		if (!data) {
 			return undefined;
 		}
 
-		const rR = Math.floor(Math.random() * 255);
-		const rG = Math.floor(Math.random() * 255);
-		const rB = Math.floor(Math.random() * 255);
+		const color = taxaColors[data.taxonId]
 
 		return (
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
 				<Layer
 					id={`points-${idx}`}
 					type="heatmap"
-					// type="heatmap"
+					// type="circle"
 					// paint={{
 					// 	'circle-radius': 5,
 					// 	'circle-color': `rgba(${randomColor()},${randomColor()},${randomColor()},.8)`,
@@ -140,17 +118,17 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 	                        ['linear'],
 	                        ['heatmap-density'],
 	                        0,
-	                        `rgba(${rR},${rG},${rB},0)`,
+	                        `${color}00`,
 	                        0.2,
-	                        `rgba(${rR},${rG},${rB},0.2)`,
+	                        `${color}20`,
 	                        0.4,
-	                        `rgba(${rR},${rG},${rB},0.4)`,
+	                        `${color}40`,
 	                        0.6,
-	                        `rgba(${rR},${rG},${rB},0.6)`,
+	                        `${color}60`,
 	                        0.8,
-	                        `rgba(${rR},${rG},${rB},0.8)`,
+	                        `${color}80`,
 	                        1,
-	                        `rgba(${rR},${rG},${rB},1)`,
+	                        `${color}FF`,
 	                    ],
 	                    // Adjust the heatmap radius by zoom level
 	                    'heatmap-radius': [
@@ -180,9 +158,30 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 		);
 	}
 
+
+export default function MapLibre({data, taxaColors, children, onClick = null, nav = true, style = {}}) {
+	const [lng] = useState(2.75802);
+	const [lat] = useState(39.37029);
+	const [zoom] = useState(7);
+	const [bearing] = useState(-8);
+	const [pitch] = useState(0);
+	const mapRef = useRef();
+
+	function flyTo(layer) {
+		const i = Math.floor(Math.random() * data[layer].features.length);
+		mapRef.current?.flyTo({
+			center: data[layer].features[i].geometry.coordinates,
+			zoom: 13,
+			pitch: 60,
+			bearing: Math.random() * 360,
+			duration: 2000,
+			essential: true
+		})
+	}
+
 	return (
-		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}} mapStyle={style}
-		     interactiveLayerIds={['points-0', 'points-1']} style={{flex: 1}}
+		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}} mapStyle={MAP_STYLE}
+		     interactiveLayerIds={['points-0', 'points-1']} style={{flex: 1, ...style}}
 		     doubleClickZoom={false} onDblClick={(e) => nav && flyTo(0)}
 		     onClick={e => onClick && onClick(e.features.length === 0 ? null : e.features[0])}>
 			{/*<Source id="layers" type="geojson" data={map}>*/}
@@ -199,7 +198,7 @@ export default function MapLibre({data, children, onClick = null, nav = true}) {
 			{
 				data && data.map((el, idx) => {
 					return (
-						<PointsSource key={idx} idx={idx} data={el}/>
+						<PointsSource key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
 					)
 				})
 			}

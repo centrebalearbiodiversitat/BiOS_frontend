@@ -9,7 +9,10 @@
 
 	"taxon.sidebar.classification": "Clasificación",
 	"taxon.sidebar.children": "Descendientes",
+	"taxon.sidebar.synonyms": "Sinónimos",
 	"taxon.main.distribution": "Distribución",
+	"taxon.main.accepted": "Aceptado",
+	"taxon.main.synonym": "Sinónimo",
 
 
 	"map.drawer.close": "Cerrar",
@@ -27,6 +30,7 @@
 	"components.header.button.taxonomy": "Taxonomía",
 	"components.header.button.genetics": "Genética",
 
+	"components.verticalTaxonomy.empty": "Vacío",
 
     "lang": "Castellano"
 }

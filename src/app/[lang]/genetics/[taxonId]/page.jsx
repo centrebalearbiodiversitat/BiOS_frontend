@@ -4,7 +4,8 @@
 //   return languages.map((lng) => ({ lng }))
 // }
 
-export default function Gene({params: {gene}}) {
+export default function Gene({params: {taxonId}}) {
+
 	return (
 		<div className="flex h-full">
 			<h1 className="m-auto font-bold text-6xl">

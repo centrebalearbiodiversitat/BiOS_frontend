@@ -9,7 +9,10 @@ function get(id) {
 function list(taxonomyId, geographicalLocationId) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list`,
-		{taxonomy: taxonomyId, geographicalLocation: geographicalLocationId}
+		{
+			taxonomy: taxonomyId,
+			...geographicalLocationId !== null && {geographicalLocation: geographicalLocationId}
+		}
 	)
 }
 

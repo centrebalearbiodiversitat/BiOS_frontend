@@ -22,10 +22,20 @@ function children(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/children`, {id})
 }
 
+function synonyms(id) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/synonyms`, {id})
+}
+
+function sources(id) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/sources`, {id})
+}
+
 module.exports = {
 	list,
 	search,
 	get,
 	parent,
 	children,
+	synonyms,
+	sources,
 }

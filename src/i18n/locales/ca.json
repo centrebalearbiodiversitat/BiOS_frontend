@@ -3,13 +3,16 @@
     "web.description": "Pàgina web oficial de la base de dades y eines del Centre Balear de Biodiversitat",
 
 
-	"home.title": "Access to species data from the Balearic Islands",
+	"home.title": "Accés a les dades d'espècies de les Illes Balears",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 
 	"taxon.sidebar.classification": "Classificació",
 	"taxon.sidebar.children": "Descendents",
+	"taxon.sidebar.synonyms": "Sinònims",
 	"taxon.main.distribution": "Distribució",
+	"taxon.main.accepted": "Acceptat",
+	"taxon.main.synonym": "Sinònim",
 
 
 	"map.drawer.close": "Tanca",
@@ -26,6 +29,8 @@
 	"components.header.button.map": "Mapa",
 	"components.header.button.taxonomy": "Taxonomia",
 	"components.header.button.genetics": "Genètica",
+
+	"components.verticalTaxonomy.empty": "Buit",
 
 
     "lang": "Català"
