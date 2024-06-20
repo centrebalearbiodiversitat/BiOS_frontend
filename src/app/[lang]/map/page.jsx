@@ -96,12 +96,11 @@ export default function MapPage({params: {lang}}) {
 
 	useEffect(() => {
 		// parse saved colors
-		let savedTaxaColors;
+		let savedTaxaColors = {};
 
 		try {
 			savedTaxaColors = JSON.parse(localStorage.getItem('taxaColors'));
 		} catch (e) {
-			savedTaxaColors =  {}
 			localStorage.removeItem('taxaColors');
 		}
 
@@ -183,6 +182,7 @@ export default function MapPage({params: {lang}}) {
 		}
 	}
 
+	console.log(taxa, taxaColors)
 	return (
 		<>
 			<div className="absolute top-0 h-full w-full">
@@ -198,7 +198,7 @@ export default function MapPage({params: {lang}}) {
 					<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2">
 						{
 							Object.values(taxa).map((taxon, idx) => (
-								<MapLibreCard key={idx} color={taxaColors[taxon?.id]} onColorChanged={onColorChanged}
+								<MapLibreCard key={idx} color={taxon && taxaColors ? taxaColors[taxon.id] : undefined} onColorChanged={onColorChanged}
 								              taxon={taxon} onDelete={onDeleted}/>
 							))
 						}
