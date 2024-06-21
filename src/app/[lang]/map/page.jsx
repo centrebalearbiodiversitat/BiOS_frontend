@@ -53,7 +53,7 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 				}
 			}
 
-			if (savedTaxaColors.hasOwnProperty(taxon)) {
+			if (savedTaxaColors && savedTaxaColors.hasOwnProperty(taxon)) {
 				taxaColors[taxon] = savedTaxaColors[taxon];
 			} else {
 				const randomColor = Math.floor(Math.random()*16777215)

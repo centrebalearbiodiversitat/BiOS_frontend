@@ -78,10 +78,10 @@ export default function Taxon({params: {lang, id}}) {
 			<div className="rounded-2xl col-span-9 h-fit bg-gray-100 px-16 py-12 space-y-5">
 				<div className="flex flex-row justify-center">
 					<div className="w-full grid grid-cols-10 space-x-2">
-						<div className="col-span-5 w-full h-[300px] max-h-[300px] border-accent">
+						<div className="col-span-5 w-full h-[300px] border-accent">
 							<Figure
 								alt={`Representative image of ${taxon.name}`}
-								className="h-full w-auto"
+								className="h-auto w-full max-h-full"
 								caption={taxon.attribution}
 								src={taxon.imageId}
 							/>
