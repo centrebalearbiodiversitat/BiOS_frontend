@@ -20,7 +20,7 @@ export default function Figure({alt, src, caption, className, ...extra}) {
 				     backgroundPosition: 'center',
 				}}
 			/>
-			<figure className={`w-full h-full object-cover `}>
+			<figure className={`w-full h-full object-cover transition ease-in-out hover:scale-[115%]`}>
 				<Image radius={"none"} removeWrapper className={`w-full h-full object-contain`} onError={() => setNoImage(true)}
 				       alt={alt} src={src}
 				       title={caption} {...extra}/>
