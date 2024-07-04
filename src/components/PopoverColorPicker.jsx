@@ -24,7 +24,7 @@ export default function PopoverColorPicker({color, onChange, isDisabled}) {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, [isOpen, selectedColor]);
+	}, [isOpen, handleClickOutside]);
 
 	const toggle = (state) => setIsOpen(state);
 

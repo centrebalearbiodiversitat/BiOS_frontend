@@ -11,7 +11,7 @@ function list(taxonomyId, geographicalLocationId) {
 		`${OCCURRENCES_PATH}/list`,
 		{
 			taxonomy: taxonomyId,
-			...geographicalLocationId !== null && {geographicalLocation: geographicalLocationId}
+			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
 		}
 	)
 }

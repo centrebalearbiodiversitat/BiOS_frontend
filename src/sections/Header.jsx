@@ -15,7 +15,7 @@ import HoverLink from "@/components/HoverLink";
 import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/ActiveLink";
 
-export default function Header({lang, locales}) {
+export default function Header({lang, locales, className}) {
 	const menuItems = [
 		{text: t(lang, "components.header.button.home"), href: `/${lang}`},
 		{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
@@ -24,7 +24,7 @@ export default function Header({lang, locales}) {
 	];
 
 	return (
-		<Navbar maxWidth="full" className="py-3 bg-white/60 shadow-sm backdrop-blur-sm">
+		<Navbar maxWidth="full" className={`py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>
 			<NavbarContent>
 				<NavbarMenuToggle
 					className="md:hidden text-black"

@@ -4,7 +4,7 @@ import {t} from "@/i18n/i18n";
 import ChecklistNavigator from "@/components/ChecklistNavigator";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 
-export default function Home({params: {lang}}) {
+export default function TaxonSequences({params: {lang}}) {
 
 	return (
 		<>
@@ -18,10 +18,10 @@ export default function Home({params: {lang}}) {
 				<div
 					className="col-start-4 col-span-6 2xl:col-start-5 2xl:col-span-4 flex flex-col justify-center items-center">
 					<header className="flex flex-col justify-center items-center mb-[100px] space-y-2">
-						<h3 className="text-white-drop-shadow">
+						<h3 className="text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
 							{t(lang, "home.subtitle")}
 						</h3>
-						<h2 className="text-center font-bold text-5xl text-white-drop-shadow">
+						<h2 className="text-white text-center font-bold text-5xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
 							{t(lang, "home.title")}
 						</h2>
 					</header>

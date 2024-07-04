@@ -9,7 +9,11 @@ export default function LangSelector({locales, lang}) {
 	const pathname = usePathname();
 
 	const redirect = (locale) => {
-		router.push(pathname.replace(`/${lang}`, `/${locale}`))
+		router.push(
+			pathname.replace(`/${lang}`, `/${locale}`),
+			undefined,
+			{shallow: true}
+		)
 	}
 
 	return (

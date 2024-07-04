@@ -7,7 +7,7 @@ import CBBButton from "@/components/CBBButton";
 import {t} from "@/i18n/i18n";
 
 
-export default function CBBSearchBar({lang, filters, rounded = true}) {
+export default function CBBSearchBar({lang, filters, showFilters = true, border = true, rounded = true}) {
 	const [query, setQuery] = useState([0]);
 	const [filter, setFilter] = useState(0);
 
@@ -21,7 +21,7 @@ export default function CBBSearchBar({lang, filters, rounded = true}) {
 
 	return (
 		<>
-			{ filters.length > 1 &&
+			{showFilters &&
 			<div className="w-full flex flex-row space-x-2 mb-2">
 				{
 					filters.map((fbutton, idx) => (
@@ -34,9 +34,9 @@ export default function CBBSearchBar({lang, filters, rounded = true}) {
 				}
 			</div>
 			}
-			<SearchBar data={query} onSelected={onSelected} className={`${rounded ? 'rounded-full' : ''} w-[100%]`}
+			<SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-[100%]"
 			           label={t(lang, "components.searchbar.label")}
-			           onInput={onInput}/>
+			           onInput={onInput} border={border}/>
 		</>
 	)
 }

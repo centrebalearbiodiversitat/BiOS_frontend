@@ -9,6 +9,7 @@ import CBBSearchBar from "@/components/CBBSearchBar";
 import {t} from "@/i18n/i18n";
 import MapLibre from "@/components/maplibre/MapLibre";
 import MapLibreCard from "@/components/maplibre/MapLibreCard";
+import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -125,7 +126,7 @@ export default function MapPage({params: {lang}}) {
 			reqTaxa,
 			taxa
 		).then(r => setTaxa(r));
-	}, [searchParams, setTaxaToLoc, setTaxa]);
+	}, [searchParams]);
 
 	function onSelected(id) {
 		if (id) {
@@ -182,15 +183,14 @@ export default function MapPage({params: {lang}}) {
 		}
 	}
 
-	console.log(taxa, taxaColors)
 	return (
 		<>
 			<div className="absolute top-0 h-full w-full">
 				<MapLibre data={Object.values(taxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}/>
 			</div>
-			<Drawer lang={lang}>
-				<div className="h-full p-4">
-					<CBBSearchBar className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto"
+			<Drawer>
+				<div className="h-full px-6 pt-4">
+					<CBBSearchBar showFilters={false} className="col-start-2 sm:col-start-5 sm:col-span-6 columns-md mt-auto"
 					              lang={lang} rounded={false} filters={FILTER_BUTTONS}/>
 					<h4 className="p-2 border-b-1 border-black m-2">
 						{t(lang, 'map.drawer.selectedTaxa')}
@@ -198,7 +198,8 @@ export default function MapPage({params: {lang}}) {
 					<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2">
 						{
 							Object.values(taxa).map((taxon, idx) => (
-								<MapLibreCard key={idx} color={taxon && taxaColors ? taxaColors[taxon.id] : undefined} onColorChanged={onColorChanged}
+								<MapLibreCard key={idx} color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
+								              onColorChanged={onColorChanged}
 								              taxon={taxon} onDelete={onDeleted}/>
 							))
 						}

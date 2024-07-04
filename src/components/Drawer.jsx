@@ -1,30 +1,22 @@
 import React, {useState} from "react";
 import CBBButton from "@/components/CBBButton";
-import {Button} from "@nextui-org/react";
-import {t} from "@/i18n/i18n";
+import {IoIosArrowBack, IoIosArrowForward, IoMdClose} from "react-icons/io";
 
-export default function Drawer({lang, children}) {
+export default function Drawer({children}) {
 	const [isOpen, setIsOpen] = useState(true);
 
 	return (
 		<>
-			<CBBButton className={`${isOpen ? 'hidden' : ''} bg-gray-200 absolute min-w-8 rounded-none p-0 rounded-e-xl border-s-0`} onClick={() => setIsOpen(!isOpen)}>
-				{">"}
+			<CBBButton className={`${isOpen ? 'hidden' : ''} absolute bg-white min-w-8 rounded-none p-0 rounded-e-xl border-s-0`} onClick={() => setIsOpen(!isOpen)}>
+				<IoIosArrowForward/>
 			</CBBButton>
-			<div className={`absolute w-[420px] max-w-[420px] h-full bg-cyan-100/80 backdrop-blur-md shadow-lg ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300`}>
-				<div className="flex flex-1 justify-end m-2">
-					<span className="text-2xl cursor-pointer font-mono" onClick={() => setIsOpen(!isOpen)}>
-						x
-					</span>
-					{/*<CBBButton isIconOnly onPress={() => setIsOpen(!isOpen)}*/}
-					{/*           className="hover:text-white hover:bg-black/20 backdrop-blur-sm font-medium !opacity-100 bg-white px-8 text-black border-0">*/}
-					{/*	{t(lang, 'map.drawer.close')}*/}
-					{/*</CBBButton>*/}
+			<div className={`flex flex-row w-[450px] max-w-[450px] h-full ${isOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out transition-transform duration-350`}>
+				<div className={`w-[450px] max-w-[450px] h-full bg-[#D0F8F9]/60 backdrop-brightness-125 backdrop-blur-lg ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300`}>
+					{children}
 				</div>
-				{children}
-				{/*<div className="flex-grow" onClick={() => setIsOpen(false)}>*/}
-
-				{/*</div>*/}
+				<CBBButton className={`${isOpen ? '' : 'hidden'} bg-white min-w-8 rounded-none p-0 rounded-e-xl border-s-0`} onPress={() => setIsOpen(!isOpen)}>
+					<IoIosArrowBack/>
+				</CBBButton>
 			</div>
 		</>
 	);

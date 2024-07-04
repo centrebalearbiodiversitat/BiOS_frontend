@@ -39,7 +39,7 @@ const Highlight = ({text, highlight}) => {
 };
 
 
-export default function SearchBar({className, data, onSelected, onInput, label = 'Search...', border= false}) {
+export default function SearchBar({className, data, onSelected, onInput, label = 'Search...', rounded = true, border= false}) {
 	const [isFocused, setIsFocused] = useState(false);
 	const [search, setSearch] = useState('');
 
@@ -63,7 +63,7 @@ export default function SearchBar({className, data, onSelected, onInput, label =
 		<div className={`${className}`}>
 			<Autocomplete variant={"faded"} defaultItems={data} onFocusChange={onFocusChange}
 			              label={label} onSelectionChange={onSelected} onInputChange={onInputChange}
-			              className={`w-full transition-all text-center`} radius="full"
+			              className={`w-full transition-all text-center`} radius={rounded ? "full" : "sm"}
 			              inputProps={{
 				              classNames: {
 					              input: "ml-1",

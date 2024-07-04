@@ -7,12 +7,15 @@
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 
+	"taxon.layout.button.taxon": "Descripció",
+	"taxon.layout.button.genetics": "Genètica",
 	"taxon.sidebar.classification": "Classificació",
 	"taxon.sidebar.children": "Descendents",
 	"taxon.sidebar.synonyms": "Sinònims",
 	"taxon.main.distribution": "Distribució",
 	"taxon.main.accepted": "Acceptat",
 	"taxon.main.synonym": "Sinònim",
+	"taxon.main.map.button.redirect": "Veure en Mapes",
 
 
 	"map.drawer.close": "Tanca",

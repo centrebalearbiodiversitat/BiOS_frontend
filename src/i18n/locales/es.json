@@ -7,12 +7,15 @@
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 
+	"taxon.layout.button.taxon": "Descripción",
+	"taxon.layout.button.genetics": "Genética",
 	"taxon.sidebar.classification": "Clasificación",
 	"taxon.sidebar.children": "Descendientes",
 	"taxon.sidebar.synonyms": "Sinónimos",
 	"taxon.main.distribution": "Distribución",
 	"taxon.main.accepted": "Aceptado",
 	"taxon.main.synonym": "Sinónimo",
+	"taxon.main.map.button.redirect": "Ver en Mapas",
 
 
 	"map.drawer.close": "Cerrar",
@@ -31,6 +34,7 @@
 	"components.header.button.genetics": "Genética",
 
 	"components.verticalTaxonomy.empty": "Vacío",
+
 
     "lang": "Castellano"
 }

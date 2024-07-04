@@ -2,6 +2,7 @@
 
 import React, {useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
+import LinkButton from "@/components/LinkButton";
 
 const MAP_STYLE = {
 	version: 8,
@@ -80,79 +81,78 @@ function PointsSource({data, taxaColors, idx}) {
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
 				<Layer
 					id={`points-${idx}`}
-					type="heatmap"
-					// type="circle"
-					// paint={{
-					// 	'circle-radius': 5,
-					// 	'circle-color': `rgba(${randomColor()},${randomColor()},${randomColor()},.8)`,
-					// 	// 'circle-color': `rgba(252, 186, 3)`,
-					// 	// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
-					// }}
+					// type="heatmap"
+					type="circle"
 					paint={{
-	                    // Increase the heatmap weight based on frequency and property magnitude
-	                    'heatmap-weight': [
-	                        'interpolate',
-	                        ['linear'],
-	                        ['get', 'mag'],
-	                        0,
-	                        0,
-	                        6,
-	                        1
-	                    ],
-	                    // Increase the heatmap color weight weight by zoom level
-	                    // heatmap-intensity is a multiplier on top of heatmap-weight
-	                    // 'heatmap-intensity': [
-	                    //     'interpolate',
-	                    //     ['linear'],
-	                    //     ['zoom'],
-	                    //     0,
-	                    //     1,
-	                    //     9,
-	                    //     3
-	                    // ],
-	                    // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-	                    // Begin color ramp at 0-stop with a 0-transparancy color
-	                    // to create a blur-like effect.
-	                    'heatmap-color': [
-	                        'interpolate',
-	                        ['linear'],
-	                        ['heatmap-density'],
-	                        0,
-	                        `${color}00`,
-	                        0.2,
-	                        `${color}20`,
-	                        0.4,
-	                        `${color}40`,
-	                        0.6,
-	                        `${color}60`,
-	                        0.8,
-	                        `${color}80`,
-	                        1,
-	                        `${color}FF`,
-	                    ],
-	                    // Adjust the heatmap radius by zoom level
-	                    'heatmap-radius': [
-	                        'interpolate',
-	                        ['linear'],
-	                        ['zoom'],
-	                        0,
-	                        2,
-	                        9,
-	                        20
-	                    ],
-						'heatmap-opacity': 0.7
-	                    // Transition from heatmap to circle layer by zoom level
-	                    // 'heatmap-opacity': [
-	                    //     'interpolate',
-	                    //     ['linear'],
-	                    //     ['zoom'],
-	                    //     7,
-	                    //     1,
-	                    //     9,
-	                    //     0
-	                    // ]
-	                }
-	            }
+						'circle-radius': 5,
+						'circle-color': `${color}`,
+						// 'circle-color': `rgba(252, 186, 3)`,
+						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
+					}}
+					// paint={{
+	                //     // Increase the heatmap weight based on frequency and property magnitude
+	                //     'heatmap-weight': [
+	                //         'interpolate',
+	                //         ['linear'],
+	                //         ['get', 'mag'],
+	                //         0,
+	                //         0,
+	                //         6,
+	                //         1
+	                //     ],
+	                //     // Increase the heatmap color weight weight by zoom level
+	                //     // heatmap-intensity is a multiplier on top of heatmap-weight
+	                //     // 'heatmap-intensity': [
+	                //     //     'interpolate',
+	                //     //     ['linear'],
+	                //     //     ['zoom'],
+	                //     //     0,
+	                //     //     1,
+	                //     //     9,
+	                //     //     3
+	                //     // ],
+	                //     // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+	                //     // Begin color ramp at 0-stop with a 0-transparancy color
+	                //     // to create a blur-like effect.
+	                //     'heatmap-color': [
+	                //         'interpolate',
+	                //         ['linear'],
+	                //         ['heatmap-density'],
+	                //         0,
+	                //         `${color}00`,
+	                //         0.2,
+	                //         `${color}20`,
+	                //         0.4,
+	                //         `${color}40`,
+	                //         0.6,
+	                //         `${color}60`,
+	                //         0.8,
+	                //         `${color}80`,
+	                //         1,
+	                //         `${color}FF`,
+	                //     ],
+	                //     // Adjust the heatmap radius by zoom level
+	                //     'heatmap-radius': [
+	                //         'interpolate',
+	                //         ['linear'],
+	                //         ['zoom'],
+	                //         0,
+	                //         2,
+	                //         9,
+	                //         20
+	                //     ],
+					// 	'heatmap-opacity': 0.7
+	                //     // Transition from heatmap to circle layer by zoom level
+	                //     // 'heatmap-opacity': [
+	                //     //     'interpolate',
+	                //     //     ['linear'],
+	                //     //     ['zoom'],
+	                //     //     7,
+	                //     //     1,
+	                //     //     9,
+	                //     //     0
+	                //     // ]
+	                // }
 				/>
 			</Source>
 		);

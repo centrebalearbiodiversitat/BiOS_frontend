@@ -13,23 +13,20 @@ const inter = Inter({subsets: ["latin"]});
 
 export default function RootLayout({children, params: {lang}}) {
 	return (
-		<html>
+		<html lang={lang}>
 			<head>
 				<meta charSet="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
-				{/*<meta name="generator" content={Astro.generator}/>*/}
-				<title>{t(lang,  'web.title')}</title>
-				<meta name="description" content={t(lang,  'web.description')}/>
+				<title>{t(lang, 'web.title')}</title>
+				<meta name="description" content={t(lang, 'web.description')}/>
 			</head>
-			<body>
-				<Providers className="flex flex-col min-h-screen m-0">
-					<Header lang={lang} locales={AVAILABLE_LOCALES}/>
-					<main className="flex flex-1 flex-col">
-						{children}
-					</main>
-				</Providers>
-				<Footer/>
+			<body className="h-screen m-0">
+				<Header lang={lang} className="h-[10%]" locales={AVAILABLE_LOCALES}/>
+				<main className="h-[90%]">
+					{children}
+					<Footer/>
+				</main>
 			</body>
 		</html>
 	);
