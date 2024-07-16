@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useMemo} from "react";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
+import Loading from "@/components/Loading";
 
 
 const ITALIC_RANKS = new Set([
@@ -11,9 +13,14 @@ const ITALIC_RANKS = new Set([
 
 
 export default function TaxonName({lang, taxon, author = false}) {
+	const pathname = usePathname();
+
+	const href = useMemo(() => {
+		return `/${lang}/taxon/${taxon.id}${pathname.endsWith('genetics') ? '/genetics' : ''}`
+	}, [lang, taxon.id, pathname])
 
 	return (
-		<Link href={`/${lang}/taxon/${taxon.id}`} className={`first-letter:uppercase text-pretty`}>
+		<Link href={href} className={`first-letter:uppercase text-pretty`}>
 			<span className={`${ITALIC_RANKS.has(taxon.taxonRank) ? "italic" : ""}`}>
 				{taxon.name}
 			</span>

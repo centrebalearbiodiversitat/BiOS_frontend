@@ -3,6 +3,9 @@
 import React, {useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
 import LinkButton from "@/components/LinkButton";
+import {t} from "@/i18n/i18n";
+import {IoOpenOutline} from "react-icons/io5";
+import {Spinner} from "@nextui-org/react";
 
 const MAP_STYLE = {
 	version: 8,
@@ -159,7 +162,7 @@ function PointsSource({data, taxaColors, idx}) {
 	}
 
 
-export default function MapLibre({data, taxaColors, children, onClick = null, nav = true, style = {}}) {
+export default function MapLibre({data, taxaColors, children, loading = false, onClick = null, nav = true, style = {}}) {
 	const [lng] = useState(2.75802);
 	const [lat] = useState(39.37029);
 	const [zoom] = useState(7);
@@ -180,7 +183,8 @@ export default function MapLibre({data, taxaColors, children, onClick = null, na
 	}
 
 	return (
-		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}} mapStyle={MAP_STYLE}
+		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
+		     mapStyle={MAP_STYLE}
 		     interactiveLayerIds={['points-0', 'points-1']} style={{flex: 1, ...style}}
 		     doubleClickZoom={false} onDblClick={(e) => nav && flyTo(0)}
 		     onClick={e => onClick && onClick(e.features.length === 0 ? null : e.features[0])}>
@@ -202,8 +206,12 @@ export default function MapLibre({data, taxaColors, children, onClick = null, na
 					)
 				})
 			}
-			{nav && <NavigationControl showCompass={true} position="bottom-right" visualizePitch={true} showZoom={true}/>}
+			{nav &&
+				<NavigationControl showCompass={true} position="bottom-right" visualizePitch={true} showZoom={true}/>}
 			{children}
+			{loading && <div className="bg-white/50 w-full h-full flex justify-center items-center" style={{position: 'absolute', top: 0, left: 0}}>
+				<Spinner size={"lg"}/>
+			</div>}
 		</Map>
 	);
 }

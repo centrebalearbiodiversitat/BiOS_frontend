@@ -6,16 +6,26 @@
 	"home.title": "Accés a les dades d'espècies de les Illes Balears",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
+	"home.statistics.species": "Espècies",
+	"home.statistics.observations": "Observacions",
+	"home.statistics.sequences": "Sequències",
+
 
 	"taxon.layout.button.taxon": "Descripció",
 	"taxon.layout.button.genetics": "Genètica",
+	"taxon.layout.sources": "Procedència",
 	"taxon.sidebar.classification": "Classificació",
 	"taxon.sidebar.children": "Descendents",
 	"taxon.sidebar.synonyms": "Sinònims",
 	"taxon.main.distribution": "Distribució",
+	"taxon.main.composition": "Composició del taxon",
 	"taxon.main.accepted": "Acceptat",
 	"taxon.main.synonym": "Sinònim",
 	"taxon.main.map.button.redirect": "Veure en Mapes",
+	"taxon.genetics.genes": "Gens i marcadores",
+	"taxon.genetics.genomes": "Genomes complets",
+	"taxon.genetics.transcriptomes": "Transcriptomes complets",
+	"taxon.genetics.mitogenomes": "Mitogenomes",
 
 
 	"map.drawer.close": "Tanca",

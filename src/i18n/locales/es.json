@@ -6,16 +6,26 @@
 	"home.title": "Acceso a los datos de especies de las Islas Baleares",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
+	"home.statistics.species": "Especies",
+	"home.statistics.observations": "Observaciones",
+	"home.statistics.sequences": "Secuencias",
+
 
 	"taxon.layout.button.taxon": "Descripción",
 	"taxon.layout.button.genetics": "Genética",
+	"taxon.layout.sources": "Procedencia",
 	"taxon.sidebar.classification": "Clasificación",
 	"taxon.sidebar.children": "Descendientes",
 	"taxon.sidebar.synonyms": "Sinónimos",
 	"taxon.main.distribution": "Distribución",
+	"taxon.main.composition": "Composición del taxon",
 	"taxon.main.accepted": "Aceptado",
 	"taxon.main.synonym": "Sinónimo",
 	"taxon.main.map.button.redirect": "Ver en Mapas",
+	"taxon.genetics.genes": "Genes y marcadores",
+	"taxon.genetics.genomes": "Genomas completos",
+	"taxon.genetics.transcriptomes": "Transcriptomas completos",
+	"taxon.genetics.mitogenomes": "Mitogenomas",
 
 
 	"map.drawer.close": "Cerrar",

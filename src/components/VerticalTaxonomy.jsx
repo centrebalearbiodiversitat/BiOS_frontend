@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import TaxonName from "@/components/TaxonName";
 import {t} from "@/i18n/i18n";
+import {IoIosArrowDown} from "react-icons/io";
 
-export default function VerticalTaxonomy({lang, taxonomy, overflow = false, windowSize = 5}) {
+export default function VerticalTaxonomy({lang, taxonomy, markLast= false, overflow = false, windowSize = 5}) {
 	const [loadMore, setLoadMore] = useState(overflow ? windowSize : false);
 
 	if (taxonomy && taxonomy.length) {
@@ -11,9 +12,9 @@ export default function VerticalTaxonomy({lang, taxonomy, overflow = false, wind
 			{
 				taxonomy.map(
 					(taxon, idx) => (
-						<li key={taxon.id} className={`border-b-1 p-3 flex items-end ${loadMore && idx > loadMore - 1 ? "hidden" : ""}`}>
+						<li key={taxon.id} className={`${idx + 1 < taxonomy.length ? "border-b-1" : markLast ? "bg-gray-100 border-s-1 border-primary" : ""} p-3 flex items-end ${loadMore && idx > loadMore - 1 ? "hidden" : ""}`}>
 							<p className="first-letter:uppercase font-normal">{taxon.taxonRank}</p>
-							<p className="ps-4 font-light text-end truncate ms-auto">
+							<p className="ps-4 font-extralight text-end ms-auto">
 								<TaxonName lang={lang} taxon={taxon}/>
 							</p>
 						</li>
@@ -22,9 +23,9 @@ export default function VerticalTaxonomy({lang, taxonomy, overflow = false, wind
 			}
 			{overflow && loadMore < taxonomy.length &&
 				<li>
-					<p className="text-center text-accent cursor-pointer m-4"
+					<p className="flex flex-row justify-end text-sm text-blue-400 cursor-pointer m-4 space-x-2"
 					   onClick={() => setLoadMore(loadMore + windowSize)}>
-						Load more
+						<span>Load more</span> <IoIosArrowDown className="my-auto"/>
 					</p>
 				</li>
 			}

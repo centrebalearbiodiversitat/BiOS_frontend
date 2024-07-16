@@ -1,5 +1,40 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {Chip} from "@nextui-org/react";
+import Link from "next/link";
+import {HiOutlineExternalLink} from "react-icons/hi";
+import {RxExternalLink} from "react-icons/rx";
+
+function ChipExternalLink({originSource}) {
+	const url = useMemo(() => {
+		try {
+			return originSource.source.url.replace("{id}", originSource.originId);
+		} catch (e) {
+			return null;
+		}
+	}, [originSource]);
+
+	if (url) {
+		return (
+			<Link href={url} target="_blank">
+				<Chip as={"div"} className="bg-transparent border-1 border-black/20 text-blue-700">
+					<p className="flex flex-row space-x-2">
+						<span className="">{originSource.source.name}:{originSource.originId}</span>
+						<RxExternalLink className="text-md my-auto align-baseline "/>
+					</p>
+				</Chip>
+			</Link>
+		)
+	} else {
+		return (
+			<Chip as={"div"} className="bg-transparent border-1 border-black/20">
+				<p className="flex flex-row space-x-2">
+					<span className="">{originSource.source.name}:{originSource.originId}</span>
+				</p>
+			</Chip>
+		)
+	}
+}
+
 
 export default function Sources({sources, className}) {
 	return (
@@ -7,10 +42,10 @@ export default function Sources({sources, className}) {
 		{
 			sources.map(
 				s => (
-					<li key={s.id}>
-						<Chip className="bg-accent">
+					<li key={s.id} className="">
+						<ChipExternalLink originSource={s}>
 							{s.source.name}:{s.originId}
-						</Chip>
+						</ChipExternalLink>
 					</li>
 				)
 			)
@@ -18,5 +53,4 @@ export default function Sources({sources, className}) {
 		</ul>
 
 	)
-		;
 }

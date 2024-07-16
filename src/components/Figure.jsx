@@ -1,11 +1,37 @@
-import React, {useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
 
-export default function Figure({alt, src, caption, className, ...extra}) {
+export default function Figure({alt, images, className, ...extra}) {
 	const [error, setError] = useState(false);
-	if (error || !src) {
-		src = "https://img.freepik.com/free-vector/404-error-with-cute-animal-concept-illustration_114360-1900.jpg"
-	}
+	const [i, setI] = React.useState(0);
+
+	const onError = useCallback(() => {
+		if (i === images.length - 1) {
+			setError(true);
+		} else {
+			setI(i + 1);
+		}
+	}, [i, images.length]);
+
+	const {src, title, loading} = useMemo(() => {
+		let src = "https://img.freepik.com/free-vector/404-error-with-cute-animal-concept-illustration_114360-1900.jpg";
+		let title, loading;
+		if (!images) {
+			loading = true;
+			title = 'Loading...';
+		} else if (error || images.length === 0) {
+			title = 'No image found';
+			loading = false;
+		} else {
+			if (images[i].source.url) {
+				src = images[i].source.url.replace('{id}', images[i].originId);
+			}
+			title = images[i].attribution;
+			loading = false;
+		}
+
+		return {src, title, loading}
+	}, [images])
 
 	return (
 		<div className="w-full h-full relative overflow-hidden rounded-lg">
@@ -21,10 +47,9 @@ export default function Figure({alt, src, caption, className, ...extra}) {
 				}}
 			/>
 			<figure className={`w-full h-full object-cover transition ease-in-out hover:scale-[115%]`}>
-				<Image radius={"none"} removeWrapper className={`w-full h-full object-contain`}
-			        alt={alt} src={src} onError={() => setError(true)}
-			        fallbackSrc="https://img.freepik.com/free-vector/404-error-with-cute-animal-concept-illustration_114360-1900.jpg"
-			        title={caption} {...extra}/>
+				<Image isLoading={loading} radius={"none"} removeWrapper className={`w-full h-full object-contain`}
+			        alt={alt} src={src} onError={onError}
+			        title={title} {...extra}/>
 			</figure>
 		</div>
 	);

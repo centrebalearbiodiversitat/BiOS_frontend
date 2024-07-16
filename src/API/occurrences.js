@@ -16,7 +16,18 @@ function list(taxonomyId, geographicalLocationId) {
 	)
 }
 
+function listCount(taxonomyId, geographicalLocationId) {
+	return requests.GET(
+		`${OCCURRENCES_PATH}/list/count`,
+		{
+			taxonomy: taxonomyId,
+			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
+		}
+	)
+}
+
 module.exports = {
 	get,
 	list,
+	listCount,
 }

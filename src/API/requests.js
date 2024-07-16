@@ -15,7 +15,9 @@ function request(method) {
 		if (body)
 			requestOptions.body = JSON.stringify(body);
 
-		console.log(url)
+		if (method === 'URL')
+			return url
+
 		return fetch(url, requestOptions).then(handleResponse);
 	}
 }
@@ -58,5 +60,6 @@ module.exports = {
 	GET: request('GET'),
 	POST: request('POST'),
 	PUT: request('PUT'),
-	DELETE: request('DELETE')
+	DELETE: request('DELETE'),
+	URL: request('URL')
 }

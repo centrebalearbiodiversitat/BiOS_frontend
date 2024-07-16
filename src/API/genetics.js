@@ -12,7 +12,12 @@ function listSequences(taxonomy) {
 	return requests.GET(`${SEQUENCES_PATH}/list`, {taxonomy})
 }
 
+function listCountSequences(taxonId) {
+	return requests.GET(`${SEQUENCES_PATH}/list/count`, {taxonId})
+}
+
 module.exports = {
 	listGenes,
 	listSequences,
+	listCountSequences,
 }
