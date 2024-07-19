@@ -48,8 +48,8 @@ export default function Taxon({params: {lang, id}}) {
 						]}
 						slotProps={{
 							legend: {
-								hidden: true
-								// hidden: composition.length > 20
+								// hidden: true
+								hidden: composition.length > 16
 							}
 						}}
 						height={250}/>

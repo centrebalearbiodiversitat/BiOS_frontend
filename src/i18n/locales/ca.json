@@ -42,6 +42,7 @@
 	"components.header.button.map": "Mapa",
 	"components.header.button.taxonomy": "Taxonomia",
 	"components.header.button.genetics": "Genètica",
+	"components.header.button.methodology": "Metodologia",
 
 	"components.verticalTaxonomy.empty": "Buit",
 

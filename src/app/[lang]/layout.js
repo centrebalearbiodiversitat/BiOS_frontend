@@ -22,8 +22,8 @@ export default function RootLayout({children, params: {lang}}) {
 				<title>{t(lang, 'web.title')}</title>
 				<meta name="description" content={t(lang, 'web.description')}/>
 			</head>
-			<body className="h-screen m-0">
-				<Header lang={lang} className="h-[10%]" locales={AVAILABLE_LOCALES}/>
+			<body className="h-screen m-0 overflow-x-auto">
+				<Header lang={lang} className="h-[10%] min-h-[64px]" locales={AVAILABLE_LOCALES}/>
 				<main className="h-[90%] w-full">
 					{children}
 					<Footer/>

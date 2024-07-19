@@ -19,8 +19,9 @@ export default function Header({lang, locales, className}) {
 	const menuItems = [
 		{text: t(lang, "components.header.button.home"), href: `/${lang}`},
 		{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
-		{text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
-		{text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
+		{text: t(lang, "components.header.button.methodology"), href: `/${lang}/methodology`},
+		// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
+		// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
 	];
 
 	return (
@@ -52,23 +53,16 @@ export default function Header({lang, locales, className}) {
 					<LangSelector locales={locales} lang={lang}/>
 				</NavbarItem>
 			</NavbarContent>
-			<NavbarMenu>
+			<NavbarMenu className="flex flex-col justify-center items-center space-y-2 bg-white">
 				{
-					menuItems.map((item, index) => (
-							<NavbarMenuItem key={`${item}-${index}`}>
-								<Link
-									color={
-										index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-									}
-									className="w-full"
-									href="#"
-									size="lg"
-								>
-									{item}
-								</Link>
-							</NavbarMenuItem>
-						)
-					)
+					menuItems.map(({text, href}, idx) => (
+						<NavbarMenuItem key={href} className="w-full">
+							<Link color={idx === 0 ? "primary" : "foreground"} href={href}
+							      className="w-full justify-center m-4">
+								{text}
+							</Link>
+						</NavbarMenuItem>
+					))
 				}
 			</NavbarMenu>
 		</Navbar>
