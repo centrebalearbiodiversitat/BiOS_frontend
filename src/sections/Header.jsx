@@ -25,7 +25,7 @@ export default function Header({lang, locales, className}) {
 	];
 
 	return (
-		<Navbar maxWidth="full" className={`py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>
+		<Navbar maxWidth="full" className={`z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>
 			<NavbarContent>
 				<NavbarMenuToggle
 					className="md:hidden text-black"

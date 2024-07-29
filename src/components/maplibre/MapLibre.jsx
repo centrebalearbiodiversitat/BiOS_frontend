@@ -2,9 +2,6 @@
 
 import React, {useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
-import LinkButton from "@/components/LinkButton";
-import {t} from "@/i18n/i18n";
-import {IoOpenOutline} from "react-icons/io5";
 import {Spinner} from "@nextui-org/react";
 
 const MAP_STYLE = {
@@ -83,12 +80,14 @@ function PointsSource({data, taxaColors, idx}) {
 		return (
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
 				<Layer
-					id={`points-${idx}`}
+					id={`${idx}`}
 					// type="heatmap"
 					type="circle"
 					paint={{
-						'circle-radius': 5,
+						'circle-radius': 7,
+						'circle-pitch-scale': 'map',
 						'circle-color': `${color}`,
+						// 'circle-opacity': 0.3,
 						// 'circle-color': `rgba(252, 186, 3)`,
 						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
 					}}
@@ -184,10 +183,10 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
-		     mapStyle={MAP_STYLE}
-		     interactiveLayerIds={['points-0', 'points-1']} style={{flex: 1, ...style}}
-		     doubleClickZoom={false} onDblClick={(e) => nav && flyTo(0)}
-		     onClick={e => onClick && onClick(e.features.length === 0 ? null : e.features[0])}>
+		     mapStyle={MAP_STYLE} doubleClickZoom={false}
+		     interactiveLayerIds={data.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
+		     onDblClick={(e) => nav && flyTo(0)}
+		     onClick={e => onClick && e.features && onClick(e.features[0])}>
 			{/*<Source id="layers" type="geojson" data={map}>*/}
 			{/*	<Layer*/}
 			{/*		id="polygons-layer"*/}
@@ -199,8 +198,8 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 			{/*	/>*/}
 			{/*	/!*	/!*<Layer {...skyLayer} />*!/*!/*/}
 			{/*</Source>*/}
-			{
-				data && data.map((el, idx) => {
+			{data &&
+				data.map((el, idx) => {
 					return (
 						<PointsSource key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
 					)

@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
@@ -9,7 +9,9 @@ import CBBSearchBar from "@/components/CBBSearchBar";
 import {t} from "@/i18n/i18n";
 import MapLibre from "@/components/maplibre/MapLibre";
 import MapLibreCard from "@/components/maplibre/MapLibreCard";
-import FullCBBSearchBar from "@/components/FullCBBSearchBar";
+import TaxonName from "@/components/TaxonName";
+import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
+import Sources from "@/components/Sources";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -85,7 +87,7 @@ export default function MapPage({params: {lang}}) {
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const router = useRouter();
-	const [occuPopup, setOccuPopup] = useState(null);
+	const [selectedOccus, setSelectedOccus] = useState([]);
 	const [taxa, setTaxa] = useState({});
 	const [taxaToLoc, setTaxaToLoc] = useState({});
 	const [taxaColors, setTaxaColors] = useState({});
@@ -174,19 +176,44 @@ export default function MapPage({params: {lang}}) {
 	]
 
 	function onSelectedOccurrences(feature) {
-		if (feature != null) {
-			const occurrence = feature.properties;
-			taxonomy.get(occurrence.taxonomy).then(r => {
-				occurrence.taxonomy = r;
-				setOccuPopup(occurrence);
-			})
+		if (feature) {
+			occurrences.get(feature.properties.id)
+				.then(r => setSelectedOccus([...selectedOccus, r]))
 		}
 	}
 
 	return (
 		<>
 			<div className="absolute top-0 h-full w-full">
-				<MapLibre data={Object.values(taxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}/>
+				<MapLibre data={Object.values(taxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}>
+					{
+						selectedOccus.map(
+							(occu, idx) => (
+								<MapLibrePopup key={occu.id} maxWidth={'450px'} maxHeight={'250px'} images={occu.taxonomy.images}
+								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
+								               longitude={occu.decimalLongitude} latitude={occu.decimalLatitude}>
+									<div className="m-6 mt-4 text-medium">
+										<p className="text-3xl mb-4 text-center">
+											<TaxonName lang={lang} taxon={occu.taxonomy} author={false}/>
+										</p>
+										<div>
+											<TwoLineText title={t(lang, "map.popup.locality")} text={occu.location?.name}/>
+											<TwoLineText title={t(lang, "map.popup.location")} text={
+												<span>({occu.decimalLatitude}, {occu.decimalLongitude}) {occu.coordinateUncertaintyInMeters && (<span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
+											}/>
+											<TwoLineText title={t(lang, "map.popup.eventDate")} text={occu.eventDate}/>
+											<TwoLineText title={t(lang, "map.popup.basisRecord")} text={occu.basisOfRecord}/>
+											<TwoLineText title={t(lang, "map.popup.voucher")} text={occu.voucher}/>
+										</div>
+										<div className="mx-2 mt-6">
+											<Sources sources={occu.sources} className="my-3"/>
+										</div>
+									</div>
+								</MapLibrePopup>
+							)
+						)
+					}
+				</MapLibre>
 			</div>
 			<Drawer>
 				<div className="h-full px-6 pt-4">
@@ -199,7 +226,7 @@ export default function MapPage({params: {lang}}) {
 						{
 							Object.values(taxa).map((taxon, idx) => (
 								<MapLibreCard key={idx} color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
-								              onColorChanged={onColorChanged}
+								              onColorChanged={onColorChanged} lang={lang}
 								              taxon={taxon} onDelete={onDeleted}/>
 							))
 						}

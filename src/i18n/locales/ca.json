@@ -30,6 +30,11 @@
 
 	"map.drawer.close": "Tanca",
 	"map.drawer.selectedTaxa": "Taxons seleccionats",
+	"map.popup.locality": "Localitat",
+	"map.popup.location": "Ubicació",
+	"map.popup.eventDate": "Data del event",
+	"map.popup.basisRecord": "Base del registre",
+	"map.popup.voucher": "Identificador",
 
 
     "components.searchbar.label": "Cerca biodiversitat...",

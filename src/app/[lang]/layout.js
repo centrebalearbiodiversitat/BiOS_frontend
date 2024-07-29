@@ -4,8 +4,8 @@ import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
 import {AVAILABLE_LOCALES, t} from "@/i18n/i18n"
 
-import "@/globals.css";
 import 'maplibre-gl/dist/maplibre-gl.css';
+import "@/globals.css";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"]

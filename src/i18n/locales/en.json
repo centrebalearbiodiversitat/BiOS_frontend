@@ -30,6 +30,11 @@
 
 	"map.drawer.close": "Close",
 	"map.drawer.selectedTaxa": "Selected taxa",
+	"map.popup.locality": "Locality",
+	"map.popup.location": "Location",
+	"map.popup.eventDate": "Event date",
+	"map.popup.basisRecord": "Basis of record",
+	"map.popup.voucher": "Voucher",
 
 
 	"components.searchbar.label": "Search biodiversity...",
