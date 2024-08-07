@@ -11,9 +11,9 @@ import {
 } from "@nextui-org/react";
 import {Image} from "@nextui-org/react";
 import LangSelector from "@/components/LangSelector";
-import HoverLink from "@/components/HoverLink";
+import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
-import ActiveLink from "@/components/ActiveLink";
+import ActiveLink from "@/components/common/ActiveLink";
 
 export default function Header({lang, locales, className}) {
 	const menuItems = [

@@ -2,7 +2,7 @@
 
 import React, {useState} from "react";
 import taxonomy from "@/API/taxonomy"
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/common/SearchBar";
 import {redirect} from "next/navigation";
 
 

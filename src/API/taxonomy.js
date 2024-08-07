@@ -6,8 +6,12 @@ function list() {
 	return requests.GET(`${TAXONOMY_PATH}/list`)
 }
 
-function search(name) {
-	return requests.GET(`${TAXONOMY_PATH}/search`, {name})
+async function search(name) {
+	if (name) {
+		return requests.GET(`${TAXONOMY_PATH}/search`, {name})
+	} else {
+		return []
+	}
 }
 
 function get(id) {
@@ -42,6 +46,10 @@ async function checklist(id) {
 	return requests.URL(`${TAXONOMY_PATH}/taxon/checklist`, {id})
 }
 
+async function taxonData(id) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/data`, {id})
+}
+
 module.exports = {
 	list,
 	search,
@@ -53,4 +61,5 @@ module.exports = {
 	synonyms,
 	sources,
 	checklist,
+	taxonData,
 }

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import TaxonName from "@/components/TaxonName";
+import TaxonName from "@/components/common/TaxonName";
 import {t} from "@/i18n/i18n";
 import {IoIosArrowDown} from "react-icons/io";
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
-import Loading from "@/components/Loading";
+import Loading from "@/components/common/Loading";
 
 
 function DataCard({lang, title, icon, fetchData}) {

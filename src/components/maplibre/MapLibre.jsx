@@ -1,8 +1,8 @@
 "use client"
 
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
-import {Spinner} from "@nextui-org/react";
+import {Button, Spinner} from "@nextui-org/react";
 
 const MAP_STYLE = {
 	version: 8,
@@ -40,7 +40,7 @@ const MAP_STYLE = {
           {
             id: 'background',
             type: 'background',
-            paint: { 'background-color': '#ACD1D2' }
+            paint: { 'background-color': '#A0D3D3' }
           },
 		{
 			id: 'osm',
@@ -181,6 +181,20 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 		})
 	}
 
+	const exportMap = useCallback(() => {
+		const mapCanvas = mapRef.current?.getMap().getCanvas();
+		if (mapCanvas) {
+            const image = mapCanvas.toDataURL('image/png');
+			console.log(image);
+			const link = document.createElement('a');
+            link.href = image;
+            link.download = 'map-image.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+		}
+	}, []);
+
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
 		     mapStyle={MAP_STYLE} doubleClickZoom={false}
@@ -211,6 +225,9 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 			{loading && <div className="bg-white/50 w-full h-full flex justify-center items-center" style={{position: 'absolute', top: 0, left: 0}}>
 				<Spinner size={"lg"}/>
 			</div>}
+            <Button className="top-[20vh]" onClick={exportMap}>
+                Export map
+            </Button>
 		</Map>
 	);
 }

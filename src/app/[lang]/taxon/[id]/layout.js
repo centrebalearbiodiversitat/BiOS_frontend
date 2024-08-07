@@ -6,18 +6,18 @@ import "@/globals.css";
 import 'maplibre-gl/dist/maplibre-gl.css';
 import VerticalTaxonomy from "@/components/VerticalTaxonomy";
 import MainContent from "@/sections/MainContent";
-import Figure from "@/components/Figure";
-import TaxonName from "@/components/TaxonName";
+import Figure from "@/components/common/Figure";
+import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
 import {useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import CBBButton from "@/components/CBBButton";
+import CBBButton from "@/components/common/CBBButton";
 import {BsFiletypeCsv} from "react-icons/bs";
 import Link from "next/link";
-import TabButtonGroup from "@/components/TabButtonGroup";
+import TabButtonGroup from "@/components/common/TabButtonGroup";
 import {Accordion, AccordionItem} from "@nextui-org/react";
-import Loading from "@/components/Loading";
+import Loading from "@/components/common/Loading";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -73,8 +73,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 
 	const TAB_BUTTONS = useMemo(() => [
 		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon')},
+		{href: `/${lang}/taxon/${id}/distribution`, text: t(lang, 'taxon.layout.button.distribution')},
 		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics')},
-		// {href: `/${lang}/taxon/${id}/traits`, text: t(lang, 'taxon.layout.button.genetics')},
 	], [lang, id])
 
 	return (
@@ -94,7 +94,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 						<div className="col-span-full lg:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon === null} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
-								         className="h-auto w-full max-h-full" images={taxon?.images}/>}
+								         		  className="rounded-lg h-auto w-full max-h-full"
+												  images={taxon?.images}/>}
 							</Loading>
 						</div>
 						<header className="flex flex-col col-span-full lg:col-span-1">
@@ -150,9 +151,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 					<AccordionTaxonomy showDivider={false} selectionMode="multiple"
 					                   className="lg:hidden mt-3 mb-8" higherTaxonomy={higherTaxonomy}
 					                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
-					<div className="flex flex-row rounded-t-2xl">
-						<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
-					</div>
+					<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
 					<MainContent>
 						{children}
 					</MainContent>

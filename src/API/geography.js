@@ -1,21 +1,21 @@
 const requests = require("@/API/requests");
 
-const AUTHORSHIP_PATH = '/taxonomy/authorship'
+const GEOGRAPHY_PATH = '/geography'
 
 function list() {
-	return requests.GET(`${AUTHORSHIP_PATH}/list`)
+	return requests.GET(`${GEOGRAPHY_PATH}/list`)
 }
 
 async function search(name) {
 	if (name) {
-		return requests.GET(`${AUTHORSHIP_PATH}/search`, {name})
+		return requests.GET(`${GEOGRAPHY_PATH}/search`, {name})
 	} else {
 		return []
 	}
 }
 
 function get(id) {
-	return requests.GET(`${AUTHORSHIP_PATH}`, {id})
+	return requests.GET(`${GEOGRAPHY_PATH}/level`, {id})
 }
 
 module.exports = {

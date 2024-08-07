@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import CBBButton from "@/components/CBBButton";
+import CBBButton from "@/components/common/CBBButton";
 import {Link} from "@nextui-org/react";
 import {usePathname} from "next/navigation";
 

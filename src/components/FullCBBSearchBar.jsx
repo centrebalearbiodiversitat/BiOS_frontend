@@ -4,7 +4,7 @@ import React, {useMemo, useState} from "react";
 
 import {usePathname, useRouter} from "next/navigation";
 import taxonomy from "@/API/taxonomy";
-import CBBSearchBar from "@/components/CBBSearchBar";
+import CBBSearchBar from "@/components/common/CBBSearchBar";
 
 
 export default function FullCBBSearchBar({lang, showFilters = true, border = true, rounded = true}) {

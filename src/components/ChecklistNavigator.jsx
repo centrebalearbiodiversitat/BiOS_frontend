@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from "react";
 import {Accordion, AccordionItem} from "@nextui-org/react";
-import TaxonName from "@/components/TaxonName";
+import TaxonName from "@/components/common/TaxonName";
 import taxonomy, {children} from "@/API/taxonomy";
 
 

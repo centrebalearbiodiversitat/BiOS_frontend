@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
 
-export default function Figure({alt, images, className, ...extra}) {
+export default function Figure({alt, images, className= "rounded-lg", ...extra}) {
 	const [error, setError] = useState(false);
 	const [i, setI] = React.useState(0);
 
@@ -34,7 +34,7 @@ export default function Figure({alt, images, className, ...extra}) {
 	}, [images])
 
 	return (
-		<div className="w-full h-full relative overflow-hidden rounded-lg">
+		<div className={`w-full h-full relative overflow-hidden ${className}`}>
 			<div className={`absolute w-full h-full`}
 			     style={{
 					 backgroundImage: `url(${src})`,

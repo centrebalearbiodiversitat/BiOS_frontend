@@ -14,7 +14,7 @@ import {
 	CardBody,
 } from "@nextui-org/react";
 import TableList from "@/components/TableList";
-import Loading from "@/components/Loading";
+import Loading from "@/components/common/Loading";
 
 export default function TaxonSequences({params: {id, lang}}) {
 	const [seqs, setSeqs] = useState([]);

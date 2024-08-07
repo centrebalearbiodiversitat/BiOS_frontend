@@ -1,15 +1,16 @@
 import React from "react";
-import CBBButton from "@/components/CBBButton";
-import PopoverColorPicker from "@/components/PopoverColorPicker";
+import CBBButton from "@/components/common/CBBButton";
+import PopoverColorPicker from "@/components/common/PopoverColorPicker";
 import {IoMdClose} from "react-icons/io";
-import TaxonName from "@/components/TaxonName";
-import Loading from "@/components/Loading";
+import TaxonName from "@/components/common/TaxonName";
+import Loading from "@/components/common/Loading";
 
 
-function LoadedBodyCard({taxon, lang, color, onColorChanged, onDelete}) {
+function LoadedBodyCard({taxon, lang, color, colorSelector, onColorChanged, onDelete}) {
 	return (
 		<>
-			<PopoverColorPicker isDisabled={!taxon} color={color} onChange={(c) => onColorChanged(taxon.id, c)}/>
+			{colorSelector && <PopoverColorPicker isDisabled={!taxon} color={color} onChange={(c) => onColorChanged(taxon.id, c)}/>}
+			{!colorSelector && <p className="border border-gray-400 w-[36px] h-[36px] text-sm text-center rounded-full m-2 p-2">{taxon.name[0]}</p>}
 			<div className={`flex flex-col flex-1`}>
 				<Loading loading={taxon === null} width="100%" height="16px">
 					<p className={`text-lg w-full`}>
@@ -31,10 +32,10 @@ function LoadedBodyCard({taxon, lang, color, onColorChanged, onDelete}) {
 }
 
 
-export default function MapLibreCard({lang, taxon, color, onColorChanged, onDelete}) {
+export default function MapLibreCard({lang, taxon, colorSelector = true, color, onColorChanged, onDelete}) {
 	return (
 		<li className={`bg-white p-2 flex flex-row items-center rounded-md`}>
-			<LoadedBodyCard taxon={taxon} color={color} lang={lang}
+			<LoadedBodyCard taxon={taxon} color={color} lang={lang} colorSelector={colorSelector}
 			                onColorChanged={onColorChanged} onDelete={onDelete}/>
 		</li>
 	);
