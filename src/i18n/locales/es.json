@@ -34,12 +34,12 @@
 	"taxon.overview.habitat_3": "Matorral",
 	"taxon.overview.habitat_4": "Pastizal",
 	"taxon.overview.habitat_5": "Humedales (interiores)",
-	"taxon.overview.habitat_6": "Áreas rocosas (ej., acantilados interiores, picos de montañas)",
-	"taxon.overview.habitat_7": "Cuevas y hábitats subterráneos (no acuáticos)",
+	"taxon.overview.habitat_6": "Áreas rocosas",
+	"taxon.overview.habitat_7": "Cuevas y hábitats subterráneos",
 	"taxon.overview.habitat_8": "Desierto",
 	"taxon.overview.habitat_9": "Marino nerítico",
 	"taxon.overview.habitat_10": "Marino oceánico",
-	"taxon.overview.habitat_11": "Fondo oceánico profundo (bentónico y demersal)",
+	"taxon.overview.habitat_11": "Fondo oceánico profundo",
 	"taxon.overview.habitat_12": "Marino intermareal",
 	"taxon.overview.habitat_13": "Marino costero/supramareal",
 	"taxon.overview.habitat_14": "Artificial/terrestre",
@@ -48,19 +48,18 @@
 	"taxon.overview.habitat_17": "Otro",
 	"taxon.overview.habitat_18": "Desconocido",
 
+	"taxon.distribution.distribution": "Distribución",
 
 	"taxon.genetics.genes": "Genes y marcadores",
 	"taxon.genetics.genomes": "Genomas completos",
 	"taxon.genetics.transcriptomes": "Transcriptomas completos",
 	"taxon.genetics.mitogenomes": "Mitogenomas",
 
-
 	"geography.rank.ac": "Comunidad autónoma",
 	"geography.rank.island": "Isla",
 	"geography.rank.municipality": "Municipio",
 	"geography.rank.town": "Población",
 	"geography.rank.wb_0": "Agua",
-
 
 	"map.drawer.close": "Cerrar",
 	"map.drawer.selectedTaxa": "Taxones seleccionados",
@@ -74,7 +73,6 @@
 	"map.popup.eventDate": "Fecha del event",
 	"map.popup.basisRecord": "Base del registro",
 	"map.popup.voucher": "Identificador",
-
 
 	"components.searchbar.label": "Busca biodiversidad...",
     "components.searchbar.filter.map": "Mapa",
@@ -100,6 +98,18 @@
 
 	"components.verticalTaxonomy.empty": "Vacío",
 
+	"footer.sitemap.title": "Sitemap",
+	"footer.sitemap.home": "Inicio",
+	"footer.sitemap.map": "Mapa",
+	"footer.sitemap.methodology":  "Metodologia",
+	"footer.sitemap.team":  "Equipo",
+
+	"footer.legal.title": "Aviso legal",
+	"footer.legal.disclaimer": "Descargo de responsabilidad",
+	"footer.legal.privacy":  "Política de privacidad",
+	"footer.legal.cookies":  "Cookies",
+
+	"footer.contact.title":  "Contacto",
 
     "lang": "Castellano"
 }

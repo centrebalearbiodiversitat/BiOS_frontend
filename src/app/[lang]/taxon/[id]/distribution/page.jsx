@@ -20,7 +20,7 @@ export default function Taxon({params: {lang, id}}) {
 	return (
 		<div>
 			<h3 className="text-2xl">
-				{t(lang, 'taxon.main.distribution')}
+				{t(lang, 'taxon.distribution.distribution')}
 			</h3>
 			<MapLibre nav={true} loading={occs === null} style={{borderRadius: '8px', height: '450px'}} data={[occs]}
 			          taxaColors={{[id]: '#ff6900'}}>

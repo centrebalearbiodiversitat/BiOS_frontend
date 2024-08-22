@@ -2,14 +2,12 @@
 	"web.title": "Centre Balear de Biodiversitat",
 	"web.description": "Official web page for the database and tools developed by Centro Balear de Biodiversidad",
 
-
 	"home.title": "Access to species data from the Balearic Islands",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Species",
 	"home.statistics.observations": "Occurrences",
 	"home.statistics.sequences": "Sequences",
-
 
 	"taxon.layout.button.taxon": "Overview",
 	"taxon.layout.button.distribution": "Distribution",
@@ -34,12 +32,12 @@
 	"taxon.overview.habitat_3": "Shrubland",
 	"taxon.overview.habitat_4": "Grassland",
 	"taxon.overview.habitat_5": "Wetlands (inland)",
-	"taxon.overview.habitat_6": "Rocky areas (e.g., inland cliffs, mountain peaks)",
-	"taxon.overview.habitat_7": "Caves & subterranean habitats (non-aquatic)",
+	"taxon.overview.habitat_6": "Rocky areas",
+	"taxon.overview.habitat_7": "Caves & subterranean habitats",
 	"taxon.overview.habitat_8": "Desert",
 	"taxon.overview.habitat_9": "Marine neritic",
 	"taxon.overview.habitat_10": "Marine oceanic",
-	"taxon.overview.habitat_11": "Marine deep ocean floor (benthic and demersal)",
+	"taxon.overview.habitat_11": "Marine deep ocean floor",
 	"taxon.overview.habitat_12": "Marine intertidal",
 	"taxon.overview.habitat_13": "Marine coastal/supratidal",
 	"taxon.overview.habitat_14": "Artificial/terrestrial",
@@ -48,19 +46,18 @@
 	"taxon.overview.habitat_17": "Other",
 	"taxon.overview.habitat_18": "Unknown",
 
+	"taxon.distribution.distribution": "Distribution",
 
 	"taxon.genetics.genes": "Genes and markers",
 	"taxon.genetics.genomes": "Complete genomes",
 	"taxon.genetics.transcriptomes": "Complete transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",
 
-
 	"geography.rank.ac": "Autonomous comunity",
 	"geography.rank.island": "Island",
 	"geography.rank.municipality": "Municipality",
 	"geography.rank.town": "Town",
 	"geography.rank.wb_0": "Water",
-
 
 	"map.drawer.close": "Close",
 	"map.drawer.selectedTaxa": "Selected taxa",
@@ -74,7 +71,6 @@
 	"map.popup.eventDate": "Event date",
 	"map.popup.basisRecord": "Basis of record",
 	"map.popup.voucher": "Voucher",
-
 
 	"components.searchbar.label": "Search biodiversity...",
     "components.searchbar.filter.map": "Map",
@@ -100,6 +96,18 @@
 
 	"components.verticalTaxonomy.empty": "Empty",
 
+	"footer.sitemap.title": "Sitemap",
+	"footer.sitemap.home": "Home",
+	"footer.sitemap.map": "Map",
+	"footer.sitemap.methodology":  "Methodology",
+	"footer.sitemap.team":  "Team",
+
+	"footer.legal.title": "Legal advice",
+	"footer.legal.disclaimer": "Disclaimer",
+	"footer.legal.privacy":  "Privacy",
+	"footer.legal.cookies":  "Cookies",
+
+	"footer.contact.title":  "Contact",
 
 	"lang": "English"
 }

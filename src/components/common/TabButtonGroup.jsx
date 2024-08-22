@@ -26,34 +26,18 @@ function TabButton({href, children, type, className, ...extra}) {
 
 export default function TabButtonGroup({buttons, colorPrimary, colorSecondary, ...extra}) {
 	const pathname = usePathname();
-	const last = buttons.length - 1;
 
 	return (
-		<div className="flex flex-row rounded-t-2xl divide-x divide-gray-300">
-			<Tabs selectedKey={pathname} aria-label="Options" color="primary" variant="underlined">
-				{
-					buttons.map((button, index) => {
-						// const type = index === 0 ? "first" : (index === last ? "last" : "between");
-
-						// return (
-						// 	<TabButton key={index} href={button.href} type={type}
-						// 	           className={`${button.href === pathname ? colorPrimary : colorSecondary}`}
-						// 	           {...extra}>
-						// 		{button.text}
-						// 	</TabButton>
-						// )
-						return (
-							<Tab key={button.href} href={button.href}
-							     title={
-								     <div className="flex items-center space-x-2">
-									     <span>{button.text}</span>
-								     </div>
-							     }
-							/>
-						)
-					})
-				}
-			</Tabs>
+		<div className="flex flex-row flex-wrap md:grid-cols-6 justify-center md:my-6">
+		{
+			buttons.map((button) => {
+				return (
+					<Button as={Link} radius="full" className={`mb-2 me-2 w-[50px] max-w-[50px] md:w-[150px] md:max-w-[150px] py-4 md:py-6 text-center text-lg font-extralight ${button.href === pathname ? "text-white bg-primary" : "text-black bg-slate-200/50"}`} href={button.href} key={button.href}>
+						{button.icon}<span className="hidden md:block">{button.text}</span>
+					</Button>
+				)
+			})
+		}
 		</div>
 	)
 }

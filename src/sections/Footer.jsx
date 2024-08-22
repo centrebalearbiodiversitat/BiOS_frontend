@@ -1,18 +1,21 @@
 import React from "react";
+import {Image} from "@nextui-org/react";
+import SiteMap from "@/components/SiteMap";
+import Legal from "@/components/Legal";
+import Contact from "@/components/Contact";
 
-export default function Footer({}) {
+export default function Footer({lang}) {
 	return (
-		<footer className="py-4">
-			<div className="mx-auto">
-				<p className="text-slate-400 text-small text-center">
-					Centre Balear de Biodiversitat (CBB) de la Universitat de les Illes Balears (UIB)
-				</p>
-				<p className="text-slate-400 text-small text-center">
-					Cra. de Valldemossa, km 7,5. 07122 Palma (Illes Balears).
-				</p>
-				<p className="text-slate-400 text-small text-center">
-					Contacte: centre.biodiversitat@uib.es Tel.: (+34) 971 17 30 00.
-				</p>
+		<footer className="px-10 md:px-16 py-10 w-full">
+			<div className="border-t-1 border-slate-200 py-6 flex flex-col-reverse md:flex-row">
+				<Image className="justify-self-start" src="/images/cbb-logo.png" alt={"CBB logo"} width="400px" radius={null}/>
+				<div className="flex flex-col align-top md:ms-auto md:flex-row md:space-x-8">
+					<div className="grid grid-cols-2 md:space-x-8">
+						<SiteMap lang={lang}/>
+						<Legal lang={lang}/>
+					</div>
+					<Contact lang={lang}/>
+				</div>
 			</div>
 		</footer>
 	);

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
@@ -13,9 +13,11 @@ import MapLibreCard from "@/components/maplibre/MapLibreCard";
 import TaxonName from "@/components/common/TaxonName";
 import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
 import Sources from "@/components/Sources";
-import {Accordion, AccordionItem} from "@nextui-org/react";
+import {Accordion, AccordionItem, Button} from "@nextui-org/react";
 import HighlightText from "@/components/common/HighlightText";
 import Filters from "@/components/Filters";
+import {FiDownload} from "react-icons/fi";
+import CBBButton from "@/components/common/CBBButton";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -108,6 +110,7 @@ export default function MapPage({params: {lang}}) {
     const [taxaToLoc, setTaxaToLoc] = useState({});
     const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
     const [taxaColors, setTaxaColors] = useState({});
+    const mapRef = useRef();
 
     function setAndSaveTaxaColors(tC) {
         localStorage.setItem('taxaColors', JSON.stringify(tC));
@@ -187,7 +190,7 @@ export default function MapPage({params: {lang}}) {
     return (
         <>
             <div className="absolute top-0 h-full w-full">
-                <MapLibre data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}>
+                <MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}>
                     {
                         selectedOccus.map(
                             (occu, idx) => (
@@ -224,57 +227,66 @@ export default function MapPage({params: {lang}}) {
                 </MapLibre>
             </div>
             <Drawer>
-                <Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "filters"]} selectionMode={"multiple"}>
-                    <AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
-                                   className="border-b-1 border-slate-400"
-                                   title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
-                        <div className="mx-3">
-                            <CBBSearchBar showFilters={false} lang={lang} rounded={true}
-                                          filters={[{
-                                                textKey: "components.searchbar.filter.taxonomy",
-                                                onSelected: e => onSelectedSearch('taxon', e),
-                                                onInput: e => taxonomy.search(e)
-                                          }]}/>
-                            <ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
-                                {
-                                    Object.values(taxa).map((taxon, idx) => (
-                                        <MapLibreCard key={idx}
-                                                      color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
-                                                      onColorChanged={onColorChanged} lang={lang}
-                                                      taxon={taxon} onDelete={d => onDeleted('taxon', d)}/>
+                <Drawer.Body>
+                    <Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "filters"]} selectionMode={"multiple"}>
+                        <AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
+                                       className="border-b-1 border-slate-400"
+                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
+                            <div className="mx-3">
+                                <CBBSearchBar showFilters={false} lang={lang} rounded={true}
+                                              filters={[{
+                                                    textKey: "components.searchbar.filter.taxonomy",
+                                                    onSelected: e => onSelectedSearch('taxon', e),
+                                                    onInput: e => taxonomy.search(e)
+                                              }]}/>
+                                <ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
+                                    {
+                                        Object.values(taxa).map((taxon, idx) => (
+                                            <MapLibreCard key={idx}
+                                                          color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
+                                                          onColorChanged={onColorChanged} lang={lang}
+                                                          taxon={taxon} onDelete={d => onDeleted('taxon', d)}/>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        </AccordionItem>
+                        <AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')} className="border-b-1 border-slate-400"
+                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
+                            <div className="mx-3">
+                                <CBBSearchBar showFilters={false} lang={lang} rounded={true}
+                                              filters={[{
+                                                    textKey: "components.searchbar.filter.authors",
+                                                    onSelected: e => onSelectedSearch('loc', e),
+                                                    onInput: e => geography.search(e)
+                                              }]}>
+                                    {(obj, search) => <><span className="text-slate-500">{t(lang, `geography.rank.${obj.rank}`)}: </span><HighlightText text={obj.name} highlight={search}/></>}
+                                </CBBSearchBar>
+                                <ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 mx-4">
+                                    {
+                                    Object.values(geographicalLocations).map((location, idx) => (
+                                        <MapLibreCard key={idx} colorSelector={false} lang={lang}
+                                                      taxon={location} onDelete={d => onDeleted('loc', d)}/>
                                     ))
-                                }
-                            </ul>
-                        </div>
-                    </AccordionItem>
-                    <AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')} className="border-b-1 border-slate-400"
-                                   title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
-                        <div className="mx-3">
-                            <CBBSearchBar showFilters={false} lang={lang} rounded={true}
-                                          filters={[{
-                                                textKey: "components.searchbar.filter.authors",
-                                                onSelected: e => onSelectedSearch('loc', e),
-                                                onInput: e => geography.search(e)
-                                          }]}>
-                                {(obj, search) => <><span className="text-slate-500">{t(lang, `geography.rank.${obj.rank}`)}: </span><HighlightText text={obj.name} highlight={search}/></>}
-                            </CBBSearchBar>
-                            <ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 mx-4">
-                                {
-                                Object.values(geographicalLocations).map((location, idx) => (
-                                    <MapLibreCard key={idx} colorSelector={false} lang={lang}
-                                                  taxon={location} onDelete={d => onDeleted('loc', d)}/>
-                                ))
-                                }
-                            </ul>
-                        </div>
-                    </AccordionItem>
-                    <AccordionItem key="filters" aria-label={t(lang, 'map.drawer.filters')} className="border-b-0"
-                                   title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
-                        <div className="mx-3">
-                            <Filters data={taxaToLoc} onFiltered={d => setFilteredTaxaToLoc(d)}/>
-                        </div>
-                    </AccordionItem>
-                </Accordion>
+                                    }
+                                </ul>
+                            </div>
+                        </AccordionItem>
+                        <AccordionItem key="filters" aria-label={t(lang, 'map.drawer.filters')} className="border-b-0"
+                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
+                            <div className="mx-3">
+                                <Filters data={taxaToLoc} onFiltered={d => setFilteredTaxaToLoc(d)}/>
+                            </div>
+                        </AccordionItem>
+                    </Accordion>
+                </Drawer.Body>
+                <Drawer.Footer>
+                    <div className="m-4 flex justify-end">
+                        <CBBButton disabled={!mapRef?.current} className="me-auto" onClick={() => mapRef.current.exportMap()}>
+                            Export map <FiDownload />
+                        </CBBButton>
+                    </div>
+                </Drawer.Footer>
             </Drawer>
         </>
     );

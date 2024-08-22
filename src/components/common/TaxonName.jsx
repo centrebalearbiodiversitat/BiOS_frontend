@@ -17,8 +17,11 @@ export default function TaxonName({lang, taxon, author = false}) {
 	const pathname = usePathname();
 
 	const href = useMemo(() => {
-		return pathname.replace(/\/taxon\/\d+/, `/taxon/${taxon.id}`)
-	}, [lang, taxon.id, pathname])
+		if (pathname.search(/\/taxon\/\d+/) === -1)
+			return `/${lang}/taxon/${taxon.id}`;
+		else
+			return pathname.replace(/\/taxon\/\d+/, `/taxon/${taxon.id}`);
+	}, [lang, taxon.id, pathname]);
 
 	return (
 		<Link href={href} className={`first-letter:uppercase text-pretty hover:underline`}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {
 	Navbar,
 	NavbarBrand,
@@ -16,13 +16,15 @@ import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/common/ActiveLink";
 
 export default function Header({lang, locales, className}) {
-	const menuItems = [
-		{text: t(lang, "components.header.button.home"), href: `/${lang}`},
-		{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
-		{text: t(lang, "components.header.button.methodology"), href: `/${lang}/methodology`},
-		// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
-		// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
-	];
+	const menuItems = useMemo(() => {
+		return [
+			{text: t(lang, "components.header.button.home"), href: `/${lang}`},
+			{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
+			{text: t(lang, "components.header.button.methodology"), href: `/${lang}/methodology`},
+			// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
+			// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
+		]
+	}, [lang]);
 
 	return (
 		<Navbar maxWidth="full" className={`z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>

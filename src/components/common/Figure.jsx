@@ -14,7 +14,7 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 	}, [i, images.length]);
 
 	const {src, title, loading} = useMemo(() => {
-		let src = "https://img.freepik.com/free-vector/404-error-with-cute-animal-concept-illustration_114360-1900.jpg";
+		let src = "/images/image-not-found.webp";
 		let title, loading;
 		if (!images) {
 			loading = true;

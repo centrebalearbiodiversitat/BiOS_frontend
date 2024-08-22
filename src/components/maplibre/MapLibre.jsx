@@ -1,8 +1,8 @@
 "use client"
 
-import React, {useCallback, useRef, useState} from 'react';
+import React, {forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
-import {Button, Spinner} from "@nextui-org/react";
+import {Spinner} from "@nextui-org/react";
 
 const MAP_STYLE = {
 	version: 8,
@@ -84,9 +84,25 @@ function PointsSource({data, taxaColors, idx}) {
 					// type="heatmap"
 					type="circle"
 					paint={{
-						'circle-radius': 7,
+						'circle-radius': 13,
+						'circle-pitch-scale': 'map',
+						'circle-color': `rgba(0, 0, 0, 0)`,
+						// 'circle-opacity': 0.3,
+						// 'circle-color': `rgba(252, 186, 3)`,
+						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
+					}}/>
+				<Layer
+					id={`${idx}-visual`}
+					// type="heatmap"
+					type="circle"
+					paint={{
+						'circle-radius': 3,
 						'circle-pitch-scale': 'map',
 						'circle-color': `${color}`,
+						// 'circle-opacity': .65,
+						// 'circle-stroke-color': `${color}`,
+						// 'circle-stroke-width': 1,
+						// 'circle-stroke-opacity': 1,
 						// 'circle-opacity': 0.3,
 						// 'circle-color': `rgba(252, 186, 3)`,
 						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
@@ -161,25 +177,16 @@ function PointsSource({data, taxaColors, idx}) {
 	}
 
 
-export default function MapLibre({data, taxaColors, children, loading = false, onClick = null, nav = true, style = {}}) {
+const MapLibre = forwardRef(({
+	data, taxaColors, children, loading = false, onClick = null,
+	nav = true, navPos= "bottom-right", style = {}
+}, ref) => {
 	const [lng] = useState(2.75802);
 	const [lat] = useState(39.37029);
 	const [zoom] = useState(7);
 	const [bearing] = useState(-8);
 	const [pitch] = useState(0);
 	const mapRef = useRef();
-
-	function flyTo(layer) {
-		const i = Math.floor(Math.random() * data[layer].features.length);
-		mapRef.current?.flyTo({
-			center: data[layer].features[i].geometry.coordinates,
-			zoom: 13,
-			pitch: 60,
-			bearing: Math.random() * 360,
-			duration: 2000,
-			essential: true
-		})
-	}
 
 	const exportMap = useCallback(() => {
 		const mapCanvas = mapRef.current?.getMap().getCanvas();
@@ -195,23 +202,30 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 		}
 	}, []);
 
+	useImperativeHandle(ref, () => {
+		return {
+			exportMap
+		}
+	});
+
+	function flyTo(layer) {
+		const i = Math.floor(Math.random() * data[layer].features.length);
+		mapRef.current?.flyTo({
+			center: data[layer].features[i].geometry.coordinates,
+			zoom: 13,
+			pitch: 60,
+			bearing: Math.random() * 360,
+			duration: 2000,
+			essential: true
+		})
+	}
+
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
-		     mapStyle={MAP_STYLE} doubleClickZoom={false}
+		     mapStyle={MAP_STYLE} doubleClickZoom={false} preserveDrawingBuffer={true}
 		     interactiveLayerIds={data.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
 		     onDblClick={(e) => nav && flyTo(0)}
 		     onClick={e => onClick && e.features && onClick(e.features[0])}>
-			{/*<Source id="layers" type="geojson" data={map}>*/}
-			{/*	<Layer*/}
-			{/*		id="polygons-layer"*/}
-			{/*		type="fill"*/}
-			{/*		paint={{*/}
-			{/*			'fill-color': '#088',*/}
-			{/*			'fill-opacity': 0.8*/}
-			{/*		}}*/}
-			{/*	/>*/}
-			{/*	/!*	/!*<Layer {...skyLayer} />*!/*!/*/}
-			{/*</Source>*/}
 			{data &&
 				data.map((el, idx) => {
 					return (
@@ -220,14 +234,15 @@ export default function MapLibre({data, taxaColors, children, loading = false, o
 				})
 			}
 			{nav &&
-				<NavigationControl showCompass={true} position="bottom-right" visualizePitch={true} showZoom={true}/>}
+				<NavigationControl showCompass={true} position={navPos} visualizePitch={true} showZoom={true}/>}
 			{children}
 			{loading && <div className="bg-white/50 w-full h-full flex justify-center items-center" style={{position: 'absolute', top: 0, left: 0}}>
 				<Spinner size={"lg"}/>
 			</div>}
-            <Button className="top-[20vh]" onClick={exportMap}>
-                Export map
-            </Button>
 		</Map>
 	);
-}
+});
+
+MapLibre.displayName = "MapLibre";
+
+export default MapLibre;

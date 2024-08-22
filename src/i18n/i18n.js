@@ -19,7 +19,8 @@ const dictionaries = {
 
 export function t(locale, key) {
     if (!(locale in dictionaries)) {
-        console.error(locale, 'not found in dictionaries')
+        // throw new Error(`Locale "${key}" is not supported`)
+        console.error(locale, 'language not found in dictionaries. Availables: ', AVAILABLE_LOCALES)
         locale = DEFAULT_LOCALE
     }
 

@@ -1,0 +1,30 @@
+import React, {useMemo} from "react";
+import {Link} from "@nextui-org/react";
+import {t} from "@/i18n/i18n";
+
+
+export default function SiteMap({lang}) {
+	const links = useMemo(() => [
+		{path: `/${lang}`, text: t(lang, "footer.sitemap.home")},
+		{path: `/${lang}/map`, text: t(lang, "footer.sitemap.map")},
+		{path: `/${lang}/methodology`, text: t(lang, "footer.sitemap.methodology")},
+		{path: `/${lang}/team`, text: t(lang, "footer.sitemap.team")},
+	], [lang])
+
+	return (
+		<div className="space-y-2 text-sm">
+			<p className="uppercase font-medium text-slate-500">{t(lang, "footer.sitemap.title")}</p>
+			<ul className="flex flex-col">
+			{
+				links.map((link) => (
+					<li key={link.path}>
+						<Link href={link.path} className="font-extralight hover:underline text-slate-500">
+							{link.text}
+						</Link>
+					</li>
+				))
+			}
+			</ul>
+		</div>
+	)
+}

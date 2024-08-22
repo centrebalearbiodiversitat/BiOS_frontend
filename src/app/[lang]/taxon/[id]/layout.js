@@ -18,6 +18,8 @@ import Link from "next/link";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import Loading from "@/components/common/Loading";
+import {FaDna, FaInfo} from "react-icons/fa";
+import {FaLocationDot} from "react-icons/fa6";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -72,13 +74,13 @@ export default function RootLayout({children, params: {lang, id}}) {
 	}, [id]);
 
 	const TAB_BUTTONS = useMemo(() => [
-		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon')},
-		{href: `/${lang}/taxon/${id}/distribution`, text: t(lang, 'taxon.layout.button.distribution')},
-		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics')},
+		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon'), icon: <FaInfo />},
+		{href: `/${lang}/taxon/${id}/distribution`, text: t(lang, 'taxon.layout.button.distribution'), icon: <FaLocationDot />},
+		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics'), icon: <FaDna />},
 	], [lang, id])
 
 	return (
-		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-10 md:mx-8 2xl:mx-16 mt-5">
+		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-5 md:mx-8 2xl:mx-16 mt-5">
 			<aside className="col-span-3 w-full h-full space-y-6 mb-5 xl:me-8 m-auto">
 				<div className="rounded-full ms-auto w-full">
 					<FullCBBSearchBar lang={lang} border={true} rounded={false} showFilters={false}/>
@@ -89,7 +91,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 			</aside>
 			<div className="col-span-9 md:px-4 2xl:px-16 space-y-6">
-				<div className="flex flex-row justify-center">
+				<div className="flex flex-row justify-center mb-10">
 					<div className="w-full grid grid-cols-2 lg:space-x-12">
 						<div className="col-span-full lg:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon === null} width="100%" height="100%">

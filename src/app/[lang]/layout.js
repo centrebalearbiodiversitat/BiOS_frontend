@@ -26,7 +26,7 @@ export default function RootLayout({children, params: {lang}}) {
 				<Header lang={lang} className="h-[10%] min-h-[64px]" locales={AVAILABLE_LOCALES}/>
 				<main className="h-[90%] w-full">
 					{children}
-					<Footer/>
+					<Footer lang={lang}/>
 				</main>
 			</body>
 		</html>

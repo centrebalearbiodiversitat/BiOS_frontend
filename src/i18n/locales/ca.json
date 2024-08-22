@@ -2,14 +2,12 @@
     "web.title": "Centre Balear de Biodiversitat",
     "web.description": "Pàgina web oficial de la base de dades y eines del Centre Balear de Biodiversitat",
 
-
 	"home.title": "Accés a les dades d'espècies de les Illes Balears",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Espècies",
 	"home.statistics.observations": "Observacions",
 	"home.statistics.sequences": "Sequències",
-
 
 	"taxon.layout.button.taxon": "Descripció",
 	"taxon.layout.button.distribution": "Distribució",
@@ -34,12 +32,12 @@
 	"taxon.overview.habitat_3": "Matollar",
 	"taxon.overview.habitat_4": "Prat",
 	"taxon.overview.habitat_5": "Aiguamolls (interiors)",
-	"taxon.overview.habitat_6": "Zones rocoses (ex., penya-segats interiors, cims de muntanyes)",
-	"taxon.overview.habitat_7": "Coves i hàbitats subterranis (no aquàtics)",
+	"taxon.overview.habitat_6": "Zones rocoses",
+	"taxon.overview.habitat_7": "Coves i hàbitats subterranis",
 	"taxon.overview.habitat_8": "Desert",
 	"taxon.overview.habitat_9": "Marí nerític",
 	"taxon.overview.habitat_10": "Marí oceànic",
-	"taxon.overview.habitat_11": "Fons oceànic profund (bentònic i demersal)",
+	"taxon.overview.habitat_11": "Fons oceànic profund",
 	"taxon.overview.habitat_12": "Marí intermareal",
 	"taxon.overview.habitat_13": "Marí costaner/supramareal",
 	"taxon.overview.habitat_14": "Artificial/terrestre",
@@ -48,19 +46,18 @@
 	"taxon.overview.habitat_17": "Altre",
 	"taxon.overview.habitat_18": "Desconegut",
 
+	"taxon.distribution.distribution": "Distribució",
 
 	"taxon.genetics.genes": "Gens i marcadores",
 	"taxon.genetics.genomes": "Genomes complets",
 	"taxon.genetics.transcriptomes": "Transcriptomes complets",
 	"taxon.genetics.mitogenomes": "Mitogenomes",
 
-
 	"geography.rank.ac": "Comunitat autònoma",
 	"geography.rank.island": "Illa",
 	"geography.rank.municipality": "Municipi",
 	"geography.rank.town": "Població",
 	"geography.rank.wb_0": "Aigua",
-
 
 	"map.drawer.close": "Tanca",
 	"map.drawer.selectedTaxa": "Taxons seleccionats",
@@ -74,7 +71,6 @@
 	"map.popup.eventDate": "Data del event",
 	"map.popup.basisRecord": "Base del registre",
 	"map.popup.voucher": "Identificador",
-
 
     "components.searchbar.label": "Cerca biodiversitat...",
     "components.searchbar.filter.map": "Mapa",
@@ -100,6 +96,18 @@
 
 	"components.verticalTaxonomy.empty": "Buit",
 
+	"footer.sitemap.title": "Sitemap",
+	"footer.sitemap.home": "Inici",
+	"footer.sitemap.map": "Mapa",
+	"footer.sitemap.methodology":  "Metodologia",
+	"footer.sitemap.team":  "Equip",
+
+	"footer.legal.title": "Avís legal",
+	"footer.legal.disclaimer": "Descàrrec de responsabilitat",
+	"footer.legal.privacy":  "Política de privadesa",
+	"footer.legal.cookies":  "Cookies",
+
+	"footer.contact.title":  "Contacte",
 
     "lang": "Català"
 }

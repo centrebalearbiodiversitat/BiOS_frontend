@@ -30,14 +30,14 @@ export default function Taxon({params: {lang, id}}) {
 			<h3 className="text-2xl font-semibold">
 				Habitats
 			</h3>
-			<Loading className="mb-4" loading={taxonData === null} width="100%" height={350}>
+			<Loading className="mb-4 aspect-video" loading={taxonData === null} width="100%">
 				<Habitats lang={lang} habitats={taxonData?.habitat}/>
 			</Loading>
 
 			<h3 className="text-2xl font-semibold">
 				{t(lang, 'taxon.overview.iucn_status')}
 			</h3>
-			<Loading className="mb-4" loading={taxonData === null} width="100%" height={350}>
+			<Loading className="mb-4 aspect-video" loading={taxonData === null} width="100%">
 				{taxonData &&
 					<div className="my-5 flex flex-col items-center">
 						<IUCN title="taxon.overview.iucn_global" status={taxonData.iucnMediterranean} lang={lang}/>
