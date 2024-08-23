@@ -8,7 +8,6 @@ function filterDataMinMax(occurences, feature, min, max) {
     Object.entries(occurences)
         .forEach(([key, value]) => {
             // console.log(value)
-            console.log(value)
             const features = value.features.filter(
                 v => v.properties[feature] !== null && min <= v.properties[feature] && v.properties[feature] <= max
             )

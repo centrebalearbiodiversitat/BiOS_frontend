@@ -14,7 +14,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	useEffect(() => {
 		occurrences.list(id, null)
-			.then(r => setOccs(occurrencesToGeoJson(id, r)));
+			.then(r => r && setOccs(occurrencesToGeoJson(id, r)));
 	}, [id])
 
 	return (

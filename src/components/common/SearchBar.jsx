@@ -18,7 +18,7 @@ function SearchBarIcon() {
 
 
 const defaultChildren = (obj, search) => {
-    console.log(obj)
+
     return (
         <HighlightText text={obj.name} highlight={search}/>
     )

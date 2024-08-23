@@ -1,7 +1,7 @@
 "use client"
 
 function request(method) {
-	return (path, params= null, body= null) => {
+	return (path, params = null, body = null) => {
 		const requestOptions = {
 			method,
 			headers: authHeader(),
@@ -18,7 +18,7 @@ function request(method) {
 		if (method === 'URL')
 			return url
 
-		return fetch(url, requestOptions).then(handleResponse);
+		return fetch(url, requestOptions).then(handleResponse)
 	}
 }
 
@@ -26,15 +26,15 @@ function request(method) {
 
 function authHeader() {
 	// const token = getSessionToken();
-    const heads = {
-        'accept': 'application/json',
-        'content-Type': 'application/json',
-    }
+	const heads = {
+		'accept': 'application/json',
+		'content-Type': 'application/json',
+	}
 	// if (token !== null) {
-    //     heads['Authorization'] = `Token ${token}`
-    // }
+	//     heads['Authorization'] = `Token ${token}`
+	// }
 
-    return heads;
+	return heads;
 }
 
 async function handleResponse(response) {
@@ -49,8 +49,12 @@ async function handleResponse(response) {
 		// }
 
 		// get error message from body or default to response status
-		const error = (data && data.message) || response.statusText;
-		return Promise.reject(error);
+		if (400 <= response.status && response.status < 500) {
+			return null;
+		} else {
+			const error = (data && data.message) || response.statusText;
+			return Promise.reject(error);
+		}
 	}
 
 	return data;

@@ -4,7 +4,7 @@ import Loading from "@/components/common/Loading";
 
 
 function DataCard({lang, title, icon, fetchData}) {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState(undefined);
 
 
 	useEffect(() => {
@@ -19,17 +19,17 @@ function DataCard({lang, title, icon, fetchData}) {
 				</div>
 				<div className="flex flex-col justify-center">
 					<div className="flex justify-center">
-						<Loading loading={data === null} className="" width="60px" height="40px">
+						<Loading loading={data} className="" width="60px" height="40px">
 							<h3 className="font-semibold text-2xl text-center">
 								{data}
 							</h3>
 						</Loading>
 					</div>
 					<h4 className="font-light text-center">{t(lang, title)}</h4>
+				</div>
 			</div>
 		</div>
-</div>
-)
+	)
 }
 
 

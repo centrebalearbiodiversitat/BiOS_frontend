@@ -18,7 +18,7 @@ import Loading from "@/components/common/Loading";
 
 export default function TaxonSequences({params: {id, lang}}) {
 	const [seqs, setSeqs] = useState([]);
-	const [genes, setGenes] = useState(null);
+	const [genes, setGenes] = useState(undefined);
 
 	useEffect(() => {
 		// genetics.listSequences(taxonId).then(r => setSeqs(r))
@@ -43,7 +43,7 @@ export default function TaxonSequences({params: {id, lang}}) {
 			<h3 className="text-2xl">
 				{t(lang, "taxon.genetics.genes")}
 			</h3>
-			<Loading loading={genes === null} width="100%" height={200}>
+			<Loading loading={genes} width="100%" height={200}>
 				<ul className="grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8">
 					{genes &&
 						genes.map(

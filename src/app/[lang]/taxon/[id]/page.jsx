@@ -9,20 +9,27 @@ import {PieChart} from "@mui/x-charts";
 import Loading from "@/components/common/Loading";
 import IUCN from "@/components/IUCN";
 import Habitats from "@/components/Habitats";
+import Empty from "@/components/Empty";
+import TaxonPie from "@/components/TaxonPie";
 
 
 export default function Taxon({params: {lang, id}}) {
-	const [occs, setOccs] = useState(null);
-	const [composition, setComposition] = useState(null);
-	const [taxonData, setTaxonData] = useState(null);
+	const [occs, setOccs] = useState(undefined);
+	const [composition, setComposition] = useState(undefined);
+	const [taxonData, setTaxonData] = useState(undefined);
 
 	useEffect(() => {
 		taxonomy.composition(id)
-			.then(r => setComposition(r.map(taxon => ({id, value: taxon.totalSpecies, label: taxon.name}))));
+			.then(r => {
+				if (r && r.length > 0)
+					setComposition(r.map(taxon => ({id, value: taxon.totalSpecies, label: taxon.name})));
+				else
+					setComposition(null);
+			});
 		taxonomy.taxonData(id)
 			.then(r => setTaxonData(r));
 		occurrences.list(id, null)
-			.then(r => setOccs(occurrencesToGeoJson(id, r)));
+			.then(r => r && setOccs(occurrencesToGeoJson(id, r)));
 	}, [id])
 
 	return (
@@ -30,45 +37,25 @@ export default function Taxon({params: {lang, id}}) {
 			<h3 className="text-2xl font-semibold">
 				Habitats
 			</h3>
-			<Loading className="mb-4 aspect-video" loading={taxonData === null} width="100%">
+			<Loading className="mb-4 aspect-video" loading={taxonData} width="100%" height="100px">
 				<Habitats lang={lang} habitats={taxonData?.habitat}/>
 			</Loading>
 
 			<h3 className="text-2xl font-semibold">
 				{t(lang, 'taxon.overview.iucn_status')}
 			</h3>
-			<Loading className="mb-4 aspect-video" loading={taxonData === null} width="100%">
-				{taxonData &&
-					<div className="my-5 flex flex-col items-center">
-						<IUCN title="taxon.overview.iucn_global" status={taxonData.iucnMediterranean} lang={lang}/>
-						<IUCN title="taxon.overview.iucn_europe" status={taxonData.iucnEurope} lang={lang}/>
-						<IUCN title="taxon.overview.iucn_mediterranean" status={taxonData.iucnGlobal} lang={lang}/>
-					</div>
-				}
+			<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">
+				<div className="my-5 flex flex-col items-center">
+					<IUCN title="taxon.overview.iucn_global" status={taxonData?.iucnMediterranean} lang={lang}/>
+					<IUCN title="taxon.overview.iucn_europe" status={taxonData?.iucnEurope} lang={lang}/>
+					<IUCN title="taxon.overview.iucn_mediterranean" status={taxonData?.iucnGlobal} lang={lang}/>
+				</div>
 			</Loading>
 			<h3 className="text-2xl font-semibold">
 				{t(lang, 'taxon.overview.composition')}
 			</h3>
-			<Loading className="mb-4" loading={composition === null} width="100%" height={350}>
-				{composition &&
-					<PieChart
-						skipAnimation={true}
-						series={[
-							{
-								innerRadius: 60,
-								data: composition,
-								// highlightScope: {faded: 'global', highlighted: 'item'},
-								// faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'},
-							},
-						]}
-						slotProps={{
-							legend: {
-								// hidden: true
-								hidden: composition.length > 16
-							}
-						}}
-						height={250}/>
-				}
+			<Loading className="mb-4" loading={composition} width="100%" height={350}>
+				<TaxonPie composition={composition}/>
 			</Loading>
 		</div>
 	);

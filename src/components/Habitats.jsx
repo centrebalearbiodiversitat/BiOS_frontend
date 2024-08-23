@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import {t} from "@/i18n/i18n";
 import {
 	FaBuilding,
@@ -11,6 +11,7 @@ import {
 	FaWater
 } from "react-icons/fa";
 import {GiFallingRocks, GiSharkFin, GiUndergroundCave, GiWaterSplash, GiWheat} from "react-icons/gi";
+import Empty from "@/components/Empty";
 
 const HABITAT_ICONS = {
 	'taxon.overview.habitat_1': {icon: <FaTree/>, color: "#16a34a"},
@@ -57,20 +58,22 @@ const HABITAT_MOCKUP = [
 export default function Habitats({habitats, lang}) {
 
 	return (
-		<ul className="m-5 capitalize grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-			{HABITAT_MOCKUP.map((habitat) => {
-				const habitatKey = `taxon.overview.habitat_${habitat.sources[0].originId}`;
-				const habitatStyle = HABITAT_ICONS[habitatKey];
+		<Empty isEmpty={!habitats} lang={lang}>
+			<ul className="m-5 capitalize grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+				{habitats?.map((habitat) => {
+					const habitatKey = `taxon.overview.habitat_${habitat.sources[0].originId}`;
+					const habitatStyle = HABITAT_ICONS[habitatKey];
 
-				return (
-					<li key={habitatKey}
-						className="flex items-center p-3 rounded-lg shadow-sm transition-all hover:shadow-md hover:scale-105"
-						style={{color: habitatStyle.color, backgroundColor: `${habitatStyle.color}1A`}}>
-						<span className="text-2xl">{habitatStyle.icon}</span>
-						<p className="ml-3 flex-1 text-center">{t(lang, habitatKey)}</p>
-					</li>
-				);
-			})}
-		</ul>
+					return (
+						<li key={habitatKey}
+							className="flex items-center p-3 rounded-lg shadow-sm"
+							style={{color: habitatStyle.color, backgroundColor: `${habitatStyle.color}1A`}}>
+							<span className="text-2xl mx-2">{habitatStyle.icon}</span>
+							<p className="flex-1 text-center">{t(lang, habitatKey)}</p>
+						</li>
+					);
+				})}
+			</ul>
+		</Empty>
 	)
 }

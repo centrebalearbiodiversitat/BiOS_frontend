@@ -8,9 +8,7 @@ import taxonomy, {children} from "@/API/taxonomy";
 
 function RecursiveChecklistNav({checklist, updateChecklist, className}) {
 	function fetchChildren(taxon, idx) {
-		taxonomy.children(taxon.id).then(r => {
-			updateUpwards(r, idx)
-		})
+		taxonomy.children(taxon.id).then(r => r && updateUpwards(r, idx))
 	}
 
 	function updateUpwards(r, idx) {
@@ -49,9 +47,8 @@ export default function ChecklistNavigator({lang}) {
 	const [checklist, setChecklist] = useState([]);
 
 	useEffect(() => {
-		taxonomy.search('Biota').then(biota => {
-			setChecklist(biota);
-		})
+		taxonomy.search('Biota')
+			.then(biota => setChecklist(biota))
 	}, []);
 
 	return (

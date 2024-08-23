@@ -74,6 +74,8 @@
 	"map.popup.basisRecord": "Base del registro",
 	"map.popup.voucher": "Identificador",
 
+	"components.empty": "Sin datos",
+
 	"components.searchbar.label": "Busca biodiversidad...",
     "components.searchbar.filter.map": "Mapa",
     "components.searchbar.filter.taxonomy": "Taxonomía",

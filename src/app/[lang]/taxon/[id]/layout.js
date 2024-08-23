@@ -27,11 +27,11 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 		<Accordion className={`${className}`} {...extra}>
 			<AccordionItem title={<h3 className="text-xl font-normal">{t(lang, 'taxon.sidebar.classification')}</h3>}
 			               key="1" aria-label="Accordion 1">
-				<Loading loading={taxon === null || higherTaxonomy === null} width="100%" height="300px">
+				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
 					{taxon && higherTaxonomy && <VerticalTaxonomy lang={lang} taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
 					<div className="ps-2 mt-3">
 						<h4 className="pt-2 font-light">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
-						<Loading loading={descendants === null} width="100%" height="100px">
+						<Loading loading={descendants} width="100%" height="100px">
 							{descendants && <VerticalTaxonomy lang={lang} overflow={true} taxonomy={descendants}/>}
 						</Loading>
 					</div>
@@ -40,7 +40,7 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 			<AccordionItem
 				title={<h3 className="text-xl font-normal">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
 				key="3" aria-label="Accordion 3">
-				<Loading loading={synonyms === null} width="100%" height="200px">
+				<Loading loading={synonyms} width="100%" height="200px">
 					{synonyms && <VerticalTaxonomy lang={lang} title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
 					                   overflow={true} taxonomy={synonyms}/>}
 				</Loading>
@@ -51,11 +51,11 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 
 
 export default function RootLayout({children, params: {lang, id}}) {
-	const [taxon, setTaxon] = useState(null);
-	const [higherTaxonomy, setHigherTaxonomy] = useState(null);
-	const [descendants, setDescendants] = useState(null);
-	const [synonyms, setSynonyms] = useState(null);
-	const [sources, setSources] = useState(null);
+	const [taxon, setTaxon] = useState(undefined);
+	const [higherTaxonomy, setHigherTaxonomy] = useState(undefined);
+	const [descendants, setDescendants] = useState(undefined);
+	const [synonyms, setSynonyms] = useState(undefined);
+	const [sources, setSources] = useState(undefined);
 	const [checklistLink, setChecklistLink] = useState('');
 
 	useEffect(() => {
@@ -94,7 +94,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 				<div className="flex flex-row justify-center mb-10">
 					<div className="w-full grid grid-cols-2 lg:space-x-12">
 						<div className="col-span-full lg:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
-							<Loading loading={taxon === null} width="100%" height="100%">
+							<Loading loading={taxon} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
 								         		  className="rounded-lg h-auto w-full max-h-full"
 												  images={taxon?.images}/>}
@@ -109,21 +109,21 @@ export default function RootLayout({children, params: {lang, id}}) {
 								</Link>
 							</div>
 							<div className="my-auto">
-								<Loading loading={taxon === null} className="mb-4" width="40%" height="32px">
+								<Loading loading={taxon} className="mb-4" width="40%" height="32px">
 									{taxon &&
 										<h2 className="first-letter:uppercase font-extralight text-3xl">
 											{taxon.taxonRank}
 										</h2>
 									}
 								</Loading>
-								<Loading loading={taxon === null} className="mb-4" width="80%" height="58px">
+								<Loading loading={taxon} className="mb-4" width="80%" height="58px">
 									{taxon &&
 										<h1 className="first-letter:uppercase font-medium text-4xl">
 											<TaxonName taxon={taxon} lang={lang}/>
 										</h1>
 									}
 								</Loading>
-								<Loading loading={taxon === null} className="mb-4" width="60%" height="30px">
+								<Loading loading={taxon} className="mb-4" width="60%" height="30px">
 									{taxon &&
 										<>
 											{taxon.scientificNameAuthorship &&
@@ -142,7 +142,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 										</>
 									}
 								</Loading>
-								<Loading loading={sources === null} width="100%" height="80px">
+								<Loading loading={sources} width="100%" height="80px">
 									<Sources sources={sources} className="my-3"/>
 								</Loading>
 							</div>
