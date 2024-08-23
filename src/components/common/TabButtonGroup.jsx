@@ -28,7 +28,7 @@ export default function TabButtonGroup({buttons, colorPrimary, colorSecondary, .
 	const pathname = usePathname();
 
 	return (
-		<div className="flex flex-row flex-wrap md:grid-cols-6 justify-center md:my-6">
+		<div className="flex flex-row flex-wrap md:grid-cols-6 justify-center md:mt-6">
 		{
 			buttons.map((button) => {
 				return (
