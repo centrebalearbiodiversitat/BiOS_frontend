@@ -80,7 +80,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 	], [lang, id])
 
 	return (
-		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-5 md:mx-8 2xl:mx-16 mt-5">
+		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-3 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-6 mb-5 xl:me-8 m-auto">
 				<div className="rounded-full ms-auto w-full">
 					<FullCBBSearchBar lang={lang} border={true} rounded={false} showFilters={false}/>
@@ -90,17 +90,17 @@ export default function RootLayout({children, params: {lang, id}}) {
 				                   className="hidden lg:block" higherTaxonomy={higherTaxonomy}
 				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 			</aside>
-			<div className="col-span-9 md:px-4 2xl:px-16 space-y-6">
-				<div className="flex flex-row justify-center mb-10">
-					<div className="w-full grid grid-cols-2 lg:space-x-12">
-						<div className="col-span-full lg:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
+			<div className="rounded-lg bg-slate-50 col-span-9 p-4 md:p-10 md:mx-2">
+				<header className="flex flex-row justify-center mb-10">
+					<div className="w-full grid grid-cols-2 md:space-x-12">
+						<div className="col-span-full md:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
 								         		  className="rounded-lg h-auto w-full max-h-full"
 												  images={taxon?.images}/>}
 							</Loading>
 						</div>
-						<header className="flex flex-col col-span-full lg:col-span-1">
+						<div className="flex flex-col col-span-full md:col-span-1">
 							<div className="ms-auto">
 								<Link href={checklistLink} download={true}>
 									<CBBButton className="border-primary px-5">
@@ -146,19 +146,17 @@ export default function RootLayout({children, params: {lang, id}}) {
 									<Sources sources={sources} className="my-3"/>
 								</Loading>
 							</div>
-						</header>
+						</div>
 					</div>
-				</div>
-				<div>
-					<AccordionTaxonomy showDivider={false} selectionMode="multiple"
-					                   className="lg:hidden mt-3 mb-8" higherTaxonomy={higherTaxonomy}
-					                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
-					<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
-					<MainContent>
-						{children}
-					</MainContent>
-				</div>
+				</header>
+				<AccordionTaxonomy showDivider={false} selectionMode="multiple"
+				                   className="lg:hidden mt-3 mb-8" higherTaxonomy={higherTaxonomy}
+				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
+				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
+				<MainContent>
+					{children}
+				</MainContent>
 			</div>
-		</div>
+		</article>
 	);
 }

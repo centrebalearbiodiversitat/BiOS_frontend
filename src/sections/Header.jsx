@@ -29,13 +29,10 @@ export default function Header({lang, locales, className}) {
 	return (
 		<Navbar maxWidth="full" className={`z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>
 			<NavbarContent>
-				<NavbarMenuToggle
-					className="md:hidden text-black"
-				/>
+				<NavbarMenuToggle className="md:hidden text-black"/>
 				<NavbarBrand>
 					<HoverLink href={`/${lang}`} className="flex gap-2">
 						<Image src="/images/cbb-logo.png" alt={"CBB logo"} width="400px" radius={null}/>
-						{/*<Image className="hidden md:flex" src="/images/cbb-text.png" width="120px" radius={null}/>*/}
 					</HoverLink>
 				</NavbarBrand>
 			</NavbarContent>
@@ -56,16 +53,16 @@ export default function Header({lang, locales, className}) {
 				</NavbarItem>
 			</NavbarContent>
 			<NavbarMenu className="flex flex-col justify-center items-center space-y-2 bg-white">
-				{
-					menuItems.map(({text, href}, idx) => (
-						<NavbarMenuItem key={href} className="w-full">
-							<Link color={idx === 0 ? "primary" : "foreground"} href={href}
-							      className="w-full justify-center m-4">
-								{text}
-							</Link>
-						</NavbarMenuItem>
-					))
-				}
+			{
+				menuItems.map(({text, href}, idx) => (
+					<NavbarMenuItem key={href} className="w-full">
+						<Link color={idx === 0 ? "primary" : "foreground"} href={href}
+						      className="w-full justify-center m-4">
+							{text}
+						</Link>
+					</NavbarMenuItem>
+				))
+			}
 			</NavbarMenu>
 		</Navbar>
 	);

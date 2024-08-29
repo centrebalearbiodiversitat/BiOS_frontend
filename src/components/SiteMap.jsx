@@ -12,19 +12,19 @@ export default function SiteMap({lang}) {
 	], [lang])
 
 	return (
-		<div className="space-y-2 text-sm">
+		<nav className="space-y-1">
 			<p className="uppercase font-medium text-slate-500">{t(lang, "footer.sitemap.title")}</p>
 			<ul className="flex flex-col">
 			{
 				links.map((link) => (
 					<li key={link.path}>
-						<Link href={link.path} className="font-extralight hover:underline text-slate-500">
+						<Link href={link.path} className="!text-sm font-extralight hover:underline text-slate-500">
 							{link.text}
 						</Link>
 					</li>
 				))
 			}
 			</ul>
-		</div>
+		</nav>
 	)
 }

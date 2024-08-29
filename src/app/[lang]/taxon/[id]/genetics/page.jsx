@@ -15,6 +15,7 @@ import {
 } from "@nextui-org/react";
 import TableList from "@/components/TableList";
 import Loading from "@/components/common/Loading";
+import Section from "@/components/common/Section";
 
 export default function TaxonSequences({params: {id, lang}}) {
 	const [seqs, setSeqs] = useState([]);
@@ -40,46 +41,43 @@ export default function TaxonSequences({params: {id, lang}}) {
 
 	return (
 		<>
-			<h3 className="text-2xl">
-				{t(lang, "taxon.genetics.genes")}
-			</h3>
-			<Loading loading={genes} width="100%" height={200}>
-				<ul className="grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8">
-					{genes &&
-						genes.map(
-							gene => (
-								<li key={gene.id} className="col-span-1 m-1">
-									<Card className="">
-										<CardBody className="flex flex-col text-center overflow-hidden">
-											<p className="font-bold">
-												{gene.name}
-											</p>
-											<div className="flex-1 w-full">
-												<p className="m-auto">
-													{gene.total}
+			<Section lang={lang} title="taxon.genetics.genes">
+				<Loading loading={genes} width="100%" height={200}>
+					<ul className="grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8">
+						{genes &&
+							genes.map(
+								gene => (
+									<li key={gene.id} className="col-span-1 m-1">
+										<Card className="">
+											<CardBody className="flex flex-col text-center overflow-hidden">
+												<p className="font-bold">
+													{gene.name}
 												</p>
-											</div>
-										</CardBody>
-									</Card>
+												<div className="flex-1 w-full">
+													<p className="m-auto">
+														{gene.total}
+													</p>
+												</div>
+											</CardBody>
+										</Card>
 
-								</li>
+									</li>
+								)
 							)
-						)
-					}
-				</ul>
-			</Loading>
-			<h3 className="text-2xl">
-				{t(lang, "taxon.genetics.genomes")}
-			</h3>
-			<TableList list={seqs} headers={SEQ_HEADERS}/>
-			<h3 className="text-2xl">
-				{t(lang, "taxon.genetics.transcriptomes")}
-			</h3>
-			<TableList list={seqs} headers={SEQ_HEADERS}/>
-			<h3 className="text-2xl">
-				{t(lang, "taxon.genetics.mitogenomes")}
-			</h3>
-			<TableList list={seqs} headers={SEQ_HEADERS}/>
+						}
+					</ul>
+				</Loading>
+			</Section>
+
+			<Section lang={lang} title="taxon.genetics.genomes">
+				<TableList list={seqs} headers={SEQ_HEADERS}/>
+			</Section>
+			<Section lang={lang} title="taxon.genetics.transcriptomes">
+				<TableList list={[]} headers={SEQ_HEADERS}/>
+			</Section>
+			<Section lang={lang} title="taxon.genetics.mitogenomes">
+				<TableList list={[]} headers={SEQ_HEADERS}/>
+			</Section>
 		</>
 	);
 }

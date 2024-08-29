@@ -53,7 +53,7 @@ export default function Home({params: {lang}}) {
 						<div className="">
 							<Statistics lang={lang} className="grid grid-cols-3" data={CBB_STATISTICS}/>
 						</div>
-						<div className="grid grid-cols-4 my-auto space-x-2 space-y-2 justify-center pt-4">
+						<div className="grid grid-cols-4 my-auto gap-2 justify-center items-center pt-4">
 							<Image src="/images/partners/eu_next_gen.png" alt={"Partner NextGenerationEU"}
                                    removeWrapper={true}
                                    className="m-auto" radius={null}/>

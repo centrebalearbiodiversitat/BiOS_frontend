@@ -11,19 +11,19 @@ export default function Legal({lang}) {
 	], [lang])
 
 	return (
-		<div className="space-y-2">
-			<p className="font-bold text-slate-400">{t(lang, "footer.legal.title")}</p>
+		<nav className="space-y-1">
+			<p className="uppercase font-medium text-slate-500">{t(lang, "footer.legal.title")}</p>
 			<ul className="flex flex-col">
 			{
 				links.map((link) => (
 					<li key={link.path}>
-						<Link href={link.path} className="hover:underline text-slate-400">
+						<Link href={link.path} className="font-extralight hover:underline text-slate-500">
 							{link.text}
 						</Link>
 					</li>
 				))
 			}
 			</ul>
-		</div>
+		</nav>
 	)
 }

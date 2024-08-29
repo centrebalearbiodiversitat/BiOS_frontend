@@ -1,54 +1,96 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {t} from "@/i18n/i18n";
 import {Tooltip} from "@nextui-org/react";
+import {TiArrowSortedUp} from "react-icons/ti";
 
-const IUCN_CATEGORIES = [
-	{status: 'ex', color: "black", text: 'components.iucn.EX', textColor: "red"},
-	{status: 'ew', color: "black", text: 'components.iucn.EW', textColor: "white"},
-	{status: 'cr', color: "#C52512", text: 'components.iucn.CR', textColor: "#FECBCB"},
-	{status: 'en', color: "#F28533", text: 'components.iucn.EN', textColor: "#FFCC99"},
-	{status: 'vu', color: "#FFC90E", text: 'components.iucn.VU', textColor: "#FFFFCC"},
-	{status: 'nt', color: "#AFF092", text: 'components.iucn.NT', textColor: "#f5ffe9"},
-	{status: 'lc', color: "#006666", text: 'components.iucn.LC', textColor: "white"},
-	{status: 'dd', color: "#808285", text: 'components.iucn.DD', textColor: "white"},
-	{status: 'ne', color: "#cdcdcd", text: 'components.iucn.NE', textColor: "black"},
-]
+const IUCN_CATEGORIES = {
+	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "red"},
+	'ew': {color: "#4a3835", text: 'components.iucn.EW', textColor: "white"},
+	'cr': {color: "#C52512", text: 'components.iucn.CR', textColor: "#FECBCB"},
+	'en': {color: "#F28533", text: 'components.iucn.EN', textColor: "#ffdab5"},
+	'vu': {color: "#FFC90E", text: 'components.iucn.VU', textColor: "#FFFFCC"},
+	'nt': {color: "#CCE227", text: 'components.iucn.NT', textColor: "#f5ffe9"},
+	'lc': {color: "#006666", text: 'components.iucn.LC', textColor: "white"},
+	'dd': {color: "#808285", text: 'components.iucn.DD', textColor: "white"},
+	'na': {color: "#C1B5A5", text: 'components.iucn.NA', textColor: "black"},
+	'ne': {color: "#e1e1e1", text: 'components.iucn.NE', textColor: "black"},
+}
 
-function IUCNPill({status, color, text, textColor, lang, enabled}) {
+
+function IUCNPill({lang, status, color, text, textColor, enabled, arrow = false}) {
+	const radius = '40px'
+
 	return (
-		<li className="flex font-semibold text-lg min-h-[60px]"
+		<div className="rounded-full"
 		     style={{
-			     paddingTop: enabled ? '' : '.8rem',
-			     paddingBottom: enabled ? '' : '.8rem',
-			     border: enabled ? '1px solid white' : 0,
+			     // paddingTop: enabled ? '' : '.8rem',
+			     // paddingBottom: enabled ? '' : '.8rem',
+			     border: enabled ? null : '3px solid #FFFFFF',
 			     color: textColor,
+			     backgroundColor: color,
+			     minWidth: radius,
+			     width: radius,
+			     maxWidth: radius,
+			     minHeight: radius,
+			     height: radius,
+			     maxHeight: radius,
+			     opacity: enabled ? 1 : 0.3,
+			     marginLeft: arrow && enabled && '4px',
+			     marginRight: arrow && enabled && '4px',
 		     }}>
-			<Tooltip offset={12} showArrow
-			         content={<p className="m-3 text-lg">{t(lang, text)}</p>}>
-				<p className="uppercase py-2 flex justify-center items-center w-full h-full"
-				   style={{
-					   backgroundColor: color,
-				   }}>
-					{status}
-				</p>
-			</Tooltip>
-		</li>
+			<p className="uppercase flex justify-center items-center w-full h-full">
+				{status}
+			</p>
+			{arrow && enabled && <TiArrowSortedUp className="text-slate-600 mt-auto mx-auto"/>}
+		</div>
 	)
 }
 
-export default function IUCN({title, status, lang}) {
+
+function IUCNToolTip({lang, children, status}) {
 	return (
-		<div className="w-full h-full ">
-			<h3 className="text-lg font-medium mt-3">
-				{t(lang, title)}
-			</h3>
-			<ul className="grid grid-cols-9">
-				{
-					IUCN_CATEGORIES.map((item) => (
-						<IUCNPill key={item.status} lang={lang} enabled={item.status === status} {...item}/>
-					))
-				}
-			</ul>
-		</div>
+		<Tooltip offset={12} showArrow
+		         content={
+			         <div className=" py-4">
+				         <h3 className="text-center font-light text-lg m-2 mb-3">IUCN Red List Status</h3>
+				         <ul className="flex flex-row justify-center items-center p-2">
+					         {
+						         Object.keys(IUCN_CATEGORIES).map((key) => {
+							         const item = IUCN_CATEGORIES[key];
+
+							         return (
+								         <IUCNPill key={key} lang={lang} status={key} arrow={true}
+								                   enabled={status === key} {...item}/>
+							         )
+						         })
+					         }
+				         </ul>
+			         </div>
+		         }>
+			{children}
+		</Tooltip>
+	)
+}
+
+
+export default function IUCN({title, status, lang, className}) {
+	status = status || 'na';
+
+	const iucn_cat = IUCN_CATEGORIES[status];
+
+	return (
+		<IUCNToolTip lang={lang} status={status}>
+			<div className={`h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 flex flex-row items-center ${className}`}>
+				<IUCNPill lang={lang} enabled={true} status={status} {...iucn_cat}/>
+				<div className="flex flex-col text-pretty">
+					<h3 className="text-lg font-medium w-full">
+						{t(lang, title)}
+					</h3>
+					<p className="text-sm text-gray-500">
+						{t(lang, iucn_cat.text)}
+					</p>
+				</div>
+			</div>
+		</IUCNToolTip>
 	)
 }
