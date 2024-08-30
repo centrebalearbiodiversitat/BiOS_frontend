@@ -23,7 +23,7 @@ export default function Taxon({params: {lang, id}}) {
 		taxonomy.composition(id)
 			.then(r => {
 				if (r && r.length > 0)
-					setComposition(r.map(taxon => ({id, value: taxon.totalSpecies, label: taxon.name})));
+					setComposition(r.map(taxon => ({id: taxon.id, value: taxon.totalSpecies, label: taxon.name})));
 				else
 					setComposition(null);
 			});

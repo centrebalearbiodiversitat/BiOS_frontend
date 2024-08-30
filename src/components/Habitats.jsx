@@ -70,7 +70,7 @@ const HABITAT_MOCKUP = [
 
 export default function Habitats({habitats, lang}) {
 	habitats = habitats || [];
-	habitats = HABITAT_MOCKUP;
+	// habitats = HABITAT_MOCKUP;
 
 	const habitatStyles = useMemo(() => {
 		return habitats.map(habitat => {
@@ -95,22 +95,20 @@ export default function Habitats({habitats, lang}) {
 
 	return (
 		<Empty isEmpty={habitats.length === 0} lang={lang}>
-			<ul className="flex flex-wrap gap-3 justify-center mb-4">
-				{Object.keys(HABITAT_GROUPS).map((key) => (
-					<li key={key} className="text-3xl rounded-full p-3 bg-white border-6 border-white"
-					    style={{
-						    // opacity: habitatGroupsEnabled[key] ? 1 : 0.2,
-						    color: habitatGroupsEnabled[key] ? HABITAT_GROUPS[key].color : '#00000020'
-						    // color: habitatGroupsEnabled[key] ? '#94C635' : '#00000020'
-					    }}>
-						{HABITAT_GROUPS[key].icon}
-					</li>
-				))}
-			</ul>
-			<ul className="rounded-xl  bg-white grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-6 m-auto py-5 max-w-[800px]">
+			<ul className="rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 m-auto py-5">
 				{habitatStyles?.map((habitatStyle) => (
-					<li key={habitatStyle.habitatKey} className=" flex">
-						<p className="w-full text-medium m-auto text-pretty text-center font-light tracking-wide">
+					<li key={habitatStyle.habitatKey} className="bg-white rounded-xl p-2 flex border-1 border-slate-200"
+					    style={{
+							 // border: `2px solid ${HABITAT_GROUPS[habitatStyle.group].color}44`,
+					    }}>
+						<div className="rounded-full text-lg flex justify-center items-center min-w-[35px] max-w-[35px] min-h-[35px] max-h-[35px] relative -left-3 -top-5 -mx-3"
+						     style={{
+								 color: "white",
+								 backgroundColor: HABITAT_GROUPS[habitatStyle.group].color,
+						}}>
+							{HABITAT_GROUPS[habitatStyle.group].icon}
+						</div>
+						<p className="w-full text-medium m-auto text-pretty text-center font-light ">
 							{t(lang, habitatStyle.habitatKey)}
 						</p>
 					</li>

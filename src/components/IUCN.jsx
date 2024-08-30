@@ -51,8 +51,8 @@ function IUCNToolTip({lang, children, status}) {
 	return (
 		<Tooltip offset={12} showArrow
 		         content={
-			         <div className=" py-4">
-				         <h3 className="text-center font-light text-lg m-2 mb-3">IUCN Red List Status</h3>
+			         <div className="py-2">
+				         <h3 className="text-center font-light text-lg ">IUCN Red List Status</h3>
 				         <ul className="flex flex-row justify-center items-center p-2">
 					         {
 						         Object.keys(IUCN_CATEGORIES).map((key) => {
@@ -80,7 +80,7 @@ export default function IUCN({title, status, lang, className}) {
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<div className={`h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 flex flex-row items-center ${className}`}>
+			<div className={`border-1 border-slate-200 h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 lg:py-2 xl:py3 flex flex-row items-center ${className}`}>
 				<IUCNPill lang={lang} enabled={true} status={status} {...iucn_cat}/>
 				<div className="flex flex-col text-pretty">
 					<h3 className="text-lg font-medium w-full">
