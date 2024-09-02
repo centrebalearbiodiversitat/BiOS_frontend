@@ -75,7 +75,7 @@
 
 	"components.empty": "Sense dades",
 
-    "components.searchbar.label": "Cerca biodiversitat...",
+    "components.searchbar.label": "Cercar",
     "components.searchbar.filter.map": "Mapa",
     "components.searchbar.filter.taxonomy": "Taxonomia",
     "components.searchbar.filter.genetics": "Genètica",

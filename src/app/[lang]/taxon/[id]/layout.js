@@ -25,12 +25,12 @@ import {FaLocationDot} from "react-icons/fa6";
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
 	return (
 		<Accordion className={`${className}`} {...extra}>
-			<AccordionItem title={<h3 className="text-xl font-normal">{t(lang, 'taxon.sidebar.classification')}</h3>}
+			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.classification')}</h3>}
 			               key="1" aria-label="Accordion 1">
 				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
 					{taxon && higherTaxonomy && <VerticalTaxonomy lang={lang} taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
 					<div className="ps-2 mt-3">
-						<h4 className="pt-2 font-light">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
+						<h4 className="pt-2 text-lg font-light">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
 						<Loading loading={descendants} width="100%" height="100px">
 							{descendants && <VerticalTaxonomy lang={lang} overflow={true} taxonomy={descendants}/>}
 						</Loading>
@@ -38,7 +38,7 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 				</Loading>
 			</AccordionItem>
 			<AccordionItem
-				title={<h3 className="text-xl font-normal">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
+				title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
 				key="3" aria-label="Accordion 3">
 				<Loading loading={synonyms} width="100%" height="200px">
 					{synonyms && <VerticalTaxonomy lang={lang} title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}

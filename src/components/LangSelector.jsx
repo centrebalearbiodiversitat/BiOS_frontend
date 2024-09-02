@@ -19,14 +19,14 @@ export default function LangSelector({locales, lang}) {
 	return (
 		<Dropdown className="min-w-[100px]">
 			<DropdownTrigger>
-				<Button radius="full" className="bg-white/60 border-0 backdrop-blur-2xl">
+				<Button radius="full" className="uppercase bg-white/60 border-0 backdrop-blur-2xl">
 					{lang}
 				</Button>
 			</DropdownTrigger>
 			<DropdownMenu aria-label="Change language" onAction={redirect}>
 				{
 					locales.map((locale) =>
-						<DropdownItem key={locale} hidden={false} className="text-center">
+						<DropdownItem key={locale} hidden={false} className="text-center uppercase">
 							{locale}
 						</DropdownItem>
 					)

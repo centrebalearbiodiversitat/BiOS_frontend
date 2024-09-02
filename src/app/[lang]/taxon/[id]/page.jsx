@@ -10,7 +10,7 @@ import Loading from "@/components/common/Loading";
 import IUCN from "@/components/IUCN";
 import Habitats from "@/components/Habitats";
 import Empty from "@/components/Empty";
-import TaxonPie from "@/components/TaxonPie";
+import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
 
 
@@ -54,7 +54,7 @@ export default function Taxon({params: {lang, id}}) {
 
 			<Section lang={lang} title="taxon.overview.composition">
 				<Loading className="mb-4" loading={composition} width="100%" height={350}>
-					<TaxonPie composition={composition}/>
+					<TaxonComposition lang={lang} composition={composition}/>
 				</Loading>
 			</Section>
 		</>

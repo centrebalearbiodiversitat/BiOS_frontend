@@ -83,16 +83,6 @@ export default function Habitats({habitats, lang}) {
 		})
 	}, [habitats]);
 
-	const habitatGroupsEnabled = useMemo(() => {
-		const groups = {};
-
-		habitatStyles.forEach((habitat) => {
-			groups[habitat.group] = true;
-		});
-
-		return groups;
-	}, [habitatStyles]);
-
 	return (
 		<Empty isEmpty={habitats.length === 0} lang={lang}>
 			<ul className="rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 m-auto py-5">

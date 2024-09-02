@@ -75,7 +75,7 @@
 
 	"components.empty": "No data",
 
-	"components.searchbar.label": "Search biodiversity...",
+	"components.searchbar.label": "Search",
     "components.searchbar.filter.map": "Map",
     "components.searchbar.filter.taxonomy": "Taxonomy",
     "components.searchbar.filter.genetics": "Genetics",

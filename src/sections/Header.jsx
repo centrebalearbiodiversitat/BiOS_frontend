@@ -52,17 +52,20 @@ export default function Header({lang, locales, className}) {
 					<LangSelector locales={locales} lang={lang}/>
 				</NavbarItem>
 			</NavbarContent>
-			<NavbarMenu className="flex flex-col justify-center items-center space-y-2 bg-white">
-			{
-				menuItems.map(({text, href}, idx) => (
-					<NavbarMenuItem key={href} className="w-full">
-						<Link color={idx === 0 ? "primary" : "foreground"} href={href}
-						      className="w-full justify-center m-4">
-							{text}
-						</Link>
-					</NavbarMenuItem>
-				))
-			}
+			<NavbarMenu className="flex flex-col justify-center items-center bg-white">
+				{
+					menuItems.map(({text, href}, idx) => (
+						<NavbarMenuItem key={href} className="w-full">
+							<Link color={idx === 0 ? "primary" : "foreground"} href={href}
+							      className="w-full justify-center">
+								{text}
+							</Link>
+						</NavbarMenuItem>
+					))
+				}
+				<NavbarItem className="mt-3">
+					<LangSelector locales={locales} lang={lang}/>
+				</NavbarItem>
 			</NavbarMenu>
 		</Navbar>
 	);
