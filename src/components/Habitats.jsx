@@ -85,7 +85,7 @@ export default function Habitats({habitats, lang}) {
 
 	return (
 		<Empty isEmpty={habitats.length === 0} lang={lang}>
-			<ul className="rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 m-auto py-5">
+			<ul className="rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 m-auto py-5 px-4">
 				{habitatStyles?.map((habitatStyle) => (
 					<li key={habitatStyle.habitatKey} className="bg-white rounded-xl p-2 flex border-1 border-slate-200"
 					    style={{

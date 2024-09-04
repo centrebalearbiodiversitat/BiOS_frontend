@@ -28,11 +28,11 @@ export default function TabButtonGroup({buttons, colorPrimary, colorSecondary, .
 	const pathname = usePathname();
 
 	return (
-		<div className="flex flex-row flex-wrap md:grid-cols-6 justify-center md:mt-6">
+		<div className="flex flex-row flex-wrap md:grid-cols-6 justify-center md:mt-4">
 		{
 			buttons.map((button) => {
 				return (
-					<Button as={Link} radius="full" className={`mb-2 me-2 w-[50px] max-w-[50px] md:w-[150px] md:max-w-[150px] py-4 md:py-6 text-center text-lg font-extralight ${button.href === pathname ? "text-white bg-primary" : "text-black bg-slate-200/50"}`} href={button.href} key={button.href}>
+					<Button as={Link} radius="full" className={`mb-2 me-2 w-[50px] max-w-[50px] md:w-[150px] md:max-w-[150px] py-4 md:py-6 text-center text-lg font-extralight ${button.href === pathname ? "text-white bg-primary" : "text-black bg-gray-100"}`} href={button.href} key={button.href}>
 						{button.icon}<span className="hidden md:block">{button.text}</span>
 					</Button>
 				)

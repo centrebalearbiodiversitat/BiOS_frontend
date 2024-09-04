@@ -10,7 +10,7 @@ export default function ActiveLink({children, href, ...props}) {
 
 	return (
 		<Link href={href}>
-			<CBBButton {...props} variant={"light"} className={`!bg-transparent !opacity-1 hover:text-primary/90 text-lg font-light navbar-button ${pathName === href ? ' font-normal text-primary' : 'text-black'}`}>
+			<CBBButton {...props} variant={"light"} className={`!bg-transparent !opacity-1 hover:text-primary/90 text-md font-light navbar-button ${pathName === href ? 'font-normal text-primary' : 'font-[350] text-black'}`}>
 				{children}
 			</CBBButton>
 		</Link>

@@ -31,6 +31,9 @@ export default function Taxon({params: {lang, id}}) {
 					</div>
 				</MapLibre>
 			</Section>
+			<Section lang={lang}>
+
+			</Section>
 		</>
 	);
 }

@@ -13,7 +13,7 @@ export default function LoadMore({lang, items, children, overflow = false, initi
 				}
 				{overflow && loadMore < items.length &&
 					<li>
-						<p className="flex flex-row justify-end text-sm text-primary cursor-pointer m-4 space-x-2"
+						<p className="flex flex-row justify-end text-sm text-primary cursor-pointer m-4 mb-0 space-x-2"
 						   onClick={() => setLoadMore(loadMore + initialSize)}>
 							<span>Load more</span> <IoIosArrowDown className="my-auto"/>
 						</p>

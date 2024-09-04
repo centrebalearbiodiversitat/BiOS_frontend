@@ -35,7 +35,6 @@ export default function Taxon({params: {lang, id}}) {
 
 	return (
 		<>
-
 			<Section lang={lang} title="taxon.overview.iucn_status">
 				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">
 					<div className="mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[370px] sm:max-w-[550px] xl:max-w-[800px] xl:grid-cols-3">

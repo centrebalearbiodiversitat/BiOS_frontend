@@ -3,6 +3,7 @@
 import React from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 import {useRouter, usePathname} from "next/navigation";
+import {IoIosArrowDown} from "react-icons/io";
 
 export default function LangSelector({locales, lang}) {
 	const router = useRouter();
@@ -20,7 +21,7 @@ export default function LangSelector({locales, lang}) {
 		<Dropdown className="min-w-[100px]">
 			<DropdownTrigger>
 				<Button radius="full" className="uppercase bg-white/60 border-0 backdrop-blur-2xl">
-					{lang}
+					{lang} <IoIosArrowDown/>
 				</Button>
 			</DropdownTrigger>
 			<DropdownMenu aria-label="Change language" onAction={redirect}>

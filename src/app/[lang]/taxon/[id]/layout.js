@@ -29,8 +29,8 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 			               key="1" aria-label="Accordion 1">
 				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
 					{taxon && higherTaxonomy && <VerticalTaxonomy lang={lang} taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
-					<div className="ps-2 mt-3">
-						<h4 className="pt-2 text-lg font-light">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
+					<div className="mt-3">
+						<h4 className="pt-2 text-xl font-extralight">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
 						<Loading loading={descendants} width="100%" height="100px">
 							{descendants && <VerticalTaxonomy lang={lang} overflow={true} taxonomy={descendants}/>}
 						</Loading>
@@ -38,7 +38,7 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 				</Loading>
 			</AccordionItem>
 			<AccordionItem
-				title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
+				title={<h3 className="text-xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
 				key="3" aria-label="Accordion 3">
 				<Loading loading={synonyms} width="100%" height="200px">
 					{synonyms && <VerticalTaxonomy lang={lang} title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
@@ -80,8 +80,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 	], [lang, id])
 
 	return (
-		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-3 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
-			<aside className="col-span-3 w-full h-full space-y-6 mb-5 xl:me-8 m-auto">
+		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-6 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
+			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
 				<div className="rounded-full ms-auto w-full">
 					<FullCBBSearchBar lang={lang} border={true} rounded={false} showFilters={false}/>
 				</div>
@@ -90,17 +90,17 @@ export default function RootLayout({children, params: {lang, id}}) {
 				                   className="hidden lg:block" higherTaxonomy={higherTaxonomy}
 				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 			</aside>
-			<div className="rounded-lg bg-slate-50 col-span-9 p-4 md:p-10 md:mx-2">
-				<header className="flex flex-row justify-center mb-10">
-					<div className="w-full grid grid-cols-2 md:space-x-12">
-						<div className="col-span-full md:col-span-1 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
+			<div className="rounded-lg col-span-9 xl:ps-8">
+				<header className="flex flex-row justify-center mb-6">
+					<div className="w-full grid grid-cols-5 md:space-x-10">
+						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
 								         		  className="rounded-lg h-auto w-full max-h-full"
 												  images={taxon?.images}/>}
 							</Loading>
 						</div>
-						<div className="flex flex-col col-span-full md:col-span-1">
+						<div className="flex flex-col col-span-full md:col-span-2">
 							<div className="ms-auto">
 								<Link href={checklistLink} download={true}>
 									<CBBButton className="border-primary px-5">

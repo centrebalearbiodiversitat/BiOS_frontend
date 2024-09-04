@@ -18,7 +18,7 @@ function ChipExternalLink({originSource}) {
 			<Link href={url} target="_blank">
 				<Chip as={"div"} className="bg-transparent border-1 border-black/20 text-blue-700">
 					<p className="flex flex-row space-x-2">
-						<span className="">{originSource.source.name}:{originSource.originId}</span>
+						<span>{originSource.source.name}{originSource.source.origin === 6 ? '' : `:${originSource.originId}`}</span>
 						<RxExternalLink className="text-md my-auto align-baseline "/>
 					</p>
 				</Chip>
@@ -28,7 +28,7 @@ function ChipExternalLink({originSource}) {
 		return (
 			<Chip as={"div"} className="bg-transparent border-1 border-black/20">
 				<p className="flex flex-row space-x-2">
-					<span className="">{originSource.source.name}:{originSource.originId}</span>
+					<span className="">{originSource.source.name}{originSource.source.origin === 6 ? '' : `:${originSource.originId}`}</span>
 				</p>
 			</Chip>
 		)
@@ -43,9 +43,7 @@ export default function Sources({sources, className}) {
 			sources.map(
 				s => (
 					<li key={s.id} className="">
-						<ChipExternalLink originSource={s}>
-							{s.source.name}:{s.originId}
-						</ChipExternalLink>
+						<ChipExternalLink originSource={s}/>
 					</li>
 				)
 			)

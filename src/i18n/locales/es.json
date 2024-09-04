@@ -77,7 +77,7 @@
 
 	"components.empty": "Sin datos",
 
-	"components.searchbar.label": "Buscar",
+	"components.searchbar.label": "Buscar un taxon...",
     "components.searchbar.filter.map": "Mapa",
     "components.searchbar.filter.taxonomy": "Taxonomía",
     "components.searchbar.filter.genetics": "Genética",
@@ -114,6 +114,10 @@
 	"footer.legal.cookies":  "Cookies",
 
 	"footer.contact.title":  "Contacto",
+
+	"about.question": "¿Qué es el CBBDB?",
+
+	"about.answer": "La Plataforma de Biodiversidad CBB, desarrollada por el Centre Balear de Biodiversitat, es un sistema informático público avanzado diseñado para recopilar, gestionar, analizar y compartir datos sobre la biodiversidad de las Islas Baleares. La plataforma se basa en el principio de integrar diversos tipos de datos obtenidos de varias fuentes, incluyendo observaciones de campo, registros de museos, datos genéticos, datos ambientales, informes, bases de datos públicas y literatura gris. \n\n \n\nAl integrar diversas fuentes de datos, la plataforma ofrece una visión integral de la biodiversidad balear, mejorando el conocimiento científico y sirviendo como una herramienta útil para estudiar la diversidad biológica en todas sus facetas. Con un enfoque en la experiencia del usuario, la plataforma es tanto intuitiva como accesible, atendiendo a investigadores científicos así como al público en general, permitiendo una exploración e investigación exhaustiva de la biodiversidad. Por lo tanto, creemos que esta plataforma tiene el potencial de convertirse en un recurso indispensable para investigadores, conservacionistas y responsables politicos, ayudando a profundizar su comprensión de la biodiversidad y fortalecer los esfuerzos de conservación en un futuro próximo.",
 
     "lang": "Castellano"
 }
