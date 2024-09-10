@@ -85,7 +85,7 @@
 	"components.header.button.map": "Map",
 	"components.header.button.taxonomy": "Taxonomy",
 	"components.header.button.genetics": "Genetics",
-	"components.header.button.methodology": "Methodology",
+	"components.header.button.about": "About",
 
 	"components.iucn.EX": "Extinct",
 	"components.iucn.EW": "Extinct in the wild",
@@ -116,6 +116,16 @@
 	"about.question": "What is the CBBDB?",
 	"about.answer_1": "The CBB Biodiversity Platform, developed by the Centre Balear de Biodiversitat, is a public advanced informatics system designed to collect, manage, analyze, and share Balearic biodiversity data. The platform is built on the principle of integrating diverse data types retrieved from several sources, including field observations, museum records, genetic data, environmental data, reports, public databases, and grey literature.",
 	"about.answer_2": "By integrating diverse data sources, the platform offers a comprehensive view of balearic biodiversity, enhancing scientific research and serving as a useful tool for studying biological diversity in all its dimensions. With a focus on user experience, the platform is both intuitive and accessible, catering to scientific researchers as well as the general public, and enabling thorough exploration and investigation of biodiversity. As such, we believe this platform has the potential to become an indispensable resource for researchers, conservationists, and policymakers, helping to deepen their understanding of biodiversity and bolster conservation efforts in the near future.",
+
+	"about.our_methodology": "Our Methodology",
+	"about.block.taxonomy": "Taxonomy",
+	"about.block.taxonomy.text": "We aim to develop a comprehensive and curated checklist of terrestrial and marine biodiversity for the Balearic Islands. This checklist will be compiled using data from scientific and grey literature, field observations, museum records, and expert notes. It will be aligned with the Catalogue of Life nomenclature, with taxonomic entries reviewed by experts at each biologically coherent level (e.g., family). This approach is designed to ensure high-quality taxon coverage and taxonomic consistency.",
+	"about.block.distribution": "Distribution",
+	"about.block.distribution.text": "We aim to produce an accurate map of biodiversity distribution within the Balearic territory. Taxa distribution data will be collected primarily from public databases, scientific and governmental reports, literature, and field investigations. The spatial information from these sources will be standardized using a common geodetic system and a list of standardized toponims. This methodology is intended to ensure high-quality geographic accuracy and consistency.",
+	"about.block.genetic": "Genetic",
+	"about.block.genetic.text": "We aim to create an accessible online resource for obtaining genetic information about Balearic taxa. This will be the first platform of its kind, providing easy access to standardized genetic data. Information will be sourced primarily from public databases such as NCBI and BOLD. Genetic data will be normalized by harmonizing marker codes and other metadata associated with each occurrence, ensuring consistency and ease of use.",
+	"about.block.traits": "Biological and ecological Traits",
+	"about.block.traits.text": "We aim to provide a detailed repository of biological and ecological traits for the taxa livinf in the Balearic Islands. This section will compile information on various traits such as body measurements, life cycles, reproductive strategies, habitat and ecological preferences. Data will be gathered from scientific literature, field observations, and expert contributions. To ensure the accuracy and relevance of the information, biological and ecological traits will be systematically categorized and standardized according to established frameworks and terminologies.",
 
 	"lang": "English"
 }

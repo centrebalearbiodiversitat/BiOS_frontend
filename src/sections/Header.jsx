@@ -20,7 +20,7 @@ export default function Header({lang, locales, className}) {
 		return [
 			{text: t(lang, "components.header.button.home"), href: `/${lang}`},
 			{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
-			{text: t(lang, "components.header.button.methodology"), href: `/${lang}/methodology`},
+			{text: t(lang, "components.header.button.about"), href: `/${lang}/about`},
 			// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
 			// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
 		]

@@ -20,7 +20,7 @@ export default function TaxonComposition({lang, composition}) {
 	return (
 		<Empty isEmpty={composition.length === 0} lang={lang}>
 		{composition &&
-			<ul className="flex flex-col w-full gap-1 max-w-[1000px] bg-white m-auto p-6 px-8 border-1 border-slate-200 rounded-xl">
+			<ul className="flex flex-col w-full gap-1 max-w-[850px] bg-white m-auto p-6 px-8 border-1 border-slate-200 rounded-xl">
 				<LoadMore lang={lang} items={compositionNorm} overflow={true}>
 				{
 					taxon => (

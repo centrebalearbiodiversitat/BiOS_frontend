@@ -6,9 +6,9 @@ function list() {
 	return requests.GET(`${TAXONOMY_PATH}/list`)
 }
 
-async function search(name) {
+async function search(name, exact = false) {
 	if (name) {
-		return requests.GET(`${TAXONOMY_PATH}/search`, {name})
+		return requests.GET(`${TAXONOMY_PATH}/search`, {name, exact})
 	} else {
 		return []
 	}

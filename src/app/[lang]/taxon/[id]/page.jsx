@@ -3,13 +3,10 @@
 import taxonomy from "@/API/taxonomy";
 import occurrences from "@/API/occurrences";
 import React, {useEffect, useState} from "react";
-import {t} from "@/i18n/i18n";
 import {occurrencesToGeoJson} from "@/utils/geojson";
-import {PieChart} from "@mui/x-charts";
 import Loading from "@/components/common/Loading";
 import IUCN from "@/components/IUCN";
 import Habitats from "@/components/Habitats";
-import Empty from "@/components/Empty";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
 

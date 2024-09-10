@@ -83,11 +83,11 @@
     "components.searchbar.filter.genetics": "Genética",
     "components.searchbar.filter.authors": "Autores",
 
-	"components.header.button.home": "Home",
+	"components.header.button.home": "Inicio",
 	"components.header.button.map": "Mapa",
 	"components.header.button.taxonomy": "Taxonomía",
 	"components.header.button.genetics": "Genética",
-	"components.header.button.methodology": "Metodología",
+	"components.header.button.about": "Acerca de",
 
 	"components.iucn.EX": "Extinta",
 	"components.iucn.EW": "Extinta en estado silvestre",
@@ -116,8 +116,18 @@
 	"footer.contact.title":  "Contacto",
 
 	"about.question": "¿Qué es el CBBDB?",
+	"about.answer_1": "La Plataforma de Biodiversidad CBB, desarrollada por el Centre Balear de Biodiversitat, es un sistema informático público avanzado diseñado para recopilar, gestionar, analizar y compartir datos sobre la biodiversidad de las Islas Baleares. La plataforma se basa en el principio de integrar diversos tipos de datos obtenidos de varias fuentes, incluyendo observaciones de campo, registros de museos, datos genéticos, datos ambientales, informes, bases de datos públicas y literatura gris.",
+	"about.answer_2": "Al integrar diversas fuentes de datos, la plataforma ofrece una visión integral de la biodiversidad balear, mejorando el conocimiento científico y sirviendo como una herramienta útil para estudiar la diversidad biológica en todas sus facetas. Con un enfoque en la experiencia del usuario, la plataforma es tanto intuitiva como accesible, atendiendo a investigadores científicos así como al público en general, permitiendo una exploración e investigación exhaustiva de la biodiversidad. Por lo tanto, creemos que esta plataforma tiene el potencial de convertirse en un recurso indispensable para investigadores, conservacionistas y responsables politicos, ayudando a profundizar su comprensión de la biodiversidad y fortalecer los esfuerzos de conservación en un futuro próximo.",
 
-	"about.answer": "La Plataforma de Biodiversidad CBB, desarrollada por el Centre Balear de Biodiversitat, es un sistema informático público avanzado diseñado para recopilar, gestionar, analizar y compartir datos sobre la biodiversidad de las Islas Baleares. La plataforma se basa en el principio de integrar diversos tipos de datos obtenidos de varias fuentes, incluyendo observaciones de campo, registros de museos, datos genéticos, datos ambientales, informes, bases de datos públicas y literatura gris. \n\n \n\nAl integrar diversas fuentes de datos, la plataforma ofrece una visión integral de la biodiversidad balear, mejorando el conocimiento científico y sirviendo como una herramienta útil para estudiar la diversidad biológica en todas sus facetas. Con un enfoque en la experiencia del usuario, la plataforma es tanto intuitiva como accesible, atendiendo a investigadores científicos así como al público en general, permitiendo una exploración e investigación exhaustiva de la biodiversidad. Por lo tanto, creemos que esta plataforma tiene el potencial de convertirse en un recurso indispensable para investigadores, conservacionistas y responsables politicos, ayudando a profundizar su comprensión de la biodiversidad y fortalecer los esfuerzos de conservación en un futuro próximo.",
+	"about.our_methodology": "Nuestra Metodología",
+	"about.block.taxonomy": "Taxonomía",
+	"about.block.taxonomy.text": "Nuestro objetivo es desarrollar un listado exhaustivo y curado de los taxones terrestres y marinos de las Islas Baleares. Esta lista será compilada utilizando datos de literatura científica y gris, observaciones de campo, registros de museos y notas de expertos. Estará alineada con la nomenclatura del Catalogue of Life, con entradas taxonómicas revisadas por expertos en cada nivel biológicamente coherente (p.j., familia). Este enfoque está diseñado para garantizar una cobertura taxonómica de alta calidad y consistencia taxonómica.",
+	"about.block.distribution": "Distribución",
+	"about.block.distribution.text": "Nuestro objetivo es producir un mapa de la distribución de la biodiversidad en el territorio balear. Los datos de distribución de los taxones se recopilarán principalmente de bases de datos públicas, informes científicos y gubernamentales, literatura e investigaciones de campo. La información espacial de estas fuentes se estandarizará utilizando un sistema geodésico común y una lista de topónimos estandarizados. Esta metodología está destinada a asegurar una alta precisión geográfica y consistencia.",
+	"about.block.genetic": "Genética",
+	"about.block.genetic.text": "Nuestro objetivo es crear un recurso accesible para obtener información genética sobre los taxones baleares. Esta será la primera plataforma de su tipo, proporcionando acceso fácil a datos genéticos estandarizados. La información se obtendrá principalmente de bases de datos públicas como NCBI y BOLD. Los datos genéticos se normalizarán armonizando los códigos de marcadores y otros metadatos asociados con cada ocurrencia, asegurando la consistencia y facilidad de uso.",
+	"about.block.traits": "Rasgos biológicos y ecológicos",
+	"about.block.traits.text": "Nuestro objetivo es proporcionar un repositorio detallado de rasgos biológicos y ecológicos de los taxones que viven en las Islas Baleares. Esta sección recopilará información sobre diversos rasgos como medidas corporales, ciclos de vida, estrategias reproductivas, hábitats y preferencias ecológicas. Los datos se recopilarán de la literatura científica, observaciones de campo y contribuciones de expertos. Para garantizar la precisión y relevancia de la información, los rasgos biológicos y ecológicos se categorizarán y estandarizarán sistemáticamente según marcos y terminologías establecidos.",
 
     "lang": "Castellano"
 }
