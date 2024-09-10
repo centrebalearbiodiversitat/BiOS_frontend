@@ -8,7 +8,7 @@ import {t} from "@/i18n/i18n";
 export default function AboutApp({lang}) {
 
 	return (
-		<section className="h-full grid grid-cols-2  px-10 md:gap-16 md:px-[10vw] m-auto">
+		<section className="h-full grid grid-cols-2 py-10 px-10 md:gap-16 md:px-[10vw] m-auto">
 			<div className="col-span-full md:col-span-1 m-auto">
 				<h1 className="text-5xl font-extralight">
 					{t(lang, "about.question")}
@@ -21,7 +21,7 @@ export default function AboutApp({lang}) {
 					<p className="text-pretty">{t(lang, "about.answer_2")}</p>
 				</section>
 			</div>
-			<div className="mx-auto flex w-full h-full col-span-full md:col-span-1 max-w-[500px]">
+			<div className="mx-auto my-3 flex w-full h-full col-span-full md:col-span-1 max-w-[500px]">
 				<div className="m-auto grid grid-cols-2 gap-4">
 					<Link href={`/${lang}/taxon/search?q=Upupa epops`} className="mb-20">
 						<Image alt="Upupa epops" removeWrapper={true} src="/images/about/upupa.png"

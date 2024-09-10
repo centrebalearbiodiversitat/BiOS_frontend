@@ -7,10 +7,10 @@ export default function About({params: {lang}}) {
 
 	return (
 		<>
-			<article className="h-full">
+			<article className="min-h-full flex justify-center items-center">
 				<AboutApp lang={lang}/>
 			</article>
-			<article className="h-full">
+			<article className="min-h-full">
 				<AboutBulletPoints lang={lang}/>
 			</article>
 		</>
