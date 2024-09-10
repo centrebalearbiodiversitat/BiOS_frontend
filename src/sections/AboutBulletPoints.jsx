@@ -17,7 +17,7 @@ export default function AboutBulletPoints({lang}) {
 
 	return (
 		<section className="px-10 mt-8 md:gap-16 md:px-[10vw] m-auto">
-			<h1 className="text-center text-6xl font-extralight">{t(lang, "about.our_methodology")}</h1>
+			<h1 className="text-center text-5xl xl:text-6xl font-extralight">{t(lang, "about.our_methodology")}</h1>
 			<div className="my-[10vh] grid grid-cols-1 md:grid-cols-2 gap-20 max-w-[1100px] m-auto">
 				<TextBlock lang={lang} number={1} numberColor="text-secondary"
 				           titleKey={"about.block.taxonomy"}

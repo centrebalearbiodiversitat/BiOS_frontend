@@ -10,7 +10,7 @@ export default function AboutApp({lang}) {
 	return (
 		<section className="h-full grid grid-cols-2 py-10 px-10 md:gap-16 md:px-[10vw] m-auto">
 			<div className="col-span-full md:col-span-1 m-auto">
-				<h1 className="text-5xl font-extralight">
+				<h1 className="text-4xl xl:text-5xl font-extralight">
 					{t(lang, "about.question")}
 				</h1>
 				<section className="text-gray-500 font-normal text-sm leading-6">
