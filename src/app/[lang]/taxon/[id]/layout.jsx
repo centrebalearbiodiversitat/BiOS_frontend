@@ -63,7 +63,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 			.then((r) => setTaxon(r))
 		taxonomy.parent(id)
 			.then((r) => setHigherTaxonomy(r))
-		taxonomy.children(id)
+		taxonomy.children(id, true)
 			.then((r) => setDescendants(r))
 		taxonomy.synonyms(id)
 			.then((r) => setSynonyms(r))

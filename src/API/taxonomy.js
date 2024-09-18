@@ -22,8 +22,8 @@ function parent(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/parent`, {id})
 }
 
-function children(id) {
-	return requests.GET(`${TAXONOMY_PATH}/taxon/children`, {id})
+function children(id, accepted_only) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/children`, {id, accepted_only})
 }
 
 function childrenCount(id, childrenRank = null) {

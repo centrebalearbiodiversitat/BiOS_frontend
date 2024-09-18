@@ -1,8 +1,9 @@
 "use client"
 
 import React, {forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
-import Map, {Layer, Source, NavigationControl} from 'react-map-gl/maplibre';
+import Map, {Layer, Source, NavigationControl, ScaleControl} from 'react-map-gl/maplibre';
 import {Spinner} from "@nextui-org/react";
+import html2canvas from "html2canvas";
 
 const MAP_STYLE = {
 	version: 8,
@@ -188,17 +189,25 @@ const MapLibre = forwardRef(({
 	const [pitch] = useState(0);
 	const mapRef = useRef();
 
-	const exportMap = useCallback(() => {
-		const mapCanvas = mapRef.current?.getMap().getCanvas();
-		if (mapCanvas) {
-            const image = mapCanvas.toDataURL('image/png');
-			console.log(image);
+	const exportMap = useCallback(async () => {
+		const scaleDom = document.getElementsByClassName('maplibregl-ctrl-bottom-left');
+		const mapDom = document.getElementsByClassName('maplibregl-canvas');
+		const compassDom = document.getElementsByClassName('maplibregl-ctrl-compass');
+		// const mapCanvas = mapRef.current?.getMap().getCanvas();
+		if (mapDom) {
+			console.log(mapDom)
+			const scaleCanvas = await html2canvas(scaleDom[0]);
+			const compassCanvas = await html2canvas(compassDom[0]);
+			const mapCanvas = await html2canvas(mapDom[0]);
+			mapCanvas.getContext('2d').drawImage(scaleCanvas, 0, 0);
+			mapCanvas.getContext('2d').drawImage(compassCanvas, 0, 200);
+			const image = mapCanvas.toDataURL('image/png');
 			const link = document.createElement('a');
-            link.href = image;
-            link.download = 'map-image.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+			link.href = image;
+			link.download = 'map-export.png';
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		}
 	}, []);
 
@@ -233,6 +242,9 @@ const MapLibre = forwardRef(({
 					)
 				})
 			}
+			<div className="bg-transparent">
+				<ScaleControl maxWidth={200}/>
+			</div>
 			{nav &&
 				<NavigationControl showCompass={true} position={navPos} visualizePitch={true} showZoom={true}/>}
 			{children}

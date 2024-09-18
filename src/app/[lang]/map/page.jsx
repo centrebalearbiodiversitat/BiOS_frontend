@@ -21,273 +21,285 @@ import CBBButton from "@/components/common/CBBButton";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
-    const taxaColors = {};
-    const taxaToLoc = {};
+	const taxaColors = {};
+	const taxaToLoc = {};
+	locations = new Set([...locations]);
 
-    if (locations.size === 0) {
-        locations.add(null)
-    }
+	if (locations.size === 0) {
+		locations.add(null)
+	}
 
-    for (const taxon of taxa) {
-        for (const location of locations) {
-            const taxaToLocKey = `${taxon}_${location}`;
+	for (const taxon of taxa) {
+		for (const location of locations) {
+			const taxaToLocKey = `${taxon}_${location}`;
 
-            if (savedTaxaToLoc.hasOwnProperty(taxaToLocKey)) {
-                taxaToLoc[taxaToLocKey] = savedTaxaToLoc[taxaToLocKey];
-            } else {
-                const payload = await occurrences.list(
-                    taxon,
-                    location
-                );
+			if (savedTaxaToLoc.hasOwnProperty(taxaToLocKey)) {
+				taxaToLoc[taxaToLocKey] = savedTaxaToLoc[taxaToLocKey];
+			} else {
+				const payload = await occurrences.list(
+					taxon,
+					location
+				);
 
-                const features = [];
-                for (const occurrence of payload) {
-                    features.push(
-                        {
-                            id: occurrence.id,
-                            properties: occurrence,
-                            geometry: {
-                                type: "Point",
-                                coordinates: [occurrence.decimalLongitude, occurrence.decimalLatitude]
-                            }
-                        },
-                    )
-                }
+				const features = [];
+				for (const occurrence of payload) {
+					features.push(
+						{
+							id: occurrence.id,
+							properties: occurrence,
+							geometry: {
+								type: "Point",
+								coordinates: [occurrence.decimalLongitude, occurrence.decimalLatitude]
+							}
+						},
+					)
+				}
 
-                taxaToLoc[taxaToLocKey] = {
-                    type: "FeatureCollection",
-                    taxonId: taxon,
-                    crs: {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
-                    features: features
-                }
-            }
+				taxaToLoc[taxaToLocKey] = {
+					type: "FeatureCollection",
+					taxonId: taxon,
+					crs: {"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}},
+					features: features
+				}
+			}
 
-            if (savedTaxaColors && savedTaxaColors.hasOwnProperty(taxon)) {
-                taxaColors[taxon] = savedTaxaColors[taxon];
-            } else {
-                const randomColor = Math.floor(Math.random() * 16777215)
-                taxaColors[taxon] = `#${randomColor.toString(16).padStart(6, '0')}`
-            }
-        }
-    }
+			if (savedTaxaColors && savedTaxaColors.hasOwnProperty(taxon)) {
+				taxaColors[taxon] = savedTaxaColors[taxon];
+			} else {
+				const randomColor = Math.floor(Math.random() * 16777215)
+				taxaColors[taxon] = `#${randomColor.toString(16).padStart(6, '0')}`
+			}
+		}
+	}
 
-    return [taxaToLoc, taxaColors];
+	return [taxaToLoc, taxaColors];
 }
 
 
 async function fetchTaxa(taxa, savedTaxa) {
-    const taxaList = {};
+	const taxaList = {};
 
-    for (const taxon of taxa) {
-        if (savedTaxa.hasOwnProperty(taxon))
-            taxaList[taxon] = savedTaxa[taxon];
-        else
-            taxaList[taxon] = await taxonomy.get(taxon);
-    }
+	for (const taxon of taxa) {
+		if (savedTaxa.hasOwnProperty(taxon))
+			taxaList[taxon] = savedTaxa[taxon];
+		else
+			taxaList[taxon] = await taxonomy.get(taxon);
+	}
 
-    return taxaList;
+	return taxaList;
 }
 
 
 async function fetchGeographicalLocations(locationsIDs, savedLocations) {
-    for (const location of locationsIDs) {
-        if (!savedLocations.hasOwnProperty(location)) {
-            savedLocations[location] = await geography.get(location);
-        }
-    }
+    console.log('ids', locationsIDs, 'sl', savedLocations)
+	for (const location of locationsIDs) {
+		if (!savedLocations.hasOwnProperty(location)) {
+			savedLocations[location] = await geography.get(location);
+		}
+	}
 
-    return savedLocations;
+	return savedLocations;
 }
 
 
 export default function MapPage({params: {lang}}) {
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
-    const router = useRouter();
-    const [selectedOccus, setSelectedOccus] = useState([]);
-    const [taxa, setTaxa] = useState({});
-    const [geographicalLocations, setGeographicalLocations] = useState({});
-    const [taxaToLoc, setTaxaToLoc] = useState({});
-    const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
-    const [taxaColors, setTaxaColors] = useState({});
-    const mapRef = useRef();
+	const searchParams = useSearchParams();
+	const pathname = usePathname();
+	const router = useRouter();
+	const [selectedOccus, setSelectedOccus] = useState([]);
+	const [taxa, setTaxa] = useState({});
+	const [geographicalLocations, setGeographicalLocations] = useState({});
+	const [taxaToLoc, setTaxaToLoc] = useState({});
+	const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
+	const [taxaColors, setTaxaColors] = useState({});
+	const mapRef = useRef();
 
-    function setAndSaveTaxaColors(tC) {
-        localStorage.setItem('taxaColors', JSON.stringify(tC));
-        setTaxaColors(tC);
-    }
+	function setAndSaveTaxaColors(tC) {
+		localStorage.setItem('taxaColors', JSON.stringify(tC));
+		setTaxaColors(tC);
+	}
 
-    useEffect(() => {
-        // parse saved colors
-        let savedTaxaColors = {};
+	useEffect(() => {
+		// parse saved colors
+		let savedTaxaColors = {};
 
-        try {
-            savedTaxaColors = JSON.parse(localStorage.getItem('taxaColors'));
-        } catch (e) {
-            localStorage.removeItem('taxaColors');
-        }
+		try {
+			savedTaxaColors = JSON.parse(localStorage.getItem('taxaColors'));
+		} catch (e) {
+			localStorage.removeItem('taxaColors');
+		}
 
-        setTaxaColors(savedTaxaColors);
+		setTaxaColors(savedTaxaColors);
 
-        // parse params
-        const reqTaxa = new Set(searchParams.getAll('taxon'));
-        const locs = new Set(searchParams.getAll('loc'));
-        setTaxa([...reqTaxa].map(() => undefined))
+		// parse params
+		const reqTaxa = new Set(searchParams.getAll('taxon'));
+		const locs = new Set(searchParams.getAll('loc'));
+		setTaxa([...reqTaxa].map(() => undefined))
 
-        fetchOccurrences(
-            reqTaxa,
-            locs,
-            savedTaxaColors,
-            taxaToLoc
-        ).then(([newTaxaToLoc, colors]) => {
-            setTaxaToLoc(newTaxaToLoc);
-            setAndSaveTaxaColors(colors);
-        });
+        console.log(locs)
+		fetchOccurrences(
+			reqTaxa,
+			locs,
+			savedTaxaColors,
+			taxaToLoc
+		).then(([newTaxaToLoc, colors]) => {
+			setTaxaToLoc(newTaxaToLoc);
+			setAndSaveTaxaColors(colors);
+		});
 
-        fetchTaxa(
-            reqTaxa,
-            taxa
-        ).then(r => setTaxa(r));
+		fetchTaxa(
+			reqTaxa,
+			taxa
+		).then(r => setTaxa(r));
+        console.log(locs)
+		fetchGeographicalLocations(
+			locs,
+			geographicalLocations
+		).then(r => setGeographicalLocations(r));
+	}, [searchParams]);
 
-        fetchGeographicalLocations(
-            locs,
-            geographicalLocations
-        ).then(r => setGeographicalLocations(r));
-    }, [searchParams]);
+	function onSelectedSearch(paramName, id) {
+		if (id) {
+			const params = new URLSearchParams(searchParams.toString())
+			if (!params.getAll(paramName).includes(id)) {
+				params.append(paramName, id)
+				router.push(`${pathname}?${params.toString()}`)
+			}
+		}
+	}
 
-    function onSelectedSearch(paramName, id) {
-        if (id) {
-            const params = new URLSearchParams(searchParams.toString())
-            if (!params.getAll(paramName).includes(id)) {
-                params.append(paramName, id)
-                router.push(`${pathname}?${params.toString()}`)
-            }
-        }
-    }
+	function onColorChanged(id, color) {
+		if (id) {
+			const newTaxaColors = {...taxaColors, [id]: color};
+			setAndSaveTaxaColors(newTaxaColors);
+		}
+	}
 
-    function onColorChanged(id, color) {
-        if (id) {
-            const newTaxaColors = {...taxaColors, [id]: color};
-            setAndSaveTaxaColors(newTaxaColors);
-        }
-    }
+	function onDeleted(paramName, id) {
+		if (id) {
+			const params = new URLSearchParams(searchParams.toString())
+			params.delete(paramName, id)
+			router.push(`${pathname}?${params.toString()}`)
+		}
+	}
 
-    function onDeleted(paramName, id) {
-        if (id) {
-            const params = new URLSearchParams(searchParams.toString())
-            params.delete(paramName, id)
-            router.push(`${pathname}?${params.toString()}`)
-        }
-    }
+	function onSelectedOccurrences(feature) {
+		if (feature) {
+			occurrences.get(feature.properties.id)
+				.then(r => setSelectedOccus([...selectedOccus, r]))
+		}
+	}
 
-    function onSelectedOccurrences(feature) {
-        if (feature) {
-            occurrences.get(feature.properties.id)
-                .then(r => setSelectedOccus([...selectedOccus, r]))
-        }
-    }
-
-    return (
-        <>
-            <div className="absolute top-0 h-full w-full">
-                <MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors} onClick={onSelectedOccurrences}>
-                    {
-                        selectedOccus.map(
-                            (occu, idx) => (
-                                <MapLibrePopup key={occu.id} images={occu.taxonomy.images}
-                                               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
-                                               title={
-                                                   <>
-                                                       <TaxonName lang={lang} taxon={occu.taxonomy} author={false}/>
-                                                       <p className={`text-medium font-light w-full`}>
-                                                           {occu ? occu.taxonomy.scientificNameAuthorship : ""}
-                                                       </p>
-                                                   </>
-                                               }
-                                               longitude={occu.decimalLongitude} latitude={occu.decimalLatitude}>
-                                    <div className="text-medium my-6">
-                                        <TwoLineText title={t(lang, "map.popup.locality")}
-                                                     text={occu.location?.name}/>
-                                        <TwoLineText title={t(lang, "map.popup.location")} text={
-                                            <span>({occu.decimalLatitude}, {occu.decimalLongitude}) {occu.coordinateUncertaintyInMeters && (
-                                                <span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
-                                        }/>
-                                        <TwoLineText title={t(lang, "map.popup.elevation")} text={occu.elevation}/>
-                                        <TwoLineText title={t(lang, "map.popup.depth")} text={occu.depth}/>
-                                        <TwoLineText title={t(lang, "map.popup.eventDate")} text={occu.eventDate}/>
-                                        <TwoLineText title={t(lang, "map.popup.basisRecord")}
-                                                     text={occu.basisOfRecord}/>
-                                        <TwoLineText title={t(lang, "map.popup.voucher")} text={occu.voucher}/>
-                                    </div>
-                                    <Sources sources={occu.sources} className="my-3"/>
-                                </MapLibrePopup>
-                            )
-                        )
-                    }
-                </MapLibre>
-            </div>
-            <Drawer>
-                <Drawer.Body>
-                    <Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "filters"]} selectionMode={"multiple"}>
-                        <AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
-                                       className="border-b-1 border-slate-400"
-                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
-                            <div className="mx-3">
-                                <CBBSearchBar showFilters={false} lang={lang} rounded={true}
-                                              filters={[{
-                                                    textKey: "components.searchbar.filter.taxonomy",
-                                                    onSelected: e => onSelectedSearch('taxon', e),
-                                                    onInput: e => taxonomy.search(e)
-                                              }]}/>
-                                <ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
-                                    {
-                                        Object.values(taxa).map((taxon, idx) => (
-                                            <MapLibreCard key={idx}
-                                                          color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
-                                                          onColorChanged={onColorChanged} lang={lang}
-                                                          taxon={taxon} onDelete={d => onDeleted('taxon', d)}/>
-                                        ))
-                                    }
-                                </ul>
-                            </div>
-                        </AccordionItem>
-                        <AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')} className="border-b-1 border-slate-400"
-                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
-                            <div className="mx-3">
-                                <CBBSearchBar showFilters={false} lang={lang} rounded={true}
-                                              filters={[{
-                                                    textKey: "components.searchbar.filter.authors",
-                                                    onSelected: e => onSelectedSearch('loc', e),
-                                                    onInput: e => geography.search(e)
-                                              }]}>
-                                    {(obj, search) => <><span className="text-slate-500">{t(lang, `geography.rank.${obj.rank}`)}: </span><HighlightText text={obj.name} highlight={search}/></>}
-                                </CBBSearchBar>
-                                <ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 mx-4">
-                                    {
-                                    Object.values(geographicalLocations).map((location, idx) => (
-                                        <MapLibreCard key={idx} colorSelector={false} lang={lang}
-                                                      taxon={location} onDelete={d => onDeleted('loc', d)}/>
-                                    ))
-                                    }
-                                </ul>
-                            </div>
-                        </AccordionItem>
-                        <AccordionItem key="filters" aria-label={t(lang, 'map.drawer.filters')} className="border-b-0"
-                                       title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
-                            <div className="mx-3">
-                                <Filters data={taxaToLoc} onFiltered={d => setFilteredTaxaToLoc(d)}/>
-                            </div>
-                        </AccordionItem>
-                    </Accordion>
-                </Drawer.Body>
-                <Drawer.Footer>
-                    <div className="m-4 flex justify-end">
-                        <CBBButton disabled={!mapRef?.current} className="me-auto" onClick={() => mapRef.current.exportMap()}>
-                            Export map <FiDownload />
-                        </CBBButton>
-                    </div>
-                </Drawer.Footer>
-            </Drawer>
-        </>
-    );
+	return (
+		<>
+			<div className="absolute top-0 h-full w-full">
+				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
+				          onClick={onSelectedOccurrences}>
+					{
+						selectedOccus.map(
+							(occu, idx) => (
+								<MapLibrePopup key={occu.id} images={occu.taxonomy.images}
+								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
+								               title={
+									               <>
+										               <TaxonName lang={lang} taxon={occu.taxonomy} author={false}/>
+										               <p className={`text-medium font-light w-full`}>
+											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
+										               </p>
+									               </>
+								               }
+								               longitude={occu.decimalLongitude} latitude={occu.decimalLatitude}>
+									<div className="text-medium my-6">
+										<TwoLineText title={t(lang, "map.popup.locality")}
+										             text={occu.location?.name}/>
+										<TwoLineText title={t(lang, "map.popup.location")} text={
+											<span>({occu.decimalLatitude}, {occu.decimalLongitude}) {occu.coordinateUncertaintyInMeters && (
+												<span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
+										}/>
+										<TwoLineText title={t(lang, "map.popup.elevation")} text={occu.elevation}/>
+										<TwoLineText title={t(lang, "map.popup.depth")} text={occu.depth}/>
+										<TwoLineText title={t(lang, "map.popup.eventDate")} text={occu.eventDate}/>
+										<TwoLineText title={t(lang, "map.popup.basisRecord")}
+										             text={occu.basisOfRecord}/>
+										<TwoLineText title={t(lang, "map.popup.voucher")} text={occu.voucher}/>
+									</div>
+									<Sources sources={occu.sources} className="my-3"/>
+								</MapLibrePopup>
+							)
+						)
+					}
+				</MapLibre>
+			</div>
+			<Drawer>
+				<Drawer.Body>
+					<Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "filters"]}
+					           selectionMode={"multiple"}>
+						<AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
+						               className="border-b-1 border-slate-400"
+						               title={<h4
+							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
+							<div className="mx-3">
+								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+								              filters={[{
+									              textKey: "components.searchbar.filter.taxonomy",
+									              onSelected: e => onSelectedSearch('taxon', e),
+									              onInput: e => taxonomy.search(e)
+								              }]}/>
+								<ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
+									{
+										Object.values(taxa).map((taxon, idx) => (
+											<MapLibreCard key={idx}
+											              color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
+											              onColorChanged={onColorChanged} lang={lang}
+											              taxon={taxon} onDelete={d => onDeleted('taxon', d)}/>
+										))
+									}
+								</ul>
+							</div>
+						</AccordionItem>
+						<AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')}
+						               className="border-b-1 border-slate-400"
+						               title={<h4
+							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
+							<div className="mx-3">
+								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+								              filters={[{
+									              textKey: "components.searchbar.filter.authors",
+									              onSelected: e => onSelectedSearch('loc', e),
+									              onInput: e => geography.search(e)
+								              }]}>
+									{(obj, search) => <><span
+										className="text-slate-500">{t(lang, `geography.rank.${obj.rank}`)}: </span><HighlightText
+										text={obj.name} highlight={search}/></>}
+								</CBBSearchBar>
+								<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 mx-4">
+									{
+										Object.values(geographicalLocations).map((location, idx) => (
+											<MapLibreCard key={idx} colorSelector={false} lang={lang}
+											              taxon={location} onDelete={d => onDeleted('loc', d)}/>
+										))
+									}
+								</ul>
+							</div>
+						</AccordionItem>
+						<AccordionItem key="filters" aria-label={t(lang, 'map.drawer.filters')} className="border-b-0"
+						               title={<h4
+							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
+							<div className="mx-3">
+								<Filters data={taxaToLoc} onFiltered={d => setFilteredTaxaToLoc(d)}/>
+							</div>
+						</AccordionItem>
+					</Accordion>
+				</Drawer.Body>
+				<Drawer.Footer>
+					<div className="m-4 flex justify-end">
+						<CBBButton disabled={!mapRef?.current} className="me-auto"
+						           onClick={() => mapRef.current.exportMap()}>
+							Export map <FiDownload/>
+						</CBBButton>
+					</div>
+				</Drawer.Footer>
+			</Drawer>
+		</>
+	);
 }

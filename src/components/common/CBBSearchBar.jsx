@@ -19,8 +19,6 @@ export default function CBBSearchBar({lang, filters, showFilters = true, border 
         filters[filter].onInput(input).then(q => setQuery(q))
     }, [filters, filter])
 
-    console.log(query)
-
     return (
         <>
             {showFilters &&
