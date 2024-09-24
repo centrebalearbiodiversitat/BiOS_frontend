@@ -7,7 +7,7 @@ import CBBButton from "@/components/common/CBBButton";
 import {t} from "@/i18n/i18n";
 
 
-export default function CBBSearchBar({lang, filters, showFilters = true, border = true, rounded = true, children}) {
+export default function CBBSearchBar({lang, label, placeholder, redirect = false, filters, showFilters = true, border = true, rounded = true, children}) {
     const [query, setQuery] = useState([]);
     const [filter, setFilter] = useState(0);
 
@@ -35,7 +35,7 @@ export default function CBBSearchBar({lang, filters, showFilters = true, border 
                 </div>
             }
             <SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-[100%]"
-                       label={t(lang, "components.searchbar.label")}
+                       label={label} placeholder={placeholder} lang={lang} redirect={redirect}
                        onInput={onInput} border={border}>
                 {children}
             </SearchBar>

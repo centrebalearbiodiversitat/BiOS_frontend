@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
@@ -18,6 +18,7 @@ import HighlightText from "@/components/common/HighlightText";
 import Filters from "@/components/Filters";
 import {FiDownload} from "react-icons/fi";
 import CBBButton from "@/components/common/CBBButton";
+import MapLibreTaxa from "@/components/maplibre/MapLibreTaxa";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -91,14 +92,16 @@ async function fetchTaxa(taxa, savedTaxa) {
 
 
 async function fetchGeographicalLocations(locationsIDs, savedLocations) {
-    console.log('ids', locationsIDs, 'sl', savedLocations)
+	const locationList = {}
+
 	for (const location of locationsIDs) {
-		if (!savedLocations.hasOwnProperty(location)) {
-			savedLocations[location] = await geography.get(location);
-		}
+		if (savedLocations.hasOwnProperty(location))
+			locationList[location] = savedLocations[location];
+		else
+			locationList[location] = await geography.get(location);
 	}
 
-	return savedLocations;
+	return locationList;
 }
 
 
@@ -114,10 +117,11 @@ export default function MapPage({params: {lang}}) {
 	const [taxaColors, setTaxaColors] = useState({});
 	const mapRef = useRef();
 
-	function setAndSaveTaxaColors(tC) {
+	const setAndSaveTaxaColors = useCallback((tC) => {
 		localStorage.setItem('taxaColors', JSON.stringify(tC));
 		setTaxaColors(tC);
-	}
+	}, [setTaxaColors]);
+
 
 	useEffect(() => {
 		// parse saved colors
@@ -130,16 +134,16 @@ export default function MapPage({params: {lang}}) {
 		}
 
 		setTaxaColors(savedTaxaColors);
+		// setTaxa([...reqTaxa].map(() => undefined))
 
 		// parse params
-		const reqTaxa = new Set(searchParams.getAll('taxon'));
-		const locs = new Set(searchParams.getAll('loc'));
-		setTaxa([...reqTaxa].map(() => undefined))
+		const reqTaxa = Array.from(new Set(searchParams.getAll('taxon')));
+		const reqLocs = Array.from(new Set(searchParams.getAll('loc')));
+		console.log('locs', reqLocs)
 
-        console.log(locs)
 		fetchOccurrences(
 			reqTaxa,
-			locs,
+			reqLocs,
 			savedTaxaColors,
 			taxaToLoc
 		).then(([newTaxaToLoc, colors]) => {
@@ -151,12 +155,19 @@ export default function MapPage({params: {lang}}) {
 			reqTaxa,
 			taxa
 		).then(r => setTaxa(r));
-        console.log(locs)
+
 		fetchGeographicalLocations(
-			locs,
+			reqLocs,
 			geographicalLocations
 		).then(r => setGeographicalLocations(r));
 	}, [searchParams]);
+
+	function onColorChanged(id, color) {
+		if (id) {
+			const newTaxaColors = {...taxaColors, [id]: color};
+			setAndSaveTaxaColors(newTaxaColors);
+		}
+	}
 
 	function onSelectedSearch(paramName, id) {
 		if (id) {
@@ -168,14 +179,7 @@ export default function MapPage({params: {lang}}) {
 		}
 	}
 
-	function onColorChanged(id, color) {
-		if (id) {
-			const newTaxaColors = {...taxaColors, [id]: color};
-			setAndSaveTaxaColors(newTaxaColors);
-		}
-	}
-
-	function onDeleted(paramName, id) {
+	function onDeletedSearch(paramName, id) {
 		if (id) {
 			const params = new URLSearchParams(searchParams.toString())
 			params.delete(paramName, id)
@@ -194,6 +198,7 @@ export default function MapPage({params: {lang}}) {
 		<>
 			<div className="absolute top-0 h-full w-full">
 				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
+				          sources={geographicalLocations}
 				          onClick={onSelectedOccurrences}>
 					{
 						selectedOccus.map(
@@ -232,30 +237,14 @@ export default function MapPage({params: {lang}}) {
 			</div>
 			<Drawer>
 				<Drawer.Body>
-					<Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "filters"]}
+					<Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "geo", "filters"]}
 					           selectionMode={"multiple"}>
 						<AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
 						               className="border-b-1 border-slate-400"
 						               title={<h4
 							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
-							<div className="mx-3">
-								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
-								              filters={[{
-									              textKey: "components.searchbar.filter.taxonomy",
-									              onSelected: e => onSelectedSearch('taxon', e),
-									              onInput: e => taxonomy.search(e)
-								              }]}/>
-								<ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
-									{
-										Object.values(taxa).map((taxon, idx) => (
-											<MapLibreCard key={idx}
-											              color={taxon && taxaColors ? taxaColors[taxon.id] : undefined}
-											              onColorChanged={onColorChanged} lang={lang}
-											              taxon={taxon} onDelete={d => onDeleted('taxon', d)}/>
-										))
-									}
-								</ul>
-							</div>
+							<MapLibreTaxa lang={lang} taxa={taxa} taxaColors={taxaColors} onColorChanged={onColorChanged}
+							              onDeleted={onDeletedSearch} onSelectedSearch={onSelectedSearch}/>
 						</AccordionItem>
 						<AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')}
 						               className="border-b-1 border-slate-400"
@@ -263,6 +252,8 @@ export default function MapPage({params: {lang}}) {
 							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
 							<div className="mx-3">
 								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+								              label="components.searchbar.label.geography"
+								              placeholder="components.searchbar.placeholder.geography"
 								              filters={[{
 									              textKey: "components.searchbar.filter.authors",
 									              onSelected: e => onSelectedSearch('loc', e),
@@ -276,7 +267,7 @@ export default function MapPage({params: {lang}}) {
 									{
 										Object.values(geographicalLocations).map((location, idx) => (
 											<MapLibreCard key={idx} colorSelector={false} lang={lang}
-											              taxon={location} onDelete={d => onDeleted('loc', d)}/>
+											              taxon={location} onDelete={d => onDeletedSearch('loc', d)}/>
 										))
 									}
 								</ul>

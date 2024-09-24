@@ -52,7 +52,7 @@ const MAP_STYLE = {
 			id: 'hills',
 			type: 'hillshade',
 			source: 'hillshadeSource',
-			paint: {'hillshade-shadow-color': 'rgba(6,46,98,1)'}
+			paint: {'hillshade-shadow-color': 'hsl(146, 7%, 30%)'}
 		},
 		// {
 		// 	id: 'water-layer',
@@ -176,11 +176,21 @@ function PointsSource({data, taxaColors, idx}) {
 			</Source>
 		);
 	}
+const polygonLayer = {
+  type: 'line',
+  paint: {
+    // 'fill-color': '#39f31b',
+    // 'fill-opacity': 0.4,
+    "line-color": "#ffffff",
+    "line-width": 3,
+    // "line-opacity": .4,
+  }
+};
 
 
 const MapLibre = forwardRef(({
 	data, taxaColors, children, loading = false, onClick = null,
-	nav = true, navPos= "bottom-right", style = {}
+	nav = true, navPos= "bottom-right", style = {}, sources
 }, ref) => {
 	const [lng] = useState(2.75802);
 	const [lat] = useState(39.37029);
@@ -188,7 +198,7 @@ const MapLibre = forwardRef(({
 	const [bearing] = useState(-8);
 	const [pitch] = useState(0);
 	const mapRef = useRef();
-
+	console.log(sources)
 	const exportMap = useCallback(async () => {
 		const scaleDom = document.getElementsByClassName('maplibregl-ctrl-bottom-left');
 		const mapDom = document.getElementsByClassName('maplibregl-canvas');
@@ -241,6 +251,16 @@ const MapLibre = forwardRef(({
 						<PointsSource key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
 					)
 				})
+			}
+			{sources &&
+				Object.values(sources).map(
+					source => (
+						<Source key={source.id} id={`geo-${source.id}`} type="geojson" data={JSON.parse(source.area)}>
+							<Layer {...polygonLayer}/>
+							{console.log(JSON.parse(source.area))}
+						</Source>
+					)
+				)
 			}
 			<div className="bg-transparent">
 				<ScaleControl maxWidth={200}/>

@@ -9,7 +9,7 @@ function filterDataMinMax(occurences, feature, min, max) {
         .forEach(([key, value]) => {
             // console.log(value)
             const features = value.features.filter(
-                v => v.properties[feature] !== null && min <= v.properties[feature] && v.properties[feature] <= max
+                v => v.properties[feature] === null || min <= v.properties[feature] && v.properties[feature] <= max
             )
             // console.log(features.length)
             filteredOccurrences[key] = {...value, features};

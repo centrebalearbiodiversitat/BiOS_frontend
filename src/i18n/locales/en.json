@@ -75,7 +75,10 @@
 
 	"components.empty": "No data",
 
-	"components.searchbar.label": "Search a taxon...",
+	"components.searchbar.label.taxonomy": "Search a taxon...",
+	"components.searchbar.label.geography": "Search a place...",
+	"components.searchbar.placeholder.taxonomy": "Alytes muletensis",
+	"components.searchbar.placeholder.geography": "Menorca",
     "components.searchbar.filter.map": "Map",
     "components.searchbar.filter.taxonomy": "Taxonomy",
     "components.searchbar.filter.genetics": "Genetics",
