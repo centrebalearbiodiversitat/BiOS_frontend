@@ -2,9 +2,10 @@ import {DEFAULT_LOCALE, AVAILABLE_LOCALES} from "@/i18n/i18n";
 import {NextResponse} from "next/server";
 
 export function middleware(request) {
-	const preferredLocale = request.cookies.get('preferredLocale')?.value;
-	const acceptLanguage = request.headers.get('accept-language')?.split(',')[0];
-	const locale = preferredLocale || acceptLanguage || DEFAULT_LOCALE;
+	// const preferredLocale = request.cookies.get('preferredLocale')?.value;
+	// const acceptLanguage = request.headers.get('accept-language')?.split(',')[0];
+	// const locale = preferredLocale || acceptLanguage || DEFAULT_LOCALE;
+	const locale = DEFAULT_LOCALE;
 	const { pathname } = request.nextUrl;
 
 	if (pathname === "/") {
