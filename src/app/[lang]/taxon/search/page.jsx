@@ -9,7 +9,6 @@ import {Spinner} from "@nextui-org/react";
 export default function About({params: {lang}}) {
 	const router = useRouter();
 	const searchParams = useSearchParams()
-	const [results, setResults] = useState({});
 
 	useEffect(() => {
 		const query = searchParams.get('q');

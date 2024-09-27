@@ -2,7 +2,7 @@ const requests = require("@/API/requests");
 
 const GENETICS_PATH = '/genetics'
 const SEQUENCES_PATH = `${GENETICS_PATH}/sequence`
-const GENES_PATH = `${GENETICS_PATH}/gene`
+const GENES_PATH = `${GENETICS_PATH}/marker`
 
 function listGenes(taxonomy) {
 	return requests.GET(`${GENES_PATH}/list`, {taxonomy})

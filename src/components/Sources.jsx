@@ -40,7 +40,7 @@ export default function Sources({sources, className}) {
 	return (
 		<ul className={`flex flex-row flex-wrap gap-1 gap-y-2 ${className}`}>
 		{
-			sources.map(
+			sources?.map(
 				s => (
 					<li key={s.id} className="">
 						<ChipExternalLink originSource={s}/>

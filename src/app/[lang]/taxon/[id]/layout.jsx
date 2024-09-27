@@ -61,6 +61,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 	useEffect(() => {
 		taxonomy.get(id)
 			.then((r) => setTaxon(r))
+			.catch(r => console.log('ERROR!'))
 		taxonomy.parent(id)
 			.then((r) => setHigherTaxonomy(r))
 		taxonomy.children(id, true)
@@ -119,7 +120,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 								<Loading loading={taxon} className="mb-4" width="80%" height="58px">
 									{taxon &&
 										<h1 className="first-letter:uppercase font-medium text-4xl">
-											<TaxonName taxon={taxon} lang={lang}/>
+											<TaxonName taxon={taxon} lang={lang} redirect={false}/>
 										</h1>
 									}
 								</Loading>

@@ -1,9 +1,7 @@
 "use client"
 
 import taxonomy from "@/API/taxonomy";
-import occurrences from "@/API/occurrences";
 import React, {useEffect, useState} from "react";
-import {occurrencesToGeoJson} from "@/utils/geojson";
 import Loading from "@/components/common/Loading";
 import IUCN from "@/components/IUCN";
 import Habitats from "@/components/Habitats";
@@ -12,7 +10,6 @@ import Section from "@/components/common/Section";
 
 
 export default function Taxon({params: {lang, id}}) {
-	const [occs, setOccs] = useState(undefined);
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);
 
@@ -26,8 +23,6 @@ export default function Taxon({params: {lang, id}}) {
 			});
 		taxonomy.taxonData(id)
 			.then(r => setTaxonData(r));
-		occurrences.list(id, null)
-			.then(r => r && setOccs(occurrencesToGeoJson(id, r)));
 	}, [id])
 
 	return (

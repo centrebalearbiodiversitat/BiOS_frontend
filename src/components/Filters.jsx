@@ -22,7 +22,7 @@ function filterDataMinMax(occurences, feature, min, max) {
 export default function Filters({data, onFiltered}) {
     useEffect(() => {
         onFiltered(filterDataMinMax(data, 'coordinateUncertaintyInMeters', 0, 30000))
-    }, [data]);
+    }, [onFiltered, data]);
 
     return (
         <Slider label="Uncertainty"
@@ -31,6 +31,7 @@ export default function Filters({data, onFiltered}) {
                 maxValue={30000}
                 minValue={0}
                 defaultValue={[0, 30000]}
+                formatOptions={{style: "unit", unit: "meter"}}
                 color="primary"
                 onChangeEnd={v => onFiltered(filterDataMinMax(data, 'coordinateUncertaintyInMeters', v[0], v[1]))}
                 classNames={{

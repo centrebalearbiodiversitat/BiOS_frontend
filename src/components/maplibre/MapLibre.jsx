@@ -198,7 +198,7 @@ const MapLibre = forwardRef(({
 	const [bearing] = useState(-8);
 	const [pitch] = useState(0);
 	const mapRef = useRef();
-	console.log(sources)
+
 	const exportMap = useCallback(async () => {
 		const scaleDom = document.getElementsByClassName('maplibregl-ctrl-bottom-left');
 		const mapDom = document.getElementsByClassName('maplibregl-canvas');
@@ -257,7 +257,6 @@ const MapLibre = forwardRef(({
 					source => (
 						<Source key={source.id} id={`geo-${source.id}`} type="geojson" data={JSON.parse(source.area)}>
 							<Layer {...polygonLayer}/>
-							{console.log(JSON.parse(source.area))}
 						</Source>
 					)
 				)

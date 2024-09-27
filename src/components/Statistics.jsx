@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
 import Loading from "@/components/common/Loading";

@@ -9,7 +9,6 @@ import Drawer from "@/components/common/Drawer";
 import CBBSearchBar from "@/components/common/CBBSearchBar";
 import {t} from "@/i18n/i18n";
 import MapLibre from "@/components/maplibre/MapLibre";
-import MapLibreCard from "@/components/maplibre/MapLibreCard";
 import TaxonName from "@/components/common/TaxonName";
 import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
 import Sources from "@/components/Sources";
@@ -19,6 +18,7 @@ import Filters from "@/components/Filters";
 import {FiDownload} from "react-icons/fi";
 import CBBButton from "@/components/common/CBBButton";
 import MapLibreTaxa from "@/components/maplibre/MapLibreTaxa";
+import MapLibreCardGeography from "@/components/maplibre/MapLibreCardGeography";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -37,10 +37,13 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 			if (savedTaxaToLoc.hasOwnProperty(taxaToLocKey)) {
 				taxaToLoc[taxaToLocKey] = savedTaxaToLoc[taxaToLocKey];
 			} else {
-				const payload = await occurrences.list(
+				let payload = await occurrences.list(
 					taxon,
 					location
 				);
+
+				if (!payload)
+					payload = []
 
 				const features = [];
 				for (const occurrence of payload) {
@@ -83,8 +86,11 @@ async function fetchTaxa(taxa, savedTaxa) {
 	for (const taxon of taxa) {
 		if (savedTaxa.hasOwnProperty(taxon))
 			taxaList[taxon] = savedTaxa[taxon];
-		else
-			taxaList[taxon] = await taxonomy.get(taxon);
+		else {
+			const taxonPayload = await taxonomy.get(taxon);
+			if (taxonPayload)
+				taxaList[taxon] = taxonPayload;
+		}
 	}
 
 	return taxaList;
@@ -97,8 +103,11 @@ async function fetchGeographicalLocations(locationsIDs, savedLocations) {
 	for (const location of locationsIDs) {
 		if (savedLocations.hasOwnProperty(location))
 			locationList[location] = savedLocations[location];
-		else
-			locationList[location] = await geography.get(location);
+		else {
+			const locPayload = await geography.get(location);
+			if (locPayload)
+				locationList[location] = locPayload;
+		}
 	}
 
 	return locationList;
@@ -111,17 +120,12 @@ export default function MapPage({params: {lang}}) {
 	const router = useRouter();
 	const [selectedOccus, setSelectedOccus] = useState([]);
 	const [taxa, setTaxa] = useState({});
+	const [loading, setLoading] = useState(false);
 	const [geographicalLocations, setGeographicalLocations] = useState({});
 	const [taxaToLoc, setTaxaToLoc] = useState({});
 	const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
 	const [taxaColors, setTaxaColors] = useState({});
 	const mapRef = useRef();
-
-	const setAndSaveTaxaColors = useCallback((tC) => {
-		localStorage.setItem('taxaColors', JSON.stringify(tC));
-		setTaxaColors(tC);
-	}, [setTaxaColors]);
-
 
 	useEffect(() => {
 		// parse saved colors
@@ -134,12 +138,13 @@ export default function MapPage({params: {lang}}) {
 		}
 
 		setTaxaColors(savedTaxaColors);
-		// setTaxa([...reqTaxa].map(() => undefined))
 
 		// parse params
 		const reqTaxa = Array.from(new Set(searchParams.getAll('taxon')));
 		const reqLocs = Array.from(new Set(searchParams.getAll('loc')));
-		console.log('locs', reqLocs)
+
+		if (reqTaxa)
+			setLoading(true);
 
 		fetchOccurrences(
 			reqTaxa,
@@ -149,6 +154,7 @@ export default function MapPage({params: {lang}}) {
 		).then(([newTaxaToLoc, colors]) => {
 			setTaxaToLoc(newTaxaToLoc);
 			setAndSaveTaxaColors(colors);
+			setLoading(false);
 		});
 
 		fetchTaxa(
@@ -159,17 +165,24 @@ export default function MapPage({params: {lang}}) {
 		fetchGeographicalLocations(
 			reqLocs,
 			geographicalLocations
-		).then(r => setGeographicalLocations(r));
+		).then(r => {
+			setGeographicalLocations(r);
+		});
 	}, [searchParams]);
 
-	function onColorChanged(id, color) {
+	const setAndSaveTaxaColors = useCallback((tC) => {
+		localStorage.setItem('taxaColors', JSON.stringify(tC));
+		setTaxaColors(tC);
+	}, []);
+
+	const onColorChanged = useCallback((id, color) => {
 		if (id) {
 			const newTaxaColors = {...taxaColors, [id]: color};
 			setAndSaveTaxaColors(newTaxaColors);
 		}
-	}
+	}, [setAndSaveTaxaColors,  taxaColors]);
 
-	function onSelectedSearch(paramName, id) {
+	const onSelectedSearch = useCallback((paramName, id) => {
 		if (id) {
 			const params = new URLSearchParams(searchParams.toString())
 			if (!params.getAll(paramName).includes(id)) {
@@ -177,28 +190,32 @@ export default function MapPage({params: {lang}}) {
 				router.push(`${pathname}?${params.toString()}`)
 			}
 		}
-	}
+	}, [searchParams, router, pathname]);
 
-	function onDeletedSearch(paramName, id) {
+	const onDeletedSearch = useCallback((paramName, id) => {
 		if (id) {
 			const params = new URLSearchParams(searchParams.toString())
 			params.delete(paramName, id)
 			router.push(`${pathname}?${params.toString()}`)
 		}
-	}
+	}, [router, searchParams, pathname]);
 
-	function onSelectedOccurrences(feature) {
+	const onSelectedOccurrences = useCallback((feature) => {
 		if (feature) {
 			occurrences.get(feature.properties.id)
 				.then(r => setSelectedOccus([...selectedOccus, r]))
 		}
-	}
+	}, [selectedOccus]);
+
+	const onFiltered = useCallback((d) => {
+		setFilteredTaxaToLoc(d);
+	}, []);
 
 	return (
 		<>
 			<div className="absolute top-0 h-full w-full">
 				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
-				          sources={geographicalLocations}
+				          sources={geographicalLocations} loading={loading}
 				          onClick={onSelectedOccurrences}>
 					{
 						selectedOccus.map(
@@ -263,11 +280,12 @@ export default function MapPage({params: {lang}}) {
 										className="text-slate-500">{t(lang, `geography.rank.${obj.rank}`)}: </span><HighlightText
 										text={obj.name} highlight={search}/></>}
 								</CBBSearchBar>
-								<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 mx-4">
+								<ul className="relative col-span-1 sm:col-span-2 py-2 space-y-2 ">
 									{
 										Object.values(geographicalLocations).map((location, idx) => (
-											<MapLibreCard key={idx} colorSelector={false} lang={lang}
-											              taxon={location} onDelete={d => onDeletedSearch('loc', d)}/>
+											<MapLibreCardGeography key={idx} colorSelector={false}
+											                       taxon={location} lang={lang}
+											                       onDelete={d => onDeletedSearch('loc', d)}/>
 										))
 									}
 								</ul>
@@ -277,7 +295,7 @@ export default function MapPage({params: {lang}}) {
 						               title={<h4
 							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
 							<div className="mx-3">
-								<Filters data={taxaToLoc} onFiltered={d => setFilteredTaxaToLoc(d)}/>
+								<Filters data={taxaToLoc} onFiltered={onFiltered}/>
 							</div>
 						</AccordionItem>
 					</Accordion>

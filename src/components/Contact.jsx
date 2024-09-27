@@ -8,7 +8,7 @@ export default function Contact({lang}) {
 		{path: `https://www.google.com/maps/search/Centre+Balear+de+Biodiversitat/`, text: "Complex Balear de R+D+I", target: "_blank"},
 		{path: `mailto:centre.biodiversitat@uib.es`, text: "centre.biodiversitat@uib.es"},
 		{path: `tel:+34971173000`, text: "(+34) 971 17 30 00"},
-	], [lang])
+	], [])
 
 	return (
 		<nav className="space-y-1">

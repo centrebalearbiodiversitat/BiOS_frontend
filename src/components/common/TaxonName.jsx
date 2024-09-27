@@ -1,8 +1,6 @@
 import React, {useMemo} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import Loading from "@/components/common/Loading";
-import {RxExternalLink} from "react-icons/rx";
 
 
 const ITALIC_RANKS = new Set([
@@ -13,29 +11,39 @@ const ITALIC_RANKS = new Set([
 ])
 
 
-export default function TaxonName({lang, taxon, author = false}) {
+function LinkOrP({children, redirect, className, ...extra}) {
+	className = `${className} ${redirect ? "hover:underline" : ""}`
+
+	const Component = redirect ? Link : 'p';
+
+	return <Component className={className} {...extra}>{children}</Component>;
+}
+
+
+export default function TaxonName({lang, taxon, author = false, redirect = true}) {
 	const pathname = usePathname();
 
 	const href = useMemo(() => {
-		if (pathname.search(/\/taxon\/\d+/) === -1)
+		if (!redirect) {
+			return '';
+		} else if (pathname.search(/\/taxon\/\d+/) === -1) {
 			return `/${lang}/taxon/${taxon.id}`;
-		else
+		} else {
 			return pathname.replace(/\/taxon\/\d+/, `/taxon/${taxon.id}`);
-	}, [lang, taxon.id, pathname]);
+		}
+	}, [redirect, lang, taxon.id, pathname]);
 
 	return (
-		<Link href={href} className={`first-letter:uppercase text-pretty hover:underline`}>
+		<LinkOrP redirect={redirect} href={href} className={`first-letter:uppercase text-pretty`}>
 			<span className={`${ITALIC_RANKS.has(taxon.taxonRank) ? "italic" : ""}`}>
 				{taxon.name}
 			</span>
-			{
-				author && taxon.scientificNameAuthorship && (
-					<span className="font-light">
-						, {taxon.scientificNameAuthorship}
-					</span>
-				)
-			}
+			{author && taxon.scientificNameAuthorship && (
+				<span className="font-light">
+					, {taxon.scientificNameAuthorship}
+				</span>
+			)}
 			{/*{showRedirect && <span className="inline-block ms-2 my-auto"><RxExternalLink/></span>}*/}
-		</Link>
+		</LinkOrP>
 	);
 }

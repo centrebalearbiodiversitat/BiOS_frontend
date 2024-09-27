@@ -28,6 +28,10 @@ const CBB_STATISTICS = [
 	},
 ]
 
+// export async function generateStaticParams() {
+//   return AVAILABLE_LOCALES.map(lang => ({ lang }))
+// }
+
 export default function Home({params: {lang}}) {
 
 	return (

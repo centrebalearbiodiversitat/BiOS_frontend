@@ -1,6 +1,5 @@
 import {DEFAULT_LOCALE, AVAILABLE_LOCALES} from "@/i18n/i18n";
 import {NextResponse} from "next/server";
-import { cookies } from 'next/headers'
 
 export function middleware(request) {
 	const preferredLocale = request.cookies.get('preferredLocale')?.value;
