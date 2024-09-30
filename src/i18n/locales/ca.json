@@ -75,8 +75,8 @@
 
 	"components.empty": "Sense dades",
 
-	"components.searchbar.label.taxonomy": "Cerca un taxon ...",
-	"components.searchbar.label.geography": "Cerca un lloc ...",
+	"components.searchbar.label.taxonomy": "Cerca un taxon...",
+	"components.searchbar.label.geography": "Cerca un lloc...",
 	"components.searchbar.placeholder.taxonomy": "Alytes muletensis",
 	"components.searchbar.placeholder.geography": "Menorca",
     "components.searchbar.filter.map": "Mapa",

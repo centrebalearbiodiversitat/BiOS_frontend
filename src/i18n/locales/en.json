@@ -128,7 +128,7 @@
 	"about.block.genetic": "Genetics",
 	"about.block.genetic.text": "To create an accessible online resource for obtaining genetic information about Balearic taxa. This will be the first platform of its kind, providing easy access to standardized genetic data. Information will be sourced primarily from public databases such as NCBI and BOLD. Genetic data will be normalized by harmonizing marker codes and other metadata associated with each occurrence, ensuring consistency and ease of use.",
 	"about.block.traits": "Biological and ecological Traits",
-	"about.block.traits.text": "To provide a detailed repository of biological and ecological traits for the taxa livinf in the Balearic Islands. This section will compile information on various traits such as body measurements, life cycles, reproductive strategies, habitat and ecological preferences. Data will be gathered from scientific literature, field observations, and expert contributions. To ensure the accuracy and relevance of the information, biological and ecological traits will be systematically categorized and standardized according to established frameworks and terminologies.",
+	"about.block.traits.text": "To provide a detailed repository of biological and ecological traits for the taxa living in the Balearic Islands. This section will compile information on various traits such as body measurements, life cycles, reproductive strategies, habitat and ecological preferences. Data will be gathered from scientific literature, field observations, and expert contributions. To ensure the accuracy and relevance of the information, biological and ecological traits will be systematically categorized and standardized according to established frameworks and terminologies.",
 
 	"lang": "English"
 }
