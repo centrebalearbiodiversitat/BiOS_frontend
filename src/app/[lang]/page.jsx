@@ -41,8 +41,11 @@ export default function Home({params: {lang}}) {
 				     backgroundRepeat: 'no-repeat',
 				     backgroundSize: 'cover',
 				     backgroundPosition: 'center',
-				     backgroundImage: "linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/images/home.png')"
+				     backgroundImage: "linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/images/home.jpg')"
 			     }}>
+				<div className="bottom-0 right-0 absolute text-white text-sm backdrop-blur-xl px-3 py-1">
+				       (c) jakemellor, some rights reserved (CC BY-NC)
+				</div>
 				<div className="flex flex-col m-8 mt-16 space-y-2 max-w-[675px] lg:max-w-none lg:col-start-2 lg:col-span-6">
 					<header className="flex flex-col justify-center items-center space-y-4">
 						<h2 className="w-full font-normal text-xl text-white-drop-shadow">
