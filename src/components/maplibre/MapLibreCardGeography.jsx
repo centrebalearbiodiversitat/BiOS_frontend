@@ -4,6 +4,7 @@ import PopoverColorPicker from "@/components/common/PopoverColorPicker";
 import {IoMdClose} from "react-icons/io";
 import TaxonName from "@/components/common/TaxonName";
 import Loading from "@/components/common/Loading";
+import {t} from "@/i18n/i18n";
 
 
 function LoadedBodyCard({taxon, lang, color, colorSelector, onColorChanged, onDelete}) {
@@ -27,6 +28,11 @@ function LoadedBodyCard({taxon, lang, color, colorSelector, onColorChanged, onDe
 				<Loading className="mt-2" loading={taxon} width="50%" height="14px">
 					<p className={`text-md font-light w-full`}>
 						{taxon ? taxon.scientificNameAuthorship : ""}
+					</p>
+				</Loading>
+				<Loading className="mt-2" loading={taxon} width="50%" height="14px">
+					<p className={`text-sm text-slate-600 font-light w-full`}>
+						{t(lang, `geography.rank.${taxon.rank}`)}
 					</p>
 				</Loading>
 			</div>

@@ -269,7 +269,7 @@ export default function MapPage({params: {lang}}) {
 							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
 							<div className="mx-3">
 								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
-								              label="components.searchbar.label.geography"
+								              label="components.searchbar.label.geography" redirect={true}
 								              placeholder="components.searchbar.placeholder.geography"
 								              filters={[{
 									              textKey: "components.searchbar.filter.authors",

@@ -6,43 +6,48 @@ import LoadMore from "@/components/LoadMore";
 export default function TaxonComposition({lang, composition}) {
 	composition = composition || [];
 
-	const compositionNorm = useMemo(() => {
-		const totalSpecies = composition.reduce((acc, taxon) => acc + taxon.value, 0);
+	const totalSpecies = useMemo(() => {
+		return composition.reduce((acc, taxon) => acc + taxon.value, 0);
+	}, [composition]);
 
+	const compositionNorm = useMemo(() => {
 		return composition.map(taxon => ({
 			total: totalSpecies,
 			valueNorm: taxon.value * 100 / totalSpecies,
 			valuePercent: (taxon.value * 100 / totalSpecies).toFixed(2),
 			...taxon
 		})).sort((a, b) => b.valueNorm - a.valueNorm);
-	}, [composition]);
+	}, [totalSpecies, composition]);
 
 	return (
 		<Empty isEmpty={composition.length === 0} lang={lang}>
-		{composition &&
-			<ul className="flex flex-col w-full gap-1 max-w-[850px] bg-white m-auto p-6 px-8 border-1 border-slate-200 rounded-xl">
-				<LoadMore lang={lang} items={compositionNorm} overflow={true}>
-				{
-					taxon => (
-						<li key={taxon.id} className={`flex flex-col py-0.5 rounded-full gap-1`}>
-							<div className="text-black flex flex-row gap-3 basis-1/5 mx-1.5">
-								<p className="border-slate-200 flex justify-start text-sm w-full font-light items-center break-normal">
-									<TaxonName taxon={{name: taxon.label, id: taxon.id}}/>
-								</p>
-								<p className="container text-sm font-light text-end ">{taxon.valuePercent}%</p>
-								{/*<p className="container text-end ">{taxon.value}</p>*/}
-								{/*<p className="container text-end ">{taxon.total}</p>*/}
-							</div>
-							<div className="rounded-full bg-slate-100 w-full px-0.5 py-0.5 basis-4/5">
-								<div className="h-full py-1 rounded-full bg-primary"
-								     style={{width: `${taxon.valueNorm}%`}}/>
-							</div>
-						</li>
-					)
-				}
-				</LoadMore>
-			</ul>
-		}
+			<div className="flex bg-white border-1 border-slate-200 rounded-xl">
+			{composition &&
+				<ul className="flex flex-col w-full gap-1 max-w-[1100px] m-auto py-8 px-8 ">
+					<LoadMore lang={lang} items={compositionNorm} overflow={true} >
+						{
+							taxon => (
+								<li key={taxon.id} className={`flex flex-col py-0.5 rounded-full gap-1`}>
+									<div className="text-black flex flex-row gap-3 basis-1/5 mx-1.5">
+										<p className="border-slate-200 flex justify-start text-sm w-full font-light items-center break-normal">
+											<TaxonName taxon={{name: taxon.label, id: taxon.id}}/>
+										</p>
+										<p className="container text-sm font-light text-end ">{taxon.value} ({taxon.valuePercent}%)</p>
+										{/*<p className="container text-end ">{taxon.value}</p>*/}
+										{/*<p className="container text-end ">{taxon.total}</p>*/}
+									</div>
+									<div
+										className="rounded-full bg-slate-100 border-1 border-slate-100 w-full px-0.5 py-0.5 basis-4/5">
+										<div className="h-full py-1 rounded-full bg-primary"
+										     style={{width: `${taxon.valueNorm}%`}}/>
+									</div>
+								</li>
+							)
+						}
+					</LoadMore>
+				</ul>
+			}
+			</div>
 		</Empty>
 	)
 }

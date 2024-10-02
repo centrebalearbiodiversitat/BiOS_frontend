@@ -24,7 +24,7 @@ export default function FullCBBSearchBar({lang, showFilters = true, border = tru
 	}, [lang, pathname, router])
 
 	return (
-		<CBBSearchBar filters={FILTER_BUTTONS} lang={lang} redirect={true}
+		<CBBSearchBar filters={FILTER_BUTTONS} lang={lang}
 		              label="components.searchbar.label.taxonomy"
 		              placeholder="components.searchbar.placeholder.taxonomy"
 		              showFilters={showFilters} rounded={rounded}/>

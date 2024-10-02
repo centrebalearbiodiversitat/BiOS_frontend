@@ -2,16 +2,19 @@
 
 import React from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
-import {useRouter, usePathname} from "next/navigation";
+import {useRouter, usePathname, useSearchParams} from "next/navigation";
 import {IoIosArrowDown} from "react-icons/io";
 
 export default function LangSelector({locales, lang}) {
 	const router = useRouter();
 	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
 	const redirect = (locale) => {
+		const newPath = pathname.replace(`/${lang}`, `/${locale}`);
+
 		router.push(
-			pathname.replace(`/${lang}`, `/${locale}`),
+			`${newPath}?${searchParams.toString()}`,
 			undefined,
 			{shallow: true}
 		)
