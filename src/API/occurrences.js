@@ -16,6 +16,10 @@ function list(taxonomyId, geographicalLocationId) {
 	)
 }
 
+async function listDownload(id) {
+	return requests.URL(`${OCCURRENCES_PATH}/list/download`, {taxonomy: id})
+}
+
 function listCount(taxonomyId, geographicalLocationId) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list/count`,
@@ -29,5 +33,6 @@ function listCount(taxonomyId, geographicalLocationId) {
 module.exports = {
 	get,
 	list,
+	listDownload,
 	listCount,
 }

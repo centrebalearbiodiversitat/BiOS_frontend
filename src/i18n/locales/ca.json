@@ -13,6 +13,14 @@
 	"taxon.layout.button.distribution": "Distribució",
 	"taxon.layout.button.genetics": "Genètica",
 	"taxon.layout.sources": "Procedència",
+	"taxon.layout.modal.download_button": "Descarregar",
+	"taxon.layout.modal.title": "Centre de descàrregues",
+	"taxon.layout.modal.help_label": "Selecciona el tipus de dades",
+	"taxon.layout.modal.checklist": "Catàleg taxonòmic",
+	"taxon.layout.modal.checklist.help": "Catàleg d'espècies organitzades sistemàticament per verificar la presència i classificació dels organismes dins del tàxon.",
+	"taxon.layout.modal.occurrences": "Ocurrències",
+	"taxon.layout.modal.occurrences.help": "Llista d'ocurrències registrades per al tàxon seleccionat i tots els seus descendents taxonòmics.",
+
 
 	"taxon.sidebar.classification": "Classificació",
 	"taxon.sidebar.children": "Descendents",

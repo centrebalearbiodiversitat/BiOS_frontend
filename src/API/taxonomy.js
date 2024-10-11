@@ -46,8 +46,8 @@ async function checklist(id) {
 	return requests.URL(`${TAXONOMY_PATH}/taxon/checklist`, {id})
 }
 
-async function taxonData(id) {
-	return requests.GET(`${TAXONOMY_PATH}/taxon/data`, {id})
+async function taxonData(taxonomy) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/data`, {taxonomy})
 }
 
 module.exports = {

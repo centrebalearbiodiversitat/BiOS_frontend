@@ -11,7 +11,7 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 		} else {
 			setI(i + 1);
 		}
-	}, [i, images.length]);
+	}, [i, images?.length]);
 
 	const {src, title, loading} = useMemo(() => {
 		let src = "/images/image-not-found.webp";

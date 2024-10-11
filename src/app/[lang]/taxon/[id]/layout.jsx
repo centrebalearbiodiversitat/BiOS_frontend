@@ -11,15 +11,14 @@ import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
 import {useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
+import occurrences from "@/API/occurrences";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import CBBButton from "@/components/common/CBBButton";
-import {BsFiletypeCsv} from "react-icons/bs";
-import Link from "next/link";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
+import DownloadModal from "@/components/DownloadModal";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -56,22 +55,18 @@ export default function RootLayout({children, params: {lang, id}}) {
 	const [descendants, setDescendants] = useState(undefined);
 	const [synonyms, setSynonyms] = useState(undefined);
 	const [sources, setSources] = useState(undefined);
-	const [checklistLink, setChecklistLink] = useState('');
 
 	useEffect(() => {
 		taxonomy.get(id)
-			.then((r) => setTaxon(r))
-			.catch(r => console.log('ERROR!'))
+			.then(r => setTaxon(r))
 		taxonomy.parent(id)
-			.then((r) => setHigherTaxonomy(r))
+			.then(r => setHigherTaxonomy(r))
 		taxonomy.children(id, true)
-			.then((r) => setDescendants(r))
+			.then(r => setDescendants(r))
 		taxonomy.synonyms(id)
-			.then((r) => setSynonyms(r))
+			.then(r => setSynonyms(r))
 		taxonomy.sources(id)
-			.then((r) => setSources(r))
-		taxonomy.checklist(id)
-			.then(r => setChecklistLink(r))
+			.then(r => setSources(r))
 	}, [id]);
 
 	const TAB_BUTTONS = useMemo(() => [
@@ -103,11 +98,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 						</div>
 						<div className="flex flex-col col-span-full md:col-span-2">
 							<div className="ms-auto">
-								<Link href={checklistLink} download={true}>
-									<CBBButton className="border-primary px-5">
-										Taxonomy <BsFiletypeCsv className="text-2xl"/>
-									</CBBButton>
-								</Link>
+								<DownloadModal lang={lang} taxonId={id}/>
 							</div>
 							<div className="my-auto">
 								<Loading loading={taxon} className="mb-4" width="40%" height="32px">

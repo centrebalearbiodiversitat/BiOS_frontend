@@ -1,14 +1,25 @@
 "use client"
 
-import React from "react";
+import React, {useEffect} from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
-import {useRouter, usePathname, useSearchParams} from "next/navigation";
+import {useRouter, usePathname, useSearchParams, notFound} from "next/navigation";
 import {IoIosArrowDown} from "react-icons/io";
+import {AVAILABLE_LOCALES} from "@/i18n/i18n";
 
 export default function LangSelector({locales, lang}) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		const pathnameLocale = AVAILABLE_LOCALES.find(
+	       locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+		)
+
+		if (!pathnameLocale) {
+			notFound();
+		}
+	}, [pathname]);
 
 	const redirect = (locale) => {
 		const newPath = pathname.replace(`/${lang}`, `/${locale}`);

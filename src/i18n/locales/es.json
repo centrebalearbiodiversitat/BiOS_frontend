@@ -15,6 +15,13 @@
 	"taxon.layout.button.distribution": "Distribución",
 	"taxon.layout.button.genetics": "Genética",
 	"taxon.layout.sources": "Procedencia",
+	"taxon.layout.modal.download_button": "Descargar",
+	"taxon.layout.modal.title": "Centro de descarga",
+	"taxon.layout.modal.help_label": "Selecciona el tipo de dato",
+	"taxon.layout.modal.checklist": "Catálogo taxonómico",
+	"taxon.layout.modal.checklist.help": "Catálogo de especies organizado sistemáticamente, con el fin de verificar la presencia y clasificación de organismos dentro del taxon.",
+	"taxon.layout.modal.occurrences": "Occurrencias",
+	"taxon.layout.modal.occurrences.help": "Listado de ocurrencias registradas para el taxón seleccionado y todos sus descendientes taxonómicos.",
 
 	"taxon.sidebar.classification": "Clasificación",
 	"taxon.sidebar.children": "Descendientes",

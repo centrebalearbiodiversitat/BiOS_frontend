@@ -13,6 +13,14 @@
 	"taxon.layout.button.distribution": "Distribution",
 	"taxon.layout.button.genetics": "Genetics",
 	"taxon.layout.sources": "Sources",
+	"taxon.layout.modal.download_button": "Download",
+	"taxon.layout.modal.title": "Download center",
+	"taxon.layout.modal.help_label": "Select the data type",
+	"taxon.layout.modal.checklist": "Checklist",
+	"taxon.layout.modal.checklist.help": "Catalogue of species systematically organized to verify the presence and classification of organisms within the taxon.",
+	"taxon.layout.modal.occurrences": "Occurrences",
+	"taxon.layout.modal.occurrences.help": "List of recorded occurrences for the selected taxon and all its taxonomic descendants.",
+
 
 	"taxon.sidebar.classification": "Classification",
 	"taxon.sidebar.children": "Children",

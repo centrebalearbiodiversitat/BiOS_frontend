@@ -3,6 +3,28 @@
 import React, {useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
 import Loading from "@/components/common/Loading";
+import taxonomy from "@/API/taxonomy"
+import occurrences from "@/API/occurrences";
+import genetics from "@/API/genetics";
+import {PiButterflyFill, PiDna, PiMagnifyingGlassBold} from "react-icons/pi";
+
+const CBB_STATISTICS = [
+	{
+		title: "home.statistics.species",
+		icon: <PiButterflyFill/>,
+		fetchData: () => taxonomy.childrenCount(1, 'species'),
+	},
+	{
+		title: "home.statistics.observations",
+		icon: <PiMagnifyingGlassBold/>,
+		fetchData: () => occurrences.listCount(1),
+	},
+	{
+		title: "home.statistics.sequences",
+		icon: <PiDna/>,
+		fetchData: () => genetics.listCountSequences(1),
+	},
+]
 
 
 function DataCard({lang, title, icon, fetchData}) {
@@ -35,12 +57,12 @@ function DataCard({lang, title, icon, fetchData}) {
 }
 
 
-export default function Statistics({lang, className, data}) {
+export default function Statistics({lang, className}) {
 
 	return (
 		<div className={`bg-white/100 py-2 divide-x container flex flex-col md:flex-row rounded-md ${className}`}>
-			{data &&
-				data.map((item, index) => <DataCard {...item} key={index} lang={lang}/>)
+			{
+				CBB_STATISTICS.map((item, index) => <DataCard {...item} key={index} lang={lang}/>)
 			}
 		</div>
 	);

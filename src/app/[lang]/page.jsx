@@ -1,36 +1,9 @@
-"use client"
-
 import {t} from "@/i18n/i18n";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import {Image} from "@nextui-org/react";
 import React from "react";
 import Statistics from "@/components/Statistics";
-import taxonomy from "@/API/taxonomy"
-import occurrences from "@/API/occurrences";
-import genetics from "@/API/genetics";
-import {PiButterflyFill, PiDna, PiMagnifyingGlassBold} from "react-icons/pi";
 
-const CBB_STATISTICS = [
-	{
-		title: "home.statistics.species",
-		icon: <PiButterflyFill/>,
-		fetchData: () => taxonomy.childrenCount(1, 'species'),
-	},
-	{
-		title: "home.statistics.observations",
-		icon: <PiMagnifyingGlassBold/>,
-		fetchData: () => occurrences.listCount(1),
-	},
-	{
-		title: "home.statistics.sequences",
-		icon: <PiDna/>,
-		fetchData: () => genetics.listCountSequences(1),
-	},
-]
-
-// export async function generateStaticParams() {
-//   return AVAILABLE_LOCALES.map(lang => ({ lang }))
-// }
 
 export default function Home({params: {lang}}) {
 
@@ -58,7 +31,7 @@ export default function Home({params: {lang}}) {
 					<div className="space-y-2 py-12">
 						<FullCBBSearchBar lang={lang} showFilters={false} rounded={false}/>
 						<div className="">
-							<Statistics lang={lang} className="grid grid-cols-3" data={CBB_STATISTICS}/>
+							<Statistics lang={lang} className="grid grid-cols-3"/>
 						</div>
 						<div className="grid grid-cols-4 my-auto gap-2 justify-center items-center pt-4">
 							<Image src="/images/partners/eu_next_gen.png" alt={"Partner NextGenerationEU"}

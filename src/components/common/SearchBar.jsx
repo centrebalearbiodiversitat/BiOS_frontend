@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 import HighlightText from "@/components/common/HighlightText";
 import {t} from "@/i18n/i18n";
@@ -18,7 +18,6 @@ function SearchBarIcon() {
 
 
 const defaultChildren = (obj, search) => {
-
 	return (
 		<HighlightText text={obj.name} highlight={search}/>
 	)
@@ -26,16 +25,18 @@ const defaultChildren = (obj, search) => {
 
 
 export default function SearchBar({
-	                                  className, data, onSelected, onInput, children = defaultChildren,
-	                                  label, placeholder, rounded = true, border = false, lang
-                                  }) {
+	className, data, onSelected, onInput, children = defaultChildren,
+	label, placeholder, rounded = true, border = false, lang
+}) {
 	const [search, setSearch] = useState("");
 	const [selected, setSelected] = useState(null);
 	const [acFocus, setAcFocus] = useState(false);
 
 	const onInputChange = useCallback((input) => {
+		// if (input !== "") {
 		onInput(input);
 		setSearch(input);
+		// }
 	}, [onInput]);
 
 	const onFocusChange = useCallback((focus) => {
@@ -65,21 +66,11 @@ export default function SearchBar({
 
 	const onDefaultSelected = useCallback((e) => {
 		if (e.key === "ArrowRight" && !search) {
-			e.preventDefault();
-			e.stopPropagation();
 			onInputChange(placeholderText);
-			// setSelected(0)
+		} else if (data && data.length > 0 && e.key === "Enter")  {
+			_onSelected(data[0].id)
 		}
-	}, [onInputChange, search, placeholderText]);
-
-	useEffect(() => {
-		if (acFocus) {
-			const firstItem = document.querySelector('.nextui-autocomplete-item:first-child');
-			if (firstItem) {
-				firstItem.focus();
-			}
-		}
-	}, [acFocus]);
+	}, [data, onInputChange, search, placeholderText, _onSelected]);
 
 	return (
 		<div className={`${className}`}>
@@ -87,6 +78,9 @@ export default function SearchBar({
 			              selectedKey={selected} label={labelText} placeholder={acFocus ? `${placeholderText} →` : null}
 			              onSelectionChange={_onSelected} onInputChange={onInputChange} onKeyDown={onDefaultSelected}
 			              className={`w-full transition-all text-center`} radius={rounded ? "full" : "sm"}
+			              listboxProps={{
+				              shouldHighlightOnFocus: true,
+			              }}
 			              inputProps={{
 				              classNames: {
 					              input: "",

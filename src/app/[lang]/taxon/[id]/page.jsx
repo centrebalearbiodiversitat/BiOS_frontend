@@ -16,9 +16,9 @@ export default function Taxon({params: {lang, id}}) {
 	useEffect(() => {
 		taxonomy.composition(id)
 			.then(r => {
-				if (r && r.length > 0)
+				if (r && r.length > 0) {
 					setComposition(r.map(taxon => ({id: taxon.id, value: taxon.totalSpecies, label: taxon.name})));
-				else
+				} else
 					setComposition(null);
 			});
 		taxonomy.taxonData(id)
@@ -30,9 +30,9 @@ export default function Taxon({params: {lang, id}}) {
 			<Section lang={lang} title="taxon.overview.iucn_status">
 				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">
 					<div className="mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[370px] sm:max-w-[550px] xl:max-w-[800px] xl:grid-cols-3">
-						<IUCN className="col-span-1 sm:col-span-2 xl:col-span-1" title="taxon.overview.iucn_global" status={taxonData?.iucnMediterranean} lang={lang}/>
+						<IUCN className="col-span-1 sm:col-span-2 xl:col-span-1" title="taxon.overview.iucn_global" status={taxonData?.iucnGlobal} lang={lang}/>
 						<IUCN className="col-span-1" title="taxon.overview.iucn_europe" status={taxonData?.iucnEurope} lang={lang}/>
-						<IUCN className="col-span-1" title="taxon.overview.iucn_mediterranean" status={taxonData?.iucnGlobal} lang={lang}/>
+						<IUCN className="col-span-1" title="taxon.overview.iucn_mediterranean" status={taxonData?.iucnMediterranean} lang={lang}/>
 					</div>
 				</Loading>
 			</Section>
