@@ -7,6 +7,7 @@ import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
 import genetics from "@/API/genetics";
 import {PiButterflyFill, PiDna, PiMagnifyingGlassBold} from "react-icons/pi";
+import clsx from "clsx";
 
 const CBB_STATISTICS = [
 	{
@@ -60,7 +61,7 @@ function DataCard({lang, title, icon, fetchData}) {
 export default function Statistics({lang, className}) {
 
 	return (
-		<div className={`bg-white/100 py-2 divide-x container flex flex-col md:flex-row rounded-md ${className}`}>
+		<div className={clsx("bg-white/100 py-2 divide-x container flex flex-col md:flex-row rounded-md", className)}>
 			{
 				CBB_STATISTICS.map((item, index) => <DataCard {...item} key={index} lang={lang}/>)
 			}

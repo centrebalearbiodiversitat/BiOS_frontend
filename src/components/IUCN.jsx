@@ -2,6 +2,7 @@ import React, {useMemo} from "react";
 import {t} from "@/i18n/i18n";
 import {Tooltip} from "@nextui-org/react";
 import {TiArrowSortedUp} from "react-icons/ti";
+import clsx from "clsx";
 
 const IUCN_CATEGORIES = {
 	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "red"},
@@ -80,7 +81,7 @@ export default function IUCN({title, status, lang, className}) {
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<div className={`border-1 border-slate-200 h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 lg:py-2 xl:py3 flex flex-row items-center ${className}`}>
+			<div className={clsx("border-1 border-slate-200 h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 lg:py-2 xl:py3 flex flex-row items-center", className)}>
 				<IUCNPill lang={lang} enabled={true} status={status} {...iucn_cat}/>
 				<div className="flex flex-col text-pretty">
 					<h3 className="text-lg font-medium w-full">

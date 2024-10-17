@@ -14,6 +14,7 @@ import LangSelector from "@/components/LangSelector";
 import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/common/ActiveLink";
+import clsx from "clsx";
 
 export default function Header({lang, locales, className}) {
 	const menuItems = useMemo(() => {
@@ -27,7 +28,7 @@ export default function Header({lang, locales, className}) {
 	}, [lang]);
 
 	return (
-		<Navbar maxWidth="full" className={`z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm ${className}`}>
+		<Navbar maxWidth="full" className={clsx("z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
 			<NavbarContent>
 				<NavbarMenuToggle className="md:hidden text-black"/>
 				<NavbarBrand>

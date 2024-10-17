@@ -23,7 +23,7 @@ import DownloadModal from "@/components/DownloadModal";
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
 	return (
-		<Accordion className={`${className}`} {...extra}>
+		<Accordion className={className} {...extra}>
 			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.classification')}</h3>}
 			               key="1" aria-label="Accordion 1">
 				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
@@ -75,6 +75,10 @@ export default function RootLayout({children, params: {lang, id}}) {
 		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics'), icon: <FaDna />},
 	], [lang, id])
 
+	const taxonRank = useMemo(() => {
+		return taxon ? t(lang, `general.taxon_rank.${taxon.taxonRank}`) : ""
+	}, [lang, taxon])
+
 	return (
 		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-6 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
@@ -104,7 +108,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 								<Loading loading={taxon} className="mb-4" width="40%" height="32px">
 									{taxon &&
 										<h2 className="first-letter:uppercase font-extralight text-3xl">
-											{taxon.taxonRank}
+											{taxonRank}
 										</h2>
 									}
 								</Loading>

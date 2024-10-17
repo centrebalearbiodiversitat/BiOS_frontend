@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Tab, Tabs} from "@nextui-org/react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import clsx from "clsx";
 
 function TabButton({href, children, type, className, ...extra}) {
 	let borders = 'rounded-none';
@@ -17,7 +18,7 @@ function TabButton({href, children, type, className, ...extra}) {
 
 	return (
 		<Button href={href} as={Link} radius={"sm"}
-		        className={`min-w-[150px] p-4 ${borders} ${className}`}
+		        className={clsx("min-w-[150px] p-4", borders, className)}
 		        {...extra}>
 			{children}
 		</Button>

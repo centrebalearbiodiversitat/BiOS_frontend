@@ -34,6 +34,7 @@
 	"taxon.overview.iucn_global": "Global",
 	"taxon.overview.iucn_europe": "Europeu",
 	"taxon.overview.iucn_mediterranean": "Mediterrani",
+	"taxon.overview.statistics": "Estadístiques",
 	"taxon.overview.composition": "Composició del taxon",
 	"taxon.overview.habitats": "Hàbitats",
 	"taxon.overview.habitat_1": "Bosc",
@@ -137,6 +138,17 @@
 	"about.block.genetic.text": "Crear un recurs en línia accessible per obtenir informació genètica sobre els tàxons balears. Aquesta serà la primera plataforma del seu tipus, proporcionant un accés fàcil a dades genètiques estandarditzades. La informació s'obtindrà principalment de bases de dades públiques com NCBI i BOLD. Les dades genètiques seran normalitzades mitjançant l'harmonització dels codis de marcadors i altres metadades associades amb cada ocurrència, garantint consistència i facilitat d'ús.",
 	"about.block.traits": "Trets biològics i ecològics",
 	"about.block.traits.text": "Proporcionar un repositori detallat de trets biològics i ecològics dels tàxons de les Illes Balears. Aquesta secció compilarà informació sobre diversos trets com mesures corporals, cicles de vida, estratègies reproductives, preferències d'hàbitat i preferències ecològiques. Les dades es recolliran de literatura científica, observacions de camp i contribucions d'experts. Per garantir la precisió i rellevància de la informació, els trets biològics i ecològics seran sistemàticament categoritzats i estandarditzats d'acord amb marcs i terminologies establerts.",
+
+	"general.taxon_rank.life": "vida",
+	"general.taxon_rank.kingdom": "regne",
+	"general.taxon_rank.phylum": "fílum",
+	"general.taxon_rank.class": "classe",
+	"general.taxon_rank.order": "ordre",
+	"general.taxon_rank.family": "família",
+	"general.taxon_rank.genus": "gènere",
+	"general.taxon_rank.species": "espècie",
+	"general.taxon_rank.subspecies": "subespècie",
+	"general.taxon_rank.variety": "varietat",
 
 	"lang": "Català"
 }

@@ -2,8 +2,7 @@
 
 import React, {useEffect, useState} from "react";
 import {Accordion, AccordionItem} from "@nextui-org/react";
-import TaxonName from "@/components/common/TaxonName";
-import taxonomy, {children} from "@/API/taxonomy";
+import taxonomy from "@/API/taxonomy";
 
 
 function RecursiveChecklistNav({checklist, updateChecklist, className}) {

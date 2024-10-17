@@ -50,6 +50,14 @@ async function taxonData(taxonomy) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/data`, {taxonomy})
 }
 
+async function descendantCount(id) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/descendants/count`, {id})
+}
+
+async function habitats(taxonomy) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/data/habitats`, {taxonomy})
+}
+
 module.exports = {
 	list,
 	search,
@@ -62,4 +70,6 @@ module.exports = {
 	sources,
 	checklist,
 	taxonData,
+	descendantCount,
+	habitats,
 }

@@ -7,11 +7,14 @@ import IUCN from "@/components/IUCN";
 import Habitats from "@/components/Habitats";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
+import TaxonDescendants from "@/components/TaxonDescendants";
 
 
 export default function Taxon({params: {lang, id}}) {
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);
+	const [taxonHabitats, setTaxonHabitats] = useState(undefined);
+	const [descendants, setDescendants] = useState(undefined);
 
 	useEffect(() => {
 		taxonomy.composition(id)
@@ -23,10 +26,20 @@ export default function Taxon({params: {lang, id}}) {
 			});
 		taxonomy.taxonData(id)
 			.then(r => setTaxonData(r));
+		taxonomy.habitats(id)
+			.then(r => setTaxonHabitats(r));
+		taxonomy.descendantCount(id)
+			.then(r => setDescendants(r));
 	}, [id])
 
 	return (
 		<>
+			<Section lang={lang} title="taxon.overview.statistics">
+				<Loading className="mb-4 aspect-video" loading={descendants} width="100%" height="300px">
+					<TaxonDescendants lang={lang} descendants={descendants}/>
+				</Loading>
+			</Section>
+
 			<Section lang={lang} title="taxon.overview.iucn_status">
 				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">
 					<div className="mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[370px] sm:max-w-[550px] xl:max-w-[800px] xl:grid-cols-3">
@@ -37,15 +50,15 @@ export default function Taxon({params: {lang, id}}) {
 				</Loading>
 			</Section>
 
-			<Section lang={lang} title="taxon.overview.habitats">
-				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%" height="100px">
-					<Habitats lang={lang} habitats={taxonData?.habitat}/>
-				</Loading>
-			</Section>
-
 			<Section lang={lang} title="taxon.overview.composition">
 				<Loading className="mb-4" loading={composition} width="100%" height={350}>
 					<TaxonComposition lang={lang} composition={composition}/>
+				</Loading>
+			</Section>
+
+			<Section lang={lang} title="taxon.overview.habitats">
+				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%" height="100px">
+					<Habitats lang={lang} habitats={taxonHabitats}/>
 				</Loading>
 			</Section>
 		</>

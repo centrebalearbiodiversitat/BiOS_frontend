@@ -73,7 +73,7 @@ export default function SearchBar({
 	}, [data, onInputChange, search, placeholderText, _onSelected]);
 
 	return (
-		<div className={`${className}`}>
+		<div className={className}>
 			<Autocomplete variant={"faded"} defaultItems={data} onFocusChange={onFocusChange} inputValue={search}
 			              selectedKey={selected} label={labelText} placeholder={acFocus ? `${placeholderText} →` : null}
 			              onSelectionChange={_onSelected} onInputChange={onInputChange} onKeyDown={onDefaultSelected}

@@ -35,6 +35,7 @@
 	"taxon.overview.iucn_global": "Global",
 	"taxon.overview.iucn_europe": "Europeo",
 	"taxon.overview.iucn_mediterranean": "Mediterráneo",
+	"taxon.overview.statistics": "Estadísticas",
 	"taxon.overview.composition": "Composición del taxon",
 	"taxon.overview.habitats": "Hábitats",
 	"taxon.overview.habitat_1": "Bosque",
@@ -138,6 +139,17 @@
 	"about.block.genetic.text": "Crear un recurso accesible para obtener información genética sobre los taxones baleares. Esta será la primera plataforma de su tipo, proporcionando acceso fácil a datos genéticos estandarizados. La información se obtendrá principalmente de bases de datos públicas como NCBI y BOLD. Los datos genéticos se normalizarán armonizando los códigos de marcadores y otros metadatos asociados con cada ocurrencia, asegurando la consistencia y facilidad de uso.",
 	"about.block.traits": "Rasgos biológicos y ecológicos",
 	"about.block.traits.text": "Proporcionar un repositorio detallado de rasgos biológicos y ecológicos de los taxones que viven en las Islas Baleares. Esta sección recopilará información sobre diversos rasgos como medidas corporales, ciclos de vida, estrategias reproductivas, hábitats y preferencias ecológicas. Los datos se recopilarán de la literatura científica, observaciones de campo y contribuciones de expertos. Para garantizar la precisión y relevancia de la información, los rasgos biológicos y ecológicos se categorizarán y estandarizarán sistemáticamente según marcos y terminologías establecidos.",
+
+	"general.taxon_rank.life": "vida",
+	"general.taxon_rank.kingdom": "reino",
+	"general.taxon_rank.phylum": "filo",
+	"general.taxon_rank.class": "clase",
+	"general.taxon_rank.order": "orden",
+	"general.taxon_rank.family": "familia",
+	"general.taxon_rank.genus": "género",
+	"general.taxon_rank.species": "especie",
+	"general.taxon_rank.subspecies": "subespecie",
+	"general.taxon_rank.variety": "variedad",
 
     "lang": "Castellano"
 }

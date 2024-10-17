@@ -34,6 +34,7 @@
 	"taxon.overview.iucn_global": "Global",
 	"taxon.overview.iucn_europe": "Europe",
 	"taxon.overview.iucn_mediterranean": "Mediterranean",
+	"taxon.overview.statistics": "Statistics",
 	"taxon.overview.composition": "Taxon composition",
 	"taxon.overview.habitats": "Habitats",
 	"taxon.overview.habitat_1": "Forest",
@@ -137,6 +138,17 @@
 	"about.block.genetic.text": "To create an accessible online resource for obtaining genetic information about Balearic taxa. This will be the first platform of its kind, providing easy access to standardized genetic data. Information will be sourced primarily from public databases such as NCBI and BOLD. Genetic data will be normalized by harmonizing marker codes and other metadata associated with each occurrence, ensuring consistency and ease of use.",
 	"about.block.traits": "Biological and ecological Traits",
 	"about.block.traits.text": "To provide a detailed repository of biological and ecological traits for the taxa living in the Balearic Islands. This section will compile information on various traits such as body measurements, life cycles, reproductive strategies, habitat and ecological preferences. Data will be gathered from scientific literature, field observations, and expert contributions. To ensure the accuracy and relevance of the information, biological and ecological traits will be systematically categorized and standardized according to established frameworks and terminologies.",
+
+	"general.taxon_rank.life": "life",
+	"general.taxon_rank.kingdom": "kingdom",
+	"general.taxon_rank.phylum": "phylum",
+	"general.taxon_rank.class": "class",
+	"general.taxon_rank.order": "order",
+	"general.taxon_rank.family": "family",
+	"general.taxon_rank.genus": "genus",
+	"general.taxon_rank.species": "species",
+	"general.taxon_rank.subspecies": "subspecies",
+	"general.taxon_rank.variety": "variety",
 
 	"lang": "English"
 }

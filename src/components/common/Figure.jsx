@@ -1,5 +1,6 @@
 import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
+import clsx from "clsx";
 
 export default function Figure({alt, images, className= "rounded-lg", ...extra}) {
 	const [error, setError] = useState(false);
@@ -26,7 +27,7 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 			if (images[i].source.url) {
 				src = images[i].source.url.replace('{id}', images[i].originId);
 			}
-			title = images[i].attribution;
+			title = `${images[i].source.name} | ${images[i].attribution})`;
 			loading = false;
 		}
 
@@ -34,7 +35,7 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 	}, [images])
 
 	return (
-		<div className={`w-full h-full relative overflow-hidden ${className}`}>
+		<div className={clsx("w-full h-full relative overflow-hidden", className)}>
 			<div className={`absolute w-full h-full`}
 			     style={{
 					 backgroundImage: `url(${src})`,

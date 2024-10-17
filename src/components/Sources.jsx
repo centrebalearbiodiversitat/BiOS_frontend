@@ -1,8 +1,8 @@
 import React, {useMemo} from "react";
 import {Chip} from "@nextui-org/react";
 import Link from "next/link";
-import {HiOutlineExternalLink} from "react-icons/hi";
 import {RxExternalLink} from "react-icons/rx";
+import clsx from "clsx";
 
 function ChipExternalLink({originSource}) {
 	const url = useMemo(() => {
@@ -38,7 +38,7 @@ function ChipExternalLink({originSource}) {
 
 export default function Sources({sources, className}) {
 	return (
-		<ul className={`flex flex-row flex-wrap gap-1 gap-y-2 ${className}`}>
+		<ul className={clsx("flex flex-row flex-wrap gap-1 gap-y-2", className)}>
 		{
 			sources?.map(
 				s => (

@@ -21,10 +21,13 @@ export default function TaxonComposition({lang, composition}) {
 
 	return (
 		<Empty isEmpty={composition.length === 0} lang={lang}>
-			<div className="flex bg-white border-1 border-slate-200 rounded-xl">
+			<div className="flex flex-col bg-white border-1 max-w-[800px] mx-auto border-slate-200 rounded-xl">
 			{composition &&
-				<ul className="flex flex-col w-full gap-1 max-w-[1100px] m-auto py-8 px-8 ">
-					<LoadMore lang={lang} items={compositionNorm} overflow={true} >
+				<ul className="flex flex-col w-full gap-1 m-auto py-8 px-8 ">
+					<div className="flex flex-row mb-2 px-1.5 ">
+						<p className="ms-auto font-light">({totalSpecies}) Total species</p>
+					</div>
+					<LoadMore lang={lang} items={compositionNorm} overflow={true}>
 						{
 							taxon => (
 								<li key={taxon.id} className={`flex flex-col py-0.5 rounded-full gap-1`}>
