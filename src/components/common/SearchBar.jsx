@@ -67,7 +67,7 @@ export default function SearchBar({
 	const onDefaultSelected = useCallback((e) => {
 		if (e.key === "ArrowRight" && !search) {
 			onInputChange(placeholderText);
-		} else if (data && data.length > 0 && e.key === "Enter")  {
+		} else if (data && data.length === 1 && e.key === "Enter")  {
 			_onSelected(data[0].id)
 		}
 	}, [data, onInputChange, search, placeholderText, _onSelected]);

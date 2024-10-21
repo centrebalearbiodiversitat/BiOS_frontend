@@ -1,15 +1,15 @@
 "use client"
 
-import React, {useMemo, useState} from "react";
+import React, {useMemo} from "react";
 
 import {usePathname, useRouter} from "next/navigation";
 import taxonomy from "@/API/taxonomy";
 import CBBSearchBar from "@/components/common/CBBSearchBar";
 
 
-export default function FullCBBSearchBar({lang, showFilters = true, border = true, rounded = true}) {
+export default function FullCBBSearchBar({lang, showFilters = true, rounded = true}) {
 	const router = useRouter();
-	const pathname = usePathname()
+	const pathname = usePathname();
 
 	const FILTER_BUTTONS = useMemo(() => {
 		return [

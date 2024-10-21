@@ -30,9 +30,24 @@ function listCount(taxonomyId, geographicalLocationId) {
 	)
 }
 
+function statsByMonth(taxonomy) {
+	return requests.GET(`${OCCURRENCES_PATH}/stats/month`, {taxonomy})
+}
+
+function statsByYear(taxonomy) {
+	return requests.GET(`${OCCURRENCES_PATH}/stats/year`, {taxonomy})
+}
+
+function statsBySource(taxonomy) {
+	return requests.GET(`${OCCURRENCES_PATH}/stats/source`, {taxonomy})
+}
+
 module.exports = {
 	get,
 	list,
 	listDownload,
 	listCount,
+	statsByMonth,
+	statsByYear,
+	statsBySource,
 }

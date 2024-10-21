@@ -83,7 +83,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-6 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
 				<div className="rounded-full ms-auto w-full">
-					<FullCBBSearchBar lang={lang} border={true} rounded={false} showFilters={false}/>
+					<FullCBBSearchBar lang={lang} rounded={false} showFilters={false}/>
 				</div>
 				<AccordionTaxonomy hideIndicator={true} showDivider={false}
 				                   selectionMode="multiple" defaultSelectedKeys="all"
