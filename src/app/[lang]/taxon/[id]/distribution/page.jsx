@@ -1,7 +1,7 @@
 "use client"
 
 import occurrences from "@/API/occurrences";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {t} from "@/i18n/i18n";
 import {occurrencesToGeoJson} from "@/utils/geojson";
 import MapLibre from "@/components/maplibre/MapLibre";
@@ -10,6 +10,14 @@ import {IoOpenOutline} from "react-icons/io5";
 import Section from "@/components/common/Section";
 import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
+
+function translateMonths(data) {
+	return data.map((item) => {
+		return {
+			month: item.month,
+		}
+	})
+}
 
 
 export default function Taxon({params: {lang, id}}) {
@@ -29,6 +37,28 @@ export default function Taxon({params: {lang, id}}) {
 			.then(r => setOccsStatsBySource(r));
 	}, [id])
 
+	const occsStatsByMonthTranslated = useMemo(() => {
+		if (occsStatsByMonth)
+			return occsStatsByMonth.map(e => ({
+					...e,
+					month: t(lang, `taxon.distribution.statistics.month_${e.month}`)
+				})
+			)
+
+		return occsStatsByMonth
+	}, [lang, occsStatsByMonth]);
+
+	const occsStatsByYearAccumulated = useMemo(() => {
+		if (occsStatsByYear)
+			return occsStatsByYear.reduce((acc, elem) => {
+				acc[1].push({...elem, count: acc[0] + elem.count});
+
+				return [acc[0] + elem.count, acc[1]];
+			}, [0, []])[1]
+
+		return occsStatsByYear
+	}, [occsStatsByYear]);
+
 	return (
 		<>
 			<Section lang={lang} title="taxon.distribution.distribution">
@@ -45,18 +75,23 @@ export default function Taxon({params: {lang, id}}) {
 			<Section lang={lang} title="taxon.distribution.statistics">
 				<div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
 					<div className="w-full aspect-video">
-						<Loading loading={occsStatsByMonth} width="100%" height="100%">
-							<StatsChart lang={lang} data={occsStatsByMonth} yLabel="month" type="bar"/>
+						<Loading loading={occsStatsByMonthTranslated} width="100%" height="100%">
+							<StatsChart color="#3DBBCC" data={occsStatsByMonthTranslated} yLabel="month" type="bar"/>
 						</Loading>
 					</div>
 					<div className="w-full aspect-video">
 						<Loading loading={occsStatsBySource} width="100%" height="100%">
-							<StatsChart lang={lang} data={occsStatsBySource} yLabel="source" type="bar"/>
+							<StatsChart color="#BA3C4C" data={occsStatsBySource} yLabel="source" type="bar"/>
 						</Loading>
 					</div>
 					<div className="w-full aspect-video xl:col-span-2">
 						<Loading loading={occsStatsByYear} width="100%" height="100%">
-							<StatsChart lang={lang} data={occsStatsByYear} yLabel="year" type="line" show_null={false}/>
+							<StatsChart color="#94C635" data={occsStatsByYear} yLabel="year" type="line" show_null={false}/>
+						</Loading>
+					</div>
+					<div className="w-full aspect-video xl:col-span-2">
+						<Loading loading={occsStatsByYearAccumulated} width="100%" height="100%">
+							<StatsChart color="#94C635" data={occsStatsByYearAccumulated} yLabel="year" type="line" show_null={false}/>
 						</Loading>
 					</div>
 				</div>

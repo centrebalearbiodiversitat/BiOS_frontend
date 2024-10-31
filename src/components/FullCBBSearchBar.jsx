@@ -25,7 +25,7 @@ export default function FullCBBSearchBar({lang, showFilters = true, rounded = tr
 
 	return (
 		<CBBSearchBar filters={FILTER_BUTTONS} lang={lang}
-		              label="components.searchbar.label.taxonomy"
+		              label="components.searchbar.label.taxonomy" border={true}
 		              placeholder="components.searchbar.placeholder.taxonomy"
 		              showFilters={showFilters} rounded={rounded}/>
 	)

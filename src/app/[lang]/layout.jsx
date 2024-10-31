@@ -22,12 +22,12 @@ export default function RootLayout({children, params: {lang}}) {
 				<title>{t(lang, 'web.title')}</title>
 				<meta name="description" content={t(lang, 'web.description')}/>
 			</head>
-			<body className="h-screen m-0 overflow-x-auto">
-				<Header lang={lang} className="h-[10%] min-h-[64px]" locales={AVAILABLE_LOCALES}/>
-				<main className="h-[90%] w-full">
+			<body className="min-h-screen m-0">
+				<Header lang={lang} className="h-[10vh] min-h-[64px]" locales={AVAILABLE_LOCALES}/>
+				<main className="min-h-[90vh] w-full">
 					{children}
-					<Footer lang={lang}/>
 				</main>
+				<Footer lang={lang}/>
 			</body>
 		</html>
 	);

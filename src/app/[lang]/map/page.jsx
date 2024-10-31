@@ -213,7 +213,7 @@ export default function MapPage({params: {lang}}) {
 
 	return (
 		<>
-			<div className="absolute top-0 h-full w-full">
+			<div className="absolute -z-10 top-0 h-full w-full">
 				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
 				          sources={geographicalLocations} loading={loading}
 				          onClick={onSelectedOccurrences}>

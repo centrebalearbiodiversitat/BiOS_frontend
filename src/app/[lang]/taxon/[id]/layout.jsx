@@ -9,9 +9,8 @@ import MainContent from "@/sections/MainContent";
 import Figure from "@/components/common/Figure";
 import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useState, createContext, useContext} from "react";
 import taxonomy from "@/API/taxonomy";
-import occurrences from "@/API/occurrences";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
 import {Accordion, AccordionItem} from "@nextui-org/react";
@@ -19,6 +18,8 @@ import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import DownloadModal from "@/components/DownloadModal";
+import {TaxonProvider, useTaxon} from "@/context/TaxonContext";
+import Scrollbars from "react-custom-scrollbars-2";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -82,21 +83,26 @@ export default function RootLayout({children, params: {lang, id}}) {
 	return (
 		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-6 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
-				<div className="rounded-full ms-auto w-full">
-					<FullCBBSearchBar lang={lang} rounded={false} showFilters={false}/>
+				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[128px] flex flex-col">
+					<div className="rounded-full ms-auto w-full">
+						<FullCBBSearchBar lang={lang} rounded={false} showFilters={false}/>
+					</div>
+					<Scrollbars universal autoHide className="hidden lg:block flex-grow h-0">
+						<AccordionTaxonomy hideIndicator={true} showDivider={false}
+						                   selectionMode="multiple" defaultSelectedKeys="all"
+						                   className="px-0 pe-2.5" higherTaxonomy={higherTaxonomy}
+						                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
+					</Scrollbars>
 				</div>
-				<AccordionTaxonomy hideIndicator={true} showDivider={false}
-				                   selectionMode="multiple" defaultSelectedKeys="all"
-				                   className="hidden lg:block" higherTaxonomy={higherTaxonomy}
-				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 			</aside>
 			<div className="rounded-lg col-span-9 xl:ps-8">
 				<header className="flex flex-row justify-center mb-6">
 					<div className="w-full grid grid-cols-5 md:space-x-10">
-						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
+						<div
+							className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
-								         		  className="rounded-lg h-auto w-full max-h-full"
+								                  className="rounded-lg h-auto w-full max-h-full"
 												  images={taxon?.images}/>}
 							</Loading>
 						</div>
@@ -150,7 +156,9 @@ export default function RootLayout({children, params: {lang, id}}) {
 				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
 				<MainContent>
-					{children}
+					<TaxonProvider initialState={taxon}>
+						{children}
+					</TaxonProvider>
 				</MainContent>
 			</div>
 		</article>

@@ -5,9 +5,9 @@ import {t} from "@/i18n/i18n";
 
 export default function Legal({lang}) {
 	const links = useMemo(() => [
-		{path: `/${lang}/disclaimer`, text: t(lang, "footer.legal.disclaimer")},
-		{path: `/${lang}/privacy`, text: t(lang, "footer.legal.privacy")},
-		{path: `/${lang}/cookies`, text: t(lang, "footer.legal.cookies")},
+		{path: `/${lang}/legal/disclaimer`, text: t(lang, "footer.legal.disclaimer")},
+		{path: `/${lang}/legal/privacy`, text: t(lang, "footer.legal.privacy")},
+		{path: `/${lang}/legal/cookies`, text: t(lang, "footer.legal.cookies")},
 	], [lang])
 
 	return (

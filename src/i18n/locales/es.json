@@ -59,6 +59,19 @@
 
 	"taxon.distribution.distribution": "Distribución",
 	"taxon.distribution.statistics": "Estadísticas",
+	"taxon.distribution.statistics.month_1": "Enero",
+	"taxon.distribution.statistics.month_2": "Febrero",
+	"taxon.distribution.statistics.month_3": "Marzo",
+	"taxon.distribution.statistics.month_4": "Abril",
+	"taxon.distribution.statistics.month_5": "Mayo",
+	"taxon.distribution.statistics.month_6": "Junio",
+	"taxon.distribution.statistics.month_7": "Julio",
+	"taxon.distribution.statistics.month_8": "Agosto",
+	"taxon.distribution.statistics.month_9": "Septiembre",
+	"taxon.distribution.statistics.month_10": "Octubre",
+	"taxon.distribution.statistics.month_11": "Noviembre",
+	"taxon.distribution.statistics.month_12": "Diciembre",
+	"taxon.distribution.statistics.month_null": "Desconocido",
 
 	"taxon.genetics.genes": "Genes y marcadores",
 	"taxon.genetics.genomes": "Genomas",
@@ -151,6 +164,33 @@
 	"general.taxon_rank.species": "especie",
 	"general.taxon_rank.subspecies": "subespecie",
 	"general.taxon_rank.variety": "variedad",
+
+	"privacy.title": "Política de privacidad",
+	"privacy.subtitle": "Esta Política de Cookies entra en vigor el 2024-10-30.\nÚltima actualización el {update}.",
+	"privacy.info_lssi.title": "Información LSSI",
+	"privacy.info_lssi.p": "Esta web es propiedad del ente público UNIVERSITAT DE LES ILLES BALEARS (UIB), con domicilio Cra. de Valldemossa, km 7.5. Palma (Islas Baleares), y con C.I.F. Q0718001A.\n\nEsta web sirve para facilitar el acceso público a la información de la cual dispone, en conformidad con la finalidad institucional y el ejercicio de las funciones que son conferidas a la UNIVERSITAT DE LES ILLES BALEARS.",
+	"privacy.intelectual_property.title": "Propiedad intelectual y derechos de autor",
+	"privacy.intelectual_property.p": "Los derechos de propiedad intelectual de la página, el nombre del dominio, el código fuente, el diseño y la estructura de navegación contenidos son titularidad de la entidad referida, a quien corresponde el ejercicio exclusivo de los derechos de explotación, en cualquier forma y, en especial, los derechos de reproducción, distribución comunicación pública y transformación.\n\nEl usuario se compromete, en cumplimiento de lo establecido en la Ley de propiedad intelectual, a mantener la integridad de la obra y a impedir cualquier deformación, modificación o alteración contra ella que suponga un perjuicio a sus intereses legítimos o menoscabe su reputación. Así mismo, se compromete a no reproducir, copiar, distribuir o publicar el contenido de la información de esta página a través de cualquier medio y soporte sin la autorización previa por escrito de su titular.",
+	"privacy.policy.title": "Condiciones de uso de la web",
+	"privacy.policy.p": "Mediante la aceptación de esta política de privacidad os comprometéis a utilizar esta página web y los servicios ofrecidos de manera lícita, de acuerdo con lo dispuesto en estas cláusulas y de manera que no produzcan un perjuicio a los derechos o intereses de terceros o que puedan dañar o provocar un uso anormal de la página web o de los servicios prestados por ella.",
+	"privacy.forms.title": "Formularios web",
+	"privacy.forms.p": "En cumplimiento de lo dispuesto en la Ley Orgánica 3/2018, de 5 diciembre, de Protección de Datos Personales y garantía de los derechos digitales, le informamos que los datos recogidos serán incluidos en uno o más ficheros gestionados por la UIB en el registro de actividad de tratamiento habilitado al efecto, la finalidad de los cuales es gestionar su solicitud. Los datos solicitados son necesarios para cumplir con la finalidad mencionada y, por lo tanto, el hecho de no obtenerlos impide conseguirla.\n\nLa UIB es la responsable del tratamiento de los datos y como tal le garantiza los derechos de acceso, rectificación, oposición, supresión, portabilidad y limitación del tratamiento en cuanto a los datos facilitados. Para ejercer los derechos indicados se deberá dirigir por escrito a: Universitat de les Illes Balears, Secretaría General, a la atención de la delegada de protección de datos, cra. de Valldemossa, km 7,5, 07122 Palma (Illes Balears). Del mismo modo, la UIB se compromete a respetar la confidencialidad de sus datos y a utilizarlos de conformidad con la finalidad de los ficheros.",
+
+	"disclaimer.title": "Descargo de responsabilidad",
+    "disclaimer.subtitle": "Este Descargo de responsabilidad entra en vigor el 2024-10-30.\nÚltima actualización el {update}.",
+	"disclaimer.usage.title": "Utilización de la web",
+	"disclaimer.usage.p": "El uso de esta página web se realiza bajo el propio riesgo del usuario; por tanto, la UNIVERSITAT DE LES ILLES BALEARS no se responsabiliza de posibles daños derivados de interferencias, interrupciones, virus informáticos, averías telefónicas o desconexiones telefónicas motivadas por causas ajenas a la entidad pública mencionada; de retrasos o bloqueos en el uso de este sistema electrónico provocados por deficiencias o sobrecargas en el centro procesador de datos, de líneas telefónicas, en el sistema de Internet o en otros sistemas eléctricos; ni tampoco de cualquier otra alteración que se pueda producir en el software o la maquinaria de los usuarios.\n\nDel mismo modo, la UNIVERSITAT DE LES ILLES BALEARS no responderá por los daños provocados por terceras personas mediante intromisiones ilegítimas fuera de su control. Tampoco responderá a los daños y perjuicios provocados por la utilización o el mal uso del contenido de la página web ni para las consecuencias que puedan derivarse de los errores, defectos u omisiones en los contenidos que puedan aparecer en esta página proporcionados por terceros.",
+	"disclaimer.contractual.title": "Relaciones contractuales",
+	"disclaimer.contractual.p": "El mero acceso a la página web no supone en caso alguno la existencia de una relación contractual entre el usuario y la UNIVERSITAT DE LES ILLES BALEARS.\n\nEn consecuencia, la UNIVERSITAT DE LES ILLES BALEARS no asume ninguna responsabilidad que pueda derivarse de la falta de veracidad, del carácter incompleto, de la falta de actualización y/o de la imprecisión de los datos o informaciones facilitados en la web.",
+	"disclaimer.content.title": "Contenidos de la web y enlaces",
+	"disclaimer.content.p": "La UNIVERSITAT DE LES ILLES BALEARS se reserva la facultad de cambiar, modificar, añadir o eliminar en cualquier momento la información expuesta en la página web, por lo cual os aconsejamos que reviséis periódicamente esta página para permanecer al corriente de los cambios efectuados.\n\nEl portal no asume ninguna responsabilidad derivada de los contenidos ajenos que se trasmiten, alojan o que facilitan el acceso desde la web, ya que no está obligado a controlar con carácter previo si los mencionados enlaces cumplen con la legalidad vigente. Tampoco garantiza la ausencia de virus u otros elementos que puedan producir alteraciones en el sistema informático, documentos o ficheros del usuario, excluyendo cualquier responsabilidad por los daños de cualquier clase provocados al usuario por este motivo.\n\nAquellas entidades que, con autorización previa del titular del espacio web, pretendan establecer un enlace con esta página web deberán garantizar que permiten únicamente el acceso a esta página o servicio, pero que no realizan una reproducción de sus contenidos y servicios.",
+	"disclaimer.downtime.title": "Suspensión temporal de la accesibilidad de la web",
+	"disclaimer.downtime.p": "La UNIVERSITAT DE LES ILLES BALEARS se reserva el derecho de suspender temporalmente y sin necesidad de previo aviso la accesibilidad de su página web por la necesidad eventual de efectuar operaciones de mantenimiento, reparación, actualización o mejora, sin que esto pueda suponer responsabilidad alguna para la UNIVERSITAT DE LES ILLES BALEARS.",
+
+	"cookies.title": "Política de cookies",
+    "cookies.subtitle": "Esta Política de cookies entra en vigor el 2024-10-30.\nÚltima actualización el {update}.",
+    "cookies.usage.title": "Uso de cookies",
+    "cookies.usage.p": "Esta página web usa cookies para recopilar datos con finalidad estadística, en ningún caso identifica información personal del usuario. Se utilizan para obtener información de acceso de manera anónima y para facilitar al usuario la accesibilidad del espacio web.\n\nEl uso de cookies de sesión (que no son memorizadas de manera persistente en el ordenador del usuario y desaparecen con el cierre del navegador), en caso de ser utilizadas, se limitarán únicamente a recopilar información técnica para identificar la sesión con el objetivo de facilitar la exploración segura y eficiente del espacio web.\n\nLas cookies con finalidades estadísticas sirven para recoger datos como fecha, navegador utilizado, sistema operativo y país de origen entre otros, y se manipulan con Google Analytics, un servicio de análisis web ofrecido por Google una empresa de Delaware, la sede principal de la cual se encuentra en 1600 Amphitheatre Parkway, Mountain View (California), CA 94043, Estados Unidos («Google»).\n\nGoogle trasmitirá y almacenará directamente la información que genera la galleta sobre vuestro uso del espacio web (incluida vuestra dirección IP) a los servidores de Estados Unidos. Google utilizará esta información en nuestro nombre con la finalidad de hacer el seguimiento de vuestro uso del espacio web, mediante la recogida de informes de la actividad del espacio web y la presentación de los servicios relacionados con la actividad del espacio web y el uso de Internet.\n\nNo obstante, el usuario puede impedir la generación de cookies con la opción correspondiente que posea su programa navegador. En este caso, la página continuará siendo operativa, pero sin las ventajas de la personalización.",
 
     "lang": "Castellano"
 }

@@ -58,6 +58,19 @@
 
 	"taxon.distribution.distribution": "Distribution",
 	"taxon.distribution.statistics": "Statistics",
+	"taxon.distribution.statistics.month_1": "January",
+	"taxon.distribution.statistics.month_2": "February",
+	"taxon.distribution.statistics.month_3": "March",
+	"taxon.distribution.statistics.month_4": "April",
+	"taxon.distribution.statistics.month_5": "May",
+	"taxon.distribution.statistics.month_6": "June",
+	"taxon.distribution.statistics.month_7": "July",
+	"taxon.distribution.statistics.month_8": "August",
+	"taxon.distribution.statistics.month_9": "September",
+	"taxon.distribution.statistics.month_10": "October",
+	"taxon.distribution.statistics.month_11": "November",
+	"taxon.distribution.statistics.month_12": "December",
+	"taxon.distribution.statistics.month_null": "Unknown",
 
 	"taxon.genetics.genes": "Genes and markers",
 	"taxon.genetics.genomes": "Genomes",
@@ -150,6 +163,33 @@
 	"general.taxon_rank.species": "species",
 	"general.taxon_rank.subspecies": "subspecies",
 	"general.taxon_rank.variety": "variety",
+
+	"privacy.title": "Privacy Policy",
+    "privacy.subtitle": "This Cookie Policy comes into effect on 2024-10-30.\nLast updated on {update}.",
+    "privacy.info_lssi.title": "LSSI Information",
+    "privacy.info_lssi.p": "This website is owned by the public entity UNIVERSITAT DE LES ILLES BALEARS (UIB), located at Cra. de Valldemossa, km 7.5, Palma (Balearic Islands), with C.I.F. Q0718001A.\n\nThis site serves to facilitate public access to the information it possesses, in accordance with the institutional purpose and the exercise of the functions conferred on the UNIVERSITAT DE LES ILLES BALEARS.",
+    "privacy.intelectual_property.title": "Intellectual Property and Copyright",
+    "privacy.intelectual_property.p": "The intellectual property rights to the page, the domain name, source code, design, and navigation structure contained herein are owned by the aforementioned entity, which holds exclusive rights to exploit them in any form and, in particular, the rights of reproduction, distribution, public communication, and transformation.\n\nThe user agrees, in accordance with the Intellectual Property Law, to maintain the integrity of the work and to prevent any deformation, modification, or alteration that could harm its legitimate interests or damage its reputation. Likewise, they commit not to reproduce, copy, distribute, or publish the content of this page's information through any medium or support without prior written authorization from the owner.",
+    "privacy.policy.title": "Website Terms of Use",
+    "privacy.policy.p": "By accepting this privacy policy, you agree to use this website and the services offered lawfully, in accordance with these clauses, and in a way that does not harm the rights or interests of third parties or damage or cause abnormal use of the website or the services provided by it.",
+    "privacy.forms.title": "Web Forms",
+    "privacy.forms.p": "In compliance with Organic Law 3/2018, of December 5, on the Protection of Personal Data and guarantee of digital rights, we inform you that the data collected will be included in one or more files managed by the UIB in the activity registry enabled for this purpose, whose purpose is to manage your request. The data requested is necessary to fulfill the aforementioned purpose, and therefore, failure to provide it prevents achieving it.\n\nThe UIB is responsible for processing the data and as such guarantees the rights of access, rectification, opposition, deletion, portability, and restriction of processing with regard to the data provided. To exercise the indicated rights, you must write to: Universitat de les Illes Balears, General Secretariat, to the attention of the Data Protection Officer, Cra. de Valldemossa, km 7.5, 07122 Palma (Illes Balears). Likewise, the UIB commits to respecting the confidentiality of your data and using it in accordance with the purpose of the files.",
+
+	"disclaimer.title": "Disclaimer",
+    "disclaimer.subtitle": "This Disclaimer comes into effect on 2024-10-30.\nLast updated on {update}.",
+    "disclaimer.usage.title": "Use of the Website",
+    "disclaimer.usage.p": "Use of this website is at the user’s own risk; therefore, the UNIVERSITAT DE LES ILLES BALEARS is not responsible for any damages arising from interferences, interruptions, computer viruses, telephone failures, or disconnections due to causes beyond the public entity’s control; delays or blocks in using this electronic system caused by deficiencies or overloads in the data processing center, phone lines, Internet system, or other electrical systems; or for any other alteration that may occur in the user’s software or hardware.\n\nSimilarly, the UNIVERSITAT DE LES ILLES BALEARS will not be liable for damages caused by third parties through illegal intrusions beyond its control. It is also not responsible for damages caused by the use or misuse of the website's content or for any consequences arising from errors, defects, or omissions in the contents provided by third parties on this page.",
+    "disclaimer.contractual.title": "Contractual Relationships",
+    "disclaimer.contractual.p": "Mere access to the website does not imply the existence of a contractual relationship between the user and the UNIVERSITAT DE LES ILLES BALEARS.\n\nConsequently, the UNIVERSITAT DE LES ILLES BALEARS assumes no responsibility for any lack of veracity, incompleteness, lack of updating, and/or inaccuracy of the data or information provided on the website.",
+    "disclaimer.content.title": "Website Content and Links",
+    "disclaimer.content.p": "The UNIVERSITAT DE LES ILLES BALEARS reserves the right to change, modify, add, or delete the information displayed on the website at any time, so we advise you to review this page periodically to stay updated on the changes made.\n\nThe portal assumes no responsibility for external content transmitted, hosted, or accessed from the website, as it is not required to monitor beforehand whether the linked content complies with current regulations. Nor does it guarantee the absence of viruses or other elements that may alter the user’s computer system, documents, or files, excluding any liability for damages of any kind caused to the user for this reason.\n\nEntities that, with prior authorization from the website owner, intend to establish a link to this website must ensure that they only allow access to this page or service and do not reproduce its content and services.",
+    "disclaimer.downtime.title": "Temporary Suspension of Website Accessibility",
+    "disclaimer.downtime.p": "The UNIVERSITAT DE LES ILLES BALEARS reserves the right to temporarily suspend access to its website without prior notice due to the need for maintenance, repair, update, or improvement, without this implying any liability for the UNIVERSITAT DE LES ILLES BALEARS.",
+
+	"cookies.title": "Cookie Policy",
+    "cookies.subtitle": "This Cookie Policy takes effect on 2024-10-30.\nLast updated on {update}.",
+    "cookies.usage.title": "Use of cookies",
+    "cookies.usage.p": "This website uses cookies to collect data for statistical purposes, and it does not identify any personal information about the user. Cookies are used to anonymously gather access information and enhance the user's accessibility to the website.\n\nThe use of session cookies (which are not stored persistently on the user's computer and disappear when the browser is closed), if used, will be limited solely to collecting technical information to identify the session and to facilitate secure and efficient navigation of the website.\n\nCookies used for statistical purposes collect data such as the date, browser used, operating system, and country of origin, among other things. They are managed through Google Analytics, a web analytics service provided by Google, a company based in Delaware, with its main office located at 1600 Amphitheatre Parkway, Mountain View, California, CA 94043, United States («Google»).\n\nGoogle will transmit and directly store the information generated by the cookie about your use of the website (including your IP address) on servers in the United States. Google will use this information on our behalf to monitor your use of the website, compiling reports on website activity and providing services related to website activity and internet usage.\n\nHowever, the user can prevent the generation of cookies using the relevant option in their browser settings. In this case, the website will remain operational, though without the benefits of personalization.",
 
 	"lang": "English"
 }

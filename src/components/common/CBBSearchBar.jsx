@@ -16,7 +16,6 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
     }, [filters, filter])
 
     const onInput = useCallback((input) => {
-        console.log(typeof filters[filter].onInput)
         filters[filter].onInput(input).then(q => setQuery(q))
     }, [filters, filter])
 
@@ -36,7 +35,7 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
                 </div>
             }
             <SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-[100%]"
-                       label={label} placeholder={placeholder} lang={lang}
+                       label={label} placeholder={placeholder} lang={lang} border={border}
                        onInput={onInput}>
                 {children}
             </SearchBar>

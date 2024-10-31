@@ -25,12 +25,12 @@ export default function AboutApp({lang}) {
 				<div className="m-auto grid grid-cols-2 gap-4">
 					<Link href={`/${lang}/taxon/search?q=Upupa epops`} className="mb-20">
 						<Image alt="Upupa epops" removeWrapper={true} src="/images/about/upupa.jpg"
-						       title="(c) jakemellor, some rights reserved (CC BY-NC)"
+						       title="iNaturalist | (c) jakemellor, some rights reserved (CC BY-NC)"
 						       className="object-cover w-full h-full min-h-[340px] saturate-[120%]"/>
 					</Link>
 					<Link href={`/${lang}/taxon/search?q=Alytes muletensis`} className="mt-20">
 						<Image alt="Alytes muletensis" removeWrapper={true} src="/images/about/ferreret.jpg"
-						       title="(c) tuurio and wallie, some rights reserved (CC BY-SA)"
+						       title="Wikipedia | (c) tuurio and wallie, some rights reserved (CC BY-SA)"
 						       className="object-cover w-full h-full saturate-[120%] brightness-110"/>
 					</Link>
 				</div>

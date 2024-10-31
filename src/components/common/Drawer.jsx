@@ -20,7 +20,7 @@ function DrawerBody({children}) {
 					<IoClose/>
 				</CBBButton>
 			</div>
-			<Scrollbars universal>
+			<Scrollbars universal className="flex-1">
 				{children}
 			</Scrollbars>
 		</>
@@ -37,11 +37,11 @@ const Drawer = ({children}) => {
 				onClick={() => setIsOpen(!isOpen)}>
 				<IoIosArrowForward/>
 			</CBBButton>
-			<div className={`relative z-40 flex flex-col w-full max-w-[450px] h-full bg-[#D0F8F9]/60 backdrop-brightness-125 backdrop-blur-lg ${isOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out transition-transform duration-350`}>
+			<div className={`z-50 flex flex-col w-full max-w-[450px] min-h-[inherit] bg-[#D0F8F9]/60 backdrop-brightness-125 backdrop-blur-lg ${isOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out transition-transform duration-350`}>
 				{children}
 			</div>
 		</DrawerStatusContext.Provider>
-);
+	)
 };
 
 Drawer.Body = DrawerBody;

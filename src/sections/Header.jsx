@@ -15,6 +15,7 @@ import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/common/ActiveLink";
 import clsx from "clsx";
+import CBBLogo from "@/components/common/CBBLogo";
 
 export default function Header({lang, locales, className}) {
 	const menuItems = useMemo(() => {
@@ -28,12 +29,12 @@ export default function Header({lang, locales, className}) {
 	}, [lang]);
 
 	return (
-		<Navbar maxWidth="full" className={clsx("z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
+		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" className={clsx("z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
 			<NavbarContent>
-				<NavbarMenuToggle className="md:hidden text-black"/>
-				<NavbarBrand>
-					<HoverLink href={`/${lang}`} className="flex gap-2">
-						<Image src="/images/cbb-logo.png" alt={"CBB logo"} width="400px" radius={null}/>
+				<NavbarBrand className="w-full h-full">
+					<HoverLink href={`/${lang}`} className="container flex me-auto my-auto">
+						{/*<Image src="/images/cbb-logo.png" alt={"CBB logo"} width="400px" radius={null}/>*/}
+						<CBBLogo className="w-full h-[6svw] sm:h-[8svw] md:h-[11svw] min-h-[38px] max-h-[48px] brightness-90"/>
 					</HoverLink>
 				</NavbarBrand>
 			</NavbarContent>
@@ -53,6 +54,7 @@ export default function Header({lang, locales, className}) {
 					<LangSelector locales={locales} lang={lang}/>
 				</NavbarItem>
 			</NavbarContent>
+			<NavbarMenuToggle className="md:hidden text-black"/>
 			<NavbarMenu className="flex flex-col justify-center items-center bg-white">
 				{
 					menuItems.map(({text, href}, idx) => (
