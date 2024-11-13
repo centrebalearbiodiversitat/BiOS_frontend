@@ -95,7 +95,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 					</Scrollbars>
 				</div>
 			</aside>
-			<div className="rounded-lg col-span-9 xl:ps-8">
+			<div className="rounded-lg col-span-9 xl:ps-8 space-y-6">
 				<header className="flex flex-row justify-center mb-6">
 					<div className="w-full grid grid-cols-5 md:space-x-10">
 						<div

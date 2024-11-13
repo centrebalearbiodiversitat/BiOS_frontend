@@ -23,6 +23,7 @@ export default function Header({lang, locales, className}) {
 			{text: t(lang, "components.header.button.home"), href: `/${lang}`},
 			{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
 			{text: t(lang, "components.header.button.about"), href: `/${lang}/about`},
+			{text: t(lang, "components.header.button.sources"), href: `/${lang}/sources`},
 			// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
 			// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
 		]
@@ -31,10 +32,10 @@ export default function Header({lang, locales, className}) {
 	return (
 		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" className={clsx("z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
 			<NavbarContent>
-				<NavbarBrand className="w-full h-full">
-					<HoverLink href={`/${lang}`} className="container flex me-auto my-auto">
-						{/*<Image src="/images/cbb-logo.png" alt={"CBB logo"} width="400px" radius={null}/>*/}
-						<CBBLogo className="w-full h-[6svw] sm:h-[8svw] md:h-[11svw] min-h-[38px] max-h-[48px] brightness-90"/>
+				<NavbarBrand>
+					<HoverLink href={`/${lang}`}>
+						<Image src="/images/cbb-logo.png" className="brightness-95" alt={"CBB logo"} width="400px" radius={null}/>
+						{/*<CBBLogo className="w-full h-[6svw] sm:h-[8svw] md:h-[11svw] min-h-[38px] max-h-[48px] brightness-95"/>*/}
 					</HoverLink>
 				</NavbarBrand>
 			</NavbarContent>

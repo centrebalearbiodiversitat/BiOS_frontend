@@ -2,14 +2,12 @@
     "web.title": "Centre Balear de Biodiversitat",
     "web.description": "Página web oficial de la base de datos y herramientas del Centro Balear de Biodiversidad",
 
-
 	"home.title": "Acceso a los datos de especies de las Islas Baleares",
 	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Especies",
 	"home.statistics.observations": "Observaciones",
 	"home.statistics.sequences": "Secuencias",
-
 
 	"taxon.layout.button.taxon": "Descripción",
 	"taxon.layout.button.distribution": "Distribución",
@@ -113,6 +111,7 @@
 	"components.header.button.taxonomy": "Taxonomía",
 	"components.header.button.genetics": "Genética",
 	"components.header.button.about": "Acerca de",
+	"components.header.button.sources": "Fuentes",
 
 	"components.iucn.EX": "Extinta",
 	"components.iucn.EW": "Extinta en estado silvestre",
@@ -191,6 +190,27 @@
     "cookies.subtitle": "Esta Política de cookies entra en vigor el 2024-10-30.\nÚltima actualización el {update}.",
     "cookies.usage.title": "Uso de cookies",
     "cookies.usage.p": "Esta página web usa cookies para recopilar datos con finalidad estadística, en ningún caso identifica información personal del usuario. Se utilizan para obtener información de acceso de manera anónima y para facilitar al usuario la accesibilidad del espacio web.\n\nEl uso de cookies de sesión (que no son memorizadas de manera persistente en el ordenador del usuario y desaparecen con el cierre del navegador), en caso de ser utilizadas, se limitarán únicamente a recopilar información técnica para identificar la sesión con el objetivo de facilitar la exploración segura y eficiente del espacio web.\n\nLas cookies con finalidades estadísticas sirven para recoger datos como fecha, navegador utilizado, sistema operativo y país de origen entre otros, y se manipulan con Google Analytics, un servicio de análisis web ofrecido por Google una empresa de Delaware, la sede principal de la cual se encuentra en 1600 Amphitheatre Parkway, Mountain View (California), CA 94043, Estados Unidos («Google»).\n\nGoogle trasmitirá y almacenará directamente la información que genera la galleta sobre vuestro uso del espacio web (incluida vuestra dirección IP) a los servidores de Estados Unidos. Google utilizará esta información en nuestro nombre con la finalidad de hacer el seguimiento de vuestro uso del espacio web, mediante la recogida de informes de la actividad del espacio web y la presentación de los servicios relacionados con la actividad del espacio web y el uso de Internet.\n\nNo obstante, el usuario puede impedir la generación de cookies con la opción correspondiente que posea su programa navegador. En este caso, la página continuará siendo operativa, pero sin las ventajas de la personalización.",
+
+	"partners.title": "Estadísitcas sobre los datos",
+	"partners.subtitle": "Todos los datos están conectados a sus respectivas fuentes. Aquí puedes encontrar estadísticas relacionadas sobre esto.",
+
+	"partners.origin.database": "Base de datos",
+	"partners.origin.journal_article": "Articulo de revista",
+	"partners.origin.book": "Libro",
+	"partners.origin.ai": "Inteligencia artificial",
+	"partners.origin.web_page": "Página web",
+	"partners.origin.document": "Documento",
+
+	"partners.list.taxon": "Taxonomía",
+	"partners.list.taxon.graph": "Conteo total de niveles taxonómicos recuperados de para cada fuente de datos",
+	"partners.list.occurrence": "Ocurrencias",
+	"partners.list.occurrence.graph": "Conteo total de ocurrencias recuperadas de para cada fuente de datos",
+	"partners.list.sequence": "Secuencias",
+	"partners.list.sequence.graph": "Conteo total de secuencias genéticas recuperadas de para cada fuente de datos",
+	"partners.list.image": "Imagen",
+	"partners.list.image.graph": "Conteo total de imágenes recuperadas de para cada fuente de datos",
+	"partners.list.taxon_data": "Información relacionada al taxón",
+	"partners.list.taxon_data.graph": "Conteo total de metadatos taxonómicos recuperados de para cada fuente de datos",
 
     "lang": "Castellano"
 }

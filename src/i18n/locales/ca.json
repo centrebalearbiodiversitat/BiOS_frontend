@@ -7,7 +7,7 @@
 
 	"home.statistics.species": "Espècies",
 	"home.statistics.observations": "Observacions",
-	"home.statistics.sequences": "Sequències",
+	"home.statistics.sequences": "Seqüències",
 
 	"taxon.layout.button.taxon": "Descripció",
 	"taxon.layout.button.distribution": "Distribució",
@@ -112,6 +112,7 @@
 	"components.header.button.taxonomy": "Taxonomia",
 	"components.header.button.genetics": "Genètica",
 	"components.header.button.about": "Sobre",
+	"components.header.button.sources": "Fonts",
 
 	"components.iucn.EX": "Extinta",
 	"components.iucn.EW": "Extinta en estat salvatge",
@@ -190,6 +191,27 @@
     "cookies.subtitle": "Aquesta Política de cookies entra en vigor el 2024-10-30.\nÚltima actualització el {update}.",
     "cookies.usage.title": "Ús de cookies",
     "cookies.usage.p": "Aquest lloc web utilitza cookies per recollir dades amb finalitat estadística, en cap cas identifica informació personal de l'usuari. S'utilitzen per obtenir informació d'accés de manera anònima i per facilitar l'accessibilitat de l'espai web a l'usuari.\n\nL'ús de cookies de sessió (que no es memoritzen de manera persistent a l'ordinador de l'usuari i desapareixen en tancar el navegador), en cas d'utilitzar-se, es limitarà únicament a recollir informació tècnica per identificar la sessió amb l'objectiu de facilitar l'exploració segura i eficient de l'espai web.\n\nLes cookies amb finalitats estadístiques serveixen per recollir dades com la data, el navegador utilitzat, el sistema operatiu i el país d'origen entre altres, i es gestionen amb Google Analytics, un servei d'anàlisi web ofert per Google, una empresa de Delaware, la seu principal de la qual es troba a 1600 Amphitheatre Parkway, Mountain View (Califòrnia), CA 94043, Estats Units («Google»).\n\nGoogle transmetrà i emmagatzemarà directament la informació que genera la galeta sobre l'ús de l'espai web (inclosa la vostra adreça IP) als seus servidors dels Estats Units. Google utilitzarà aquesta informació en el nostre nom amb la finalitat de fer el seguiment del vostre ús de l'espai web, mitjançant la recollida d'informes de l'activitat de l'espai web i la presentació dels serveis relacionats amb l'activitat de l'espai web i l'ús d'Internet.\n\nNo obstant això, l'usuari pot impedir la generació de cookies amb l'opció corresponent que ofereixi el seu programa navegador. En aquest cas, la pàgina continuarà sent operativa, però sense els avantatges de la personalització.",
+
+	"partners.title": "Estadístiques sobre les dades",
+	"partners.subtitle": "Cada dada està enllaçada a la seva font. Aquí pots trobar estadístiques relacionades sobre això.",
+
+	"partners.origin.database": "Base de dades",
+	"partners.origin.journal_article": "Article de revista",
+	"partners.origin.book": "Llibre",
+	"partners.origin.ai": "Inteligència artificial",
+	"partners.origin.web_page": "Pàgina web",
+	"partners.origin.document": "Document",
+
+	"partners.list.taxon": "Taxonomia",
+	"partners.list.taxon.graph": "Recompte total de nivells taxonòmics recuperats de per a cada font de dades",
+	"partners.list.occurrence": "Ocurrències",
+	"partners.list.occurrence.graph": "Recompte total d'ocurrències recuperades de per a cada font de dades",
+	"partners.list.sequence": "Seqüències",
+	"partners.list.sequence.graph": "Recompte total de seqüències genètiques recuperades de per a cada font de dades",
+	"partners.list.image": "Imatges",
+	"partners.list.image.graph": "Recompte total d'imatges recuperades de per a cada font de dades",
+	"partners.list.taxon_data": "Informació relacionada al tàxon",
+	"partners.list.taxon_data.graph": "Recompte total de metadades taxonòmiques recuperades de per a cada font de dades",
 
 	"lang": "Català"
 }

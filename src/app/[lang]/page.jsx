@@ -14,7 +14,7 @@ export default function Home({params: {lang}}) {
 				     backgroundRepeat: 'no-repeat',
 				     backgroundSize: 'cover',
 				     backgroundPosition: 'center',
-				     backgroundImage: "linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/images/home.jpg')"
+				     backgroundImage: "linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('/images/pages/home/home.jpg')"
 			     }}>
 				<div className="bottom-0 right-0 absolute text-slate-200 text-sm font-extralight backdrop-blur-xl px-3 py-1">
 				       (c) Lioneska, some rights reserved (CC BY-NC)

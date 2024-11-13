@@ -97,7 +97,7 @@ function PointsSource({data, taxaColors, idx}) {
 					// type="heatmap"
 					type="circle"
 					paint={{
-						'circle-radius': 3,
+						'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 15, 5],
 						'circle-pitch-scale': 'map',
 						'circle-color': `${color}`,
 						// 'circle-opacity': .65,
@@ -261,9 +261,7 @@ const MapLibre = forwardRef(({
 					)
 				)
 			}
-			<div className="bg-transparent">
-				<ScaleControl maxWidth={200}/>
-			</div>
+			<ScaleControl position="bottom-left" style={{zIndex: -10, position: "relative"}} maxWidth={200}/>
 			{nav &&
 				<NavigationControl showCompass={true} position={navPos} visualizePitch={true} showZoom={true}/>}
 			{children}

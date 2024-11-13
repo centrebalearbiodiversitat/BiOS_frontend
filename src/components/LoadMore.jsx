@@ -12,12 +12,12 @@ export default function LoadMore({lang, items, children, overflow = false, initi
 					items.slice(0, loadMore).map((taxon, idx) => children(taxon, idx))
 				}
 				{overflow && loadMore < items.length &&
-					<li>
+					<div>
 						<p className="flex flex-row justify-end text-sm text-primary cursor-pointer m-4 mb-0 space-x-2"
 						   onClick={() => setLoadMore(items.length)}>
 							<span>Load more</span> <IoIosArrowDown className="my-auto"/>
 						</p>
-					</li>
+					</div>
 				}
 			</>
 		);

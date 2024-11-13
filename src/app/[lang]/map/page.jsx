@@ -213,7 +213,7 @@ export default function MapPage({params: {lang}}) {
 
 	return (
 		<>
-			<div className="absolute -z-10 top-0 h-full w-full">
+			<div className="z-0 absolute top-0 h-full w-full">
 				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
 				          sources={geographicalLocations} loading={loading}
 				          onClick={onSelectedOccurrences}>
@@ -235,7 +235,7 @@ export default function MapPage({params: {lang}}) {
 										<TwoLineText title={t(lang, "map.popup.locality")}
 										             text={occu.location?.name}/>
 										<TwoLineText title={t(lang, "map.popup.location")} text={
-											<span>({occu.decimalLatitude}, {occu.decimalLongitude}) {occu.coordinateUncertaintyInMeters && (
+											<span>({occu.decimalLatitude}, {occu.decimalLongitude}) {occu.coordinateUncertaintyInMeters !== null && (
 												<span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
 										}/>
 										<TwoLineText title={t(lang, "map.popup.elevation")} text={occu.elevation}/>

@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 import {BarChart, BarPlot, markElementClasses, LineChart} from "@mui/x-charts";
 
 
-export default function StatsChart({color = null, data, yLabel, type, show_null = true}) {
+export default function StatsChart({color = null, data, yLabel, type, hideLegend= false, show_null = true}) {
 	const {x, y, isLong} = useMemo(() => {
 		const _x = [];
 		const _y = [];
@@ -10,14 +10,14 @@ export default function StatsChart({color = null, data, yLabel, type, show_null 
 		data?.forEach(e => {
 			if (show_null || e[yLabel]) {
 				const xLabel = e[yLabel].toString()
-				isLong = xLabel.length > 4
+				isLong |= xLabel.length > 4
 				_x.push(xLabel);
 				_y.push(e.count);
 			}
 		});
 
 		return {x: _x, y: _y, isLong};
-	}, [data, yLabel]);
+	}, [show_null, data, yLabel]);
 
 	if (type === "line") {
 		return (
@@ -31,7 +31,7 @@ export default function StatsChart({color = null, data, yLabel, type, show_null 
 						strokeWidth: 2,
 					},
 				}}
-				slotProps={{legend: { hidden: true }}}
+				slotProps={{legend: { hidden: hideLegend }}}
 				xAxis={[{scaleType: 'point', data: x}]}
 			/>
 		);
@@ -40,6 +40,7 @@ export default function StatsChart({color = null, data, yLabel, type, show_null 
 			<BarChart
 				className="w-full h-full"
 				series={[{data: y, label: yLabel, type: 'bar', ...(color ? {color} : {})}]}
+				slotProps={{legend: { hidden: hideLegend }}}
 				xAxis={[{
 					scaleType: 'band',
 					data: x,
