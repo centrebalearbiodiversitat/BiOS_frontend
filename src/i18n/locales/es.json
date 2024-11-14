@@ -13,6 +13,7 @@
 	"taxon.layout.button.distribution": "Distribución",
 	"taxon.layout.button.genetics": "Genética",
 	"taxon.layout.sources": "Procedencia",
+	"taxon.layout.modal.close_button": "Cerrar",
 	"taxon.layout.modal.download_button": "Descargar",
 	"taxon.layout.modal.title": "Centro de descarga",
 	"taxon.layout.modal.help_label": "Selecciona el tipo de dato",
@@ -70,6 +71,11 @@
 	"taxon.distribution.statistics.month_11": "Noviembre",
 	"taxon.distribution.statistics.month_12": "Diciembre",
 	"taxon.distribution.statistics.month_null": "Desconocido",
+
+	"taxon.distribution.statistics.graph.months": "Acumulación de ocurrencias mes a mes",
+	"taxon.distribution.statistics.graph.sources": "Recuperadas según la fuente de datos",
+	"taxon.distribution.statistics.graph.y2y": "Registradas por años",
+	"taxon.distribution.statistics.graph.y2yAcc": "Acumulación por años",
 
 	"taxon.genetics.genes": "Genes y marcadores",
 	"taxon.genetics.genomes": "Genomas",

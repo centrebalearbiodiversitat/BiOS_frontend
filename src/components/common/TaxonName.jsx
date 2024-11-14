@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useCallback, useMemo} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 
@@ -10,13 +10,16 @@ const ITALIC_RANKS = new Set([
 	"variety",
 ])
 
+const handleScrollTop = () => {
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
 function LinkOrP({children, redirect, className, ...extra}) {
 	className = `${className} ${redirect ? "hover:underline" : ""}`
 
 	const Component = redirect ? Link : 'p';
 
-	return <Component className={className} {...extra}>{children}</Component>;
+	return <Component onClick={handleScrollTop} className={className} {...extra}>{children}</Component>;
 }
 
 

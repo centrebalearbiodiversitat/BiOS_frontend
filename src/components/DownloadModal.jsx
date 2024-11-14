@@ -114,10 +114,10 @@ export default function DownloadModal({lang, taxonId}) {
 							</ModalBody>
 							<ModalFooter className="m-2">
 								<CBBButton color="danger" variant="light" onPress={onClose}>
-									Close
+									{t(lang, "taxon.layout.modal.close_button")}
 								</CBBButton>
 								{/*<Link isDisabled={!selectedLink} href={selectedLink} download={true}>*/}
-								<DownloadButton isDisabled={!selectedLink} href={selectedLink}/>
+								<DownloadButton lang={lang} isDisabled={!selectedLink} href={selectedLink}/>
 								{/*</Link>*/}
 							</ModalFooter>
 						</>

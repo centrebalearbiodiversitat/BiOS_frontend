@@ -13,6 +13,7 @@
 	"taxon.layout.button.distribution": "Distribution",
 	"taxon.layout.button.genetics": "Genetics",
 	"taxon.layout.sources": "Sources",
+	"taxon.layout.modal.close_button": "Close",
 	"taxon.layout.modal.download_button": "Download",
 	"taxon.layout.modal.title": "Download center",
 	"taxon.layout.modal.help_label": "Select the data type",
@@ -71,6 +72,11 @@
 	"taxon.distribution.statistics.month_11": "November",
 	"taxon.distribution.statistics.month_12": "December",
 	"taxon.distribution.statistics.month_null": "Unknown",
+
+	"taxon.distribution.statistics.graph.months": "Accumulation of occurrences month by month",
+	"taxon.distribution.statistics.graph.sources": "Retrieved by data source",
+	"taxon.distribution.statistics.graph.y2y": "Recorded by year",
+	"taxon.distribution.statistics.graph.y2yAcc": "Accumulation by year",
 
 	"taxon.genetics.genes": "Genes and markers",
 	"taxon.genetics.genomes": "Genomes",

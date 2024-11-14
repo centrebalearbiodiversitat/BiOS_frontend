@@ -3,7 +3,6 @@ import {Image} from "@nextui-org/react";
 import SiteMap from "@/components/SiteMap";
 import Legal from "@/components/Legal";
 import Contact from "@/components/Contact";
-import CBBLogo from "@/components/common/CBBLogo";
 
 export default function Footer({lang}) {
 	return (

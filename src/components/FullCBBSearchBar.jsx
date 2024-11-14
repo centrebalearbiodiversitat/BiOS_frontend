@@ -16,7 +16,8 @@ export default function FullCBBSearchBar({lang, showFilters = true, rounded = tr
 			{
 				textKey: "components.searchbar.filter.taxonomy",
 				onSelected: taxonId => router.push(
-					`/${lang}/taxon/${taxonId}${pathname.endsWith('genetics') ? '/genetics' : ''}`
+					`/${lang}/taxon/${taxonId}${pathname.endsWith('genetics') ? '/genetics' : ''}`,
+					{scroll: false},
 				),
 				onInput: e => taxonomy.search(e)
 			}

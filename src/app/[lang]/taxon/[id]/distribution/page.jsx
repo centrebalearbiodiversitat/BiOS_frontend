@@ -10,6 +10,7 @@ import {IoOpenOutline} from "react-icons/io5";
 import Section from "@/components/common/Section";
 import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
+import {Card, Description} from "@/components/common/DescriptionCard";
 
 function translateMonths(data) {
 	return data.map((item) => {
@@ -62,7 +63,7 @@ export default function Taxon({params: {lang, id}}) {
 	return (
 		<>
 			<Section lang={lang} title="taxon.distribution.distribution">
-				<MapLibre nav={true} loading={occs === null} style={{borderRadius: '8px', height: '450px'}} data={[occs]}
+				<MapLibre nav={true} loading={occs === null} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={[occs]}
 				          taxaColors={{[id]: '#ff6900'}}>
 					<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>
 						<LinkButton variant="bordered" className="font-medium text-white" color="white"
@@ -75,24 +76,38 @@ export default function Taxon({params: {lang, id}}) {
 			<Section lang={lang} title="taxon.distribution.statistics">
 				<div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
 					<div className="w-full aspect-video">
-						<Loading loading={occsStatsByMonthTranslated} width="100%" height="100%">
-							<StatsChart color="#3DBBCC" data={occsStatsByMonthTranslated} yLabel="month" type="bar"/>
-						</Loading>
+						<Card>
+							<Card.Description>
+								{t(lang, 'taxon.distribution.statistics.graph.months')}
+							</Card.Description>
+							<Loading loading={occsStatsByMonthTranslated} width="100%" height="100%">
+								<Card.Body className="px-3">
+									<StatsChart color="#3DBBCC" hideLegend data={occsStatsByMonthTranslated} yLabel="month" type="bar"/>
+								</Card.Body>
+							</Loading>
+						</Card>
 					</div>
 					<div className="w-full aspect-video">
-						<Loading loading={occsStatsBySource} width="100%" height="100%">
-							<StatsChart color="#BA3C4C" data={occsStatsBySource} yLabel="source" type="bar"/>
-						</Loading>
+						<Card>
+							<Card.Description>
+								{t(lang, 'taxon.distribution.statistics.graph.sources')}
+							</Card.Description>
+							<Loading loading={occsStatsBySource} width="100%" height="100%">
+								<Card.Body className="px-3">
+									<StatsChart color="#BA3C4C" hideLegend data={occsStatsBySource} yLabel="source" type="bar"/>
+								</Card.Body>
+							</Loading>
+						</Card>
 					</div>
-					<div className="w-full aspect-video xl:col-span-2">
-						<Loading loading={occsStatsByYear} width="100%" height="100%">
-							<StatsChart color="#94C635" data={occsStatsByYear} yLabel="year" type="line" show_null={false}/>
-						</Loading>
-					</div>
-					<div className="w-full aspect-video xl:col-span-2">
-						<Loading loading={occsStatsByYearAccumulated} width="100%" height="100%">
-							<StatsChart color="#94C635" data={occsStatsByYearAccumulated} yLabel="year" type="line" show_null={false}/>
-						</Loading>
+					<div className="w-full aspect-video col-span-full">
+						<Card>
+							<Card.Description>
+								{t(lang, 'taxon.distribution.statistics.graph.y2yAcc')}
+							</Card.Description>
+							<Loading loading={occsStatsByYearAccumulated} width="100%" height="100%">
+								<StatsChart color="#94C635CC" colorR={"#94C635"} hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
+							</Loading>
+						</Card>
 					</div>
 				</div>
 			</Section>

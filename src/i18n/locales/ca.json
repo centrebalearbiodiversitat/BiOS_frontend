@@ -13,6 +13,7 @@
 	"taxon.layout.button.distribution": "Distribució",
 	"taxon.layout.button.genetics": "Genètica",
 	"taxon.layout.sources": "Procedència",
+	"taxon.layout.modal.close_button": "Tancar",
 	"taxon.layout.modal.download_button": "Descarregar",
 	"taxon.layout.modal.title": "Centre de descàrregues",
 	"taxon.layout.modal.help_label": "Selecciona el tipus de dades",
@@ -71,6 +72,11 @@
 	"taxon.distribution.statistics.month_11": "Novembre",
 	"taxon.distribution.statistics.month_12": "Desembre",
 	"taxon.distribution.statistics.month_null": "Desconegut",
+
+	"taxon.distribution.statistics.graph.months": "Acumulació d'ocurrències mes a mes",
+	"taxon.distribution.statistics.graph.sources": "Recuperades segons la font de dades",
+	"taxon.distribution.statistics.graph.y2y": "Registrades per anys",
+	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
 	"taxon.genetics.genes": "Gens i marcadores",
 	"taxon.genetics.genomes": "Genomes",

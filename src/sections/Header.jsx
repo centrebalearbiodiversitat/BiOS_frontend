@@ -15,7 +15,6 @@ import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/common/ActiveLink";
 import clsx from "clsx";
-import CBBLogo from "@/components/common/CBBLogo";
 
 export default function Header({lang, locales, className}) {
 	const menuItems = useMemo(() => {

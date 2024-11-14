@@ -18,7 +18,7 @@ import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import DownloadModal from "@/components/DownloadModal";
-import {TaxonProvider, useTaxon} from "@/context/TaxonContext";
+import {TaxonProvider} from "@/context/TaxonContext";
 import Scrollbars from "react-custom-scrollbars-2";
 
 
@@ -38,7 +38,7 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 				</Loading>
 			</AccordionItem>
 			<AccordionItem
-				title={<h3 className="text-xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
+				title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
 				key="3" aria-label="Accordion 3">
 				<Loading loading={synonyms} width="100%" height="200px">
 					{synonyms && <VerticalTaxonomy lang={lang} title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
@@ -81,7 +81,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 	}, [lang, taxon])
 
 	return (
-		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-6 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
+		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
 				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[128px] flex flex-col">
 					<div className="rounded-full ms-auto w-full">
@@ -97,9 +97,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 			</aside>
 			<div className="rounded-lg col-span-9 xl:ps-8 space-y-6">
 				<header className="flex flex-row justify-center mb-6">
-					<div className="w-full grid grid-cols-5 md:space-x-10">
-						<div
-							className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
+					<div className="w-full grid grid-cols-5 gap-1 md:gap-6">
+						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
 							<Loading loading={taxon} width="100%" height="100%">
 								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
 								                  className="rounded-lg h-auto w-full max-h-full"
@@ -107,7 +106,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 							</Loading>
 						</div>
 						<div className="flex flex-col col-span-full md:col-span-2">
-							<div className="ms-auto">
+							<div className="ms-auto mt-4">
 								<DownloadModal lang={lang} taxonId={id}/>
 							</div>
 							<div className="my-auto">
