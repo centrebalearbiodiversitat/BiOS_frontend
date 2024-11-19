@@ -93,7 +93,7 @@ export default function StatsChart({color = null, colorR = null, data, dataRight
 				<ChartsYAxis/>
 				<ChartsTooltip/>
 				<LineHighlightPlot/>
-				<ChartsAxisHighlight x="line" />
+				<ChartsAxisHighlight x="line"/>
 			</ResponsiveChartContainer>
 		);
 	} else {

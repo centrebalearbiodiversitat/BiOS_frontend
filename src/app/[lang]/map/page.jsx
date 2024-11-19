@@ -81,15 +81,15 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 
 
 async function fetchTaxa(taxa, savedTaxa) {
-	const taxaList = {};
+	const taxaList = new Map();
 
 	for (const taxon of taxa) {
 		if (savedTaxa.hasOwnProperty(taxon))
-			taxaList[taxon] = savedTaxa[taxon];
+			taxaList.set(taxon.toString(), savedTaxa[taxon]);
 		else {
 			const taxonPayload = await taxonomy.get(taxon);
 			if (taxonPayload)
-				taxaList[taxon] = taxonPayload;
+				taxaList.set(taxon.toString(), taxonPayload);
 		}
 	}
 
@@ -119,12 +119,13 @@ export default function MapPage({params: {lang}}) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const [selectedOccus, setSelectedOccus] = useState([]);
-	const [taxa, setTaxa] = useState({});
+	const [taxa, setTaxa] = useState(new Map());
 	const [loading, setLoading] = useState(false);
 	const [geographicalLocations, setGeographicalLocations] = useState({});
 	const [taxaToLoc, setTaxaToLoc] = useState({});
 	const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
 	const [taxaColors, setTaxaColors] = useState({});
+	const [hidden, setHidden] = useState({});
 	const mapRef = useRef();
 
 	useEffect(() => {
@@ -211,11 +212,15 @@ export default function MapPage({params: {lang}}) {
 		setFilteredTaxaToLoc(d);
 	}, []);
 
+	const onHide = useCallback((idx, isHidden) => {
+		setHidden({...hidden, [idx]: isHidden});
+	}, [hidden]);
+
 	return (
 		<>
 			<div className="z-0 absolute top-0 h-full w-full">
 				<MapLibre ref={mapRef} data={Object.values(filteredTaxaToLoc)} taxaColors={taxaColors}
-				          sources={geographicalLocations} loading={loading}
+				          sources={geographicalLocations} loading={loading} hidden={hidden}
 				          onClick={onSelectedOccurrences}>
 					{
 						selectedOccus.map(
@@ -258,15 +263,13 @@ export default function MapPage({params: {lang}}) {
 					           selectionMode={"multiple"}>
 						<AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
 						               className="border-b-1 border-slate-400"
-						               title={<h4
-							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
-							<MapLibreTaxa lang={lang} taxa={taxa} taxaColors={taxaColors} onColorChanged={onColorChanged}
+						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
+							<MapLibreTaxa lang={lang} taxa={Array.from(taxa.values())} taxaColors={taxaColors} onColorChanged={onColorChanged} onHide={onHide}
 							              onDeleted={onDeletedSearch} onSelectedSearch={onSelectedSearch}/>
 						</AccordionItem>
 						<AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')}
 						               className="border-b-1 border-slate-400"
-						               title={<h4
-							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
+						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
 							<div className="mx-3">
 								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
 								              label="components.searchbar.label.geography" redirect={true}

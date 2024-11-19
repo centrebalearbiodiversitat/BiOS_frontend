@@ -3,8 +3,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import {HexColorPicker} from "react-colorful";
 import CBBButton from "@/components/common/CBBButton";
+import clsx from "clsx";
 
-export default function PopoverColorPicker({color, onChange, isDisabled}) {
+export default function PopoverColorPicker({className, color, onChange, isDisabled}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedColor, setSelectedColor] = useState(color);
 	const popover = useRef(null);
@@ -34,7 +35,7 @@ export default function PopoverColorPicker({color, onChange, isDisabled}) {
 				isIconOnly
 				isDisabled={isDisabled}
 				style={{backgroundColor: color}}
-				className="me-3"
+				className={clsx("me-3", className)}
 				onClick={() => {
 					if (isOpen && selectedColor) {
 						onChange(selectedColor);

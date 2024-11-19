@@ -9,7 +9,7 @@ import MainContent from "@/sections/MainContent";
 import Figure from "@/components/common/Figure";
 import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
-import {useEffect, useMemo, useState, createContext, useContext} from "react";
+import {useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import TabButtonGroup from "@/components/common/TabButtonGroup";

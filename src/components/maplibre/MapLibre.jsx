@@ -71,7 +71,7 @@ const MAP_STYLE = {
 };
 
 
-function PointsSource({data, taxaColors, idx}) {
+function PointsSource({data, taxaColors, idx, visible}) {
 		if (!data) {
 			return undefined;
 		}
@@ -84,6 +84,7 @@ function PointsSource({data, taxaColors, idx}) {
 					id={`${idx}`}
 					// type="heatmap"
 					type="circle"
+					layout={{visibility: visible ? "visible" : "none"}}
 					paint={{
 						'circle-radius': 13,
 						'circle-pitch-scale': 'map',
@@ -96,6 +97,7 @@ function PointsSource({data, taxaColors, idx}) {
 					id={`${idx}-visual`}
 					// type="heatmap"
 					type="circle"
+					layout={{visibility: visible ? "visible" : "none"}}
 					paint={{
 						'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 15, 5],
 						'circle-pitch-scale': 'map',
@@ -189,7 +191,7 @@ const polygonLayer = {
 
 
 const MapLibre = forwardRef(({
-	data, taxaColors, children, loading = false, onClick = null,
+	data, hidden = {}, taxaColors, children, loading = false, onClick = null,
 	nav = true, navPos= "bottom-right", style = {}, sources
 }, ref) => {
 	const [lng] = useState(2.75802);
@@ -205,7 +207,6 @@ const MapLibre = forwardRef(({
 		const compassDom = document.getElementsByClassName('maplibregl-ctrl-compass');
 		// const mapCanvas = mapRef.current?.getMap().getCanvas();
 		if (mapDom) {
-			console.log(mapDom)
 			const scaleCanvas = await html2canvas(scaleDom[0]);
 			const compassCanvas = await html2canvas(compassDom[0]);
 			const mapCanvas = await html2canvas(mapDom[0]);
@@ -248,7 +249,7 @@ const MapLibre = forwardRef(({
 			{data &&
 				data.map((el, idx) => {
 					return (
-						<PointsSource key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
+						<PointsSource visible={!(hidden[el.taxonId] ?? false)} key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
 					)
 				})
 			}

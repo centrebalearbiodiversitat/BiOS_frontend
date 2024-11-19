@@ -12,15 +12,6 @@ import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
 import {Card, Description} from "@/components/common/DescriptionCard";
 
-function translateMonths(data) {
-	return data.map((item) => {
-		return {
-			month: item.month,
-		}
-	})
-}
-
-
 export default function Taxon({params: {lang, id}}) {
 	const [occs, setOccs] = useState(null);
 	const [occsStatsByMonth, setOccsStatsByMonth] = useState(undefined);
