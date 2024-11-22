@@ -11,8 +11,10 @@ import Section from "@/components/common/Section";
 import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
 import {Card, Description} from "@/components/common/DescriptionCard";
+import {useTaxon} from "@/context/TaxonContext";
 
 export default function Taxon({params: {lang, id}}) {
+	const [taxon, setTaxon] = useTaxon();
 	const [occs, setOccs] = useState(null);
 	const [occsStatsByMonth, setOccsStatsByMonth] = useState(undefined);
 	const [occsStatsByYear, setOccsStatsByYear] = useState(undefined);
@@ -20,7 +22,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	useEffect(() => {
 		occurrences.list(id, null)
-			.then(r => r && setOccs(occurrencesToGeoJson(id, r)));
+			.then(r => setOccs([occurrencesToGeoJson(id, r)]));
 		occurrences.statsByMonth(id)
 			.then(r => setOccsStatsByMonth(r));
 		occurrences.statsByYear(id)
@@ -28,6 +30,11 @@ export default function Taxon({params: {lang, id}}) {
 		occurrences.statsBySource(id)
 			.then(r => setOccsStatsBySource(r));
 	}, [id])
+
+	useEffect(() => {
+		if (taxon)
+			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')} | ${t(lang, 'web.name')}`
+	}, [taxon, lang]);
 
 	const occsStatsByMonthTranslated = useMemo(() => {
 		if (occsStatsByMonth)
@@ -54,7 +61,7 @@ export default function Taxon({params: {lang, id}}) {
 	return (
 		<>
 			<Section lang={lang} title="taxon.distribution.distribution">
-				<MapLibre nav={true} loading={occs === null} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={[occs]}
+				<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}
 				          taxaColors={{[id]: '#ff6900'}}>
 					<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>
 						<LinkButton variant="bordered" className="font-medium text-white" color="white"

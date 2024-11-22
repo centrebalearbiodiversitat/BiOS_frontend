@@ -243,16 +243,9 @@ const MapLibre = forwardRef(({
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
 		     mapStyle={MAP_STYLE} doubleClickZoom={false} preserveDrawingBuffer={true}
-		     interactiveLayerIds={data.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
+		     interactiveLayerIds={data?.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
 		     onDblClick={(e) => nav && flyTo(0)}
 		     onClick={e => onClick && e.features && onClick(e.features[0])}>
-			{data &&
-				data.map((el, idx) => {
-					return (
-						<PointsSource visible={!(hidden[el.taxonId] ?? false)} key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
-					)
-				})
-			}
 			{sources &&
 				Object.values(sources).map(
 					source => (
@@ -261,6 +254,13 @@ const MapLibre = forwardRef(({
 						</Source>
 					)
 				)
+			}
+			{data &&
+				data.map((el, idx) => {
+					return (
+						<PointsSource visible={!(hidden[el.taxonId] ?? false)} key={idx} idx={idx} data={el} taxaColors={taxaColors}/>
+					)
+				})
 			}
 			<ScaleControl position="bottom-left" style={{zIndex: -10, position: "relative"}} maxWidth={200}/>
 			{nav &&

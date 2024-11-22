@@ -16,8 +16,10 @@ import {
 import TableList from "@/components/TableList";
 import Loading from "@/components/common/Loading";
 import Section from "@/components/common/Section";
+import {useTaxon} from "@/context/TaxonContext";
 
 export default function TaxonSequences({params: {id, lang}}) {
+	const [taxon, setTaxon] = useTaxon();
 	const [seqs, setSeqs] = useState([]);
 	const [genes, setGenes] = useState(undefined);
 
@@ -25,6 +27,11 @@ export default function TaxonSequences({params: {id, lang}}) {
 		// genetics.listSequences(taxonId).then(r => setSeqs(r))
 		genetics.listGenes(id).then(r => setGenes(r))
 	}, [id]);
+
+	useEffect(() => {
+		if (taxon)
+			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')} | ${t(lang, 'web.name')}`
+	}, [taxon, lang]);
 
 	const SEQ_HEADERS = useMemo(
 		() => {

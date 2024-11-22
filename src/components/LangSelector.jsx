@@ -34,11 +34,11 @@ export default function LangSelector({locales, lang}) {
 	return (
 		<Dropdown className="min-w-[100px]">
 			<DropdownTrigger>
-				<Button radius="full" className="uppercase bg-white/60 border-0 backdrop-blur-2xl">
+				<Button radius="full" className="uppercase bg-white border-0">
 					{lang} <IoIosArrowDown/>
 				</Button>
 			</DropdownTrigger>
-			<DropdownMenu aria-label="Change language" onAction={redirect}>
+			<DropdownMenu itemClasses={{wrapper: "rounded-full"}} className="rounded-full" aria-label="Change language" onAction={redirect}>
 				{
 					locales.map((locale) =>
 						<DropdownItem key={locale} hidden={false} className="text-center uppercase">

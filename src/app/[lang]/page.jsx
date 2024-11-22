@@ -24,15 +24,13 @@ export default function Home({params: {lang}}) {
 						<h2 className="w-full font-normal text-xl text-white-drop-shadow">
 							{t(lang, "home.subtitle")}
 						</h2>
-						<h1 className="w-full text-pretty font-normal text-4xl md:font-light md:text-6xl text-white-drop-shadow">
+						<h1 className="w-full text-pretty font-normal text-4xl md:font-light md:text-5xl 2xl:text-6xl text-white-drop-shadow">
 							{t(lang, "home.title")}
 						</h1>
 					</header>
 					<div className="space-y-2 py-12">
-						<FullCBBSearchBar lang={lang} showFilters={false} rounded={false}/>
-						<div className="">
-							<Statistics lang={lang} className="grid grid-cols-3"/>
-						</div>
+						<FullCBBSearchBar lang={lang} showFilters={false} rounded={true}/>
+						<Statistics lang={lang}/>
 						<div className="grid grid-cols-4 my-auto gap-2 justify-center items-center pt-4">
 							<Image src="/images/partners/eu_next_gen.png" alt={"Partner NextGenerationEU"}
                                    removeWrapper={true}

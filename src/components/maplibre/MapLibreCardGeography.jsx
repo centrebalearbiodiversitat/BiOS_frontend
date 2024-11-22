@@ -47,7 +47,7 @@ function LoadedBodyCard({taxon, lang, color, colorSelector, onColorChanged, onDe
 
 export default function MapLibreCardGeography({lang, taxon, colorSelector = true, color, onColorChanged, onDelete}) {
 	return (
-		<li className={`bg-white p-2 flex flex-row items-center rounded-md`}>
+		<li className={`bg-white p-2 flex flex-row items-center rounded-2xl min-h-[68px]`}>
 			<LoadedBodyCard taxon={taxon} color={color} lang={lang} colorSelector={colorSelector}
 			                onColorChanged={onColorChanged} onDelete={onDelete}/>
 		</li>

@@ -9,7 +9,7 @@ import clsx from "clsx";
 import {MdDragIndicator} from "react-icons/md";
 
 
-export default function MapLibreCard({lang, taxon, colorSelector = true, color, onColorChanged, onHide, onDelete}) {
+export default function MapLibreCard({lang, taxon, dragControls, colorSelector = true, color, onColorChanged, onHide, onDelete}) {
 	const [isHidden, setIsHidden] = useState(false);
 
 	const _onHide = useCallback(() => {
@@ -26,11 +26,7 @@ export default function MapLibreCard({lang, taxon, colorSelector = true, color, 
 	}, [taxon, onDelete]);
 
 	return (
-		<li className={clsx(`bg-white py-2 pe-2 px-4 flex flex-row items-center rounded-md transition-all`, isHidden && "bg-opacity-65")}>
-			{/*<CBBButton isIconOnly className={"border-0 text-lg ms-auto hover:contrast-50 transition-all"}*/}
-			{/*           onPress={_onHide}>*/}
-			{/*	{<MdDragIndicator className=""/>}*/}
-			{/*</CBBButton>*/}
+		<li className={clsx(`bg-white py-2 pe-2 px-4 flex flex-row items-center rounded-2xl transition-all select-none min-h-[68px]`, isHidden && "bg-opacity-65")}>
 			{colorSelector &&
 				<PopoverColorPicker isDisabled={!taxon || isHidden} color={color}
 				                    className={clsx(isHidden && "opacity-65")}
@@ -65,7 +61,7 @@ export default function MapLibreCard({lang, taxon, colorSelector = true, color, 
 			</div>
 			<div className="ms-4 border-s-1 ps-2">
 				<CBBButton isIconOnly className="border-0 text-lg hover:contrast-50 transition-all min-w-[20px] max-w-[20px]"
-				           onPress={_onDelete}>
+				           onPointerDown={(event) => dragControls.start(event)}>
 					<MdDragIndicator/>
 				</CBBButton>
 			</div>

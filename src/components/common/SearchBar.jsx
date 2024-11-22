@@ -4,6 +4,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 import HighlightText from "@/components/common/HighlightText";
 import {t} from "@/i18n/i18n";
+import clsx from "clsx";
 
 
 function SearchBarIcon() {
@@ -81,15 +82,16 @@ export default function SearchBar({
 			              listboxProps={{
 				              shouldHighlightOnFocus: true,
 			              }}
+			              classNames={{popoverContent: "rounded-2xl"}}
 			              inputProps={{
 				              classNames: {
 					              input: "",
-					              inputWrapper: `min-h-[50px] bg-white border-${border ? 1 : 0}`,
+					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border-1' : 'border-0'),
 				              },
 			              }}
 			              selectorIcon={<SearchBarIcon/>} disableSelectorIconRotation={true}>
 				{obj => (
-					<AutocompleteItem key={obj.id} textValue={obj.name}>
+					<AutocompleteItem key={obj.id} textValue={obj.name} className="rounded-xl">
 						{children(obj, search)}
 					</AutocompleteItem>
 				)}

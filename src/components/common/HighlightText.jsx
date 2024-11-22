@@ -11,7 +11,7 @@ export default function HighlightText({text, highlight}) {
         <span>
 			{parts && parts.map((part, index) =>
                 part.toLowerCase() === highlight.toLowerCase() ? (
-                    <span key={index} className="bg-primary bg-opacity-80">
+                    <span key={index} className="bg-primary rounded-sm bg-opacity-80">
 				{part}
 				</span>
                 ) : (

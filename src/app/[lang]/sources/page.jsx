@@ -132,7 +132,7 @@ export default function Page({params: {lang}}) {
 function DataType({id, lang, refs, dtSources, dataType}) {
 	return (
 		<div id={id} ref={refs} className="w-full space-y-6 min-h-[400px]">
-			<h1 className="text-3xl font-extralight">{t(lang, `partners.list.${dataType}`)}</h1>
+			<h3 className="text-3xl font-extralight">{t(lang, `partners.list.${dataType}`)}</h3>
 			<div className="w-full aspect-video rounded-xl border-1 border-slate-200">
 				<p className="font-extralight text-gray-600 bg-slate-100 px-4 py-3 rounded-t-xl">
 					<VscGraph className="inline-block me-2"/>

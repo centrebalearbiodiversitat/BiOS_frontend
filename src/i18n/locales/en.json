@@ -1,9 +1,11 @@
 {
-	"web.title": "Centre Balear de Biodiversitat",
-	"web.description": "Official web page for the database and tools developed by Centro Balear de Biodiversidad",
+    "web.name": "CBBDB",
+
+	"web.title": "CBBDB | Centre Balear de Biodiversitat",
+	"web.description": "CBBDB is an open-access biodiversity platform for the Balearic Islands, providing curated data on taxonomy, species occurrences, genetics, and interactive maps.",
 
 	"home.title": "Access to species data from the Balearic Islands",
-	"home.subtitle": "CBB | Centre Balear de Biodiversitat",
+	"home.subtitle": "CBBDB | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Species",
 	"home.statistics.observations": "Occurrences",

@@ -38,8 +38,8 @@ function DataCard({lang, title, icon, fetchData}) {
 
 	return (
 		<div className="flex-1 w-full h-full py-1">
-			<div className="flex flex-col md:flex-row justify-center flex-wrap overflow-hidden m-auto">
-				<div className="hidden md:block my-auto me-4 text-5xl text-black justify-center items-center">
+			<div className="flex flex-row justify-center flex-wrap overflow-hidden m-auto">
+				<div className=" my-auto me-4 text-5xl text-black justify-center items-center">
 					{icon}
 				</div>
 				<div className="flex flex-col justify-center">
@@ -61,9 +61,11 @@ function DataCard({lang, title, icon, fetchData}) {
 export default function Statistics({lang, className}) {
 
 	return (
-		<div className={clsx("bg-white/100 py-2 divide-x container flex flex-col md:flex-row rounded-md", className)}>
+		<div className={clsx("bg-white/100 py-4 px-2 divide-x flex flex-row rounded-2xl", className)}>
 			{
-				CBB_STATISTICS.map((item, index) => <DataCard {...item} key={index} lang={lang}/>)
+				CBB_STATISTICS.map((item, index) => (
+					<DataCard {...item} key={index} lang={lang}/>
+				))
 			}
 		</div>
 	);

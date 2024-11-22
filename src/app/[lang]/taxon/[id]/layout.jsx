@@ -2,7 +2,6 @@
 
 import {t} from "@/i18n/i18n"
 
-import "@/globals.css";
 import 'maplibre-gl/dist/maplibre-gl.css';
 import VerticalTaxonomy from "@/components/VerticalTaxonomy";
 import MainContent from "@/sections/MainContent";
@@ -81,11 +80,11 @@ export default function RootLayout({children, params: {lang, id}}) {
 	}, [lang, taxon])
 
 	return (
-		<article className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
+		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
 				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[128px] flex flex-col">
 					<div className="rounded-full ms-auto w-full">
-						<FullCBBSearchBar lang={lang} rounded={false} showFilters={false}/>
+						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
 					</div>
 					<Scrollbars universal autoHide className="hidden lg:block flex-grow h-0">
 						<AccordionTaxonomy hideIndicator={true} showDivider={false}
@@ -95,7 +94,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 					</Scrollbars>
 				</div>
 			</aside>
-			<div className="rounded-lg col-span-9 xl:ps-8 space-y-6">
+			<article className="rounded-lg col-span-9 xl:ps-8 space-y-6">
 				<header className="flex flex-row justify-center mb-6">
 					<div className="w-full grid grid-cols-5 gap-1 md:gap-6">
 						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
@@ -119,18 +118,16 @@ export default function RootLayout({children, params: {lang, id}}) {
 								</Loading>
 								<Loading loading={taxon} className="mb-4" width="80%" height="58px">
 									{taxon &&
-										<h1 className="first-letter:uppercase font-medium text-4xl">
-											<TaxonName taxon={taxon} lang={lang} redirect={false}/>
-										</h1>
+										<TaxonName as="h1" className="first-letter:uppercase font-medium text-4xl" taxon={taxon} lang={lang} redirect={false}/>
 									}
 								</Loading>
 								<Loading loading={taxon} className="mb-4" width="60%" height="30px">
 									{taxon &&
 										<>
 											{taxon.scientificNameAuthorship &&
-												<h1 className="first-letter:uppercase font-normal text-xl">
+												<h3 className="first-letter:uppercase font-normal text-xl">
 													{taxon.scientificNameAuthorship}
-												</h1>
+												</h3>
 											}
 											<p className="font-semibold first-letter:uppercase">
 												{taxon?.acceptedModifier &&
@@ -159,7 +156,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 						{children}
 					</TaxonProvider>
 				</MainContent>
-			</div>
-		</article>
+			</article>
+		</div>
 	);
 }

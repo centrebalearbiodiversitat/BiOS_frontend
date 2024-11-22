@@ -10,6 +10,7 @@ import Section from "@/components/common/Section";
 import TaxonDescendants from "@/components/TaxonDescendants";
 import {useTaxon} from "@/context/TaxonContext";
 import Hidden from "@/components/common/Hidden";
+import {t} from "@/i18n/i18n";
 
 
 export default function Taxon({params: {lang, id}}) {
@@ -34,6 +35,11 @@ export default function Taxon({params: {lang, id}}) {
 		taxonomy.descendantCount(id)
 			.then(r => setDescendants(r));
 	}, [id]);
+
+	useEffect(() => {
+		if (taxon)
+			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')} | ${t(lang, 'web.name')}`
+	}, [taxon, lang]);
 
 	const isSpeciesOrLower = useMemo(() => {
 		return ['species', 'subspecies', 'variety'].includes(taxon?.taxonRank);

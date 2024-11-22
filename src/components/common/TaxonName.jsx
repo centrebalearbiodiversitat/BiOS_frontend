@@ -1,6 +1,9 @@
-import React, {useCallback, useMemo} from "react";
+"use client"
+
+import React, {useMemo} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import clsx from "clsx";
 
 
 const ITALIC_RANKS = new Set([
@@ -14,16 +17,16 @@ const handleScrollTop = () => {
 	window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-function LinkOrP({children, redirect, className, ...extra}) {
+function LinkOrP({children, as, redirect, className, ...extra}) {
 	className = `${className} ${redirect ? "hover:underline" : ""}`
 
-	const Component = redirect ? Link : 'p';
+	const Component = redirect ? Link : as;
 
 	return <Component onClick={handleScrollTop} className={className} {...extra}>{children}</Component>;
 }
 
 
-export default function TaxonName({lang, taxon, author = false, redirect = true}) {
+export default function TaxonName({lang, className, as = 'p', taxon, author = false, redirect = true}) {
 	const pathname = usePathname();
 
 	const href = useMemo(() => {
@@ -37,7 +40,7 @@ export default function TaxonName({lang, taxon, author = false, redirect = true}
 	}, [redirect, lang, taxon.id, pathname]);
 
 	return (
-		<LinkOrP redirect={redirect} href={href} className={`first-letter:uppercase text-pretty`}>
+		<LinkOrP as={as} redirect={redirect} href={href} className={clsx(`first-letter:uppercase text-pretty`, className)}>
 			<span className={`${ITALIC_RANKS.has(taxon.taxonRank) ? "italic" : ""}`}>
 				{taxon.name}
 			</span>
