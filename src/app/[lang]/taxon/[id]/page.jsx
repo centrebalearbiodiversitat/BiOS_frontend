@@ -11,6 +11,7 @@ import TaxonDescendants from "@/components/TaxonDescendants";
 import {useTaxon} from "@/context/TaxonContext";
 import Hidden from "@/components/common/Hidden";
 import {t} from "@/i18n/i18n";
+import {generatePageTitle} from "@/utils/utils";
 
 
 export default function Taxon({params: {lang, id}}) {
@@ -38,7 +39,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	useEffect(() => {
 		if (taxon)
-			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')} | ${t(lang, 'web.name')}`
+			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')}`)
 	}, [taxon, lang]);
 
 	const isSpeciesOrLower = useMemo(() => {

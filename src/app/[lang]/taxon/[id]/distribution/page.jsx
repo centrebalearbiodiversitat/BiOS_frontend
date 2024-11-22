@@ -12,6 +12,7 @@ import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
 import {Card, Description} from "@/components/common/DescriptionCard";
 import {useTaxon} from "@/context/TaxonContext";
+import {generatePageTitle} from "@/utils/utils";
 
 export default function Taxon({params: {lang, id}}) {
 	const [taxon, setTaxon] = useTaxon();
@@ -33,7 +34,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	useEffect(() => {
 		if (taxon)
-			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')} | ${t(lang, 'web.name')}`
+			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')}`)
 	}, [taxon, lang]);
 
 	const occsStatsByMonthTranslated = useMemo(() => {

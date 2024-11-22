@@ -19,6 +19,7 @@ import {FiDownload} from "react-icons/fi";
 import CBBButton from "@/components/common/CBBButton";
 import MapLibreTaxa from "@/components/maplibre/MapLibreTaxa";
 import MapLibreCardGeography from "@/components/maplibre/MapLibreCardGeography";
+import {generatePageTitle} from "@/utils/utils";
 
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
@@ -128,6 +129,10 @@ export default function MapPage({params: {lang}}) {
 	const [taxaColors, setTaxaColors] = useState({});
 	const [hidden, setHidden] = useState({});
 	const mapRef = useRef();
+
+	useEffect(() => {
+		document.title = generatePageTitle(lang, t(lang, 'components.header.button.map'))
+	}, [lang]);
 
 	useEffect(() => {
 		// parse saved colors

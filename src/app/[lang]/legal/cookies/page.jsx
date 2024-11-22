@@ -1,9 +1,17 @@
 import React from "react";
 import {t} from "@/i18n/i18n";
 import {Body, Section, Title} from "@/components/common/Article";
+import {generatePageTitle} from "@/utils/utils";
 
 
 const LAST_UPDATE = "2024-10-30"
+
+
+export async function generateMetadata({params: {lang}}) {
+	return {
+		title: generatePageTitle(lang, t(lang, 'cookies.title')),
+	}
+}
 
 export default function Privacy({params: {lang}}) {
 

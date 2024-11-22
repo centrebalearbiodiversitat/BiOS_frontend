@@ -14,6 +14,7 @@ import {Scrollbars} from "react-custom-scrollbars-2";
 import {GiDragonfly} from "react-icons/gi";
 import {PiMagnifyingGlassBold} from "react-icons/pi";
 import Loading from "@/components/common/Loading";
+import {generatePageTitle} from "@/utils/utils";
 
 const SOURCE_DATA_TYPES = {
 	"taxon": {icon: <GiDragonfly/>, graphDescription: "partners.list.taxon.graph"},
@@ -72,6 +73,10 @@ export default function Page({params: {lang}}) {
 	useEffect(() => {
 		versioning.list().then(r => setSources(groupByDataType(r)));
 	}, []);
+
+	useEffect(() => {
+		document.title = generatePageTitle(lang, t(lang, 'components.header.button.about'))
+	}, [lang]);
 
 	const BUTTON_GROUP = useMemo(() => {
 		return Object.entries(SOURCE_DATA_TYPES).map(([dataType, meta]) => {

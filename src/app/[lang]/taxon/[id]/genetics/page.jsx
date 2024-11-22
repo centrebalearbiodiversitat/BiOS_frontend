@@ -17,6 +17,7 @@ import TableList from "@/components/TableList";
 import Loading from "@/components/common/Loading";
 import Section from "@/components/common/Section";
 import {useTaxon} from "@/context/TaxonContext";
+import {generatePageTitle} from "@/utils/utils";
 
 export default function TaxonSequences({params: {id, lang}}) {
 	const [taxon, setTaxon] = useTaxon();
@@ -30,7 +31,7 @@ export default function TaxonSequences({params: {id, lang}}) {
 
 	useEffect(() => {
 		if (taxon)
-			document.title = `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')} | ${t(lang, 'web.name')}`
+			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')}`)
 	}, [taxon, lang]);
 
 	const SEQ_HEADERS = useMemo(
