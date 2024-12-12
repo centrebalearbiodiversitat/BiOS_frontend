@@ -37,18 +37,9 @@ export const RadioItem = ({children, ...extra}) => {
 };
 
 
-export default function DownloadModal({lang, taxonId}) {
+export default function DownloadModal({lang, availableDownloads}) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
-	const [checklistLink, setChecklistLink] = useState('');
-	const [occurrencesLink, setOccurrencesLink] = useState('');
 	const [selectedLink, setSelectedLink] = useState(null);
-
-	useEffect(() => {
-		taxonomy.checklist(taxonId)
-			.then(r => setChecklistLink(r))
-		occurrences.listDownload(taxonId)
-			.then(r => setOccurrencesLink(r))
-	}, [taxonId]);
 
 	const onOpenChangeLink = useCallback(() => {
 		if (isOpen) {
@@ -56,21 +47,6 @@ export default function DownloadModal({lang, taxonId}) {
 		}
 		onOpenChange();
 	}, [onOpenChange, isOpen]);
-
-	const availableDownload = useMemo(() => {
-		return [
-			{
-				title: t(lang, "taxon.layout.modal.checklist"),
-				description: t(lang, "taxon.layout.modal.checklist.help"),
-				link: checklistLink,
-			},
-			{
-				title: t(lang, "taxon.layout.modal.occurrences"),
-				description: t(lang, "taxon.layout.modal.occurrences.help"),
-				link: occurrencesLink,
-			},
-		]
-	}, [lang, checklistLink, occurrencesLink]);
 
 	const {headerTitle, helpLabel, downloadButton} = useMemo(() => {
 		return {
@@ -100,7 +76,7 @@ export default function DownloadModal({lang, taxonId}) {
 								</div>
 								<RadioGroup onValueChange={onValueChange} label={helpLabel}>
 								{
-									availableDownload.map(
+									availableDownloads.map(
 										item => (
 											<RadioItem key={item.link} value={item.link}
 											           className="text-pretty"

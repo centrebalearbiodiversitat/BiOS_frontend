@@ -26,7 +26,7 @@ const defaultChildren = (obj, search) => {
 
 
 export default function SearchBar({
-	className, data, onSelected, onInput, children = defaultChildren,
+	className, data, onSelected, onInput, onSubmit, children = defaultChildren,
 	label, placeholder, rounded = true, border = false, lang
 }) {
 	const [search, setSearch] = useState("");
@@ -66,12 +66,19 @@ export default function SearchBar({
 	}, [lang, placeholder]);
 
 	const onDefaultSelected = useCallback((e) => {
-		if (e.key === "ArrowRight" && !search) {
-			onInputChange(placeholderText);
-		} else if (data && data.length === 1 && e.key === "Enter")  {
-			_onSelected(data[0].id)
+		if (e.key === "ArrowRight") {
+			if (!search)
+				onInputChange(placeholderText);
+		} else if (e.key === "Enter")  {
+			if (data) {
+				if (data.length === 1) {
+					_onSelected(data[0].id)
+				} else {
+					onSubmit(search);
+				}
+			}
 		}
-	}, [data, onInputChange, search, placeholderText, _onSelected]);
+	}, [data, onInputChange, onSubmit, search, placeholderText, _onSelected]);
 
 	return (
 		<div className={className}>
@@ -89,6 +96,7 @@ export default function SearchBar({
 					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border-1' : 'border-0'),
 				              },
 			              }}
+			              isClearable={true}
 			              selectorIcon={<SearchBarIcon/>} disableSelectorIconRotation={true}>
 				{obj => (
 					<AutocompleteItem key={obj.id} textValue={obj.name} className="rounded-xl">

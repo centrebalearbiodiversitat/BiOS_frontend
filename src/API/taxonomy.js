@@ -2,8 +2,8 @@ const requests = require("@/API/requests");
 
 const TAXONOMY_PATH = '/taxonomy'
 
-function list() {
-	return requests.GET(`${TAXONOMY_PATH}/list`)
+function list(params) {
+	return requests.GET(`${TAXONOMY_PATH}/list`, params)
 }
 
 async function search(name, exact = false) {
@@ -26,8 +26,8 @@ function children(id, accepted_only) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/children`, {id, accepted_only})
 }
 
-function childrenCount(id, childrenRank = null) {
-	return requests.GET(`${TAXONOMY_PATH}/taxon/children/count`, {id, childrenRank})
+function childrenCount(id, childrenRank = null, acceptedOnly = true) {
+	return requests.GET(`${TAXONOMY_PATH}/taxon/children/count`, {id, childrenRank, acceptedOnly})
 }
 
 function composition(id) {
@@ -44,6 +44,10 @@ function sources(id) {
 
 async function checklist(id) {
 	return requests.URL(`${TAXONOMY_PATH}/taxon/checklist`, {id})
+}
+
+async function listExport(params) {
+	return requests.URL(`${TAXONOMY_PATH}/list/csv`, params)
 }
 
 async function taxonData(taxonomy) {
@@ -69,6 +73,7 @@ module.exports = {
 	synonyms,
 	sources,
 	checklist,
+	listExport,
 	taxonData,
 	descendantCount,
 	habitats,

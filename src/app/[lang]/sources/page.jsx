@@ -31,7 +31,7 @@ function groupByDataType(sources) {
 		return acc;
 	}, {});
 
-	sources.forEach(source => {
+	sources?.forEach(source => {
 		if (groups.hasOwnProperty(source.dataType))
 			groups[source.dataType].push(source);
 	});
@@ -75,7 +75,7 @@ export default function Page({params: {lang}}) {
 	}, []);
 
 	useEffect(() => {
-		document.title = generatePageTitle(lang, t(lang, 'components.header.button.about'))
+		document.title = generatePageTitle(lang, t(lang, 'components.header.button.sources'))
 	}, [lang]);
 
 	const BUTTON_GROUP = useMemo(() => {
@@ -97,7 +97,7 @@ export default function Page({params: {lang}}) {
 			<div className="w-full mx-auto">
 				<Link href={`/${lang}/taxon/search?q=Sympetrum fonscolombii`}>
 					<Image alt="Female Red-veined darter dragonfly (Sympetrum fonscolombii)" removeWrapper={true}
-					       src="/images/pages/about/odonata.jpg"
+					       src="/images/pages/sources/odonata.jpg"
 					       title="Wikipedia | Alvesgaspar, Edited by Fir0002, some rights reserved (CC BY-2.5)"
 					       className="object-cover w-full h-full max-h-[400px] rounded-none saturate-[120%] brightness-110"/>
 				</Link>
@@ -126,10 +126,6 @@ export default function Page({params: {lang}}) {
 					</div>
 				}
 			</main>
-			{/*National Center for Biotechnology Information (NCBI)[Internet]. Bethesda (MD): National Library of Medicine (US), National Center for Biotechnology Information; [1988] – [cited 2024 Nov 04]. Available from: https://www.ncbi.nlm.nih.gov/*/}
-			{/*IUCN. 2024. The IUCN Red List of Threatened Species. Version 2024-2. https://www.iucnredlist.org. Accessed on 2024 Nov 04.*/}
-			{/*iNaturalist community. Observations of [species list] from Balearic Islands, Spain observed on/between [date range]. Exported from https://www.inaturalist.org on 2024 Nov 04*/}
-			{/*BOLD Systems. Ratnasingham, S., & Hebert, P.D.N. (2007). BOLD: The Barcode of Life Data System (www.barcodinglife.org). Molecular Ecology Notes, 7(3), 355–364. doi:10.1111/j.1471-8286.2007.01678.x*/}
 		</article>
 	);
 }

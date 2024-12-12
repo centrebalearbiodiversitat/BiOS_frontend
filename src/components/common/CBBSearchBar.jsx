@@ -1,7 +1,6 @@
 "use client"
 
 import React, {useCallback, useState} from "react";
-
 import SearchBar from "@/components/common/SearchBar";
 import CBBButton from "@/components/common/CBBButton";
 import {t} from "@/i18n/i18n";
@@ -13,11 +12,16 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
 
     const onSelected = useCallback((payload) => {
         filters[filter].onSelected(payload)
-    }, [filters, filter])
+    }, [filters, filter]);
 
     const onInput = useCallback((input) => {
         filters[filter].onInput(input).then(q => setQuery(q))
-    }, [filters, filter])
+    }, [filters, filter]);
+
+    const onSubmit = useCallback((input) => {
+        if (filters[filter].onSubmit)
+            filters[filter].onSubmit(input)
+    }, [filters, filter]);
 
     return (
         <>
@@ -36,7 +40,7 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
             }
             <SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-[100%]"
                        label={label} placeholder={placeholder} lang={lang} border={border}
-                       onInput={onInput}>
+                       onSubmit={onSubmit} onInput={onInput}>
                 {children}
             </SearchBar>
         </>

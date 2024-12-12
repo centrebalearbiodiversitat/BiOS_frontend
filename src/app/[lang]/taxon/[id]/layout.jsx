@@ -19,6 +19,7 @@ import {FaLocationDot} from "react-icons/fa6";
 import DownloadModal from "@/components/DownloadModal";
 import {TaxonProvider} from "@/context/TaxonContext";
 import Scrollbars from "react-custom-scrollbars-2";
+import occurrences from "@/API/occurrences";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -55,6 +56,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 	const [descendants, setDescendants] = useState(undefined);
 	const [synonyms, setSynonyms] = useState(undefined);
 	const [sources, setSources] = useState(undefined);
+	const [checklistLink, setChecklistLink] = useState('');
+	const [occurrencesLink, setOccurrencesLink] = useState('');
 
 	useEffect(() => {
 		taxonomy.get(id)
@@ -67,7 +70,26 @@ export default function RootLayout({children, params: {lang, id}}) {
 			.then(r => setSynonyms(r))
 		taxonomy.sources(id)
 			.then(r => setSources(r))
+		taxonomy.checklist(id)
+			.then(r => setChecklistLink(r))
+		occurrences.listDownload(id)
+			.then(r => setOccurrencesLink(r))
 	}, [id]);
+
+	const availableDownloads = useMemo(() => {
+		return [
+			{
+				title: t(lang, "taxon.layout.modal.checklist"),
+				description: t(lang, "taxon.layout.modal.checklist.help"),
+				link: checklistLink,
+			},
+			{
+				title: t(lang, "taxon.layout.modal.occurrences"),
+				description: t(lang, "taxon.layout.modal.occurrences.help"),
+				link: occurrencesLink,
+			},
+		]
+	}, [lang, checklistLink, occurrencesLink]);
 
 	const TAB_BUTTONS = useMemo(() => [
 		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon'), icon: <FaInfo />},
@@ -106,7 +128,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 						</div>
 						<div className="flex flex-col col-span-full md:col-span-2">
 							<div className="ms-auto mt-4">
-								<DownloadModal lang={lang} taxonId={id}/>
+								<DownloadModal lang={lang} availableDownloads={availableDownloads}/>
 							</div>
 							<div className="my-auto">
 								<Loading loading={taxon} className="mb-4" width="40%" height="32px">
@@ -132,7 +154,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 											<p className="font-semibold first-letter:uppercase">
 												{taxon?.acceptedModifier &&
 													<span className="capitalize me-1">{taxon.acceptedModifier}</span>}
-												<span>{taxon?.accepted ? t(lang, 'taxon.main.accepted') : t(lang, 'taxon.main.synonym')}</span>
+												<span>{taxon?.accepted ? t(lang, 'general.taxonStatus.accepted') : t(lang, 'general.taxonStatus.synonym')}</span>
 											</p>
 											<p className="text-small italic font-light">
 												<span className="font-semibold me-1">ID:</span>{taxon?.id}

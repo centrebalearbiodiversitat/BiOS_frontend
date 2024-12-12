@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
 import clsx from "clsx";
 
-export default function Figure({alt, images, className= "rounded-lg", ...extra}) {
+export default function Figure({alt, hoverEffect = true, images, className= "rounded-lg", ...extra}) {
 	const [error, setError] = useState(false);
 	const [i, setI] = React.useState(0);
 
@@ -21,18 +21,18 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 			loading = true;
 			title = 'Loading...';
 		} else if (error || images.length === 0) {
-			title = 'No image found';
+			title = '';
 			loading = false;
 		} else {
 			if (images[i].source.url) {
 				src = images[i].source.url.replace('{id}', images[i].originId);
 			}
-			title = `${images[i].source.name} | ${images[i].attribution})`;
+			title = `${images[i].source.name} | ${images[i].attribution}`;
 			loading = false;
 		}
 
 		return {src, title, loading}
-	}, [images])
+	}, [images, i, error])
 
 	return (
 		<div className={clsx("w-full h-full relative overflow-hidden", className)}>
@@ -47,7 +47,7 @@ export default function Figure({alt, images, className= "rounded-lg", ...extra})
 				     backgroundPosition: 'center',
 				}}
 			/>
-			<figure className={`w-full h-full object-cover transition ease-in-out hover:scale-[115%]`}>
+			<figure className={clsx(`w-full h-full object-cover`, hoverEffect && 'transition ease-in-out hover:scale-[115%]')}>
 				<Image isLoading={loading} radius={"none"} removeWrapper className={`w-full h-full object-contain`}
 			        alt={alt} src={src} onError={onError}
 			        title={title} {...extra}/>

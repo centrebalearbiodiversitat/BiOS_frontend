@@ -4,7 +4,7 @@ import React, {useMemo} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import clsx from "clsx";
-
+import {handleScrollTop} from "@/utils/utils";
 
 const ITALIC_RANKS = new Set([
 	"genus",
@@ -13,16 +13,12 @@ const ITALIC_RANKS = new Set([
 	"variety",
 ])
 
-const handleScrollTop = () => {
-	window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 function LinkOrP({children, as, redirect, className, ...extra}) {
 	className = `${className} ${redirect ? "hover:underline" : ""}`
 
 	const Component = redirect ? Link : as;
 
-	return <Component onClick={handleScrollTop} className={className} {...extra}>{children}</Component>;
+	return <Component onClick={redirect ? handleScrollTop : null} className={className} {...extra}>{children}</Component>;
 }
 
 

@@ -13,8 +13,10 @@ export function middleware(request) {
 	// const preferredLocale = request.cookies.get('preferredLocale')?.value;
 	// const acceptLanguage = request.headers.get('accept-language')?.split(',')[0];
 	// const locale = preferredLocale || acceptLanguage || DEFAULT_LOCALE;
-	const host = (new URL(request.headers.get('host'))).hostname;
-	const domainLang = TRANSLATE_DOMAIN_ENDING[host.split('.')?.at(-1)];
+	console.log(request.headers.get('host'))
+	// const host = (new URL(request.headers.get('host'))).hostname;
+	// const domainLang = TRANSLATE_DOMAIN_ENDING[host.split('.')?.at(-1)];
+	const domainLang = null;
 
 	const fallbackLocale = domainLang || DEFAULT_LOCALE;
 	const { pathname } = request.nextUrl;

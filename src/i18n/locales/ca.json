@@ -29,8 +29,10 @@
 	"taxon.sidebar.children": "Descendents",
 	"taxon.sidebar.synonyms": "Sinònims",
 
-	"taxon.main.accepted": "Acceptat",
-	"taxon.main.synonym": "Sinònim",
+	"general.taxonStatus.accepted": "Acceptat",
+	"general.taxonStatus.true": "Acceptat",
+	"general.taxonStatus.synonym": "Sinònim",
+	"general.taxonStatus.false": "Sinònim",
 	"taxon.main.map.button.redirect": "Veure en Mapes",
 
 	"taxon.overview.iucn_status": "Estat de conservació (IUCN)",
@@ -38,7 +40,7 @@
 	"taxon.overview.iucn_europe": "Europeu",
 	"taxon.overview.iucn_mediterranean": "Mediterrani",
 	"taxon.overview.statistics": "Estadístiques",
-	"taxon.overview.composition": "Composició del taxon",
+	"taxon.overview.composition": "Composició del tàxon",
 	"taxon.overview.habitats": "Hàbitats",
 	"taxon.overview.habitat_1": "Bosc",
 	"taxon.overview.habitat_2": "Savana",
@@ -85,6 +87,25 @@
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",
 
+	"taxon.list.aside.title": "Filtres",
+	"taxon.list.aside.defaultSelector": "Tots",
+	"taxon.list.aside.rankSelector": "Nivell taxonòmic",
+	"taxon.list.aside.statusSelector": "Estat",
+	"taxon.list.aside.ancestor": "Ancestre",
+	"taxon.list.aside.higherTaxon": "Tàxon superior",
+	"taxon.list.aside.higherTaxon.placeholder": "Alytes",
+	"taxon.list.aside.hasImage": "Imatges",
+	"taxon.list.aside.hasImage.value.withImages": "Amb imatge",
+	"taxon.list.aside.hasImage.value.noImages": "Sense imatge",
+	"taxon.list.aside.search": "Cercar",
+	"taxon.list.title": "Cerca avançada",
+	"taxon.list.search.term": "Terme de cerca",
+	"taxon.list.search.term.placeholder": "muletensis",
+	"taxon.list.notFound": "Sense resultats",
+	"taxon.list.results": "Resultats de la cerca",
+	"taxon.list.modal.list": "Llista filtrada",
+	"taxon.list.modal.list.help": "Llista de taxonomia amb els filtres introduïts incloent-hi la taxonomia superior",
+
 	"geography.rank.ac": "Comunitat autònoma",
 	"geography.rank.island": "Illa",
 	"geography.rank.municipality": "Municipi",
@@ -92,7 +113,7 @@
 	"geography.rank.wb_0": "Aigua",
 
 	"map.drawer.close": "Tanca",
-	"map.drawer.selectedTaxa": "Taxons seleccionats",
+	"map.drawer.selectedTaxa": "Tàxons seleccionats",
 	"map.drawer.selectedLocalities": "Localitats seleccionades",
 	"map.drawer.filters": "Filtres",
 	"map.drawer.filters.uncertainty": "Incertesa",
@@ -106,7 +127,7 @@
 
 	"components.empty": "Sense dades",
 
-	"components.searchbar.label.taxonomy": "Cerca un taxon...",
+	"components.searchbar.label.taxonomy": "Cerca un tàxon...",
 	"components.searchbar.label.geography": "Cerca un lloc...",
 	"components.searchbar.placeholder.taxonomy": "Alytes muletensis",
 	"components.searchbar.placeholder.geography": "Menorca",
@@ -121,6 +142,7 @@
 	"components.header.button.genetics": "Genètica",
 	"components.header.button.about": "Sobre",
 	"components.header.button.sources": "Fonts",
+	"components.header.button.advancedSearch": "Cercador",
 
 	"components.iucn.EX": "Extinta",
 	"components.iucn.EW": "Extinta en estat salvatge",

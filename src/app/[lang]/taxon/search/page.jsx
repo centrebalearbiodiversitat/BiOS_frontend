@@ -6,7 +6,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {Spinner} from "@nextui-org/react";
 
 
-export default function About({params: {lang}}) {
+export default function Search({params: {lang}}) {
 	const router = useRouter();
 	const searchParams = useSearchParams()
 

@@ -19,7 +19,6 @@ export default function Taxon({params: {lang, id}}) {
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);
 	const [taxonHabitats, setTaxonHabitats] = useState(undefined);
-	const [descendants, setDescendants] = useState(undefined);
 
 	useEffect(() => {
 		taxonomy.composition(id)
@@ -33,8 +32,6 @@ export default function Taxon({params: {lang, id}}) {
 			.then(r => setTaxonData(r));
 		taxonomy.habitats(id)
 			.then(r => setTaxonHabitats(r));
-		taxonomy.descendantCount(id)
-			.then(r => setDescendants(r));
 	}, [id]);
 
 	useEffect(() => {
@@ -48,14 +45,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	return (
 		<>
-			<Hidden hide={descendants === null || descendants !== undefined && Object.keys(descendants).length === 0}>
-				<Section lang={lang} title="taxon.overview.statistics">
-					<Loading className="mb-4 aspect-video" loading={descendants} width="100%" height="300px">
-						<TaxonDescendants lang={lang} descendants={descendants}/>
-					</Loading>
-				</Section>
-			</Hidden>
-
+			<TaxonDescendants lang={lang} taxonId={id}/>
 			<Hidden hide={!isSpeciesOrLower}>
 				<Section lang={lang} title="taxon.overview.iucn_status">
 					<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">

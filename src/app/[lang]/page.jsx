@@ -1,15 +1,23 @@
 import {t} from "@/i18n/i18n";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import {Image} from "@nextui-org/react";
+import {Button, Image} from "@nextui-org/react";
 import React from "react";
 import Statistics from "@/components/Statistics";
+import Link from "next/link";
+import {MdTune} from "react-icons/md";
 
+export async function generateMetadata({params: {lang}}) {
+	return {
+		title: t(lang, 'web.title'),
+	}
+}
 
 export default function Home({params: {lang}}) {
 
 	return (
 		<>
-			<div className="absolute top-0 w-full min-h-full flex flex-col justify-center items-center lg:grid lg:grid-cols-12"
+			<div
+				className="absolute top-0 w-full min-h-full flex flex-col justify-center items-center lg:grid lg:grid-cols-12"
 			     style={{
 				     backgroundRepeat: 'no-repeat',
 				     backgroundSize: 'cover',
@@ -29,7 +37,12 @@ export default function Home({params: {lang}}) {
 						</h1>
 					</header>
 					<div className="space-y-2 py-12">
-						<FullCBBSearchBar lang={lang} showFilters={false} rounded={true}/>
+						<div className="flex flex-row gap-1.5 h-[56px]">
+							<FullCBBSearchBar lang={lang} showFilters={false} rounded={true}/>
+							<Button as={Link} href={`/${lang}/taxon/list`} className="h-full rounded-full bg-white border-1 text-2xl text-foreground-500 hover:!opacity-100">
+								<MdTune/>
+							</Button>
+						</div>
 						<Statistics lang={lang}/>
 						<div className="grid grid-cols-4 my-auto gap-2 justify-center items-center pt-4">
 							<Image src="/images/partners/eu_next_gen.png" alt={"Partner NextGenerationEU"}

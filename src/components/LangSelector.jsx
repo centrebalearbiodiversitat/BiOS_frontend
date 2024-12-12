@@ -29,16 +29,17 @@ export default function LangSelector({locales, lang}) {
 			undefined,
 			{shallow: true}
 		)
+
 	}
 
 	return (
-		<Dropdown className="min-w-[100px]">
+		<Dropdown className="min-w-[100px]" shouldBlockScroll={false}>
 			<DropdownTrigger>
 				<Button radius="full" className="uppercase bg-white border-0">
 					{lang} <IoIosArrowDown/>
 				</Button>
 			</DropdownTrigger>
-			<DropdownMenu itemClasses={{wrapper: "rounded-full"}} className="rounded-full" aria-label="Change language" onAction={redirect}>
+			<DropdownMenu itemClasses={{wrapper: "rounded-full"}} aria-label="Change language" onAction={redirect}>
 				{
 					locales.map((locale) =>
 						<DropdownItem key={locale} hidden={false} className="text-center uppercase">
