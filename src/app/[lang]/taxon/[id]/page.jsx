@@ -1,24 +1,34 @@
 "use client"
 
 import taxonomy from "@/API/taxonomy";
+import tags from "@/API/tags";
 import React, {useEffect, useMemo, useState} from "react";
 import Loading from "@/components/common/Loading";
 import IUCN from "@/components/IUCN";
-import Habitats from "@/components/Habitats";
+import TaxonHabitats from "@/components/TaxonHabitats";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
 import TaxonDescendants from "@/components/TaxonDescendants";
-import {useTaxon} from "@/context/TaxonContext";
+import {useTaxon} from "@/contexts/TaxonContext";
 import Hidden from "@/components/common/Hidden";
 import {t} from "@/i18n/i18n";
 import {generatePageTitle} from "@/utils/utils";
+import TaxonDOE from "@/components/TaxonDOE";
+import SubSection from "@/components/common/SubSection";
+import TaxonSystem from "@/components/TaxonSystem";
+import TaxonDirectives from "@/components/TaxonDirectives";
+import NoData from "@/components/common/NoData";
+import IUCNCard from "@/components/IUCNCard";
 
 
 export default function Taxon({params: {lang, id}}) {
-	const [taxon, setTaxon] = useTaxon();
+	const [taxon, _] = useTaxon();
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);
+	const [taxonTags, setTaxonTags] = useState(undefined);
 	const [taxonHabitats, setTaxonHabitats] = useState(undefined);
+	const [taxonDirectives, setTaxonDirectives] = useState(undefined);
+	const [taxonSystems, setTaxonSystems] = useState(undefined);
 
 	useEffect(() => {
 		taxonomy.composition(id)
@@ -28,10 +38,16 @@ export default function Taxon({params: {lang, id}}) {
 				} else
 					setComposition(null);
 			});
-		taxonomy.taxonData(id)
+		tags.taxonIUCN(id)
 			.then(r => setTaxonData(r));
-		taxonomy.habitats(id)
+		tags.listTagsByTaxon(id)
+			.then(r => setTaxonTags(r));
+		tags.listHabitats(id)
 			.then(r => setTaxonHabitats(r));
+		tags.listDirectives(id)
+			.then(r => setTaxonDirectives(r));
+		tags.listSystem(id)
+			.then(r => setTaxonSystems(r));
 	}, [id]);
 
 	useEffect(() => {
@@ -45,32 +61,45 @@ export default function Taxon({params: {lang, id}}) {
 
 	return (
 		<>
-			<TaxonDescendants lang={lang} taxonId={id}/>
 			<Hidden hide={!isSpeciesOrLower}>
-				<Section lang={lang} title="taxon.overview.iucn_status">
-					<Loading className="mb-4 aspect-video" loading={taxonData} width="100%">
-						<div className="mx-auto my-5 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-[370px] sm:max-w-[550px] xl:max-w-[800px] xl:grid-cols-3">
-							<IUCN className="col-span-1 sm:col-span-2 xl:col-span-1" title="taxon.overview.iucn_global" status={taxonData?.iucnGlobal} lang={lang}/>
-							<IUCN className="col-span-1" title="taxon.overview.iucn_europe" status={taxonData?.iucnEurope} lang={lang}/>
-							<IUCN className="col-span-1" title="taxon.overview.iucn_mediterranean" status={taxonData?.iucnMediterranean} lang={lang}/>
-						</div>
-					</Loading>
+				<Section title="taxon.overview.status" subtitle="taxon.overview.status.description">
+					<div className="grid grid-cols-4 md:grid-cols-5 xl:grid-cols-4 gap-4">
+						<SubSection className="col-span-full md:col-span-2 xl:col-span-1 !p-0">
+							<NoData isDataAvailable={taxonTags?.at(0)}>
+								<TaxonDOE doe={taxonTags?.at(0)}/>
+							</NoData>
+						</SubSection>
+						<SubSection className="col-span-full md:col-span-3 xl:col-span-3 !p-0">
+							<IUCNCard scopes={taxonData}/>
+						</SubSection>
+					</div>
+				</Section>
+			</Hidden>
+
+			<TaxonDescendants lang={lang} taxonId={id}/>
+
+			<Section title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
+				<TaxonSystem className="justify-center mb-4" systems={taxonSystems}/>
+				<SubSection>
+					<TaxonHabitats habitats={taxonHabitats}/>
+				</SubSection>
+			</Section>
+
+			<Hidden hide={!isSpeciesOrLower}>
+				<Section title="taxon.overview.directives" subtitle="taxon.overview.directives.description">
+					<SubSection>
+						<TaxonDirectives directives={taxonDirectives}/>
+					</SubSection>
 				</Section>
 			</Hidden>
 
 			<Hidden hide={isSpeciesOrLower}>
-				<Section lang={lang} title="taxon.overview.composition">
-					<Loading className="mb-4" loading={composition} width="100%" height={350}>
+				<Section title="taxon.overview.composition">
+					<SubSection>
 						<TaxonComposition lang={lang} composition={composition}/>
-					</Loading>
+					</SubSection>
 				</Section>
 			</Hidden>
-
-			<Section lang={lang} title="taxon.overview.habitats">
-				<Loading className="mb-4 aspect-video" loading={taxonData} width="100%" height="100px">
-					<Habitats lang={lang} habitats={taxonHabitats}/>
-				</Loading>
-			</Section>
 		</>
 	);
 }

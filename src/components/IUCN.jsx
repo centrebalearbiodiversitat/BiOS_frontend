@@ -1,16 +1,19 @@
-import React, {useMemo} from "react";
+import React from "react";
 import {t} from "@/i18n/i18n";
 import {Tooltip} from "@nextui-org/react";
 import {TiArrowSortedUp} from "react-icons/ti";
 import clsx from "clsx";
+import {GiEarthAfricaEurope, GiEuropeanFlag} from "react-icons/gi";
+import {BiDotsHorizontalRounded} from "react-icons/bi";
+import {useLang} from "@/contexts/LangContext";
 
 const IUCN_CATEGORIES = {
-	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "red"},
+	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "#fd3636"},
 	'ew': {color: "#4a3835", text: 'components.iucn.EW', textColor: "white"},
 	'cr': {color: "#C52512", text: 'components.iucn.CR', textColor: "#FECBCB"},
-	'en': {color: "#F28533", text: 'components.iucn.EN', textColor: "#ffdab5"},
+	'en': {color: "#F28533", text: 'components.iucn.EN', textColor: "#ffe4c5"},
 	'vu': {color: "#FFC90E", text: 'components.iucn.VU', textColor: "#FFFFCC"},
-	'nt': {color: "#CCE227", text: 'components.iucn.NT', textColor: "#f5ffe9"},
+	'nt': {color: "#CCE227", text: 'components.iucn.NT', textColor: "#fbfff5"},
 	'lc': {color: "#006666", text: 'components.iucn.LC', textColor: "white"},
 	'dd': {color: "#808285", text: 'components.iucn.DD', textColor: "white"},
 	'na': {color: "#C1B5A5", text: 'components.iucn.NA', textColor: "black"},
@@ -18,7 +21,7 @@ const IUCN_CATEGORIES = {
 }
 
 
-function IUCNPill({lang, status, color, text, textColor, enabled, arrow = false}) {
+function IUCNPill({lang, status, uncolored = false, color, text, textColor, enabled, arrow = false}) {
 	const radius = '40px'
 
 	return (
@@ -28,7 +31,7 @@ function IUCNPill({lang, status, color, text, textColor, enabled, arrow = false}
 			     // paddingBottom: enabled ? '' : '.8rem',
 			     border: enabled ? null : '3px solid #FFFFFF',
 			     color: textColor,
-			     backgroundColor: color,
+			     backgroundColor: !uncolored ? color : "",
 			     minWidth: radius,
 			     width: radius,
 			     maxWidth: radius,
@@ -39,7 +42,7 @@ function IUCNPill({lang, status, color, text, textColor, enabled, arrow = false}
 			     marginLeft: arrow && enabled && '4px',
 			     marginRight: arrow && enabled && '4px',
 		     }}>
-			<p className="uppercase flex justify-center items-center w-full h-full">
+			<p className="uppercase font-medium flex justify-center items-center w-full h-full">
 				{status}
 			</p>
 			{arrow && enabled && <TiArrowSortedUp className="text-slate-600 mt-auto mx-auto"/>}
@@ -74,22 +77,51 @@ function IUCNToolTip({lang, children, status}) {
 }
 
 
-export default function IUCN({title, status, lang, className}) {
+export default function IUCN({title, status, className}) {
+	const [lang, _] = useLang();
+
 	status = status || 'na';
+	// status = 'ex'
+	// status = 'ew'
+	// status = 'cr'
+	// status = 'en'
+	// status = 'vu'
+	// status = 'nt'
+	// status = 'lc'
+	// status = 'dd'
+	// status = 'na'
+	// status = 'ne'
 
 	const iucn_cat = IUCN_CATEGORIES[status];
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<div className={clsx("border-1 border-slate-200 h-full w-full gap-5 bg-white rounded-full ps-4 pe-8 py-3 lg:py-2 xl:py3 flex flex-row items-center", className)}>
-				<IUCNPill lang={lang} enabled={true} status={status} {...iucn_cat}/>
-				<div className="flex flex-col text-pretty">
-					<h3 className="text-lg font-medium w-full">
-						{t(lang, title)}
-					</h3>
-					<p className="text-sm text-gray-500">
-						{t(lang, iucn_cat.text)}
-					</p>
+			<div className={clsx("w-full h-full", className)}>
+				<div className={"flex flex-col bg-white w-full h-full gap-5 rounded-2xl p-6"}>
+					<div className="flex flex-row">
+						<div>
+							<div className="rounded-full rounded-tr-none border border-slate-50 w-fit aspect-square"
+							     style={{
+								     backgroundColor: `${iucn_cat.color}C0`
+							     }}>
+								<IUCNPill uncolored={true} lang={lang} enabled={true} status={status} {...iucn_cat}/>
+							</div>
+							<p className="text-center font-medium text-gray-500 text-xs pt-1">IUCN</p>
+						</div>
+						<div className="ms-auto text-lg">
+							<BiDotsHorizontalRounded/>
+						</div>
+					</div>
+					<div className="flex-grow flex">
+						<div className="mt-auto w-full flex flex-col text-pretty self-center justify-self-center">
+							<p className="text-end text-md font-medium">
+								{t(lang, iucn_cat.text)}
+							</p>
+							<h3 className="text-end text-gray-500 w-full text-sm">
+								{t(lang, title)}
+							</h3>
+						</div>
+					</div>
 				</div>
 			</div>
 		</IUCNToolTip>

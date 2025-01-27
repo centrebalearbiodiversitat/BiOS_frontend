@@ -2,24 +2,18 @@
 
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import taxonomy from "@/API/taxonomy";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {Autocomplete, Chip, Input, Pagination, Spacer, Spinner} from "@nextui-org/react";
-import Loading from "@/components/common/Loading";
-import TaxonListCard from "@/app/[lang]/taxon/list/TaxonListCard";
-import Scrollbars from "react-custom-scrollbars-2";
+import {useRouter, useSearchParams} from "next/navigation";
+import {Chip, Input, Pagination} from "@nextui-org/react";
 import KeySelector from "@/components/common/KeySelector";
 import {t} from "@/i18n/i18n";
 import TaxonListBlockCard from "@/app/[lang]/taxon/list/TaxonListBlockCard";
 import CBBButton from "@/components/common/CBBButton";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import {BsDownload} from "react-icons/bs";
 import {generatePageTitle, handleScrollTop} from "@/utils/utils";
 import TaxonName from "@/components/common/TaxonName";
-import {LuTextCursor} from "react-icons/lu";
 import {FaCamera, FaCheck, FaHighlighter} from "react-icons/fa";
 import {RiParentFill} from "react-icons/ri";
 import {TbHierarchy3} from "react-icons/tb";
-import DownloadButton from "@/components/common/DownloadButton";
 import DownloadModal from "@/components/DownloadModal";
 import Hidden from "@/components/common/Hidden";
 
@@ -86,8 +80,6 @@ export default function List({params: {lang}}) {
 	const [totalTaxa, setTotalTaxa] = useState(0);
 	const [totalPages, setTotalPages] = useState(1);
 	const searchParams = useSearchParams();
-	const pathname = usePathname();
-
 	const qRef = useRef(null);
 
 	useEffect(() => {
@@ -118,12 +110,12 @@ export default function List({params: {lang}}) {
 	}, [lang, router, searchParams]);
 
 	const generateSearchPath = useCallback((param= null, value = null) => {
-		const params = new URLSearchParams(searchParams.toString())
+		const params = new URLSearchParams(searchParams.toString());
 
 		if (qRef.current.value)
 			params.set('q', qRef.current.value);
 		else
-			params.delete('q')
+			params.delete('q');
 
 		if (param !== "page") {
 			params.delete('page');
@@ -177,8 +169,8 @@ export default function List({params: {lang}}) {
 							<div className="col-span-full">
 								<FilterLabel lang={lang} label="taxon.list.aside.ancestor" icon={RiParentFill}/>
 								{ancestor &&
-									<div className="my-2">
-										<Chip onClose={() => generateSearchPath('ancestor', null)}>
+									<div className="my-2 w-full">
+										<Chip className="w-full max-w-none" onClose={() => generateSearchPath('ancestor', null)}>
 											<TaxonName lang={lang} taxon={ancestor} redirect={false}/>
 										</Chip>
 									</div>
@@ -205,7 +197,7 @@ export default function List({params: {lang}}) {
 								             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}/>
 							</div>
 							<div>
-								<FilterLabel lang={lang} label="taxon.list.aside.statusSelector" icon={FaCheck}/>
+								<FilterLabel lang={lang} label="taxon.list.asidde.statusSelector" icon={FaCheck}/>
 								<KeySelector items={TAXON_STATUS} lang={lang}
 								             onSelected={s => generateSearchPath('accepted', s)}
 								             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}

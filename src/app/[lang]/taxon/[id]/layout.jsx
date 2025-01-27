@@ -17,9 +17,10 @@ import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import DownloadModal from "@/components/DownloadModal";
-import {TaxonProvider} from "@/context/TaxonContext";
+import {TaxonProvider} from "@/contexts/TaxonContext";
 import Scrollbars from "react-custom-scrollbars-2";
 import occurrences from "@/API/occurrences";
+import {useRouter} from "next/navigation";
 
 
 function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
@@ -51,6 +52,8 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants,
 
 
 export default function RootLayout({children, params: {lang, id}}) {
+	const router = useRouter();
+
 	const [taxon, setTaxon] = useState(undefined);
 	const [higherTaxonomy, setHigherTaxonomy] = useState(undefined);
 	const [descendants, setDescendants] = useState(undefined);
@@ -61,7 +64,12 @@ export default function RootLayout({children, params: {lang, id}}) {
 
 	useEffect(() => {
 		taxonomy.get(id)
-			.then(r => setTaxon(r))
+			.then(r => {
+				if (r)
+					setTaxon(r)
+				else
+					router.replace("/404")
+			})
 		taxonomy.parent(id)
 			.then(r => setHigherTaxonomy(r))
 		taxonomy.children(id, true)
@@ -104,7 +112,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 	return (
 		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
-				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[128px] flex flex-col">
+				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[100px] flex flex-col">
 					<div className="rounded-full ms-auto w-full">
 						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
 					</div>

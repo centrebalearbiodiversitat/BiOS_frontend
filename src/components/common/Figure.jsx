@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
 import clsx from "clsx";
 
-export default function Figure({alt, hoverEffect = true, images, className= "rounded-lg", ...extra}) {
+export default function Figure({alt, hoverEffect = true, images, className= "rounded-xl", ...extra}) {
 	const [error, setError] = useState(false);
 	const [i, setI] = React.useState(0);
 

@@ -16,7 +16,7 @@ import {
 import TableList from "@/components/TableList";
 import Loading from "@/components/common/Loading";
 import Section from "@/components/common/Section";
-import {useTaxon} from "@/context/TaxonContext";
+import {useTaxon} from "@/contexts/TaxonContext";
 import {generatePageTitle} from "@/utils/utils";
 
 export default function TaxonSequences({params: {id, lang}}) {
@@ -49,7 +49,7 @@ export default function TaxonSequences({params: {id, lang}}) {
 
 	return (
 		<>
-			<Section lang={lang} title="taxon.genetics.genes">
+			<Section title="taxon.genetics.genes">
 				<Loading loading={genes} width="100%" height={200}>
 					<ul className="grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8">
 						{genes &&
@@ -77,13 +77,13 @@ export default function TaxonSequences({params: {id, lang}}) {
 				</Loading>
 			</Section>
 
-			<Section lang={lang} title="taxon.genetics.genomes">
+			<Section title="taxon.genetics.genomes">
 				<TableList list={seqs} headers={SEQ_HEADERS}/>
 			</Section>
-			<Section lang={lang} title="taxon.genetics.transcriptomes">
+			<Section title="taxon.genetics.transcriptomes">
 				<TableList list={[]} headers={SEQ_HEADERS}/>
 			</Section>
-			<Section lang={lang} title="taxon.genetics.mitogenomes">
+			<Section title="taxon.genetics.mitogenomes">
 				<TableList list={[]} headers={SEQ_HEADERS}/>
 			</Section>
 		</>

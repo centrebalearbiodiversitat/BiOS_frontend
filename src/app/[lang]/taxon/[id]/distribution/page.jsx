@@ -11,7 +11,7 @@ import Section from "@/components/common/Section";
 import StatsChart from "@/components/StatsChart";
 import Loading from "@/components/common/Loading";
 import {Card, Description} from "@/components/common/DescriptionCard";
-import {useTaxon} from "@/context/TaxonContext";
+import {useTaxon} from "@/contexts/TaxonContext";
 import {generatePageTitle} from "@/utils/utils";
 
 export default function Taxon({params: {lang, id}}) {
@@ -61,7 +61,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	return (
 		<>
-			<Section lang={lang} title="taxon.distribution.distribution">
+			<Section title="taxon.distribution.distribution">
 				<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}
 				          taxaColors={{[id]: '#ff6900'}}>
 					<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>
@@ -72,7 +72,7 @@ export default function Taxon({params: {lang, id}}) {
 					</div>
 				</MapLibre>
 			</Section>
-			<Section lang={lang} title="taxon.distribution.statistics">
+			<Section title="taxon.distribution.statistics">
 				<div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
 					<div className="w-full aspect-video">
 						<Card>
