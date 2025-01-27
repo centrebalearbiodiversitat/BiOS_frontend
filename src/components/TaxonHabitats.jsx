@@ -12,6 +12,9 @@ import {
 } from "react-icons/fa";
 import {GiFallingRocks, GiSharkFin, GiUndergroundCave, GiWaterfall, GiWaterSplash, GiWheat} from "react-icons/gi";
 import Empty from "@/components/Empty";
+import Loading from "@/components/common/Loading";
+import NoData from "@/components/common/NoData";
+import {useLang} from "@/contexts/LangContext";
 
 const HABITAT_ICONS = {
 	'taxon.overview.habitat_1': {group: 'forest', color: "#16a34a"},
@@ -48,33 +51,37 @@ const HABITAT_GROUPS = {
 }
 
 const HABITAT_MOCKUP = [
-	{sources: [{originId: 1}]},
-	{sources: [{originId: 2}]},
-	{sources: [{originId: 3}]},
-	{sources: [{originId: 4}]},
-	{sources: [{originId: 5}]},
-	{sources: [{originId: 6}]},
-	{sources: [{originId: 7}]},
-	{sources: [{originId: 8}]},
-	{sources: [{originId: 9}]},
-	{sources: [{originId: 10}]},
-	{sources: [{originId: 11}]},
-	{sources: [{originId: 12}]},
-	{sources: [{originId: 13}]},
-	{sources: [{originId: 14}]},
-	{sources: [{originId: 15}]},
-	{sources: [{originId: 16}]},
-	{sources: [{originId: 17}]},
-	{sources: [{originId: 18}]},
+	{sources: [{externalId: 1}]},
+	{sources: [{externalId: 2}]},
+	{sources: [{externalId: 3}]},
+	{sources: [{externalId: 4}]},
+	{sources: [{externalId: 5}]},
+	{sources: [{externalId: 6}]},
+	{sources: [{externalId: 7}]},
+	{sources: [{externalId: 8}]},
+	{sources: [{externalId: 9}]},
+	{sources: [{externalId: 10}]},
+	{sources: [{externalId: 11}]},
+	{sources: [{externalId: 12}]},
+	{sources: [{externalId: 13}]},
+	{sources: [{externalId: 14}]},
+	{sources: [{externalId: 15}]},
+	{sources: [{externalId: 16}]},
+	{sources: [{externalId: 17}]},
+	{sources: [{externalId: 18}]},
 ]
 
-export default function Habitats({habitats, lang}) {
-	habitats = habitats || [];
-	// habitats = HABITAT_MOCKUP;
+export default function TaxonHabitats({habitats}) {
+	const [lang, _] = useLang();
+
+	const isLoading = habitats === undefined;
+	const noData = habitats === null;
+	// habitats = isLoading || noData ? HABITAT_MOCKUP.slice(0, 6) : habitats;
+	habitats = HABITAT_MOCKUP;
 
 	const habitatStyles = useMemo(() => {
 		return habitats.map(habitat => {
-			const habitatKey = `taxon.overview.habitat_${habitat.sources[0].originId}`;
+			const habitatKey = `taxon.overview.habitat_${habitat.sources[0].externalId}`;
 
 			return {
 				habitatKey: habitatKey,
@@ -84,26 +91,41 @@ export default function Habitats({habitats, lang}) {
 	}, [habitats]);
 
 	return (
-		<Empty isEmpty={habitats.length === 0} lang={lang}>
-			<ul className="rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 m-auto py-5 px-4">
-				{habitatStyles?.map((habitatStyle) => (
-					<li key={habitatStyle.habitatKey} className="bg-white rounded-xl p-2 flex border-1 border-slate-200"
-					    style={{
-							 // border: `2px solid ${HABITAT_GROUPS[habitatStyle.group].color}44`,
-					    }}>
-						<div className="rounded-full text-lg flex justify-center items-center min-w-[35px] max-w-[35px] min-h-[35px] max-h-[35px] relative -left-3 -top-5 -mx-3"
-						     style={{
-								 color: "white",
-								 backgroundColor: HABITAT_GROUPS[habitatStyle.group].color,
-						}}>
-							{HABITAT_GROUPS[habitatStyle.group].icon}
-						</div>
-						<p className="w-full text-medium m-auto text-pretty text-center font-light ">
-							{t(lang, habitatStyle.habitatKey)}
-						</p>
-					</li>
-				))}
-			</ul>
-		</Empty>
+		<Loading loading={isLoading} width="100%" height={450}>
+			<NoData isDataAvailable={!noData}>
+				<ul className="rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 m-auto">
+					{habitatStyles?.map((habitatStyle) => (
+						<HabitatCard key={habitatStyle.habitatKey} lang={lang} hStyle={habitatStyle} group={HABITAT_GROUPS[habitatStyle.group]}/>
+					))}
+				</ul>
+			</NoData>
+		</Loading>
+	)
+}
+
+function HabitatCard({hStyle, group, lang}) {
+	return (
+		<li className="space-y-6 rounded-xl p-8 border" style={{
+		     borderColor: `${group.color}10`,
+		     backgroundColor: `${group.color}10`,
+
+		}}>
+			<div className="rounded-full w-[50px] text-2xl flex justify-center border items-center aspect-square"
+			     style={{
+					color: group.color,
+					borderColor: `${group.color}20`,
+					backgroundColor: "white",
+			     }}>
+				{group.icon}
+			</div>
+			<div className="space-y-1">
+				<p className="w-full font-light text-3xl">
+					{t(lang, hStyle.habitatKey)}
+				</p>
+				<p className="rounded-full w-full h-full text-medium m-auto text-pretty font-light">
+					{t(lang, `${hStyle.habitatKey}.description`)}
+				</p>
+			</div>
+		</li>
 	)
 }
