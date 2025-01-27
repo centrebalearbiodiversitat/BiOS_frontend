@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
 import HighlightText from "@/components/common/HighlightText";
 import {t} from "@/i18n/i18n";
@@ -33,6 +33,20 @@ export default function SearchBar({
 	const [selected, setSelected] = useState(null);
 	const [acFocus, setAcFocus] = useState(false);
 
+	useEffect(() => {
+		function handleScroll() {
+			setAcFocus(false)
+			setSearch("")
+			setSelected(null)
+		}
+		
+		window.addEventListener('scroll', handleScroll);
+
+	    return () => {
+	      window.removeEventListener('scroll', handleScroll);
+	    };
+	}, []);
+	
 	const onInputChange = useCallback((input) => {
 		// if (input !== "") {
 		onInput(input);
@@ -73,9 +87,10 @@ export default function SearchBar({
 			if (data) {
 				if (data.length === 1) {
 					_onSelected(data[0].id)
-				} else {
-					onSubmit(search);
 				}
+				// else if (!selected) {
+				// 	onSubmit(search);
+				// }
 			}
 		}
 	}, [data, onInputChange, onSubmit, search, placeholderText, _onSelected]);

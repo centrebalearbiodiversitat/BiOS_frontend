@@ -50,16 +50,8 @@ async function listExport(params) {
 	return requests.URL(`${TAXONOMY_PATH}/list/csv`, params)
 }
 
-async function taxonData(taxonomy) {
-	return requests.GET(`${TAXONOMY_PATH}/taxon/data`, {taxonomy})
-}
-
 async function descendantCount(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/descendants/count`, {id})
-}
-
-async function habitats(taxonomy) {
-	return requests.GET(`${TAXONOMY_PATH}/taxon/data/habitats`, {taxonomy})
 }
 
 module.exports = {
@@ -74,7 +66,5 @@ module.exports = {
 	sources,
 	checklist,
 	listExport,
-	taxonData,
 	descendantCount,
-	habitats,
 }
