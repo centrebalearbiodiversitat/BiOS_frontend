@@ -61,7 +61,7 @@ export default function Taxon({params: {lang, id}}) {
 
 	return (
 		<>
-			<Section title="taxon.distribution.distribution">
+			<Section title="taxon.distribution.title" subtitle="taxon.distribution.subtitle">
 				<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}
 				          taxaColors={{[id]: '#ff6900'}}>
 					<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>
@@ -72,7 +72,7 @@ export default function Taxon({params: {lang, id}}) {
 					</div>
 				</MapLibre>
 			</Section>
-			<Section title="taxon.distribution.statistics">
+			<Section title="taxon.distribution.statistics" subtitle="taxon.distribution.statistics.subtitle">
 				<div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
 					<div className="w-full aspect-video">
 						<Card>

@@ -162,7 +162,9 @@ export default function RootLayout({children, params: {lang, id}}) {
 											<p className="font-semibold first-letter:uppercase">
 												{taxon?.acceptedModifier &&
 													<span className="capitalize me-1">{taxon.acceptedModifier}</span>}
-												<span>{taxon?.accepted ? t(lang, 'general.taxonStatus.accepted') : t(lang, 'general.taxonStatus.synonym')}</span>
+													{taxon?.accepted ?
+														<span>{t(lang, 'general.taxonStatus.accepted')}</span> :
+														<span className="text-secondary font-bold">{t(lang, 'general.taxonStatus.synonym')}</span>}
 											</p>
 											<p className="text-small italic font-light">
 												<span className="font-semibold me-1">ID:</span>{taxon?.id}

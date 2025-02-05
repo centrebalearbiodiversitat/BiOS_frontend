@@ -10,7 +10,11 @@ function request(method) {
 		const url = new URL(`${process.env.API_BASE_URL}${process.env.API_PATH}${path}`);
 
 		if (params)
-			Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+			Object.keys(params).forEach(key => {
+				if (params[key] !== null && params[key] !== undefined) {
+					url.searchParams.append(key, params[key])
+				}
+			});
 
 		if (body)
 			requestOptions.body = JSON.stringify(body);

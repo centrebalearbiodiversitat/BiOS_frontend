@@ -7,12 +7,12 @@ export default function StatusPill({lang, taxon, className}) {
 		if (taxon.accepted)
 			return {
 				label: t(lang, 'general.taxonStatus.accepted'),
-				className: "bg-accent/10 border-accent text-accent",
+				className: "bg-accent/85 border-accent/85 text-white",
 			}
 		else
 			return {
 				label: t(lang, 'general.taxonStatus.synonym'),
-				className: "bg-secondary/30 border-secondary text-secondary",
+				className: "bg-secondary border-secondary text-white",
 			}
 	}, [taxon, lang]);
 

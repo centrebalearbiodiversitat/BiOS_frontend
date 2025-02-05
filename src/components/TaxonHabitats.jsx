@@ -76,8 +76,8 @@ export default function TaxonHabitats({habitats}) {
 
 	const isLoading = habitats === undefined;
 	const noData = habitats === null;
-	// habitats = isLoading || noData ? HABITAT_MOCKUP.slice(0, 6) : habitats;
-	habitats = HABITAT_MOCKUP;
+	habitats = isLoading || noData ? HABITAT_MOCKUP.slice(0, 3) : habitats;
+	// habitats = HABITAT_MOCKUP;
 
 	const habitatStyles = useMemo(() => {
 		return habitats.map(habitat => {
@@ -91,15 +91,15 @@ export default function TaxonHabitats({habitats}) {
 	}, [habitats]);
 
 	return (
-		<Loading loading={isLoading} width="100%" height={450}>
 			<NoData isDataAvailable={!noData}>
 				<ul className="rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 m-auto">
 					{habitatStyles?.map((habitatStyle) => (
-						<HabitatCard key={habitatStyle.habitatKey} lang={lang} hStyle={habitatStyle} group={HABITAT_GROUPS[habitatStyle.group]}/>
+						<Loading key={habitatStyle.habitatKey} loading={isLoading} width="100%" height={280}>
+							<HabitatCard lang={lang} hStyle={habitatStyle} group={HABITAT_GROUPS[habitatStyle.group]}/>
+						</Loading>
 					))}
 				</ul>
 			</NoData>
-		</Loading>
 	)
 }
 

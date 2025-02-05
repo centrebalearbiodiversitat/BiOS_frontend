@@ -197,7 +197,7 @@ export default function List({params: {lang}}) {
 								             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}/>
 							</div>
 							<div>
-								<FilterLabel lang={lang} label="taxon.list.asidde.statusSelector" icon={FaCheck}/>
+								<FilterLabel lang={lang} label="taxon.list.aside.statusSelector" icon={FaCheck}/>
 								<KeySelector items={TAXON_STATUS} lang={lang}
 								             onSelected={s => generateSearchPath('accepted', s)}
 								             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}

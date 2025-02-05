@@ -80,9 +80,9 @@ export default function Taxon({params: {lang, id}}) {
 
 			<Section title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
 				<TaxonSystem className="justify-center mb-4" systems={taxonSystems}/>
-				<SubSection>
+				{/*<SubSection className="!p-3">*/}
 					<TaxonHabitats habitats={taxonHabitats}/>
-				</SubSection>
+				{/*</SubSection>*/}
 			</Section>
 
 			<Hidden hide={!isSpeciesOrLower}>

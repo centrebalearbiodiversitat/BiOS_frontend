@@ -6,11 +6,12 @@ function get(id) {
 	return requests.GET(`${OCCURRENCES_PATH}`, {id})
 }
 
-function list(taxonomyId, geographicalLocationId) {
+function list(taxonomyId, geographicalLocationId, hasSequence) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list`,
 		{
 			taxonomy: taxonomyId,
+			hasSequence: hasSequence,
 			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
 		}
 	)
@@ -25,7 +26,7 @@ function listCount(taxonomyId, geographicalLocationId) {
 		`${OCCURRENCES_PATH}/list/count`,
 		{
 			taxonomy: taxonomyId,
-			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
+			geographicalLocation: geographicalLocationId ? geographicalLocationId : ''
 		}
 	)
 }

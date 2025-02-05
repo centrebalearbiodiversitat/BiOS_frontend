@@ -1,23 +1,21 @@
 const requests = require("@/API/requests");
 
 const GENETICS_PATH = '/genetics'
-const SEQUENCES_PATH = `${GENETICS_PATH}/sequence`
-const GENES_PATH = `${GENETICS_PATH}/marker`
 
-function listGenes(taxonomy) {
-	return requests.GET(`${GENES_PATH}/list`, {taxonomy})
+function listMarkers(taxonomy) {
+	return requests.GET(`${GENETICS_PATH}/marker/list`, {taxonomy})
 }
 
-function listSequences(taxonomy) {
-	return requests.GET(`${SEQUENCES_PATH}/list`, {taxonomy})
+function listSequences(taxonomy, marker) {
+	return requests.GET(`${GENETICS_PATH}/sequence/list`, {taxonomy, marker});
 }
 
 function listCountSequences(taxonomy) {
-	return requests.GET(`${SEQUENCES_PATH}/list/count`, {taxonomy})
+	return requests.GET(`${GENETICS_PATH}/sequence/list/count`, {taxonomy})
 }
 
 module.exports = {
-	listGenes,
+	listMarkers,
 	listSequences,
 	listCountSequences,
 }

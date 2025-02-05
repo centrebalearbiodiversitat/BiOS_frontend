@@ -83,8 +83,10 @@
 	"taxon.overview.directives": "Directives",
 	"taxon.overview.directives.description": "Main directives and regulations designed to protect and conserve the taxon.",
 
-	"taxon.distribution.distribution": "Distribution",
+	"taxon.distribution.title": "Distribution",
+	"taxon.distribution.subtitle": "A 3D interactive map highlighting the taxon’s geographical distribution across the Balearic Islands and the surrounding relevant seas.",
 	"taxon.distribution.statistics": "Statistics",
+	"taxon.distribution.statistics.subtitle": "Aggregated data on the taxon’s geographical distribution: seasonality, history, and sources.",
 	"taxon.distribution.statistics.month_1": "January",
 	"taxon.distribution.statistics.month_2": "February",
 	"taxon.distribution.statistics.month_3": "March",
@@ -104,7 +106,7 @@
 	"taxon.distribution.statistics.graph.y2y": "Recorded by year",
 	"taxon.distribution.statistics.graph.y2yAcc": "Accumulation by year",
 
-	"taxon.genetics.genes": "Genes and markers",
+	"taxon.genetics.markers": "Genetic markers",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",

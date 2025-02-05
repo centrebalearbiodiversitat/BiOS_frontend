@@ -84,8 +84,10 @@
 	"taxon.overview.directives": "Directives",
 	"taxon.overview.directives.description": "Principals directives i regulacions dissenyades per protegir i conservar el taxó.",
 
-	"taxon.distribution.distribution": "Distribució",
+	"taxon.distribution.title": "Distribució",
+	"taxon.distribution.subtitle": "Mapa interactiu en 3D que ressalta la distribució geogràfica del tàxon a les Illes Balears i els mars rellevants circumdants.",
 	"taxon.distribution.statistics": "Estadístiques",
+	"taxon.distribution.statistics.subtitle": "Dades agregades sobre la distribució geogràfica del tàxon: estacionalitat, històric i fonts.",
 	"taxon.distribution.statistics.month_1": "Gener",
 	"taxon.distribution.statistics.month_2": "Febrer",
 	"taxon.distribution.statistics.month_3": "Març",
@@ -105,7 +107,7 @@
 	"taxon.distribution.statistics.graph.y2y": "Registrades per anys",
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
-	"taxon.genetics.genes": "Gens i marcadores",
+	"taxon.genetics.markers": "Marcadors genètics",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",

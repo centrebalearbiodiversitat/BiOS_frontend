@@ -1,32 +1,28 @@
 "use client"
 
-// const languages = ['en', 'de']
-//
-// export async function generateStaticParams() {
-//   return languages.map((lng) => ({ lng }))
-// }
-
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
 import genetics from "@/API/genetics";
-import {
-	Card,
-	CardBody,
-} from "@nextui-org/react";
-import TableList from "@/components/TableList";
-import Loading from "@/components/common/Loading";
 import Section from "@/components/common/Section";
 import {useTaxon} from "@/contexts/TaxonContext";
 import {generatePageTitle} from "@/utils/utils";
+import SubSection from "@/components/common/SubSection";
+import TaxonMarkers from "@/components/TaxonMarkers";
+import TaxonSequences from "@/components/TaxonSequences";
+import occurrences from "@/API/occurrences";
+import {occurrencesToGeoJson} from "@/utils/geojson";
 
-export default function TaxonSequences({params: {id, lang}}) {
+export default function Genetics({params: {id, lang}}) {
 	const [taxon, setTaxon] = useTaxon();
-	const [seqs, setSeqs] = useState([]);
-	const [genes, setGenes] = useState(undefined);
+	const [markers, setMarkers] = useState(undefined);
+	const [seqs, setSeqs] = useState(undefined);
+	const [occs, setOccs] = useState(undefined);
 
 	useEffect(() => {
-		// genetics.listSequences(taxonId).then(r => setSeqs(r))
-		genetics.listGenes(id).then(r => setGenes(r))
+		genetics.listSequences(id).then(r => setSeqs(r));
+		genetics.listMarkers(id).then(r => setMarkers(r));
+		occurrences.list(id, null, true)
+			.then(r => setOccs([occurrencesToGeoJson(id, r)]));
 	}, [id]);
 
 	useEffect(() => {
@@ -34,57 +30,27 @@ export default function TaxonSequences({params: {id, lang}}) {
 			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')}`)
 	}, [taxon, lang]);
 
-	const SEQ_HEADERS = useMemo(
-		() => {
-			return [
-				{key: 'bp', name: 'BP'},
-				{key: 'dataFileDivision', name: 'Data File Division'},
-				{key: 'moleculeType', name: 'Molecule Type'},
-				{key: 'isolate', name: 'Isolate'},
-				{key: 'definition', name: 'Definition'},
-				{key: 'publishedDate', name: 'Published date'},
-			]
-		}
-	, [])
+	const onSelectMarker = useCallback((marker) => {
+		setSeqs(undefined)
+		genetics.listSequences(id, marker).then(r => setSeqs(r));
+	}, [id]);
 
 	return (
 		<>
-			<Section title="taxon.genetics.genes">
-				<Loading loading={genes} width="100%" height={200}>
-					<ul className="grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8">
-						{genes &&
-							genes.map(
-								gene => (
-									<li key={gene.id} className="col-span-1 m-1">
-										<Card className="">
-											<CardBody className="flex flex-col text-center overflow-hidden">
-												<p className="font-bold">
-													{gene.name}
-												</p>
-												<div className="flex-1 w-full">
-													<p className="m-auto">
-														{gene.total}
-													</p>
-												</div>
-											</CardBody>
-										</Card>
-
-									</li>
-								)
-							)
-						}
-					</ul>
-				</Loading>
-			</Section>
-
-			<Section title="taxon.genetics.genomes">
-				<TableList list={seqs} headers={SEQ_HEADERS}/>
-			</Section>
-			<Section title="taxon.genetics.transcriptomes">
-				<TableList list={[]} headers={SEQ_HEADERS}/>
-			</Section>
-			<Section title="taxon.genetics.mitogenomes">
-				<TableList list={[]} headers={SEQ_HEADERS}/>
+			<Section title="taxon.genetics.markers">
+				<TaxonMarkers markers={markers} onSelectMarker={onSelectMarker}/>
+				{/*<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}*/}
+				{/*          taxaColors={{[id]: '#ff6900'}}>*/}
+				{/*	<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>*/}
+				{/*		<LinkButton variant="bordered" className="font-medium text-white" color="white"*/}
+				{/*		            href={`/${lang}/map?taxon=${id}`}>*/}
+				{/*			{t(lang, 'taxon.main.map.button.redirect')}<IoOpenOutline className="text-xl"/>*/}
+				{/*		</LinkButton>*/}
+				{/*	</div>*/}
+				{/*</MapLibre>*/}
+				<SubSection>
+					<TaxonSequences sequences={seqs}/>
+				</SubSection>
 			</Section>
 		</>
 	);
