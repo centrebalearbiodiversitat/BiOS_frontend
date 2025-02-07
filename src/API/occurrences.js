@@ -6,13 +6,13 @@ function get(id) {
 	return requests.GET(`${OCCURRENCES_PATH}`, {id})
 }
 
-function list(taxonomyId, geographicalLocationId, hasSequence) {
+function list(taxonomyId, geographicalLocationId, params) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list`,
 		{
 			taxonomy: taxonomyId,
-			hasSequence: hasSequence,
 			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
+			...params
 		}
 	)
 }

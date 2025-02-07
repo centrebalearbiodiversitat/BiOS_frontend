@@ -29,7 +29,7 @@ export default function Header({lang, locales, className}) {
 	}, [lang]);
 
 	return (
-		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" className={clsx("z-50 py-3 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
+		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" className={clsx("z-50 bg-white/60 shadow-sm backdrop-blur-sm", className)}>
 			<NavbarContent>
 				<NavbarBrand>
 					<HoverLink href={`/${lang}`}>

@@ -121,7 +121,12 @@
 	"taxon.list.aside.hasImage": "Images",
 	"taxon.list.aside.hasImage.value.withImages": "With image",
 	"taxon.list.aside.hasImage.value.noImages": "No image",
+	"taxon.list.aside.iucn.status": "Conservation status (Mediterranean)",
+	"taxon.list.aside.doe": "Degree of establishment",
+	"taxon.list.aside.directive": "Directive",
+	"taxon.list.aside.system": "System",
 	"taxon.list.aside.search": "Search",
+
 	"taxon.list.title": "Advanced search",
 	"taxon.list.search.term": "Search term",
 	"taxon.list.search.term.placeholder": "muletensis",

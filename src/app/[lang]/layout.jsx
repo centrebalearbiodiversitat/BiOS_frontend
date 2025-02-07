@@ -35,8 +35,8 @@ export default function RootLayout({children, params: {lang}}) {
 				<link rel="manifest" href="/images/favicon/site.webmanifest"/>
 			</head>
 			<body className="w-full min-h-screen m-0">
-				<Header lang={lang} className="min-h-[64px]" locales={AVAILABLE_LOCALES}/>
-				<main className="min-h-[90vh] w-full">
+				<Header lang={lang} className="min-h-[64px] py-[12px]" locales={AVAILABLE_LOCALES}/>
+				<main className="min-h-[calc(100vh-64px-12px*2)] w-full">
 					<LangProvider initialState={lang}>
 						{children}
 					</LangProvider>

@@ -122,7 +122,12 @@
 	"taxon.list.aside.hasImage": "Imatges",
 	"taxon.list.aside.hasImage.value.withImages": "Amb imatge",
 	"taxon.list.aside.hasImage.value.noImages": "Sense imatge",
+	"taxon.list.aside.iucn.status": "Estat de conservació (Mediterrani)",
+	"taxon.list.aside.doe": "Grau d'establiment",
+	"taxon.list.aside.directive": "Directiva",
+	"taxon.list.aside.system": "Sistema",
 	"taxon.list.aside.search": "Cercar",
+
 	"taxon.list.title": "Cerca avançada",
 	"taxon.list.search.term": "Terme de cerca",
 	"taxon.list.search.term.placeholder": "muletensis",

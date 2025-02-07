@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import SearchBar from "@/components/common/SearchBar";
 import CBBButton from "@/components/common/CBBButton";
 import {t} from "@/i18n/i18n";
@@ -9,13 +9,20 @@ import {t} from "@/i18n/i18n";
 export default function CBBSearchBar({lang, label, placeholder, filters, showFilters = true, border = true, rounded = true, children}) {
     const [query, setQuery] = useState([]);
     const [filter, setFilter] = useState(0);
+    const timeoutRef = useRef(null);
 
     const onSelected = useCallback((payload) => {
         filters[filter].onSelected(payload)
     }, [filters, filter]);
 
     const onInput = useCallback((input) => {
-        filters[filter].onInput(input).then(q => setQuery(q))
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(() => {
+            filters[filter].onInput(input).then(q => setQuery(q))
+        }, 250);
+
     }, [filters, filter]);
 
     const onSubmit = useCallback((input) => {

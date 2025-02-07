@@ -36,7 +36,7 @@ export default function PopoverColorPicker({className, color, onChange, isDisabl
 				isDisabled={isDisabled}
 				style={{backgroundColor: color}}
 				className={clsx("me-3", className)}
-				onClick={() => {
+				onPress={() => {
 					if (isOpen && selectedColor) {
 						onChange(selectedColor);
 					}

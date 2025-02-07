@@ -34,7 +34,7 @@ const Drawer = ({children}) => {
 		<DrawerStatusContext.Provider value={[isOpen, setIsOpen]}>
 			<CBBButton
 				className={`${isOpen ? 'hidden' : ''} absolute bg-white min-w-8 rounded-none p-0 rounded-e-xl border-s-0`}
-				onClick={() => setIsOpen(!isOpen)}>
+				onPress={() => setIsOpen(!isOpen)}>
 				<IoIosArrowForward/>
 			</CBBButton>
 			<div className={`z-50 flex flex-col w-full max-w-[450px] min-h-[inherit] bg-[#D0F8F9]/60 backdrop-brightness-125 backdrop-blur-lg ${isOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out transition-transform duration-350`}>

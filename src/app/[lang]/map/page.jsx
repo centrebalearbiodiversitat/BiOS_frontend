@@ -22,7 +22,7 @@ import MapLibreCardGeography from "@/components/maplibre/MapLibreCardGeography";
 import {generatePageTitle} from "@/utils/utils";
 
 
-async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc) {
+async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc, params) {
 	const taxaColors = {};
 	const taxaToLoc = {};
 	locations = new Set([...locations]);
@@ -40,7 +40,8 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 			} else {
 				let payload = await occurrences.list(
 					taxon,
-					location
+					location,
+					params
 				);
 
 				if (!payload)
@@ -150,6 +151,14 @@ export default function MapPage({params: {lang}}) {
 		const reqTaxa = Array.from(new Set(searchParams.getAll('taxon')));
 		const reqLocs = Array.from(new Set(searchParams.getAll('loc')));
 
+		const params = {};
+		const excludedKeys = new Set(['taxon', 'loc']);
+		searchParams.forEach((value, key) => {
+			if (!excludedKeys.has(key)) {
+				params[key] = value;
+			}
+		});
+
 		if (reqTaxa)
 			setLoading(true);
 
@@ -157,7 +166,8 @@ export default function MapPage({params: {lang}}) {
 			reqTaxa,
 			reqLocs,
 			savedTaxaColors,
-			taxaToLoc
+			taxaToLoc,
+			params
 		).then(([newTaxaToLoc, colors]) => {
 			setTaxaToLoc(newTaxaToLoc);
 			setAndSaveTaxaColors(colors);
@@ -309,8 +319,7 @@ export default function MapPage({params: {lang}}) {
 							</div>
 						</AccordionItem>
 						<AccordionItem key="filters" aria-label={t(lang, 'map.drawer.filters')} className="border-b-0"
-						               title={<h4
-							               className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
+						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.filters')}</h4>}>
 							<div className="mx-2">
 								<Filters data={taxaToLoc} onFiltered={onFiltered}/>
 							</div>
@@ -320,7 +329,7 @@ export default function MapPage({params: {lang}}) {
 				<Drawer.Footer>
 					<div className="m-4 flex justify-end">
 						<CBBButton disabled={!mapRef?.current} className="me-auto"
-						           onClick={() => mapRef.current.exportMap()}>
+						           onPress={() => mapRef.current.exportMap()}>
 							Export map <FiDownload/>
 						</CBBButton>
 					</div>

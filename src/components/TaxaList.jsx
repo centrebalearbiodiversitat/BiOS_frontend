@@ -1,18 +1,16 @@
-"use client"
-
-import TaxonName from "@/components/common/TaxonName";
-import Figure from "@/components/common/Figure";
-import {t} from "@/i18n/i18n";
 import React, {useMemo, useState} from "react";
-import Link from "next/link";
-import {FaChevronRight} from "react-icons/fa";
-import clsx from "clsx";
+import {t} from "@/i18n/i18n";
 import Loading from "@/components/common/Loading";
+import {useLang} from "@/contexts/LangContext";
+import Link from "next/link";
 import {handleScrollTop} from "@/utils/utils";
-import StatusPill from "@/components/common/StatusPill";
+import Figure from "@/components/common/Figure";
+import clsx from "clsx";
 import AncestorsList from "@/components/common/AncestorsList";
+import TaxonName from "@/components/common/TaxonName";
+import StatusPill from "@/components/common/StatusPill";
 
-export default function TaxonListBlockCard({lang, taxon}) {
+function TaxonListBlockCard({lang, taxon}) {
 	const [isHovered, setIsHovered] = useState(false);
 	const isLoading = typeof taxon === 'object' && Object.keys(taxon).length === 0;
 
@@ -46,5 +44,22 @@ export default function TaxonListBlockCard({lang, taxon}) {
 				</div>
 			</div>
 		</Link>
+	)
+}
+
+export default function TaxaList({taxa}) {
+	const [lang, _] = useLang();
+
+	return (
+		<Loading loading={taxa} width="100%" height="100%">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+				{taxa?.map(taxon => <TaxonListBlockCard key={taxon.id} lang={lang} taxon={taxon}/>)}
+			</div>
+			{typeof taxa === 'object' && taxa.length === 0 &&
+				<p className="text-center w-full font-extralight flex flex-wrap gap-1 justify-center my-auto">
+					{t(lang, "taxon.list.notFound")}
+				</p>
+			}
+		</Loading>
 	)
 }
