@@ -119,10 +119,10 @@ function HabitatCard({hStyle, group, lang}) {
 				{group.icon}
 			</div>
 			<div className="space-y-1">
-				<p className="w-full font-light text-3xl">
+				<p className="min-h-[1.5lh] w-full font-light text-3xl">
 					{t(lang, hStyle.habitatKey)}
 				</p>
-				<p className="rounded-full w-full h-full text-medium m-auto text-pretty font-light">
+				<p className="min-h-[4lh] w-full h-full text-medium m-auto text-pretty font-light">
 					{t(lang, `${hStyle.habitatKey}.description`)}
 				</p>
 			</div>

@@ -108,6 +108,7 @@
 
 	"taxon.genetics.markers": "Genetic markers",
 	"taxon.genetics.genomes": "Genomes",
+	"taxon.genetics.filter.inGeographyScope": "Balearic Islands only",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",
 

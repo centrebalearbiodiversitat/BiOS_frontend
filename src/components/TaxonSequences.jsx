@@ -26,7 +26,7 @@ function Sequence({seq}) {
 					{seq.isolate ?? "-"}
 				</p>
 			</div>
-			<div className="flex flex-row gap-2">
+			<div className="flex flex-wrap gap-2">
 				{
 					seq.markers.map(
 						marker => (

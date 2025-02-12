@@ -24,6 +24,7 @@
 	"taxon.layout.modal.occurrences": "Occurrencias",
 	"taxon.layout.modal.occurrences.help": "Listado de ocurrencias registradas para el taxón seleccionado y todos sus descendientes taxonómicos.",
 
+
 	"taxon.sidebar.classification": "Clasificación",
 	"taxon.sidebar.children": "Descendientes",
 	"taxon.sidebar.synonyms": "Sinónimos",
@@ -107,6 +108,7 @@
 
 	"taxon.genetics.markers": "Marcadores genéticos",
 	"taxon.genetics.genomes": "Genomas",
+	"taxon.genetics.filter.inGeographyScope": "Solo en las Islas Baleares",
 	"taxon.genetics.transcriptomes": "Transcriptomas",
 	"taxon.genetics.mitogenomes": "Mitogenomas",
 

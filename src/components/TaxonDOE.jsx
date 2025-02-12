@@ -35,9 +35,9 @@ const DOE_DEFINITIONS = {
 export default function TaxonDOE({doe, className}) {
 	const [lang, _] = useLang();
 
-	// const doeDef = DOE_DEFINITIONS[doe ?  doe?.tag?.name : "unknown"]
-	var doeDef = DOE_DEFINITIONS["unknown"]
-	var doeDef = DOE_DEFINITIONS["doubtful"]
+	const doeDef = DOE_DEFINITIONS[doe ?  doe?.tag?.name : "unknown"]
+	// var doeDef = DOE_DEFINITIONS["unknown"]
+	// var doeDef = DOE_DEFINITIONS["doubtful"]
 	// var doeDef = DOE_DEFINITIONS["absent"]
 	// var doeDef = DOE_DEFINITIONS["native"]
 	// var doeDef = DOE_DEFINITIONS["endemic"]

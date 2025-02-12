@@ -108,6 +108,7 @@
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
 	"taxon.genetics.markers": "Marcadors genètics",
+	"taxon.genetics.filter.inGeographyScope": "Només a les Illes Balears",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",

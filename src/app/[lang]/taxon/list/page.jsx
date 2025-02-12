@@ -97,7 +97,7 @@ export default function List({params: {lang}}) {
 			</h1>
 			<div className="mx-auto grid grid-cols-12 gap-6">
 				<aside className="col-span-full lg:col-span-4 xl:col-span-3">
-					<TaxonFilters className=""/>
+					<TaxonFilters/>
 				</aside>
 				<article className="flex flex-col col-span-full lg:col-span-8 xl:col-span-9 gap-6">
 					<div className="flex flex-col-reverse gap-4 sm:flex-row">

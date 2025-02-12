@@ -16,7 +16,7 @@ function Marker({marker, selected, onClick}) {
 			)}
 		    onClick={onClickMarker}
 		>
-			<p className="font-light leading-4">
+			<p className="font-light leading-4 text-center">
 				{marker.name}
 				<span className="block text-center text-xs">({marker.total})</span>
 			</p>
@@ -24,25 +24,21 @@ function Marker({marker, selected, onClick}) {
 	)
 }
 
-export default function TaxonMarkers({markers, onSelectMarker}) {
-	const [selected, setSelected] = useState(null);
-
+export default function TaxonMarkers({markers, selectedMarker, onSelectMarker}) {
 	const handleSelection = useCallback((marker) => {
-		if (selected === marker.id) {
-			setSelected(null);
+		if (selectedMarker == marker.id) {
 			onSelectMarker(null);
 		} else {
-			setSelected(marker.id);
 			onSelectMarker(marker.id);
 		}
-	}, [selected, onSelectMarker]);
+	}, [selectedMarker, onSelectMarker]);
 
 	return (
 		<Loading loading={markers} width="100%" height="150px">
 			<ul className="grid grid-cols-3 md:grid-cols-5 2xl:grid-cols-8 gap-2 w-full h-full my-3">
 				{markers &&
 					markers.map(
-						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selected === marker.id} />
+						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selectedMarker == marker.id} />
 					)
 				}
 			</ul>
