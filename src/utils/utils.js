@@ -7,3 +7,11 @@ export function generatePageTitle(lang, title) {
 export function handleScrollTop() {
 	window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+export function generateSourceUrl(basis, DEFAULT =  "") {
+	if (basis.source.url) {
+		return basis.source.url.replace('{id}', basis.externalId)
+	} else {
+		return DEFAULT
+	}
+}

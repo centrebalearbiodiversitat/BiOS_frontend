@@ -1,6 +1,7 @@
 import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@nextui-org/react";
 import clsx from "clsx";
+import {generateSourceUrl} from "@/utils/utils";
 
 export default function Figure({alt, hoverEffect = true, images, className= "rounded-xl", ...extra}) {
 	const [error, setError] = useState(false);
@@ -24,8 +25,8 @@ export default function Figure({alt, hoverEffect = true, images, className= "rou
 			title = '';
 			loading = false;
 		} else {
-			if (images[i].source.url) {
-				src = images[i].source.url.replace('{id}', images[i].originId);
+			if (images[i]) {
+				src = generateSourceUrl(images[i], src);
 			}
 			title = `${images[i].source.name} | ${images[i].attribution}`;
 			loading = false;

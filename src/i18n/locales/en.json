@@ -106,7 +106,9 @@
 	"taxon.distribution.statistics.graph.y2y": "Recorded by year",
 	"taxon.distribution.statistics.graph.y2yAcc": "Accumulation by year",
 
-	"taxon.genetics.markers": "Genetic markers",
+	"taxon.genetics.title": "List of sequences",
+	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.filter.inGeographyScope": "Balearic Islands only",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
@@ -173,6 +175,7 @@
 	"components.header.button.about": "About",
 	"components.header.button.sources": "Sources",
 	"components.header.button.advancedSearch": "Search",
+	"components.header.button.API": "API",
 
 	"components.no_data": "No data available",
 

@@ -15,6 +15,7 @@ import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
 import ActiveLink from "@/components/common/ActiveLink";
 import clsx from "clsx";
+import {LuExternalLink} from "react-icons/lu";
 
 export default function Header({lang, locales, className}) {
 	const menuItems = useMemo(() => {
@@ -23,6 +24,7 @@ export default function Header({lang, locales, className}) {
 			{text: t(lang, "components.header.button.map"), href: `/${lang}/map`},
 			{text: t(lang, "components.header.button.about"), href: `/${lang}/about`},
 			{text: t(lang, "components.header.button.sources"), href: `/${lang}/sources`},
+			{text: t(lang, "components.header.button.API"), href: `${process.env.API_BASE_URL}/api/docs`, external: true},
 			// {text: t(lang, "components.header.button.taxonomy"), href: `/${lang}/taxon`},
 			// {text: t(lang, "components.header.button.genetics"), href: `/${lang}/genetics`},
 		]
@@ -38,14 +40,15 @@ export default function Header({lang, locales, className}) {
 					</HoverLink>
 				</NavbarBrand>
 			</NavbarContent>
-			<NavbarContent className="hidden md:flex gap-4" justify="end">
+			<NavbarContent className="hidden md:flex gap-8" justify="end">
 				{
 					menuItems.map(
-						({text, href}) => (
-							<NavbarItem key={href}>
-								<ActiveLink href={href}>
-									{text}
-								</ActiveLink>
+						(section) => (
+							<NavbarItem key={section.href}>
+								<Link href={section.href} target={section.external ? "_blank" : "_self"}
+								      className="hover:text-primary-400 text-black transition-all text-md navbar-button">
+									{section.text} {section.external && <LuExternalLink className="text-xs mb-auto ms-1"/>}
+								</Link>
 							</NavbarItem>
 						)
 					)
@@ -57,11 +60,12 @@ export default function Header({lang, locales, className}) {
 			<NavbarMenuToggle className="md:hidden text-black"/>
 			<NavbarMenu className="flex flex-col justify-center items-center bg-white">
 				{
-					menuItems.map(({text, href}, idx) => (
-						<NavbarMenuItem key={href} className="w-full">
-							<Link color={idx === 0 ? "primary" : "foreground"} href={href}
+					menuItems.map((section, idx) => (
+						<NavbarMenuItem key={section.href} className="w-full">
+							<Link color={idx === 0 ? "primary" : "foreground"}
+							      href={section.href} target={section.external ? "_blank" : "_self"}
 							      className="w-full justify-center">
-								{text}
+								{section.text} {<LuExternalLink/>}
 							</Link>
 						</NavbarMenuItem>
 					))

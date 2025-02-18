@@ -107,9 +107,11 @@
 	"taxon.distribution.statistics.graph.y2y": "Registrades per anys",
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
-	"taxon.genetics.markers": "Marcadors genètics",
-	"taxon.genetics.filter.inGeographyScope": "Només a les Illes Balears",
+	"taxon.genetics.title": "Llistat de seqüències",
+	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
+	"taxon.genetics.filter.inGeographyScope": "Només a les Illes Balears",
 	"taxon.genetics.transcriptomes": "Transcriptomes",
 	"taxon.genetics.mitogenomes": "Mitogenomes",
 
@@ -174,6 +176,7 @@
 	"components.header.button.about": "Sobre",
 	"components.header.button.sources": "Fonts",
 	"components.header.button.advancedSearch": "Cercador",
+	"components.header.button.API": "API",
 
 	"components.no_data": "Sense dades",
 

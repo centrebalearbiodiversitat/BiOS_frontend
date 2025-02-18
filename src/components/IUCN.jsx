@@ -6,6 +6,9 @@ import clsx from "clsx";
 import {GiEarthAfricaEurope, GiEuropeanFlag} from "react-icons/gi";
 import {BiDotsHorizontalRounded} from "react-icons/bi";
 import {useLang} from "@/contexts/LangContext";
+import Link from "next/link";
+import {FiExternalLink} from "react-icons/fi";
+import {sources} from "@/API/taxonomy";
 
 const IUCN_CATEGORIES = {
 	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "#fd3636"},
@@ -25,11 +28,11 @@ function IUCNPill({lang, status, uncolored = false, color, text, textColor, enab
 	const radius = '40px'
 
 	return (
-		<div className="rounded-full"
+		<div className={clsx("rounded-full", enabled && "rounded-tr-none")}
 		     style={{
 			     // paddingTop: enabled ? '' : '.8rem',
 			     // paddingBottom: enabled ? '' : '.8rem',
-			     border: enabled ? null : '3px solid #FFFFFF',
+			     // border: enabled ? null : '3px solid #FFFFFF',
 			     color: textColor,
 			     backgroundColor: !uncolored ? color : "",
 			     minWidth: radius,
@@ -57,7 +60,7 @@ function IUCNToolTip({lang, children, status}) {
 		         content={
 			         <div className="py-2">
 				         <h3 className="text-center font-light text-lg ">IUCN Red List Status</h3>
-				         <ul className="flex flex-row justify-center items-center p-2">
+				         <ul className="flex flex-row justify-center items-center p-2 gap-0.5">
 					         {
 						         Object.keys(IUCN_CATEGORIES).map((key) => {
 							         const item = IUCN_CATEGORIES[key];
@@ -77,8 +80,8 @@ function IUCNToolTip({lang, children, status}) {
 }
 
 
-export default function IUCN({title, status, className}) {
-	const [lang, _] = useLang();
+export default function IUCN({scope, status, source, className}) {
+	const [lang] = useLang();
 
 	status = status || 'na';
 	// status = 'ex'
@@ -96,34 +99,38 @@ export default function IUCN({title, status, className}) {
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<div className={clsx("w-full h-full", className)}>
-				<div className={"flex flex-col bg-white w-full h-full gap-5 rounded-2xl p-6"}>
-					<div className="flex flex-row">
-						<div>
-							<div className="rounded-full rounded-tr-none border border-slate-50 w-fit aspect-square"
-							     style={{
-								     backgroundColor: `${iucn_cat.color}C0`
-							     }}>
-								<IUCNPill uncolored={true} lang={lang} enabled={true} status={status} {...iucn_cat}/>
+			<Link target="_blank" href={`https://apiv3.iucnredlist.org/api/v3/taxonredirect/${source?.externalId}/${scope}`}>
+				<div className={clsx("w-full h-full", className)}>
+					<div className={"flex flex-col w-full h-full gap-5 p-6"}>
+						<div className="flex flex-row">
+							<div>
+								<div className="w-fit aspect-square"
+								     style={{
+									     // backgroundColor: `${iucn_cat.color}`
+								     }}>
+									<IUCNPill uncolored={false} lang={lang} enabled={true} status={status} {...iucn_cat}/>
+								</div>
+								<p className="text-center font-medium text-gray-500 text-xs pt-1 flex justify-center gap-1 items-center">
+									IUCN
+								</p>
 							</div>
-							<p className="text-center font-medium text-gray-500 text-xs pt-1">IUCN</p>
+							<div className="ms-auto text-lg">
+								<BiDotsHorizontalRounded/>
+							</div>
 						</div>
-						<div className="ms-auto text-lg">
-							<BiDotsHorizontalRounded/>
-						</div>
-					</div>
-					<div className="flex-grow flex">
-						<div className="mt-auto w-full flex flex-col text-pretty self-center justify-self-center">
-							<p className="text-end text-md font-medium">
-								{t(lang, iucn_cat.text)}
-							</p>
-							<h3 className="text-end text-gray-500 w-full text-sm">
-								{t(lang, title)}
-							</h3>
+						<div className="flex-grow flex">
+							<div className="mt-auto w-full flex flex-col text-pretty self-center justify-self-center">
+								<p className="text-end text-md font-medium">
+									{t(lang, iucn_cat.text)}
+								</p>
+								<h3 className="text-end text-gray-500 w-full text-sm">
+									{t(lang, `taxon.overview.iucn_${scope}`)}
+								</h3>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 		</IUCNToolTip>
 	)
 }

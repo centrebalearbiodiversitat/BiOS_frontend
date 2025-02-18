@@ -1,71 +1,118 @@
-import React from "react";
+import React, {useCallback, useRef} from "react";
 import Loading from "@/components/common/Loading";
 import SubSection from "@/components/common/SubSection";
-import {Divider} from "@nextui-org/react";
+import {Divider, Pagination} from "@nextui-org/react";
+import Link from "next/link";
+import {generateSourceUrl, handleScrollTop} from "@/utils/utils";
+import SourceLink from "@/components/common/SourceLink";
+import Scrollbars from "react-custom-scrollbars-2";
+import Hidden from "@/components/common/Hidden";
+import {useRouter, useSearchParams} from "next/navigation";
+import TaxonName from "@/components/common/TaxonName";
+import {useLang} from "@/contexts/LangContext";
+import {t} from "@/i18n/i18n";
 
 
 function Sequence({seq}) {
 	const basis = seq.sources[0];
 
 	return (
-		<li className="flex flex-col gap-1 hover:bg-slate-50 py-4 border-b border-gray-200">
+		<li className="flex flex-col gap-1 hover:bg-slate-50 border-b border-gray-200">
 			{/*<p className="font-extralight">*/}
 			{/*	{seq.definition}*/}
 			{/*</p>*/}
-			<div className="grid grid-cols-4 text-sm">
-				<p>
-					{basis.source?.name}
-				</p>
-				<p className="font-light">
-					{basis.externalId}
-				</p>
-				<p>
-					{seq.publishedDate ?? "-"}
-				</p>
-				<p>
-					{seq.isolate ?? "-"}
-				</p>
-			</div>
-			<div className="flex flex-wrap gap-2">
-				{
-					seq.markers.map(
-						marker => (
-							<p key={marker.id} className="rounded-full bg-black text-white text-sm px-3">
-								{marker.name}
-							</p>
-						)
-					)
-				}
-			</div>
+			<SourceLink source={basis}>
+				<div className="grid grid-cols-5 py-4 text-sm">
+					<p>
+						<TaxonName taxon={seq.occurrence.taxonomy}/>
+					</p>
+					<p>
+						{basis.source?.name}
+					</p>
+					<p className="font-light">
+						{basis.externalId}
+					</p>
+					<p>
+						{seq.publishedDate ?? "-"}
+					</p>
+					<div className="flex flex-wrap gap-2">
+						{
+							seq.markers.map(
+								marker => (
+									<p key={marker.id} className="rounded-full bg-black text-white text-sm px-3">
+										{marker.name}
+									</p>
+								)
+							)
+						}
+					</div>
+				</div>
+			</SourceLink>
 		</li>
 	)
 }
 
 
 export default function TaxonSequences({sequences}) {
+	const lang = useLang();
+	const titlesRef = useRef(null);
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const pageSwap = useCallback((page) => {
+		if (!isNaN(page)) {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set("page", page)
+			router.push(`?${params.toString()}`, {scroll: false});
+			if (titlesRef.current) {
+		      const elementTop = titlesRef.current.getBoundingClientRect().top;
+		      const offset = window.innerHeight / 3; // Scroll to the middle of the screen
+		      window.scrollBy({ top: elementTop - offset, behavior: "smooth" });
+		    }
+		}
+	}, [router, searchParams]);
+
 	return (
-		<Loading loading={sequences} width="100%" height="400px">
-			<div className="grid grid-cols-4 font-semibold pb-4">
-				<p>
-					Source
-				</p>
-				<p>
-					External ID
-				</p>
-				<p>
-					Published date
-				</p>
-				<p>
-					Isolate
-				</p>
+		<Loading loading={sequences} width="100%" height="795px">
+			<div className="space-y-6">
+				<h3 className="font-extralight text-2xl">{t(lang, "taxon.genetics.totalSequence")} {sequences?.total}</h3>
+				<div className="custom-scrollbar overflow-x-auto" style={{width: "100%"}}>
+					<div className="min-w-[600px]">
+						<div ref={titlesRef} className="grid grid-cols-5 font-semibold pb-4">
+							<p>
+								Taxon
+							</p>
+							<p>
+								Source
+							</p>
+							<p>
+								External ID
+							</p>
+							<p>
+								Published date
+							</p>
+							<p>
+								Markers
+							</p>
+						</div>
+						<ul className="flex flex-col">
+							{sequences &&
+								sequences.data.map(
+									seq => <Sequence key={seq.id} seq={seq}/>
+								)
+							}
+						</ul>
+					</div>
+				</div>
+				<Hidden hide={!sequences || sequences.pages <= 1}>
+					<div className="flex flex-row container justify-center">
+						<Pagination total={sequences ? sequences.pages : 0}
+						            page={parseInt(searchParams.get('page')) || 1}
+						            initialPage={parseInt(searchParams.get('page')) || 1}
+						            onChange={pageSwap}/>
+					</div>
+				</Hidden>
 			</div>
-			<ul className="flex flex-col">
-				{sequences &&
-					sequences.map(
-						seq => <Sequence key={seq.id} seq={seq}/>
-					)
-				}
-			</ul>
 		</Loading>
 	)
 }

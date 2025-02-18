@@ -35,7 +35,7 @@ export default function TaxonMarkers({markers, selectedMarker, onSelectMarker}) 
 
 	return (
 		<Loading loading={markers} width="100%" height="150px">
-			<ul className="grid grid-cols-3 md:grid-cols-5 2xl:grid-cols-8 gap-2 w-full h-full my-3">
+			<ul className="grid grid-cols-3 md:grid-cols-5 2xl:grid-cols-8 gap-2 w-full h-full">
 				{markers &&
 					markers.map(
 						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selectedMarker == marker.id} />

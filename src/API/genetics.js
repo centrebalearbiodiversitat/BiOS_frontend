@@ -6,8 +6,8 @@ function listMarkers(taxonomy, inGeographyScope) {
 	return requests.GET(`${GENETICS_PATH}/marker/list`, {taxonomy, inGeographyScope})
 }
 
-function listSequences(taxonomy, marker, inGeographyScope) {
-	return requests.GET(`${GENETICS_PATH}/sequence/list`, {taxonomy, marker, inGeographyScope});
+function listSequences(taxonomy, marker, inGeographyScope, page) {
+	return requests.GET(`${GENETICS_PATH}/sequence/list`, {taxonomy, marker, inGeographyScope, page});
 }
 
 function listCountSequences(taxonomy) {

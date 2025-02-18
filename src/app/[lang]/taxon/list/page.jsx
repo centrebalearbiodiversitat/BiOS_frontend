@@ -59,7 +59,7 @@ export default function List({params: {lang}}) {
 		taxonomy.list(params)
 			.then(r => {
 				if (r) {
-					setTaxa(r.taxa);
+					setTaxa(r.data);
 					setTotalTaxa(r.total);
 					setTotalPages(r.pages);
 				} else {

@@ -3,8 +3,6 @@
 import taxonomy from "@/API/taxonomy";
 import tags from "@/API/tags";
 import React, {useEffect, useMemo, useState} from "react";
-import Loading from "@/components/common/Loading";
-import IUCN from "@/components/IUCN";
 import TaxonHabitats from "@/components/TaxonHabitats";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";

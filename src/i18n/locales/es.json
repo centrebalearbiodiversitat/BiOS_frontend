@@ -106,7 +106,9 @@
 	"taxon.distribution.statistics.graph.y2y": "Registradas por años",
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulación por años",
 
-	"taxon.genetics.markers": "Marcadores genéticos",
+	"taxon.genetics.title": "Lista de secuencias",
+	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomas",
 	"taxon.genetics.filter.inGeographyScope": "Solo en las Islas Baleares",
 	"taxon.genetics.transcriptomes": "Transcriptomas",
@@ -173,6 +175,7 @@
 	"components.header.button.about": "Acerca de",
 	"components.header.button.sources": "Fuentes",
 	"components.header.button.advancedSearch": "Búsqueda",
+	"components.header.button.API": "API",
 
 	"components.no_data": "Sin datos",
 

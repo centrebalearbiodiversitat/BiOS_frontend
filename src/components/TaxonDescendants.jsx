@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {t} from "@/i18n/i18n";
 import Link from "next/link";
 import taxonomy from "@/API/taxonomy";
@@ -33,19 +33,20 @@ function BlockWrapper({isClickable, href, className, ...extra}) {
 
 function ClickableLevelBlock({taxonId, level, count}) {
 	const [lang, _] = useLang();
+	const countFormat = useMemo(() => {
+		return count ? count.toLocaleString() : "-"
+	}, [count]);
 
 	return (
-		<li key={level} className="w-full aspect-square">
-			<BlockWrapper className="w-full h-full font-extralight text-sm p-3.5 bg-white rounded-xl transition-all border-1 flex flex-col"
+		<li key={level} className="w-full">
+			<BlockWrapper className="w-full h-full font-extralight  text-sm p-3.5 bg-white rounded-xl transition-all border-1 flex flex-col"
 			      href={`/${lang}/taxon/list?ancestor=${taxonId}&rank=${level}`} isClickable={count !== undefined}>
-				<p className="capitalize">
+				<p className="flex-grow text-center font-[250] text-2xl xl:text-lg 2xl:text-2xl">
+					{countFormat}
+				</p>
+				<p className="capitalize mt-auto text-center max-w-full text-sm truncate">
 					{t(lang, `general.taxon_rank.${level}`)}
 				</p>
-				<div className="flex-grow flex">
-					<p className="mt-auto font-extralight text-xl sm:text-2xl">
-						{count}
-					</p>
-				</div>
 			</BlockWrapper>
 		</li>
 	)
@@ -63,10 +64,11 @@ export default function TaxonDescendants({taxonId}) {
 		<Hidden hide={descendants === null || descendants !== undefined && Object.keys(descendants).length === 0}>
 			<Section title="taxon.overview.statistics">
 				<Loading className="mb-4 aspect-video" loading={descendants} width="100%" height="300px">
-					<ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-9 justify-items-center gap-2">
+					<ul className="grid grid-cols-3 sm:grid-cols-5 xl:grid-cols-9 justify-items-center gap-1">
 						{descendants &&
 							DESCENDANTS.map((level) => (
-								<ClickableLevelBlock key={level} taxonId={taxonId} level={level} count={descendants[level]}/>
+								<ClickableLevelBlock key={level} taxonId={taxonId} level={level}
+								                     count={descendants[level]}/>
 							))
 						}
 					</ul>

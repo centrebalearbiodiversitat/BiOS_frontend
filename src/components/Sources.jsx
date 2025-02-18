@@ -3,11 +3,12 @@ import {Chip} from "@nextui-org/react";
 import Link from "next/link";
 import {RxExternalLink} from "react-icons/rx";
 import clsx from "clsx";
+import {generateSourceUrl} from "@/utils/utils";
 
 function ChipExternalLink({originSource}) {
 	const url = useMemo(() => {
 		try {
-			return originSource.source.url.replace("{id}", originSource.originId);
+			return generateSourceUrl(originSource);
 		} catch (e) {
 			return null;
 		}
@@ -28,7 +29,7 @@ function ChipExternalLink({originSource}) {
 		return (
 			<Chip as={"div"} className="bg-transparent border-1 border-black/20">
 				<p className="flex flex-row space-x-2">
-					<span>{originSource.source.name}</span>
+					<span>{originSource.source.name}:{originSource.externalId}</span>
 				</p>
 			</Chip>
 		)
