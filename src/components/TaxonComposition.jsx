@@ -22,7 +22,7 @@ export default function TaxonComposition({lang, composition}) {
 
 	return (
 		<Loading loading={composition} width="100%" height={350}>
-			<Empty isEmpty={composition.length === 0} lang={lang}>
+			<Empty isEmpty={composition.length === 0}>
 				<div className="flex flex-col bg-white max-w-[800px] mx-auto rounded-xl">
 				{composition &&
 					<ul className="flex flex-col w-full gap-1 m-auto py-8 px-8 ">

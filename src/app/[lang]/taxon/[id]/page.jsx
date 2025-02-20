@@ -20,13 +20,14 @@ import IUCNCard from "@/components/IUCNCard";
 
 
 export default function Taxon({params: {lang, id}}) {
-	const [taxon, _] = useTaxon();
+	const [taxon] = useTaxon();
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);
 	const [taxonTags, setTaxonTags] = useState(undefined);
 	const [taxonHabitats, setTaxonHabitats] = useState(undefined);
 	const [taxonDirectives, setTaxonDirectives] = useState(undefined);
 	const [taxonSystems, setTaxonSystems] = useState(undefined);
+	const [descendants, setDescendants] = useState(undefined);
 
 	useEffect(() => {
 		taxonomy.composition(id)
@@ -36,6 +37,8 @@ export default function Taxon({params: {lang, id}}) {
 				} else
 					setComposition(null);
 			});
+		taxonomy.descendantCount(id)
+			.then(r => setDescendants(r));
 		tags.taxonIUCN(id)
 			.then(r => setTaxonData(r));
 		tags.listTagsByTaxon(id)
@@ -74,7 +77,11 @@ export default function Taxon({params: {lang, id}}) {
 				</Section>
 			</Hidden>
 
-			<TaxonDescendants lang={lang} taxonId={id}/>
+			<Hidden hide={descendants === null || descendants !== undefined && Object.keys(descendants).length === 0}>
+				<Section title="taxon.overview.statistics" subtitle="taxon.overview.statistics.description">
+					<TaxonDescendants taxonId={id} descendants={descendants}/>
+				</Section>
+			</Hidden>
 
 			<Section title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
 				<TaxonSystem className="justify-center mb-4" systems={taxonSystems}/>

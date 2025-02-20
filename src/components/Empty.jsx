@@ -1,7 +1,10 @@
 import {t} from "@/i18n/i18n";
 import React from "react";
+import {useLang} from "@/contexts/LangContext";
 
-export default function Empty({isEmpty, lang, children, maxWidth = '245px'}) {
+export default function Empty({isEmpty, children, maxWidth = '245px'}) {
+	const [lang] = useLang();
+
 	if (isEmpty) {
 		return (
 			<p className="text-center font-extralight flex mx-auto my-8" style={{maxWidth}}>

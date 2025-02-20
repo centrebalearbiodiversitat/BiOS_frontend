@@ -13,7 +13,6 @@ import {Image} from "@nextui-org/react";
 import LangSelector from "@/components/LangSelector";
 import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
-import ActiveLink from "@/components/common/ActiveLink";
 import clsx from "clsx";
 import {LuExternalLink} from "react-icons/lu";
 

@@ -13,7 +13,7 @@ import occurrences from "@/API/occurrences";
 import {occurrencesToGeoJson} from "@/utils/geojson";
 import ToggleButton from "@/components/common/ToggleButton";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Divider} from "@nextui-org/react";
+import {Button, Divider} from "@nextui-org/react";
 
 export default function Genetics({params: {id, lang}}) {
 	const [taxon, setTaxon] = useTaxon();
@@ -62,7 +62,7 @@ export default function Genetics({params: {id, lang}}) {
 			params.delete("marker");
 		}
 		router.push(`?${params.toString()}`, {scroll: false});
-	}, [router, searchParams]);
+	}, [router, inGeographyScope]);
 
 	const onGeographyToggle = useCallback((value) => {
 		const params = new URLSearchParams();
@@ -76,7 +76,7 @@ export default function Genetics({params: {id, lang}}) {
 
 	return (
 		<>
-			<Section title="taxon.genetics.title">
+			<Section title="taxon.genetics.sequences" subtitle="taxon.genetics.sequences.description">
 				{/*<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}*/}
 				{/*          taxaColors={{[id]: '#ff6900'}}>*/}
 				{/*	<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>*/}
@@ -86,6 +86,11 @@ export default function Genetics({params: {id, lang}}) {
 				{/*		</LinkButton>*/}
 				{/*	</div>*/}
 				{/*</MapLibre>*/}
+				{/*<div className="flex flex-row justify-center">*/}
+				{/*	<Button radius="full" color={inGeographyScope ? "primary" : null}>*/}
+				{/*		{t(lang, "taxon.genetics.filter.inGeographyScope")}*/}
+				{/*	</Button>*/}
+				{/*</div>*/}
 				<SubSection className="space-y-6">
 					<div className="space-y-4">
 						<div className="flex flex-row justify-end">

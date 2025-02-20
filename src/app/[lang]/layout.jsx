@@ -8,7 +8,6 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import "@/globals.css";
 import React from "react";
 import {LangProvider} from "@/contexts/LangContext";
-import clsx from "clsx";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],

@@ -41,6 +41,7 @@
 	"taxon.overview.iucn_europe": "Europeu",
 	"taxon.overview.iucn_mediterranean": "Mediterrani",
 	"taxon.overview.statistics": "Estadístiques",
+	"taxon.overview.statistics.description": "Number of classifications at each rank from the current taxon.",
 	"taxon.overview.composition": "Composició del tàxon",
 	"taxon.overview.habitats": "Hàbitats",
 	"taxon.overview.habitats.description": "Termes estàndard utilitzats per descriure els principals hàbitats i sistemes on es troba el tàxon.",
@@ -107,8 +108,8 @@
 	"taxon.distribution.statistics.graph.y2y": "Registrades per anys",
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
-	"taxon.genetics.title": "Llistat de seqüències",
-	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.sequences": "Llistat de seqüències",
+	"taxon.genetics.sequences.description": "Explora la llista de marcadors genètics i seqüències de tots els descendents d’aquest taxó.",
 	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.filter.inGeographyScope": "Només a les Illes Balears",

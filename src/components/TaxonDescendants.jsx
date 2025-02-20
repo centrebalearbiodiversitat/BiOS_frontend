@@ -9,6 +9,7 @@ import Section from "@/components/common/Section";
 import Loading from "@/components/common/Loading";
 import {useLang} from "@/contexts/LangContext";
 import clsx from "clsx";
+import NoData from "@/components/common/NoData";
 
 
 const DESCENDANTS = [
@@ -27,12 +28,14 @@ function BlockWrapper({isClickable, href, className, ...extra}) {
 	return isClickable ? (
 		<Link href={href} className={clsx("hover:border-primary", className)} {...extra}/>
 	) : (
-		<div className={clsx("backdrop-blur-2xl bg-gray-50", className)} {...extra}/>
+		<NoData isDataAvailable={false} message={false}>
+			<div className={clsx("backdrop-blur-2xl bg-gray-50", className)} {...extra}/>
+		</NoData>
 	)
 }
 
 function ClickableLevelBlock({taxonId, level, count}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 	const countFormat = useMemo(() => {
 		return count ? count.toLocaleString() : "-"
 	}, [count]);
@@ -52,28 +55,18 @@ function ClickableLevelBlock({taxonId, level, count}) {
 	)
 }
 
-export default function TaxonDescendants({taxonId}) {
-	const [descendants, setDescendants] = useState(undefined);
-
-	useEffect(() => {
-		taxonomy.descendantCount(taxonId)
-			.then(r => setDescendants(r));
-	}, [taxonId]);
+export default function TaxonDescendants({taxonId, descendants}) {
 
 	return (
-		<Hidden hide={descendants === null || descendants !== undefined && Object.keys(descendants).length === 0}>
-			<Section title="taxon.overview.statistics">
-				<Loading className="mb-4 aspect-video" loading={descendants} width="100%" height="300px">
-					<ul className="grid grid-cols-3 sm:grid-cols-5 xl:grid-cols-9 justify-items-center gap-1">
-						{descendants &&
-							DESCENDANTS.map((level) => (
-								<ClickableLevelBlock key={level} taxonId={taxonId} level={level}
-								                     count={descendants[level]}/>
-							))
-						}
-					</ul>
-				</Loading>
-			</Section>
-		</Hidden>
+		<Loading className="mb-4 aspect-video" loading={descendants} width="100%" height="300px">
+			<ul className="grid grid-cols-3 sm:grid-cols-5 xl:grid-cols-9 justify-items-center gap-1">
+				{descendants &&
+					DESCENDANTS.map((level) => (
+						<ClickableLevelBlock key={level} taxonId={taxonId} level={level}
+						                     count={descendants[level]}/>
+					))
+				}
+			</ul>
+		</Loading>
 	)
 }

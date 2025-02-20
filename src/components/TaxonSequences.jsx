@@ -11,6 +11,8 @@ import {useRouter, useSearchParams} from "next/navigation";
 import TaxonName from "@/components/common/TaxonName";
 import {useLang} from "@/contexts/LangContext";
 import {t} from "@/i18n/i18n";
+import NoData from "@/components/common/NoData";
+import Empty from "@/components/Empty";
 
 
 function Sequence({seq}) {
@@ -54,7 +56,7 @@ function Sequence({seq}) {
 
 
 export default function TaxonSequences({sequences}) {
-	const lang = useLang();
+	const [lang] = useLang();
 	const titlesRef = useRef(null);
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -75,7 +77,7 @@ export default function TaxonSequences({sequences}) {
 	return (
 		<Loading loading={sequences} width="100%" height="795px">
 			<div className="space-y-6">
-				<h3 className="font-extralight text-2xl">{t(lang, "taxon.genetics.totalSequence")} {sequences?.total}</h3>
+				<h3 className="font-extralight text-2xl">{t(lang, "taxon.genetics.totalSequence")} <span className="text-primary">{sequences?.total}</span></h3>
 				<div className="custom-scrollbar overflow-x-auto" style={{width: "100%"}}>
 					<div className="min-w-[600px]">
 						<div ref={titlesRef} className="grid grid-cols-5 font-semibold pb-4">
@@ -95,13 +97,15 @@ export default function TaxonSequences({sequences}) {
 								Markers
 							</p>
 						</div>
-						<ul className="flex flex-col">
-							{sequences &&
-								sequences.data.map(
-									seq => <Sequence key={seq.id} seq={seq}/>
-								)
-							}
-						</ul>
+						<Empty isEmpty={sequences?.data.length === 0}>
+							<ul className="flex flex-col">
+								{sequences &&
+									sequences.data.map(
+										seq => <Sequence key={seq.id} seq={seq}/>
+									)
+								}
+							</ul>
+						</Empty>
 					</div>
 				</div>
 				<Hidden hide={!sequences || sequences.pages <= 1}>

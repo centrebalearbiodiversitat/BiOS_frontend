@@ -41,6 +41,7 @@
 	"taxon.overview.iucn_europe": "Europe",
 	"taxon.overview.iucn_mediterranean": "Mediterranean",
 	"taxon.overview.statistics": "Statistics",
+	"taxon.overview.statistics.description": "Number of classifications at each rank from the current taxon.",
 	"taxon.overview.composition": "Taxon composition",
 	"taxon.overview.habitats": "Habitats",
 	"taxon.overview.habitats.description": "Standard terms used to describe the major habitats and systems in which the taxon occur.",
@@ -106,8 +107,8 @@
 	"taxon.distribution.statistics.graph.y2y": "Recorded by year",
 	"taxon.distribution.statistics.graph.y2yAcc": "Accumulation by year",
 
-	"taxon.genetics.title": "List of sequences",
-	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.sequences": "List of sequences",
+	"taxon.genetics.sequences.description": "Browse the list of genetic markers and sequences for all descendants of this taxon.",
 	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.filter.inGeographyScope": "Balearic Islands only",

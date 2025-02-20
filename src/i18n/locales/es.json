@@ -41,6 +41,7 @@
 	"taxon.overview.iucn_europe": "Europeo",
 	"taxon.overview.iucn_mediterranean": "Mediterráneo",
 	"taxon.overview.statistics": "Estadísticas",
+	"taxon.overview.statistics.description": "Number of classifications at each rank from the current taxon.",
 	"taxon.overview.composition": "Composición del taxon",
 	"taxon.overview.habitats": "Hábitats",
 	"taxon.overview.habitats.description": "Términos estándar utilizados para describir los principales hábitats y sistemas en los que se encuentra el taxón.",
@@ -106,8 +107,8 @@
 	"taxon.distribution.statistics.graph.y2y": "Registradas por años",
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulación por años",
 
-	"taxon.genetics.title": "Lista de secuencias",
-	"taxon.genetics.subtitle": "Lista de secuencias",
+	"taxon.genetics.sequences": "Lista de secuencias",
+	"taxon.genetics.sequences.description": "Explora la lista de marcadores genéticos y secuencias de todos los descendientes de este taxón.",
 	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomas",
 	"taxon.genetics.filter.inGeographyScope": "Solo en las Islas Baleares",
