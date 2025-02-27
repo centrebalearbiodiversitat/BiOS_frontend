@@ -23,6 +23,8 @@
 	"taxon.layout.modal.checklist.help": "Catalogue of species systematically organized to verify the presence and classification of organisms within the taxon.",
 	"taxon.layout.modal.occurrences": "Occurrences",
 	"taxon.layout.modal.occurrences.help": "List of recorded occurrences for the selected taxon and all its taxonomic descendants.",
+	"taxon.layout.modal.sequences": "Sequences",
+	"taxon.layout.modal.sequences.help": "List of sequences for the selected taxon and all its taxonomic descendants.",
 
 
 	"taxon.sidebar.classification": "Classification",
@@ -108,7 +110,7 @@
 	"taxon.distribution.statistics.graph.y2yAcc": "Accumulation by year",
 
 	"taxon.genetics.sequences": "List of sequences",
-	"taxon.genetics.sequences.description": "Browse the list of genetic markers and sequences for all descendants of this taxon.",
+	"taxon.genetics.sequences.description": "Browse the list of genetic markers and sequences of this taxon and descendants.",
 	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.filter.inGeographyScope": "Balearic Islands only",
@@ -159,6 +161,8 @@
 	"map.popup.voucher": "Voucher",
 
 	"components.empty": "No data",
+
+	"components.markerInfo.selected": "Selected marker",
 
 	"components.searchbar.label.taxonomy": "Search a taxon...",
 	"components.searchbar.label.geography": "Search a place...",

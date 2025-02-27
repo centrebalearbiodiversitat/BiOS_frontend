@@ -20,6 +20,7 @@ import DownloadModal from "@/components/DownloadModal";
 import {TaxonProvider} from "@/contexts/TaxonContext";
 import Scrollbars from "react-custom-scrollbars-2";
 import occurrences from "@/API/occurrences";
+import genetics from "@/API/genetics";
 import {useRouter} from "next/navigation";
 
 
@@ -61,6 +62,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 	const [sources, setSources] = useState(undefined);
 	const [checklistLink, setChecklistLink] = useState('');
 	const [occurrencesLink, setOccurrencesLink] = useState('');
+	const [geneticsLink, setGeneticsLink] = useState('');
 
 	useEffect(() => {
 		taxonomy.get(id)
@@ -82,6 +84,8 @@ export default function RootLayout({children, params: {lang, id}}) {
 			.then(r => setChecklistLink(r))
 		occurrences.listDownload(id)
 			.then(r => setOccurrencesLink(r))
+		genetics.listSequenceDownload(id)
+			.then(r => setGeneticsLink(r))
 	}, [id]);
 
 	const availableDownloads = useMemo(() => {
@@ -96,8 +100,13 @@ export default function RootLayout({children, params: {lang, id}}) {
 				description: t(lang, "taxon.layout.modal.occurrences.help"),
 				link: occurrencesLink,
 			},
+			{
+				title: t(lang, "taxon.layout.modal.sequences"),
+				description: t(lang, "taxon.layout.modal.sequences.help"),
+				link: geneticsLink,
+			},
 		]
-	}, [lang, checklistLink, occurrencesLink]);
+	}, [lang, checklistLink, occurrencesLink, geneticsLink]);
 
 	const TAB_BUTTONS = useMemo(() => [
 		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon'), icon: <FaInfo />},
@@ -136,7 +145,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 						</div>
 						<div className="flex flex-col col-span-full md:col-span-2">
 							<div className="ms-auto mt-4">
-								<DownloadModal lang={lang} availableDownloads={availableDownloads}/>
+								<DownloadModal availableDownloads={availableDownloads}/>
 							</div>
 							<div className="my-auto">
 								<Loading loading={taxon} className="mb-4" width="40%" height="32px">

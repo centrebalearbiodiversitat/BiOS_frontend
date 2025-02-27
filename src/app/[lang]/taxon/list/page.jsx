@@ -105,7 +105,7 @@ export default function List({params: {lang}}) {
 							{t(lang, "taxon.list.results")} {totalTaxa !== undefined ? `(${totalTaxa.toLocaleString()})` : ''}
 						</h2>
 						<div className="ms-auto">
-							<DownloadModal lang={lang} availableDownloads={availableDownloads}/>
+							<DownloadModal availableDownloads={availableDownloads}/>
 						</div>
 					</div>
 					<TaxaList taxa={taxa}/>

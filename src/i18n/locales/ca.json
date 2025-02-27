@@ -23,7 +23,8 @@
 	"taxon.layout.modal.checklist.help": "Catàleg d'espècies organitzades sistemàticament per verificar la presència i classificació dels organismes dins del tàxon.",
 	"taxon.layout.modal.occurrences": "Ocurrències",
 	"taxon.layout.modal.occurrences.help": "Llista d'ocurrències registrades per al tàxon seleccionat i tots els seus descendents taxonòmics.",
-
+	"taxon.layout.modal.sequences": "Seqüències",
+	"taxon.layout.modal.sequences.help": "Llista de seqüències per al tàxon seleccionat i tots els seus descendents taxonòmics.",
 
 	"taxon.sidebar.classification": "Classificació",
 	"taxon.sidebar.children": "Descendents",
@@ -109,7 +110,7 @@
 	"taxon.distribution.statistics.graph.y2yAcc": "Acumulació per anys",
 
 	"taxon.genetics.sequences": "Llistat de seqüències",
-	"taxon.genetics.sequences.description": "Explora la llista de marcadors genètics i seqüències de tots els descendents d’aquest taxó.",
+	"taxon.genetics.sequences.description": "Explora la llista de marcadors genètics i seqüències d’aquest taxó i tots els descendents.",
 	"taxon.genetics.totalSequence": "Total",
 	"taxon.genetics.genomes": "Genomes",
 	"taxon.genetics.filter.inGeographyScope": "Només a les Illes Balears",
@@ -160,6 +161,8 @@
 	"map.popup.voucher": "Identificador",
 
 	"components.empty": "Sense dades",
+
+	"components.markerInfo.selected": "Marcador seleccionat",
 
 	"components.searchbar.label.taxonomy": "Cerca un tàxon...",
 	"components.searchbar.label.geography": "Cerca un lloc...",

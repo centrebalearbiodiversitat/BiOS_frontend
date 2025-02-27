@@ -56,7 +56,6 @@ function Sequence({seq}) {
 
 
 export default function TaxonSequences({sequences}) {
-	const [lang] = useLang();
 	const titlesRef = useRef(null);
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -77,10 +76,9 @@ export default function TaxonSequences({sequences}) {
 	return (
 		<Loading loading={sequences} width="100%" height="795px">
 			<div className="space-y-6">
-				<h3 className="font-extralight text-2xl">{t(lang, "taxon.genetics.totalSequence")} <span className="text-primary">{sequences?.total}</span></h3>
 				<div className="custom-scrollbar overflow-x-auto" style={{width: "100%"}}>
 					<div className="min-w-[600px]">
-						<div ref={titlesRef} className="grid grid-cols-5 font-semibold pb-4">
+						<div ref={titlesRef} className="grid grid-cols-5 font-semibold pb-2">
 							<p>
 								Taxon
 							</p>
@@ -97,8 +95,9 @@ export default function TaxonSequences({sequences}) {
 								Markers
 							</p>
 						</div>
+						<Divider/>
 						<Empty isEmpty={sequences?.data.length === 0}>
-							<ul className="flex flex-col">
+							<ul className="outline outline-1 outline-slate-200">
 								{sequences &&
 									sequences.data.map(
 										seq => <Sequence key={seq.id} seq={seq}/>

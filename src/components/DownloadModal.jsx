@@ -1,12 +1,10 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import {
-	Button, cn,
-	Link,
+	cn,
 	Modal,
 	ModalBody,
 	ModalContent,
 	ModalFooter,
-	ModalHeader,
 	Radio,
 	RadioGroup,
 	useDisclosure
@@ -14,9 +12,8 @@ import {
 import {t} from "@/i18n/i18n";
 import CBBButton from "@/components/common/CBBButton";
 import {BsDownload} from "react-icons/bs";
-import taxonomy from "@/API/taxonomy";
-import occurrences from "@/API/occurrences";
 import DownloadButton from "@/components/common/DownloadButton";
+import {useLang} from "@/contexts/LangContext";
 
 
 export const RadioItem = ({children, ...extra}) => {
@@ -37,9 +34,10 @@ export const RadioItem = ({children, ...extra}) => {
 };
 
 
-export default function DownloadModal({lang, availableDownloads}) {
+export default function DownloadModal({availableDownloads}) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const [selectedLink, setSelectedLink] = useState(null);
+	const [lang] = useLang();
 
 	const onOpenChangeLink = useCallback(() => {
 		if (isOpen) {
@@ -92,9 +90,7 @@ export default function DownloadModal({lang, availableDownloads}) {
 								<CBBButton color="danger" variant="light" onPress={onClose}>
 									{t(lang, "taxon.layout.modal.close_button")}
 								</CBBButton>
-								{/*<Link isDisabled={!selectedLink} href={selectedLink} download={true}>*/}
-								<DownloadButton lang={lang} isDisabled={!selectedLink} href={selectedLink}/>
-								{/*</Link>*/}
+								<DownloadButton href={selectedLink}/>
 							</ModalFooter>
 						</>
 					)}

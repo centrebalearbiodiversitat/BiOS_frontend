@@ -2,11 +2,11 @@ import React from "react";
 import {t} from "@/i18n/i18n";
 import {useLang} from "@/contexts/LangContext";
 
-export default function Section({title, subtitle, children}) {
+export default function Section({title, subtitle, children, className}) {
 	const [lang, _] = useLang();
 
 	return (
-		<section>
+		<section className={className}>
 			<div className="mb-3">
 				{title &&
 					<h3 className="text-xl md:text-2xl font-extralight text-pretty">

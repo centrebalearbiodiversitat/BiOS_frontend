@@ -6,20 +6,21 @@ import {useCallback} from "react";
 import {Switch} from "@nextui-org/react";
 
 export default function ToggleButton({label, isEnabled, onToggle}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 
-	const onToggleCallback = useCallback(() => {
-		onToggle(!isEnabled);
-	}, [onToggle, isEnabled]);
+	const onToggleCallback = useCallback((value) => {
+		onToggle(value);
+	}, [onToggle]);
 
 	return (
 		<div className="flex items-center gap-2">
-			<label className="font-light">
+			<label className="font-light text-sm">
 				{t(lang, label)}
 			</label>
-			<Switch isSelected={isEnabled}
+			<Switch isSelected={isEnabled} size="sm"
 			        onValueChange={onToggleCallback}
-			        color="primary"/>
+			        color="primary">
+			</Switch>
 		</div>
 	);
 }

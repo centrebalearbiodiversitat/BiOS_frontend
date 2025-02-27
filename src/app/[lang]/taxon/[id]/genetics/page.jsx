@@ -11,15 +11,20 @@ import TaxonMarkers from "@/components/TaxonMarkers";
 import TaxonSequences from "@/components/TaxonSequences";
 import occurrences from "@/API/occurrences";
 import {occurrencesToGeoJson} from "@/utils/geojson";
-import ToggleButton from "@/components/common/ToggleButton";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Button, Divider} from "@nextui-org/react";
+import MarkerInfo from "@/components/MarkerInfo";
+import Hidden from "@/components/common/Hidden";
+import DownloadButton from "@/components/common/DownloadButton";
+import ToggleButton from "@/components/common/ToggleButton";
 
 export default function Genetics({params: {id, lang}}) {
-	const [taxon, setTaxon] = useTaxon();
+	const [taxon] = useTaxon();
 	const [markers, setMarkers] = useState(undefined);
+	const [totalMarker, setTotalMarker] = useState(undefined);
 	const [seqs, setSeqs] = useState(undefined);
-	const [occs, setOccs] = useState(undefined);
+	const [selectedMarker, setSelectedMarker] = useState(undefined);
+	const [downloadURL, setDownloadURL] = useState(undefined);
+	// const [occs, setOccs] = useState(undefined);
 	const router  = useRouter();
 	const searchParams = useSearchParams();
 
@@ -31,19 +36,28 @@ export default function Genetics({params: {id, lang}}) {
 
 	const marker = getParam("marker");
 	const page = getParam("page");
-	const inGeographyScope = getParam("inGeographyScope", false);
+	const inGeographyScope = getParam("inGeographyScope", undefined);
 
 	useEffect(() => {
 		setSeqs(undefined);
+		setDownloadURL(undefined);
 		genetics.listSequences(id, marker, inGeographyScope, page).then(r => setSeqs(r));
+		if (marker) {
+			genetics.getMarker(marker).then(r => setSelectedMarker(r));
+		} else {
+			setSelectedMarker(undefined);
+		}
+		genetics.listSequenceDownload(id, {marker, inGeographyScope}).then(r => setDownloadURL(r));
 	}, [id, page, marker, inGeographyScope]);
 
 	useEffect(() => {
 		setMarkers(undefined);
-		genetics.listMarkers(id, inGeographyScope).then(r => setMarkers(r));
+		genetics.listMarkers(id, {inGeographyScope}).then(r => setMarkers(r));
+		genetics.listCountSequences(id, {inGeographyScope})
+			.then(r => setTotalMarker({id: null, total: r, name: t(lang, "taxon.genetics.totalSequence")}));
 		// occurrences.list(id, null)
 		// 	.then(r => setOccs([occurrencesToGeoJson(id, r)]));
-	}, [id, inGeographyScope]);
+	}, [id, lang, inGeographyScope]);
 
 	useEffect(() => {
 		if (taxon)
@@ -52,7 +66,7 @@ export default function Genetics({params: {id, lang}}) {
 
 	const onSelectMarker = useCallback((marker) => {
 		const params = new URLSearchParams();
-		if (inGeographyScope){
+		if (inGeographyScope) {
 			params.set("inGeographyScope", inGeographyScope);
 		}
 
@@ -66,8 +80,9 @@ export default function Genetics({params: {id, lang}}) {
 
 	const onGeographyToggle = useCallback((value) => {
 		const params = new URLSearchParams();
+
 		if (value) {
-			params.set("inGeographyScope", value);
+			params.set("inGeographyScope", true);
 		} else {
 			params.delete("inGeographyScope");
 		}
@@ -76,7 +91,8 @@ export default function Genetics({params: {id, lang}}) {
 
 	return (
 		<>
-			<Section title="taxon.genetics.sequences" subtitle="taxon.genetics.sequences.description">
+			<Section title="taxon.genetics.sequences" subtitle="taxon.genetics.sequences.description"
+			         className="space-y-2">
 				{/*<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}*/}
 				{/*          taxaColors={{[id]: '#ff6900'}}>*/}
 				{/*	<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>*/}
@@ -91,14 +107,29 @@ export default function Genetics({params: {id, lang}}) {
 				{/*		{t(lang, "taxon.genetics.filter.inGeographyScope")}*/}
 				{/*	</Button>*/}
 				{/*</div>*/}
-				<SubSection className="space-y-6">
-					<div className="space-y-4">
-						<div className="flex flex-row justify-end">
-							<ToggleButton label="taxon.genetics.filter.inGeographyScope" onToggle={onGeographyToggle} isEnabled={inGeographyScope}/>
-						</div>
-						<TaxonMarkers markers={markers} selectedMarker={marker} onSelectMarker={onSelectMarker}/>
+				<div className="flex flex-row rounded-full">
+					<div className="flex grow">
+						{/*<PushButton label="taxon.genetics.filter.inGeographyScope" onPush={onGeographyToggle}*/}
+						{/*            className="mx-auto flex flex-row items-center gap-4 my-2" isPushed={inGeographyScope}*/}
+						{/*            icon={<IoLocationSharp className="text-xl"/>}/>*/}
+						<DownloadButton href={seqs && seqs.total ? downloadURL : undefined} className="bg-white">
+							{t(lang, "taxon.layout.modal.download_button")} {seqs && `(${seqs.total.toLocaleString()})`}
+						</DownloadButton>
 					</div>
-					<Divider/>
+					<div className="bg-white rounded-full border border-slate-200 flex px-3">
+						<ToggleButton label="taxon.genetics.filter.inGeographyScope" onToggle={onGeographyToggle}
+						              className="m-auto flex flex-row items-center gap-4" isEnabled={inGeographyScope ?? false}/>
+					</div>
+				</div>
+				<SubSection className="!p-0">
+					<TaxonMarkers
+						markers={totalMarker !== undefined && markers !== undefined && [totalMarker, ...markers]}
+						selectedMarker={marker} onSelectMarker={onSelectMarker}/>
+				</SubSection>
+				<Hidden hide={!selectedMarker}>
+					<MarkerInfo marker={selectedMarker}/>
+				</Hidden>
+				<SubSection className="flex flex-col gap-8">
 					<TaxonSequences sequences={seqs}/>
 				</SubSection>
 			</Section>
