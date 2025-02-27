@@ -33,7 +33,7 @@ function DataCard({lang, title, icon, fetchData}) {
 
 
 	useEffect(() => {
-		fetchData().then(payload => setData(payload))
+		fetchData().then(payload => setData(payload.toLocaleString()))
 	}, [fetchData]);
 
 	return (

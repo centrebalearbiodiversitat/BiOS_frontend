@@ -42,7 +42,7 @@
 	"taxon.overview.iucn_europe": "Europeu",
 	"taxon.overview.iucn_mediterranean": "Mediterrani",
 	"taxon.overview.statistics": "Estadístiques",
-	"taxon.overview.statistics.description": "Number of classifications at each rank from the current taxon.",
+	"taxon.overview.statistics.description": "Nombre de classificacions a cada rang des del tàxon actual.",
 	"taxon.overview.composition": "Composició del tàxon",
 	"taxon.overview.habitats": "Hàbitats",
 	"taxon.overview.habitats.description": "Termes estàndard utilitzats per descriure els principals hàbitats i sistemes on es troba el tàxon.",
