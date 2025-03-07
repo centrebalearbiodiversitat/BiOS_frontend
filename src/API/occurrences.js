@@ -6,6 +6,17 @@ function get(id) {
 	return requests.GET(`${OCCURRENCES_PATH}`, {id})
 }
 
+function map(taxonomyId, geographicalLocationId, params) {
+	return requests.GET(
+		`${OCCURRENCES_PATH}/map`,
+		{
+			taxonomy: taxonomyId,
+			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
+			...params
+		}
+	)
+}
+
 function list(taxonomyId, geographicalLocationId, params) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list`,
@@ -45,6 +56,7 @@ function statsBySource(taxonomy) {
 
 module.exports = {
 	get,
+	map,
 	list,
 	listDownload,
 	listCount,

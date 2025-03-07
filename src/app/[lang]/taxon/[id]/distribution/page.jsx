@@ -22,7 +22,7 @@ export default function Taxon({params: {lang, id}}) {
 	const [occsStatsBySource, setOccsStatsBySource] = useState(undefined);
 
 	useEffect(() => {
-		occurrences.list(id, null)
+		occurrences.map(id, null)
 			.then(r => setOccs([occurrencesToGeoJson(id, r)]));
 		occurrences.statsByMonth(id)
 			.then(r => setOccsStatsByMonth(r));

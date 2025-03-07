@@ -228,6 +228,11 @@
 
 	"components.verticalTaxonomy.empty": "Buit",
 
+	"components.wipToast.title": "Lloc en construcció",
+	"components.wipToast.subtitle": "La plataforma està actualment en construcció i pot canviar amb el temps",
+
+	"soon": "Pròximament",
+
 	"footer.sitemap.title": "Sitemap",
 	"footer.sitemap.home": "Inici",
 	"footer.sitemap.map": "Mapa",

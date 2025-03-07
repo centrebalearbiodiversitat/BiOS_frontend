@@ -8,6 +8,8 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import "@/globals.css";
 import React from "react";
 import {LangProvider} from "@/contexts/LangContext";
+import { GoogleAnalytics } from '@next/third-parties/google'
+import WIPToast from "@/components/common/WIPToast";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],
@@ -39,10 +41,12 @@ export default function RootLayout({children, params: {lang}}) {
 				<main className="min-h-[calc(100vh-64px-12px*2)] w-full">
 					<LangProvider initialState={lang}>
 						{children}
+						<WIPToast/>
 					</LangProvider>
 				</main>
 				<Footer lang={lang}/>
 			</body>
+			<GoogleAnalytics gaId="G-5T5J9YQ15G"/>
 		</html>
 	);
 }

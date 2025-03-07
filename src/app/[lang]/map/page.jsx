@@ -38,7 +38,7 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 			if (savedTaxaToLoc.hasOwnProperty(taxaToLocKey)) {
 				taxaToLoc[taxaToLocKey] = savedTaxaToLoc[taxaToLocKey];
 			} else {
-				let payload = await occurrences.list(
+				let payload = await occurrences.map(
 					taxon,
 					location,
 					params

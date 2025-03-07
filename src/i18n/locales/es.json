@@ -228,6 +228,11 @@
 
 	"components.verticalTaxonomy.empty": "Vacío",
 
+	"components.wipToast.title": "Sitio en construcción",
+	"components.wipToast.subtitle": "La plataforma está actualmente en desarrollo y puede cambiar con el tiempo",
+
+	"soon": "Próximamente",
+
 	"footer.sitemap.title": "Sitemap",
 	"footer.sitemap.home": "Inicio",
 	"footer.sitemap.map": "Mapa",

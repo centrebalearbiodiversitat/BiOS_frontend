@@ -28,7 +28,7 @@ export default function AboutBulletPoints({lang}) {
 				<TextBlock lang={lang} number={3} numberColor="text-accent"
 				           titleKey={"about.block.genetic"}
 				           textKey={"about.block.genetic.text"}/>
-				<TextBlock lang={lang} number={4} numberColor="text-amber-500"
+				<TextBlock lang={lang} number={`4 (${t(lang, "soon")})`} numberColor="text-amber-500"
 				           titleKey={"about.block.traits"}
 				           textKey={"about.block.traits.text"}/>
 			</div>
