@@ -15,8 +15,8 @@ import {useTaxon} from "@/contexts/TaxonContext";
 import {generatePageTitle} from "@/utils/utils";
 
 export default function Taxon({params: {lang, id}}) {
-	const [taxon, setTaxon] = useTaxon();
-	const [occs, setOccs] = useState(null);
+	const [taxon] = useTaxon();
+	const [occs, setOccs] = useState(undefined);
 	const [occsStatsByMonth, setOccsStatsByMonth] = useState(undefined);
 	const [occsStatsByYear, setOccsStatsByYear] = useState(undefined);
 	const [occsStatsBySource, setOccsStatsBySource] = useState(undefined);

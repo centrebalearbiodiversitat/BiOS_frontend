@@ -85,7 +85,7 @@ export default function List({params: {lang}}) {
 		if (!isNaN(page)) {
 			const params = new URLSearchParams(searchParams.toString());
 			params.set("page", page)
-			router.push(`?${params.toString()}`);
+			router.push(`?${params.toString()}`, {scroll: false});
 			handleScrollTop()
 		}
 	}, [router, searchParams]);

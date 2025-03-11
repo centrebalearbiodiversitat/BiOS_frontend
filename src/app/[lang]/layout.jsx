@@ -23,7 +23,7 @@ export default function RootLayout({children, params: {lang}}) {
 			<head>
 				<meta name="description" content={t(lang, 'web.description')}/>
 				<meta charSet="UTF-8"/>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 				<link rel="canonical" href="https://cbbdb.uib.eu/"/>
 				<link rel="alternate" hrefLang="en" href="https://cbbdb.uib.eu"/>
 				<link rel="alternate" hrefLang="es" href="https://cbbdb.uib.es"/>

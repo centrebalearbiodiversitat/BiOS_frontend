@@ -107,7 +107,7 @@ export default function SearchBar({
 			              classNames={{popoverContent: "rounded-2xl"}}
 			              inputProps={{
 				              classNames: {
-					              input: "",
+					              input: "text-base font-light md:text-small",
 					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border-1' : 'border-0'),
 				              },
 			              }}

@@ -5,6 +5,7 @@ import React, {useMemo} from "react";
 import {usePathname, useRouter} from "next/navigation";
 import taxonomy from "@/API/taxonomy";
 import CBBSearchBar from "@/components/common/CBBSearchBar";
+import {handleScrollTop} from "@/utils/utils";
 
 
 export default function FullCBBSearchBar({lang, showFilters = true, rounded = true, filters = null}) {
@@ -19,13 +20,16 @@ export default function FullCBBSearchBar({lang, showFilters = true, rounded = tr
 		return [
 			{
 				textKey: "components.searchbar.filter.taxonomy",
-				onSelected: taxonId => router.push(
-					`/${lang}/taxon/${taxonId}${pathname.endsWith('genetics') ? '/genetics' : ''}`,
-					{scroll: true},
-				),
+				onSelected: taxonId => {
+					handleScrollTop();
+					router.push(
+						`/${lang}/taxon/${taxonId}${pathname.endsWith('genetics') ? '/genetics' : ''}`,
+						{scroll: false},
+					)
+				},
 				onSubmit: q => router.push(
 					`/${lang}/taxon/list?q=${q}`,
-					{scroll: true},
+					{scroll: false},
 				),
 				onInput: e => taxonomy.search(e)
 			}

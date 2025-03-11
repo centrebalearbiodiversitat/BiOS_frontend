@@ -9,7 +9,7 @@ import {
 	NavbarMenuItem,
 	Link,
 } from "@nextui-org/react";
-import {Image} from "@nextui-org/react";
+import Image from "next/image";
 import LangSelector from "@/components/LangSelector";
 import HoverLink from "@/components/common/HoverLink";
 import {t} from "@/i18n/i18n";
@@ -34,7 +34,7 @@ export default function Header({lang, locales, className}) {
 			<NavbarContent>
 				<NavbarBrand>
 					<HoverLink href={`/${lang}`}>
-						<Image src="/images/cbb-logo.png" className="brightness-95" alt={"CBB logo"} width="400px" radius={null}/>
+						<Image src="/images/cbb-logo.png" className="brightness-95" alt={"CBB logo"} width={400} height={91} priority={true} radius={null}/>
 						{/*<CBBLogo className="w-full h-[6svw] sm:h-[8svw] md:h-[11svw] min-h-[38px] max-h-[48px] brightness-95"/>*/}
 					</HoverLink>
 				</NavbarBrand>
@@ -64,7 +64,7 @@ export default function Header({lang, locales, className}) {
 							<Link color={idx === 0 ? "primary" : "foreground"}
 							      href={section.href} target={section.external ? "_blank" : "_self"}
 							      className="w-full justify-center">
-								{section.text} {<LuExternalLink/>}
+								{section.text} {section.external && <LuExternalLink className="mb-auto ms-1"/>}
 							</Link>
 						</NavbarMenuItem>
 					))
