@@ -1,6 +1,6 @@
 import React from "react";
 import {t} from "@/i18n/i18n";
-import {Tooltip} from "@nextui-org/react";
+import {Tooltip} from "@heroui/react";
 import {TiArrowSortedUp} from "react-icons/ti";
 import clsx from "clsx";
 import {GiEarthAfricaEurope, GiEuropeanFlag} from "react-icons/gi";

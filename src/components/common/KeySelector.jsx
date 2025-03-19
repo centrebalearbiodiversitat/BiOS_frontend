@@ -1,6 +1,6 @@
 import {t} from "@/i18n/i18n";
 import {useCallback, useState} from "react";
-import {Button, Select, SelectItem} from "@nextui-org/react";
+import {Button, Select, SelectItem} from "@heroui/react";
 import {IoClose} from "react-icons/io5";
 
 

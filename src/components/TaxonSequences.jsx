@@ -1,7 +1,7 @@
 import React, {useCallback, useRef} from "react";
 import Loading from "@/components/common/Loading";
 import SubSection from "@/components/common/SubSection";
-import {Divider, Pagination} from "@nextui-org/react";
+import {Divider, Pagination} from "@heroui/react";
 import Link from "next/link";
 import {generateSourceUrl, handleScrollTop} from "@/utils/utils";
 import SourceLink from "@/components/common/SourceLink";

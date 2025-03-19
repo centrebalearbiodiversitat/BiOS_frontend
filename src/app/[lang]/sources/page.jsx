@@ -3,7 +3,7 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import versioning from "@/API/versioning"
 import {t} from "@/i18n/i18n";
-import {Image} from "@nextui-org/react";
+import {Image} from "@heroui/react";
 import Link from "next/link";
 import StatsChart from "@/components/StatsChart";
 import {VscGraph} from "react-icons/vsc";

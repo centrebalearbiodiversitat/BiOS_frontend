@@ -1,6 +1,6 @@
 import {t} from "@/i18n/i18n";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import {Button, Image} from "@nextui-org/react";
+import {Button, Image} from "@heroui/react";
 import React from "react";
 import Statistics from "@/components/Statistics";
 import Link from "next/link";

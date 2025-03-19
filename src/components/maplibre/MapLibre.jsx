@@ -2,7 +2,7 @@
 
 import React, {forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl, ScaleControl} from 'react-map-gl/maplibre';
-import {Spinner} from "@nextui-org/react";
+import {Spinner} from "@heroui/react";
 import html2canvas from "html2canvas";
 
 const MAP_STYLE = {
@@ -80,29 +80,31 @@ function PointsSource({data, taxaColors, idx, visible}) {
 
 		return (
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
+				{/*<Layer*/}
+				{/*	id={`${idx}`}*/}
+				{/*	// type="heatmap"*/}
+				{/*	type="circle"*/}
+				{/*	layout={{visibility: visible ? "visible" : "none"}}*/}
+				{/*	paint={{*/}
+				{/*		'circle-radius': 13,*/}
+				{/*		'circle-pitch-scale': 'map',*/}
+				{/*		'circle-color': `rgba(0, 0, 0, 0)`,*/}
+				{/*		// 'circle-opacity': 0.3,*/}
+				{/*		// 'circle-color': `rgba(252, 186, 3)`,*/}
+				{/*		// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,*/}
+				{/*	}}/>*/}
 				<Layer
 					id={`${idx}`}
 					// type="heatmap"
 					type="circle"
 					layout={{visibility: visible ? "visible" : "none"}}
 					paint={{
-						'circle-radius': 13,
-						'circle-pitch-scale': 'map',
-						'circle-color': `rgba(0, 0, 0, 0)`,
-						// 'circle-opacity': 0.3,
-						// 'circle-color': `rgba(252, 186, 3)`,
-						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
-					}}/>
-				<Layer
-					id={`${idx}-visual`}
-					// type="heatmap"
-					type="circle"
-					layout={{visibility: visible ? "visible" : "none"}}
-					paint={{
-						'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2, 15, 5],
-						'circle-pitch-scale': 'map',
+						'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 1.5, 10, 10],
+						// "circle-stroke-width": 0.5,
+                        // "circle-stroke-color": "#ffffff60",
+						// 'circle-pitch-scale': 'map',
 						'circle-color': `${color}`,
-						// 'circle-opacity': .65,
+						"circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0.4],
 						// 'circle-stroke-color': `${color}`,
 						// 'circle-stroke-width': 1,
 						// 'circle-stroke-opacity': 1,
@@ -229,13 +231,14 @@ const MapLibre = forwardRef(({
 	});
 
 	function flyTo(layer) {
+		console.log(mapRef.current.getPitch())
 		const i = Math.floor(Math.random() * data[layer].features.length);
 		mapRef.current?.flyTo({
-			center: data[layer].features[i].geometry.coordinates,
-			zoom: 13,
-			pitch: 60,
-			bearing: Math.random() * 360,
-			duration: 2000,
+			// center: data[layer].features[i].geometry.coordinates,
+			// zoom: 13,
+			pitch: mapRef.current.getPitch() === 0 ? 60 : 0,
+			// bearing: Math.random() * 360,
+			// duration: 2000,
 			essential: true
 		})
 	}

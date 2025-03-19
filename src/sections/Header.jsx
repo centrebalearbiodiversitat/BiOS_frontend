@@ -8,7 +8,7 @@ import {
 	NavbarMenu,
 	NavbarMenuItem,
 	Link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Image from "next/image";
 import LangSelector from "@/components/LangSelector";
 import HoverLink from "@/components/common/HoverLink";

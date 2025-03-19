@@ -1,5 +1,5 @@
 import React from "react";
-import {Image} from "@nextui-org/react";
+import {Image} from "@heroui/react";
 import SiteMap from "@/components/SiteMap";
 import Legal from "@/components/Legal";
 import Contact from "@/components/Contact";

@@ -1,8 +1,8 @@
 import React from "react";
 import {
 	Link,
-} from "@nextui-org/react";
-import {Image} from "@nextui-org/react";
+} from "@heroui/react";
+import {Image} from "@heroui/react";
 import {t} from "@/i18n/i18n";
 
 export default function AboutApp({lang}) {

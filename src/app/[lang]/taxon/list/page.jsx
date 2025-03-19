@@ -3,7 +3,7 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Pagination} from "@nextui-org/react";
+import {Pagination} from "@heroui/react";
 import {t} from "@/i18n/i18n";
 import {generatePageTitle, handleScrollTop} from "@/utils/utils";
 import DownloadModal from "@/components/DownloadModal";

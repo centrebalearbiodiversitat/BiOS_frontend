@@ -8,7 +8,7 @@ import {
 	Radio,
 	RadioGroup,
 	useDisclosure
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {t} from "@/i18n/i18n";
 import CBBButton from "@/components/common/CBBButton";
 import {BsDownload} from "react-icons/bs";

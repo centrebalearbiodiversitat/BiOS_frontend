@@ -3,7 +3,7 @@
 import {useLang} from "@/contexts/LangContext";
 import {t} from "@/i18n/i18n";
 import {useCallback} from "react";
-import {Switch} from "@nextui-org/react";
+import {Switch} from "@heroui/react";
 
 export default function ToggleButton({label, isEnabled, onToggle}) {
 	const [lang] = useLang();

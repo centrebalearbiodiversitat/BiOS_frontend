@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from "react";
-import {Image} from "@nextui-org/react";
+import {Image} from "@heroui/react";
 import clsx from "clsx";
 import {generateSourceUrl} from "@/utils/utils";
 

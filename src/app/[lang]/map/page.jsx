@@ -12,7 +12,7 @@ import MapLibre from "@/components/maplibre/MapLibre";
 import TaxonName from "@/components/common/TaxonName";
 import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
 import Sources from "@/components/Sources";
-import {Accordion, AccordionItem, Button} from "@nextui-org/react";
+import {Accordion, AccordionItem, Button} from "@heroui/react";
 import HighlightText from "@/components/common/HighlightText";
 import Filters from "@/components/Filters";
 import {FiDownload} from "react-icons/fi";

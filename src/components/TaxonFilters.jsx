@@ -1,6 +1,6 @@
 import {t} from "@/i18n/i18n";
 import {RiParentFill} from "react-icons/ri";
-import {Chip, Divider, Input} from "@nextui-org/react";
+import {Chip, Divider, Input} from "@heroui/react";
 import TaxonName from "@/components/common/TaxonName";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import {FaCamera, FaCheck, FaGavel, FaHighlighter, FaMapMarkerAlt} from "react-icons/fa";

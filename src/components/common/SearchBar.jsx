@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
+import {Autocomplete, AutocompleteItem, Input} from "@heroui/react";
 import HighlightText from "@/components/common/HighlightText";
 import {t} from "@/i18n/i18n";
 import clsx from "clsx";
@@ -21,6 +21,15 @@ function SearchBarIcon() {
 const defaultChildren = (obj, search) => {
 	return (
 		<HighlightText text={obj.name} highlight={search}/>
+	)
+}
+
+function RightArrowPlaceHolder(placeholder) {
+	return (
+		<span>
+			{placeholder}
+			<span className="ml-1">&#8592;</span>
+		</span>
 	)
 }
 
@@ -54,14 +63,14 @@ export default function SearchBar({
 		// }
 	}, [onInput]);
 
-	const onFocusChange = useCallback((focus) => {
-		setAcFocus(focus);
-		if (!focus) {
-			onInput("");
-			setSearch("");
-			setSelected(null);
-		}
-	}, [onInput]);
+	// const onFocusChange = useCallback((focus) => {
+		// setAcFocus(focus);
+		// if (!focus) {
+		// 	onInput("");
+		// 	setSearch("");
+		// 	setSelected(null);
+		// }
+	// }, [onInput]);
 
 	const _onSelected = useCallback((payload) => {
 		if (payload) {
@@ -93,12 +102,22 @@ export default function SearchBar({
 				// }
 			}
 		}
-	}, [data, onInputChange, onSubmit, search, placeholderText, _onSelected]);
+	}, [data, onInputChange, search, placeholderText, _onSelected]);
 
 	return (
 		<div className={className}>
-			<Autocomplete variant={"faded"} defaultItems={data} onFocusChange={onFocusChange} inputValue={search}
-			              selectedKey={selected} label={labelText} placeholder={acFocus ? `${placeholderText} →` : null}
+			<Autocomplete variant={"faded"} defaultItems={data} inputValue={search}
+			              defaultFilter={(e) => true}
+			              // renderInput={(props) => (
+				          //     <div className="relative">
+					      //         <Input {...props} className="pl-10"/>
+					      //         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+						  //             🔍 <span className="text-sm">Search here...</span>
+					      //         </div>
+				          //     </div>
+			              // )}
+			              selectedKey={selected} label={labelText}
+			              placeholder={`${placeholderText} →`}
 			              onSelectionChange={_onSelected} onInputChange={onInputChange} onKeyDown={onDefaultSelected}
 			              className={`w-full transition-all text-center`} radius={rounded ? "full" : "sm"}
 			              listboxProps={{
@@ -107,7 +126,7 @@ export default function SearchBar({
 			              classNames={{popoverContent: "rounded-2xl"}}
 			              inputProps={{
 				              classNames: {
-					              input: "text-base font-light md:text-small",
+					              input: "text-base font-light md:text-small kbd-rght-arrow",
 					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border-1' : 'border-0'),
 				              },
 			              }}

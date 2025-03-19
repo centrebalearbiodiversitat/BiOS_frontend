@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from "@nextui-org/react";
+import {Button} from "@heroui/react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 

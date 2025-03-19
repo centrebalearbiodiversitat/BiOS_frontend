@@ -5,18 +5,20 @@ export default function HighlightText({text, highlight}) {
         return <span>{text}</span>;
     }
 
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    const words = highlight.split(/\s+/).map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const regex = new RegExp(`(${words.join('|')})`, 'gi');
+    const parts = text.split(regex);
 
     return (
         <span>
 			{parts && parts.map((part, index) =>
-                part.toLowerCase() === highlight.toLowerCase() ? (
+                highlight.toLowerCase().includes(part.toLowerCase()) ? (
                     <span key={index} className="bg-primary rounded-sm bg-opacity-80">
-				{part}
-				</span>
-                ) : (
-                    part
-                )
+                        {part}
+                    </span>
+                    ) : (
+                        part
+                    )
             )}
 	    </span>
     );

@@ -12,7 +12,7 @@ import {useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
-import {Accordion, AccordionItem} from "@nextui-org/react";
+import {Accordion, AccordionItem} from "@heroui/react";
 import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";

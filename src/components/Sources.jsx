@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Chip} from "@nextui-org/react";
+import {Chip} from "@heroui/react";
 import Link from "next/link";
 import {RxExternalLink} from "react-icons/rx";
 import clsx from "clsx";
