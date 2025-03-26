@@ -37,17 +37,17 @@ function Sequence({seq}) {
 					<p>
 						{seq.publishedDate ?? "-"}
 					</p>
-					<div className="flex flex-wrap gap-2">
+					<ul className="flex flex-wrap gap-2">
 						{
 							seq.markers.map(
 								marker => (
-									<p key={marker.id} className="rounded-full bg-black text-white text-sm px-3">
+									<li key={marker.id} className="rounded-full bg-black h-auto text-white text-sm max-h-[20px] px-3">
 										{marker.name}
-									</p>
+									</li>
 								)
 							)
 						}
-					</div>
+					</ul>
 				</div>
 			</SourceLink>
 		</li>

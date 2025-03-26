@@ -12,7 +12,7 @@ import MapLibre from "@/components/maplibre/MapLibre";
 import TaxonName from "@/components/common/TaxonName";
 import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
 import Sources from "@/components/Sources";
-import {Accordion, AccordionItem, Button} from "@heroui/react";
+import {Accordion, AccordionItem, Button, Divider} from "@heroui/react";
 import HighlightText from "@/components/common/HighlightText";
 import Filters from "@/components/Filters";
 import {FiDownload} from "react-icons/fi";
@@ -21,6 +21,27 @@ import MapLibreTaxa from "@/components/maplibre/MapLibreTaxa";
 import MapLibreCardGeography from "@/components/maplibre/MapLibreCardGeography";
 import {generatePageTitle} from "@/utils/utils";
 
+const TAXA_PALETTE = [
+	"#D55E00",
+	"#56B4E9",
+	"#F0E442",
+	"#009E73",
+	"#CC79A7",
+	"#FF6F61",
+	"#008080",
+	"#D9B44A",
+	"#6A5ACD",
+	"#C07F9B",
+	"#66C2A5",
+	"#FC8D62",
+	"#8DA0CB",
+	"#E78AC3",
+	"#A6D854",
+	"#FFD92F",
+	"#E60000",
+	"#FF6600",
+	"#006666",
+]
 
 async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc, params) {
 	const taxaColors = {};
@@ -72,8 +93,8 @@ async function fetchOccurrences(taxa, locations, savedTaxaColors, savedTaxaToLoc
 			if (savedTaxaColors && savedTaxaColors.hasOwnProperty(taxon)) {
 				taxaColors[taxon] = savedTaxaColors[taxon];
 			} else {
-				const randomColor = Math.floor(Math.random() * 16777215)
-				taxaColors[taxon] = `#${randomColor.toString(16).padStart(6, '0')}`
+				const randomColor = Math.floor(Math.random() * TAXA_PALETTE.length)
+				taxaColors[taxon] = TAXA_PALETTE[randomColor];
 			}
 		}
 	}
@@ -253,13 +274,13 @@ export default function MapPage({params: {lang}}) {
 								               title={
 									               <>
 										               <TaxonName lang={lang} taxon={occu.taxonomy} author={false}/>
-										               <p className={`text-medium font-light w-full`}>
+										               <p className={`text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
 										               </p>
 									               </>
 								               }
 								               longitude={occu.decimalLongitude} latitude={occu.decimalLatitude}>
-									<div className="text-medium my-6">
+									<div className="space-y-0.5">
 										<TwoLineText title={t(lang, "map.popup.locality")}
 										             text={occu.location?.name}/>
 										<TwoLineText title={t(lang, "map.popup.location")} text={
@@ -267,13 +288,13 @@ export default function MapPage({params: {lang}}) {
 												<span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
 										}/>
 										<TwoLineText title={t(lang, "map.popup.elevation")} text={occu.elevation}/>
-										<TwoLineText title={t(lang, "map.popup.depth")} text={occu.depth}/>
+										<TwoLineText title={t(lang, "map.popup.depth")} text={occu.depth ? `${occu.depth} m.` : null}/>
 										<TwoLineText title={t(lang, "map.popup.eventDate")} text={occu.eventDate}/>
 										<TwoLineText title={t(lang, "map.popup.basisRecord")}
 										             text={occu.basisOfRecord}/>
 										<TwoLineText title={t(lang, "map.popup.voucher")} text={occu.voucher}/>
 									</div>
-									<Sources sources={occu.sources} className="my-3"/>
+									<Sources sources={occu.sources} className="mt-4 justify-end"/>
 								</MapLibrePopup>
 							)
 						)

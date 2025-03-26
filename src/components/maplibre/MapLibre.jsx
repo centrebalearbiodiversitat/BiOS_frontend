@@ -1,6 +1,6 @@
 "use client"
 
-import React, {forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
+import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl, ScaleControl} from 'react-map-gl/maplibre';
 import {Spinner} from "@heroui/react";
 import html2canvas from "html2canvas";
@@ -18,12 +18,12 @@ const MAP_STYLE = {
 		},
 		terrainSource: {
 			type: 'raster-dem',
-			tiles: ['/PRova/{z}/{x}/{y}.png'],
+			tiles: ['/images/map/{z}/{x}/{y}.png'],
 			tileSize: 256,
 		},
 		hillshadeSource: {
 			type: 'raster-dem',
-			tiles: ['/PRova/{z}/{x}/{y}.png'],
+			tiles: ['/images/map/{z}/{x}/{y}.png'],
 			tileSize: 256,
 		},
 		// terrainSource: {
@@ -80,102 +80,36 @@ function PointsSource({data, taxaColors, idx, visible}) {
 
 		return (
 			<Source id={`source-points-${idx}`} type="geojson" data={data} cluster={false}>
-				{/*<Layer*/}
-				{/*	id={`${idx}`}*/}
-				{/*	// type="heatmap"*/}
-				{/*	type="circle"*/}
-				{/*	layout={{visibility: visible ? "visible" : "none"}}*/}
-				{/*	paint={{*/}
-				{/*		'circle-radius': 13,*/}
-				{/*		'circle-pitch-scale': 'map',*/}
-				{/*		'circle-color': `rgba(0, 0, 0, 0)`,*/}
-				{/*		// 'circle-opacity': 0.3,*/}
-				{/*		// 'circle-color': `rgba(252, 186, 3)`,*/}
-				{/*		// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,*/}
-				{/*	}}/>*/}
 				<Layer
 					id={`${idx}`}
 					// type="heatmap"
 					type="circle"
 					layout={{visibility: visible ? "visible" : "none"}}
 					paint={{
-						'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 1.5, 10, 10],
+						'circle-radius': 13,
+						'circle-pitch-scale': 'map',
+						'circle-color': `rgba(0, 0, 0, 0)`,
+					}}/>
+				<Layer
+					id={`${idx}-visible`}
+					// type="heatmap"
+					type="circle"
+					layout={{visibility: visible ? "visible" : "none"}}
+					paint={{
+						'circle-radius': ['interpolate', ['linear'], ['zoom'], 4, 2, 16, 7],
 						// "circle-stroke-width": 0.5,
                         // "circle-stroke-color": "#ffffff60",
 						// 'circle-pitch-scale': 'map',
 						'circle-color': `${color}`,
-						"circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 1, 0.4],
-						// 'circle-stroke-color': `${color}`,
-						// 'circle-stroke-width': 1,
+						// 'circle-stroke-color': `${color}88`,
+						'circle-stroke-color': `#ffffff`,
+						// 'circle-stroke-width': 8,
+						'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 8, 0, 16, 2],
 						// 'circle-stroke-opacity': 1,
 						// 'circle-opacity': 0.3,
 						// 'circle-color': `rgba(252, 186, 3)`,
 						// 'circle-color': `#${Math.floor(Math.random()*16777215).toString(16)}`,
 					}}
-					// paint={{
-	                //     // Increase the heatmap weight based on frequency and property magnitude
-	                //     'heatmap-weight': [
-	                //         'interpolate',
-	                //         ['linear'],
-	                //         ['get', 'mag'],
-	                //         0,
-	                //         0,
-	                //         6,
-	                //         1
-	                //     ],
-	                //     // Increase the heatmap color weight weight by zoom level
-	                //     // heatmap-intensity is a multiplier on top of heatmap-weight
-	                //     // 'heatmap-intensity': [
-	                //     //     'interpolate',
-	                //     //     ['linear'],
-	                //     //     ['zoom'],
-	                //     //     0,
-	                //     //     1,
-	                //     //     9,
-	                //     //     3
-	                //     // ],
-	                //     // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-	                //     // Begin color ramp at 0-stop with a 0-transparancy color
-	                //     // to create a blur-like effect.
-	                //     'heatmap-color': [
-	                //         'interpolate',
-	                //         ['linear'],
-	                //         ['heatmap-density'],
-	                //         0,
-	                //         `${color}00`,
-	                //         0.2,
-	                //         `${color}20`,
-	                //         0.4,
-	                //         `${color}40`,
-	                //         0.6,
-	                //         `${color}60`,
-	                //         0.8,
-	                //         `${color}80`,
-	                //         1,
-	                //         `${color}FF`,
-	                //     ],
-	                //     // Adjust the heatmap radius by zoom level
-	                //     'heatmap-radius': [
-	                //         'interpolate',
-	                //         ['linear'],
-	                //         ['zoom'],
-	                //         0,
-	                //         2,
-	                //         9,
-	                //         20
-	                //     ],
-					// 	'heatmap-opacity': 0.7
-	                //     // Transition from heatmap to circle layer by zoom level
-	                //     // 'heatmap-opacity': [
-	                //     //     'interpolate',
-	                //     //     ['linear'],
-	                //     //     ['zoom'],
-	                //     //     7,
-	                //     //     1,
-	                //     //     9,
-	                //     //     0
-	                //     // ]
-	                // }
 				/>
 			</Source>
 		);
@@ -230,24 +164,27 @@ const MapLibre = forwardRef(({
 		}
 	});
 
-	function flyTo(layer) {
+	function flyTo() {
 		console.log(mapRef.current.getPitch())
-		const i = Math.floor(Math.random() * data[layer].features.length);
+		// const i = Math.floor(Math.random() * data[layer].features.length);
 		mapRef.current?.flyTo({
 			// center: data[layer].features[i].geometry.coordinates,
-			// zoom: 13,
 			pitch: mapRef.current.getPitch() === 0 ? 60 : 0,
 			// bearing: Math.random() * 360,
 			// duration: 2000,
-			essential: true
+			// essential: true
 		})
 	}
 
 	return (
 		<Map ref={mapRef} initialViewState={{longitude: lng, latitude: lat, zoom, bearing: bearing, pitch}}
-		     mapStyle={MAP_STYLE} doubleClickZoom={false} preserveDrawingBuffer={true}
+		     mapStyle={MAP_STYLE} doubleClickZoom={false} preserveDrawingBuffer={true} maxZoom={14} minZoom={7}
 		     interactiveLayerIds={data?.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
-		     onDblClick={(e) => nav && flyTo(0)}
+		     onDblClick={(e) => nav && flyTo()}
+		     maxBounds={[
+			     [-4.46368, 36.26470],
+				 [9.49993, 42.27980],
+		     ]}
 		     onClick={e => onClick && e.features && onClick(e.features[0])}>
 			{sources &&
 				Object.values(sources).map(

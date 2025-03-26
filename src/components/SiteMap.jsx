@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Link} from "@heroui/react";
+import {Accordion, AccordionItem, Link} from "@heroui/react";
 import {t} from "@/i18n/i18n";
 
 
@@ -12,9 +12,9 @@ export default function SiteMap({lang}) {
 	], [lang])
 
 	return (
-		<nav className="space-y-1">
+		<nav className="space-y-2">
 			<p className="uppercase font-medium text-slate-500">{t(lang, "footer.sitemap.title")}</p>
-			<ul className="flex flex-col">
+			<ul className="flex flex-col space-y-1">
 			{
 				links.map((link) => (
 					<li key={link.path}>

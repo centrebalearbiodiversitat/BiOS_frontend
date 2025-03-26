@@ -1,13 +1,16 @@
 import React from "react";
 import {Popup} from "react-map-gl/maplibre";
 import Figure from "@/components/common/Figure";
+import CBBButton from "@/components/common/CBBButton";
+import {IoClose} from "react-icons/io5";
+import {Divider} from "@heroui/react";
 
 
 export function TwoLineText({title, text, titleClassName = "", textClassName = ""}) {
 	return (
-		<p className="m-1 ms-0 text-pretty break-all">
-			<span className={`font-semibold me-2 ${titleClassName}`}>{title}:</span>
-			<span className={`${textClassName}`}>{text ? text : "-"}</span>
+		<p className="flex flex-row text-sm font-extralight text-pretty break-all gap-2">
+			<span className={`font-bold ${titleClassName}`}>{title}:</span>
+			<span className={`border-b text-end flex-grow  ${textClassName}`}>{text ? text : "-"}</span>
 		</p>
 	)
 }
@@ -16,25 +19,25 @@ export function TwoLineText({title, text, titleClassName = "", textClassName = "
 export function MapLibrePopup({longitude, title, latitude, images, children, onClose, ...extra}) {
 	return (
 		<Popup longitude={longitude} latitude={latitude} closeOnClick={true} onClose={onClose}
-		       closeOnMove={false} closeButton={false} maxWidth='475px' {...extra}>
-			<div className="m-7">
-				{/*<div className="flex flex-row justify-end">*/}
-				{/*	<CBBButton isIconOnly className="text-black text-xl border-none"*/}
-				{/*			   onPress={onClose}>*/}
-				{/*		<IoClose/>*/}
-				{/*	</CBBButton>*/}
-				{/*</div>*/}
-				<div className={`flex flex-row mb-4 space-x-4`}>
-					<div className="max-h-[100px] h-[100px] aspect-video">
-						<Figure className="rounded-lg" images={images}/>
-					</div>
-					<p className="flex-shrink-1 text-2xl my-auto text-pretty">
-						{title}
-					</p>
+		       closeOnMove={false} className="w-[375px] !max-w-[86vw]" closeButton={false} {...extra}>
+			{/*<div className="flex flex-row justify-end">*/}
+
+			{/*</div>*/}
+			<div className={`space-x-4`}>
+				<div className="w-full max-h-[190px] h-[190px] aspect-video">
+					<Figure className="rounded-t-2xl" images={images}/>
 				</div>
-				<div className="">
-					{children}
-				</div>
+				<CBBButton isIconOnly className="z-50 !m-3 absolute right-0 top-0 text-black text-xl border-none rounded-full bg-white aspect-square"
+				           onPress={onClose}>
+					<IoClose/>
+				</CBBButton>
+			</div>
+			<div className="px-8 py-4">
+				<p className="text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
+					{title}
+				</p>
+				{/*<Divider className="my-3"/>*/}
+				{children}
 			</div>
 		</Popup>
 	);

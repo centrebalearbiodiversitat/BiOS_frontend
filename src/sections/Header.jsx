@@ -34,7 +34,7 @@ export default function Header({lang, locales, className}) {
 			<NavbarContent>
 				<NavbarBrand>
 					<HoverLink href={`/${lang}`}>
-						<Image src="/images/cbb-logo.png" className="brightness-95" alt={"CBB logo"} width={400} height={91} priority={true} radius={null}/>
+						<Image src="/images/logos/cbb-logo.png" className="brightness-95" alt={"CBB logo"} width={400} height={91} priority={true} radius={null}/>
 						{/*<CBBLogo className="w-full h-[6svw] sm:h-[8svw] md:h-[11svw] min-h-[38px] max-h-[48px] brightness-95"/>*/}
 					</HoverLink>
 				</NavbarBrand>

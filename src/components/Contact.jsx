@@ -11,9 +11,9 @@ export default function Contact({lang}) {
 	], [])
 
 	return (
-		<nav className="space-y-1">
+		<nav className="space-y-2">
 			<p className="uppercase font-medium text-slate-500">{t(lang, "footer.contact.title")}</p>
-			<ul className="flex flex-col">
+			<ul className="flex flex-col space-y-1">
 			{
 				links.map((link) => (
 					<li key={link.path}>
