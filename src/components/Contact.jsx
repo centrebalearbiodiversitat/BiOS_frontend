@@ -5,9 +5,10 @@ import {t} from "@/i18n/i18n";
 
 export default function Contact({lang}) {
 	const links = useMemo(() => [
+		{path: `https://centrebaleardebiodiversitat.uib.eu/`, text: "Centre Balear de Biodiversitat", target: "_blank"},
 		{path: `https://www.google.com/maps/search/Centre+Balear+de+Biodiversitat/`, text: "Complex Balear de R+D+I", target: "_blank"},
 		{path: `mailto:centre.biodiversitat@uib.es`, text: "centre.biodiversitat@uib.es"},
-		{path: `tel:+34971173000`, text: "(+34) 971 17 30 00"},
+		{path: `tel:+34971172454`, text: "(+34) 971 17 24 54"},
 	], [])
 
 	return (

@@ -29,7 +29,7 @@ export default function TaxonComposition({lang, composition}) {
 						<div className="flex flex-row mb-2 px-1.5 ">
 							<p className="ms-auto font-light">({totalSpecies}) Total species</p>
 						</div>
-						<LoadMore lang={lang} items={compositionNorm} overflow={true}>
+						<LoadMore items={compositionNorm} overflow={true}>
 							{
 								taxon => (
 									<li key={taxon.id} className={`flex flex-col py-0.5 rounded-full gap-1`}>
@@ -41,8 +41,7 @@ export default function TaxonComposition({lang, composition}) {
 											{/*<p className="container text-end ">{taxon.value}</p>*/}
 											{/*<p className="container text-end ">{taxon.total}</p>*/}
 										</div>
-										<div
-											className="rounded-full bg-slate-100 border-1 border-slate-100 w-full px-0.5 py-0.5 basis-4/5">
+										<div className="rounded-full bg-slate-100 border-1 border-slate-100 w-full px-0.5 py-0.5 basis-4/5">
 											<div className="h-full py-1 rounded-full bg-primary"
 											     style={{width: `${taxon.valueNorm}%`}}/>
 										</div>

@@ -1,11 +1,11 @@
 {
-    "web.name": "CBBDB",
+    "web.name": "Balearica",
 
-	"web.title": "CBBDB | Centre Balear de Biodiversitat",
-	"web.description": "CBBDB is an open-access biodiversity platform for the Balearic Islands, providing curated data on taxonomy, species occurrences, genetics, and interactive maps.",
+	"web.title": "Balearica | Centre Balear de Biodiversitat",
+	"web.description": "Balearica is an open-access biodiversity platform for the Balearic Islands, providing curated data on taxonomy, species occurrences, genetics, and interactive maps.",
 
 	"home.title": "Access to species data from the Balearic Islands",
-	"home.subtitle": "CBBDB | Centre Balear de Biodiversitat",
+	"home.subtitle": "Balearica | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Species",
 	"home.statistics.observations": "Occurrences",
@@ -246,8 +246,8 @@
 
 	"footer.contact.title":  "Contact",
 
-	"about.question": "What is the CBBDB?",
-	"about.answer_1": "The CBB Biodiversity Platform, developed by the Centre Balear de Biodiversitat, is a public advanced informatics system designed to collect, manage, analyze, and share Balearic biodiversity data. The platform is built on the principle of integrating diverse data types retrieved from several sources, including field observations, museum records, genetic data, environmental data, reports, public databases, and grey literature.",
+	"about.question": "What is Balearica?",
+	"about.answer_1": "Balearica is a biodiversity platform, developed by the Centre Balear de Biodiversitat, is a public advanced informatics system designed to collect, manage, analyze, and share Balearic biodiversity data. The platform is built on the principle of integrating diverse data types retrieved from several sources, including field observations, museum records, genetic data, environmental data, reports, public databases, and grey literature.",
 	"about.answer_2": "By integrating diverse data sources, the platform offers a comprehensive view of balearic biodiversity, enhancing scientific research and serving as a useful tool for studying biological diversity in all its dimensions. With a focus on user experience, the platform is both intuitive and accessible, catering to scientific researchers as well as the general public, and enabling thorough exploration and investigation of biodiversity. As such, we believe this platform has the potential to become an indispensable resource for researchers, conservationists, and policymakers, helping to deepen their understanding of biodiversity and bolster conservation efforts in the near future.",
 
 	"about.our_methodology": "Our goals",

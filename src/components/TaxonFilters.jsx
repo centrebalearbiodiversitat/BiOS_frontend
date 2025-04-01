@@ -11,11 +11,9 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import clsx from "clsx";
 import {useLang} from "@/contexts/LangContext";
 import {useRouter, useSearchParams} from "next/navigation";
-import {handleScrollTop} from "@/utils/utils";
 import taxonomy from "@/API/taxonomy";
 import {GiAlgae} from "react-icons/gi";
 import SwitchButton from "@/components/common/SwitchButton";
-import Scrollbars from "react-custom-scrollbars-2";
 
 const TAXON_RANKS = [
 	{key: "kingdom", label: 'general.taxon_rank.kingdom'},

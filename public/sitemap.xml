@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://cbbdb.uib.eu/en</loc>
+        <loc>https://balearica.uib.eu/en</loc>
     </url>
     <url>
-        <loc>https://cbbdb.uib.eu/es</loc>
+        <loc>https://balearica.uib.eu/es</loc>
     </url>
     <url>
-        <loc>https://cbbdb.uib.eu/cat</loc>
+        <loc>https://balearica.uib.eu/cat</loc>
     </url>
     <url>
-        <loc>https://cbbdb.uib.eu/en/map</loc>
+        <loc>https://balearica.uib.eu/en/map</loc>
     </url>
     <url>
-        <loc>https://cbbdb.uib.eu/en/about</loc>
+        <loc>https://balearica.uib.eu/en/about</loc>
     </url>
     <url>
-        <loc>https://cbbdb.uib.eu/en/taxon/1</loc>
+        <loc>https://balearica.uib.eu/en/taxon/1</loc>
     </url>
 </urlset>

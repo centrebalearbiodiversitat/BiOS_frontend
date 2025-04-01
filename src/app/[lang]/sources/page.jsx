@@ -10,7 +10,6 @@ import {VscGraph} from "react-icons/vsc";
 import LoadMore from "@/components/LoadMore";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
 import {FaDna, FaImages, FaInfo} from "react-icons/fa";
-import {Scrollbars} from "react-custom-scrollbars-2";
 import {GiDragonfly} from "react-icons/gi";
 import {PiMagnifyingGlassBold} from "react-icons/pi";
 import Loading from "@/components/common/Loading";
@@ -104,11 +103,11 @@ export default function Page({params: {lang}}) {
 			</div>
 			<nav className="flex justify-center sticky top-[110px] z-10 w-full px-6">
 				<div className="max-w-full px-3 py-2 shadow-small rounded-full border border-slate-100 bg-white gap-4 ">
-					<Scrollbars autoHeight autoHide={false} universal style={{ width: '100%' }}>
+					<div className="w-full h-auto overflow-x-auto">
 						<div className="inline-flex pb-1 sm:pb-0">
 							<TabButtonGroup small buttons={BUTTON_GROUP}/>
 						</div>
-					</Scrollbars>
+					</div>
 				</div>
 			</nav>
 			<main className="w-full px-6 md:px-0 mx-auto">
@@ -148,15 +147,15 @@ function DataType({id, lang, refs, dtSources, dataType}) {
 			</div>
 			<Loading loading={dtSources} width="100%" height="100%" className="min-h-[200px]">
 				<div className="rounded-xl border border-slate-200 p-6">
-					<Scrollbars autoHeight autoHeightMax={600} className="w-full">
-						<LoadMore lang={lang} items={dtSources} overflow={true}>
+					<div className="overflow-y-auto w-full max-h-[600px] custom-scrollbar">
+						<LoadMore items={dtSources} overflow={true}>
 							{
 								source => (
 									<SourceList lang={lang} source={source}/>
 								)
 							}
 						</LoadMore>
-					</Scrollbars>
+					</div>
 				</div>
 			</Loading>
 		</div>
@@ -170,7 +169,7 @@ function SourceList({source}) {
 				<p className="font-light text-xl">{source.name}</p>
 				<p className="font-light text-gray-500">{source.origin}</p>
 			</div>
-			<p className="p-4 text-center text-4xl"><span>{source.count.toLocaleString()}</span></p>
+			<p className="p-4 text-center text-3xl md:text-4xl"><span>{source.count.toLocaleString()}</span></p>
 		</div>
 	)
 }

@@ -18,32 +18,34 @@ import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import DownloadModal from "@/components/DownloadModal";
 import {TaxonProvider} from "@/contexts/TaxonContext";
-import Scrollbars from "react-custom-scrollbars-2";
 import occurrences from "@/API/occurrences";
 import genetics from "@/API/genetics";
 import {useRouter} from "next/navigation";
+import {useLang} from "@/contexts/LangContext";
+import clsx from "clsx";
 
 
-function AccordionTaxonomy({taxon, className, higherTaxonomy, lang, descendants, synonyms, ...extra}) {
+function AccordionTaxonomy({taxon, className, higherTaxonomy, descendants, synonyms, ...extra}) {
+	const [lang] = useLang();
+
 	return (
-		<Accordion className={className} {...extra}>
+		<Accordion className={clsx(className, "!space-y-3")} {...extra}>
 			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.classification')}</h3>}
-			               key="1" aria-label="Accordion 1">
+			               key="1" classNames={{trigger: "py-0"}}>
 				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
-					{taxon && higherTaxonomy && <VerticalTaxonomy lang={lang} taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
+					{taxon && higherTaxonomy && <VerticalTaxonomy taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
 					<div className="mt-3">
-						<h4 className="pt-2 text-xl font-extralight">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
+						<h4 className="pt-2 text-lg font-extralight">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
 						<Loading loading={descendants} width="100%" height="100px">
-							{descendants && <VerticalTaxonomy lang={lang} overflow={true} taxonomy={descendants}/>}
+							{descendants && <VerticalTaxonomy overflow={true} taxonomy={descendants}/>}
 						</Loading>
 					</div>
 				</Loading>
 			</AccordionItem>
-			<AccordionItem
-				title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
-				key="3" aria-label="Accordion 3">
+			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
+			               key="3" classNames={{trigger: "py-0"}}>
 				<Loading loading={synonyms} width="100%" height="200px">
-					{synonyms && <VerticalTaxonomy lang={lang} title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
+					{synonyms && <VerticalTaxonomy title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
 					                   overflow={true} taxonomy={synonyms}/>}
 				</Loading>
 			</AccordionItem>
@@ -121,16 +123,16 @@ export default function RootLayout({children, params: {lang, id}}) {
 	return (
 		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
 			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
-				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[100px] flex flex-col">
+				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[100px] flex flex-col gap-6">
 					<div className="rounded-full ms-auto w-full">
 						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
 					</div>
-					<Scrollbars universal autoHide className="hidden lg:block flex-grow h-0">
+					<div className="hidden lg:block custom-scrollbar overflow-y-auto flex-grow h-0">
 						<AccordionTaxonomy hideIndicator={true} showDivider={false}
 						                   selectionMode="multiple" defaultSelectedKeys="all"
 						                   className="px-0 pe-2.5" higherTaxonomy={higherTaxonomy}
-						                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
-					</Scrollbars>
+						                   taxon={taxon} synonyms={synonyms} descendants={descendants}/>
+					</div>
 				</div>
 			</aside>
 			<article className="rounded-lg col-span-9 xl:ps-8 space-y-6">
@@ -190,7 +192,7 @@ export default function RootLayout({children, params: {lang, id}}) {
 				</header>
 				<AccordionTaxonomy showDivider={false} selectionMode="multiple"
 				                   className="lg:hidden mt-3 mb-8" higherTaxonomy={higherTaxonomy}
-				                   lang={lang} taxon={taxon} synonyms={synonyms} descendants={descendants}/>
+				                   taxon={taxon} synonyms={synonyms} descendants={descendants}/>
 				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
 				<MainContent>
 					<TaxonProvider initialState={taxon}>

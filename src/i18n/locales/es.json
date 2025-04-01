@@ -1,11 +1,11 @@
 {
-    "web.name": "CBBDB",
+    "web.name": "Balearica",
 
-    "web.title": "CBBDB | Centre Balear de Biodiversitat",
-    "web.description": "CBBDB es una plataforma de biodiversidad de acceso abierto para las Islas Baleares, que ofrece datos curados sobre taxonomía, ocurrencias de especies, genética y mapas interactivos.",
+    "web.title": "Balearica | Centre Balear de Biodiversitat",
+    "web.description": "Balearica es una plataforma de biodiversidad de acceso abierto para las Islas Baleares, que ofrece datos curados sobre taxonomía, ocurrencias de especies, genética y mapas interactivos.",
 
 	"home.title": "Acceso a los datos de especies de las Islas Baleares",
-	"home.subtitle": "CBBDB | Centre Balear de Biodiversitat",
+	"home.subtitle": "Balearica | Centre Balear de Biodiversitat",
 
 	"home.statistics.species": "Especies",
 	"home.statistics.observations": "Observaciones",
@@ -246,8 +246,8 @@
 
 	"footer.contact.title":  "Contacto",
 
-	"about.question": "¿Qué es el CBBDB?",
-	"about.answer_1": "La Plataforma de Biodiversidad CBB, desarrollada por el Centre Balear de Biodiversitat, es un sistema informático público avanzado diseñado para recopilar, gestionar, analizar y compartir datos sobre la biodiversidad de las Islas Baleares. La plataforma se basa en el principio de integrar diversos tipos de datos obtenidos de varias fuentes, incluyendo observaciones de campo, registros de museos, datos genéticos, datos ambientales, informes, bases de datos públicas y literatura gris.",
+	"about.question": "¿Qué es Balearica?",
+	"about.answer_1": "Balearica es una plataforma de biodiversidad desarrollada por el Centre Balear de Biodiversitat, es un sistema informático público avanzado diseñado para recopilar, gestionar, analizar y compartir datos sobre la biodiversidad de las Islas Baleares. La plataforma se basa en el principio de integrar diversos tipos de datos obtenidos de varias fuentes, incluyendo observaciones de campo, registros de museos, datos genéticos, datos ambientales, informes, bases de datos públicas y literatura gris.",
 	"about.answer_2": "Al integrar diversas fuentes de datos, la plataforma ofrece una visión integral de la biodiversidad balear, mejorando el conocimiento científico y sirviendo como una herramienta útil para estudiar la diversidad biológica en todas sus facetas. Con un enfoque en la experiencia del usuario, la plataforma es tanto intuitiva como accesible, atendiendo a investigadores científicos así como al público en general, permitiendo una exploración e investigación exhaustiva de la biodiversidad. Por lo tanto, creemos que esta plataforma tiene el potencial de convertirse en un recurso indispensable para investigadores, conservacionistas y responsables politicos, ayudando a profundizar su comprensión de la biodiversidad y fortalecer los esfuerzos de conservación en un futuro próximo.",
 
 	"about.our_methodology": "Nuestros objetivos",

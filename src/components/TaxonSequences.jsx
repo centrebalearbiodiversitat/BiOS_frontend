@@ -1,17 +1,10 @@
 import React, {useCallback, useRef} from "react";
 import Loading from "@/components/common/Loading";
-import SubSection from "@/components/common/SubSection";
 import {Divider, Pagination} from "@heroui/react";
-import Link from "next/link";
-import {generateSourceUrl, handleScrollTop} from "@/utils/utils";
 import SourceLink from "@/components/common/SourceLink";
-import Scrollbars from "react-custom-scrollbars-2";
 import Hidden from "@/components/common/Hidden";
 import {useRouter, useSearchParams} from "next/navigation";
 import TaxonName from "@/components/common/TaxonName";
-import {useLang} from "@/contexts/LangContext";
-import {t} from "@/i18n/i18n";
-import NoData from "@/components/common/NoData";
 import Empty from "@/components/Empty";
 
 

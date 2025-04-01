@@ -24,16 +24,16 @@ export default function RootLayout({children, params: {lang}}) {
 				<meta name="description" content={t(lang, 'web.description')}/>
 				<meta charSet="UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-				<link rel="canonical" href="https://cbbdb.uib.eu"/>
-				<link rel="alternate" hrefLang="en" href="https://cbbdb.uib.eu"/>
-				<link rel="alternate" hrefLang="es" href="https://cbbdb.uib.es"/>
-				<link rel="alternate" hrefLang="ca" href="https://cbbdb.uib.ca"/>
-				<link rel="alternate" hrefLang="x-default" href="https://cbbdb.uib.eu"/>
+				<link rel="canonical" href="https://balearica.uib.eu"/>
+				<link rel="alternate" hrefLang="en" href="https://balearica.uib.eu"/>
+				<link rel="alternate" hrefLang="es" href="https://balearica.uib.es"/>
+				<link rel="alternate" hrefLang="ca" href="https://balearica.uib.ca"/>
+				<link rel="alternate" hrefLang="x-default" href="https://balearica.uib.eu"/>
 				<link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96"/>
 				<link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg"/>
 				<link rel="shortcut icon" href="/images/favicon/favicon.ico"/>
 				<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
-				<meta name="apple-mobile-web-app-title" content="CBBDB"/>
+				<meta name="apple-mobile-web-app-title" content="Balearica"/>
 				<link rel="manifest" href="/images/favicon/site.webmanifest"/>
 			</head>
 			<body className="w-full min-h-screen m-0">

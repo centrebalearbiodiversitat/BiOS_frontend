@@ -4,7 +4,7 @@
 
 .text-white-drop-shadow {
     color: white;
-    filter: drop-shadow(0 1.2px 1.2px rgba(0,0,0,0.8))
+    /*filter: drop-shadow(0 1.2px 1.2px rgba(0,0,0,0.8))*/
 }
 
 .maplibregl-popup-content {
@@ -13,10 +13,16 @@
 }
 
 .custom-scrollbar {
-    --sb-track-color: #f1f1f1;
+    --sb-track-color: rgba(241, 241, 241, 0.5);
     --sb-thumb-color: #c5c5c5;
-    --sb-size: 12px;
+    --sb-size: 8px;
     --sb-radius: 3px;
+}
+
+@media (max-width: 640px) {
+    .custom-scrollbar {
+        --sb-size: 5px;
+    }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -35,7 +41,8 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+    background: #a0a0a0;
+    cursor: pointer;
 }
 
 @supports not selector(::-webkit-scrollbar) {

@@ -40,11 +40,10 @@ export default function SearchBar({
 }) {
 	const [search, setSearch] = useState("");
 	const [selected, setSelected] = useState(null);
-	const [acFocus, setAcFocus] = useState(false);
+	const [showPlaceholder, setShowPlaceholder] = useState(false);
 
 	useEffect(() => {
 		function handleScroll() {
-			setAcFocus(false)
 			setSearch("")
 			setSelected(null)
 		}
@@ -57,20 +56,13 @@ export default function SearchBar({
 	}, []);
 	
 	const onInputChange = useCallback((input) => {
-		// if (input !== "") {
 		onInput(input);
 		setSearch(input);
-		// }
 	}, [onInput]);
 
 	// const onFocusChange = useCallback((focus) => {
-		// setAcFocus(focus);
-		// if (!focus) {
-		// 	onInput("");
-		// 	setSearch("");
-		// 	setSelected(null);
-		// }
-	// }, [onInput]);
+	// 	setShowPlaceholder(focus);
+	// }, []);
 
 	const _onSelected = useCallback((payload) => {
 		if (payload) {
@@ -116,8 +108,9 @@ export default function SearchBar({
 					      //         </div>
 				          //     </div>
 			              // )}
+						  onFocusChange={setShowPlaceholder}
 			              selectedKey={selected} label={labelText}
-			              placeholder={`${placeholderText} →`}
+			              placeholder={showPlaceholder ? `${placeholderText} →` : null}
 			              onSelectionChange={_onSelected} onInputChange={onInputChange} onKeyDown={onDefaultSelected}
 			              className={`w-full transition-all text-center`} radius={rounded ? "full" : "sm"}
 			              listboxProps={{

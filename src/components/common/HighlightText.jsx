@@ -5,8 +5,8 @@ export default function HighlightText({text, highlight}) {
         return <span>{text}</span>;
     }
 
-    const words = highlight.split(/\s+/).map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const regex = new RegExp(`(${words.join('|')})`, 'gi');
+    const words = highlight.match(/\S+/g)?.map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) || [];
+    const regex = new RegExp(`(${words.length > 0 ? words.join('|') : words})`, 'gi');
     const parts = text.split(regex);
 
     return (
