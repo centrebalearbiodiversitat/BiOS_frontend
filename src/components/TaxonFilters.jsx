@@ -179,13 +179,13 @@ export default function TaxonFilters({className}) {
 						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
 						             defaultValue={searchParams.get('accepted')}/>
 					</div>
-					{/*<div>*/}
-					{/*	<FilterLabel lang={lang} label="taxon.list.aside.hasImage" icon={FaCamera}/>*/}
-					{/*	<KeySelector items={HAS_IMAGE} lang={lang}*/}
-					{/*	             onSelected={s => generateSearchPath('hasImage', s)}*/}
-					{/*	             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}*/}
-					{/*	             defaultValue={searchParams.get('hasImage')}/>*/}
-					{/*</div>*/}
+					<div>
+						<FilterLabel lang={lang} label="taxon.list.aside.hasImage" icon={FaCamera}/>
+						<KeySelector items={HAS_IMAGE} lang={lang}
+						             onSelected={s => generateSearchPath('hasImage', s)}
+						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
+						             defaultValue={searchParams.get('hasImage')}/>
+					</div>
 					<div>
 						<FilterLabel lang={lang} label="taxon.list.aside.doe" icon={FaMapMarkerAlt}/>
 						<KeySelector items={TAXON_DOE} lang={lang}
