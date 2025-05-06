@@ -5,6 +5,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import clsx from "clsx";
 import {handleScrollTop} from "@/utils/utils";
+import {useLang} from "@/contexts/LangContext";
 
 const ITALIC_RANKS = new Set([
 	"genus",
@@ -22,7 +23,8 @@ function LinkOrP({children, as, redirect, className, ...extra}) {
 }
 
 
-export default function TaxonName({lang, className, as = 'p', taxon, author = false, redirect = true}) {
+export default function TaxonName({className, as = 'p', taxon, author = false, redirect = true}) {
+	const [lang] = useLang();
 	const pathname = usePathname();
 
 	const href = useMemo(() => {

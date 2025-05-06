@@ -22,7 +22,7 @@ function LoadedBodyCard({taxon, lang, color, colorSelector, onColorChanged, onDe
 			<div className={`flex flex-col flex-1`}>
 				<Loading loading={taxon} width="100%" height="16px">
 					<p className={`text-lg w-full`}>
-						{taxon && <TaxonName taxon={taxon} lang={lang} redirect={false}/>}
+						{taxon && <TaxonName taxon={taxon} redirect={false}/>}
 					</p>
 				</Loading>
 				<Loading className="mt-2" loading={taxon} width="50%" height="14px">

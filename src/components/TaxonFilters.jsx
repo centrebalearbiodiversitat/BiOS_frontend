@@ -149,7 +149,7 @@ export default function TaxonFilters({className}) {
 							<div className="my-2 w-full">
 								<Chip className="w-full max-w-none"
 								      onClose={() => generateSearchPath('ancestor', null)}>
-									<TaxonName lang={lang} taxon={ancestor} redirect={false}/>
+									<TaxonName taxon={ancestor} redirect={false}/>
 								</Chip>
 							</div>
 						}

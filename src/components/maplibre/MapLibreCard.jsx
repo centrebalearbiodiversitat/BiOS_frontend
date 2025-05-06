@@ -40,7 +40,7 @@ export default function MapLibreCard({lang, taxon, dragControls, colorSelector =
 			<div className={clsx("flex flex-col flex-1 transition-all", isHidden && "opacity-50")}>
 				<Loading loading={taxon} width="100%" height="16px">
 					<p className={`text-lg w-full`}>
-						{taxon && <TaxonName taxon={taxon} lang={lang}/>}
+						{taxon && <TaxonName taxon={taxon}/>}
 					</p>
 				</Loading>
 				<Loading className="mt-2" loading={taxon} width="50%" height="14px">

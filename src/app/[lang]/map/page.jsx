@@ -275,7 +275,7 @@ export default function MapPage({params}) {
 								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
 								               title={
 									               <>
-										               <TaxonName lang={lang} taxon={occu.taxonomy} author={false}/>
+										               <TaxonName taxon={occu.taxonomy} author={false}/>
 										               <p className={`text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
 										               </p>

@@ -160,7 +160,7 @@ export default function RootLayout({children, params}) {
 								</Loading>
 								<Loading loading={taxon} className="mb-4" width="80%" height="58px">
 									{taxon &&
-										<TaxonName as="h1" className="first-letter:uppercase font-medium text-4xl" taxon={taxon} lang={lang} redirect={false}/>
+										<TaxonName as="h1" className="first-letter:uppercase font-medium text-4xl" taxon={taxon} redirect={false}/>
 									}
 								</Loading>
 								<Loading loading={taxon} className="mb-4" width="60%" height="30px">

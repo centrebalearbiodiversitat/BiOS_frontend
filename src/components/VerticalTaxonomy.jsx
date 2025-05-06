@@ -36,7 +36,7 @@ export default function VerticalTaxonomy({taxonomy, markLast= false, overflow = 
 								{taxon.taxonRankTranslated}
 							</p>
 							<p className="ps-4 font-extralight text-end ms-auto">
-								<TaxonName lang={lang} taxon={taxon}/>
+								<TaxonName taxon={taxon}/>
 							</p>
 						</li>
 					)
