@@ -1,9 +1,9 @@
 "use client"
 
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {use, useEffect, useMemo, useRef, useState} from "react";
 import versioning from "@/API/versioning"
 import {t} from "@/i18n/i18n";
-import {Image} from "@heroui/react";
+import {Image} from "@heroui/image";
 import Link from "next/link";
 import StatsChart from "@/components/StatsChart";
 import {VscGraph} from "react-icons/vsc";
@@ -46,7 +46,9 @@ function initDataTypeGroups() {
 	}, {});
 }
 
-export default function Page({params: {lang}}) {
+export default function Page({params}) {
+	const {lang} = use(params);
+
 	const [sources, setSources] = useState(initDataTypeGroups());
 	const sectionRefs = useRef({});
 
@@ -151,7 +153,7 @@ function DataType({id, lang, refs, dtSources, dataType}) {
 						<LoadMore items={dtSources} overflow={true}>
 							{
 								source => (
-									<SourceList lang={lang} source={source}/>
+									<SourceList key={source.id} lang={lang} source={source}/>
 								)
 							}
 						</LoadMore>

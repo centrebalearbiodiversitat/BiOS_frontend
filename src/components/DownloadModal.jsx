@@ -1,19 +1,12 @@
 import React, {useCallback, useMemo, useState} from "react";
-import {
-	cn,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalFooter,
-	Radio,
-	RadioGroup,
-	useDisclosure
-} from "@heroui/react";
+import {Modal, ModalBody, ModalFooter, ModalContent, useDisclosure} from "@heroui/modal";
+import {Radio, RadioGroup} from "@heroui/radio";
 import {t} from "@/i18n/i18n";
 import CBBButton from "@/components/common/CBBButton";
 import {BsDownload} from "react-icons/bs";
 import DownloadButton from "@/components/common/DownloadButton";
 import {useLang} from "@/contexts/LangContext";
+import clsx from "clsx";
 
 
 export const RadioItem = ({children, ...extra}) => {
@@ -22,7 +15,7 @@ export const RadioItem = ({children, ...extra}) => {
 		<Radio
 			{...extra}
 			classNames={{
-				base: cn(
+				base: clsx(
 					"inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between",
 					"flex-row-reverse max-w-full cursor-pointer rounded-lg gap-4 ps-2 pe-3 py-4 border-2 border-transparent",
 					"data-[selected=true]:bg-gray-100",

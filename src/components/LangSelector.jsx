@@ -1,7 +1,8 @@
 "use client"
 
 import React, {useEffect} from "react";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@heroui/react";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/dropdown";
+import {Button} from "@heroui/button";
 import {useRouter, usePathname, useSearchParams, notFound} from "next/navigation";
 import {IoIosArrowDown} from "react-icons/io";
 import {AVAILABLE_LOCALES} from "@/i18n/i18n";

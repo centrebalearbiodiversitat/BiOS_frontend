@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useCallback, useEffect, useState} from "react";
-import {Button} from "@heroui/react";
+import {Button} from "@heroui/button";
 import Link from "next/link";
 import clsx from "clsx";
 import {useParams, usePathname} from "next/navigation";

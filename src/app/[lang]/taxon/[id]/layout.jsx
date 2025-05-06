@@ -8,11 +8,11 @@ import MainContent from "@/sections/MainContent";
 import Figure from "@/components/common/Figure";
 import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
-import {useEffect, useMemo, useState} from "react";
+import {use, useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
 import TabButtonGroup from "@/components/common/TabButtonGroup";
-import {Accordion, AccordionItem} from "@heroui/react";
+import {Accordion, AccordionItem} from "@heroui/accordion";
 import Loading from "@/components/common/Loading";
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
@@ -54,7 +54,8 @@ function AccordionTaxonomy({taxon, className, higherTaxonomy, descendants, synon
 }
 
 
-export default function RootLayout({children, params: {lang, id}}) {
+export default function RootLayout({children, params}) {
+	const {lang, id} = use(params);
 	const router = useRouter();
 
 	const [taxon, setTaxon] = useState(undefined);

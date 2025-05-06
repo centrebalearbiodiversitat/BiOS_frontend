@@ -1,4 +1,4 @@
-import React from "react";
+import React, {use} from "react";
 import {t} from "@/i18n/i18n";
 import {Body, Section, Title} from "@/components/common/Article";
 import {generatePageTitle} from "@/utils/utils";
@@ -7,13 +7,16 @@ import {generatePageTitle} from "@/utils/utils";
 const LAST_UPDATE = "2024-10-30"
 
 
-export async function generateMetadata({params: {lang}}) {
+export async function generateMetadata({params}) {
+	const {lang} = await params;
+
 	return {
 		title: generatePageTitle(lang, t(lang, 'privacy.title')),
 	}
 }
 
-export default function Privacy({params: {lang}}) {
+export default function Privacy({params}) {
+	const {lang} = use(params);
 
 	return (
 		<>

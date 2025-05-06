@@ -1,48 +1,53 @@
 import React, {useCallback, useRef} from "react";
 import Loading from "@/components/common/Loading";
-import {Divider, Pagination} from "@heroui/react";
+import {Divider} from "@heroui/divider";
+import {Pagination} from "@heroui/pagination";
 import SourceLink from "@/components/common/SourceLink";
 import Hidden from "@/components/common/Hidden";
 import {useRouter, useSearchParams} from "next/navigation";
 import TaxonName from "@/components/common/TaxonName";
 import Empty from "@/components/Empty";
+import Sources from "@/components/Sources";
+import Link from "next/link";
+import {RxExternalLink} from "react-icons/rx";
 
 
 function Sequence({seq}) {
 	const basis = seq.sources[0];
 
 	return (
-		<li className="flex flex-col gap-1 hover:bg-slate-50 border-b border-gray-200">
+		<li className="hover:bg-slate-50 border-b border-gray-200">
 			{/*<p className="font-extralight">*/}
 			{/*	{seq.definition}*/}
 			{/*</p>*/}
-			<SourceLink source={basis}>
-				<div className="grid grid-cols-5 py-4 text-sm">
-					<p>
-						<TaxonName taxon={seq.occurrence.taxonomy}/>
-					</p>
-					<p>
-						{basis.source?.name}
-					</p>
-					<p className="font-light">
-						{basis.externalId}
-					</p>
-					<p>
-						{seq.publishedDate ?? "-"}
-					</p>
-					<ul className="flex flex-wrap gap-2">
-						{
-							seq.markers.map(
-								marker => (
-									<li key={marker.id} className="rounded-full bg-black h-auto text-white text-sm max-h-[20px] px-3">
-										{marker.name}
-									</li>
-								)
+			<div className="grid grid-cols-5 py-4 text-sm">
+				<p>
+					<TaxonName taxon={seq.occurrence.taxonomy}/>
+				</p>
+				<p>
+					{basis.source?.name}
+				</p>
+				<SourceLink source={basis}>
+					{/*<Sources sources={seq.sources} className="my-3"/>*/}
+					<span className="inline-flex gap-1 link">
+						{basis.externalId} <RxExternalLink className="text-md my-auto align-baseline"/>
+					</span>
+				</SourceLink>
+				<p>
+					{seq.publishedDate ?? "-"}
+				</p>
+				<ul className="flex flex-wrap gap-2">
+					{
+						seq.markers.map(
+							marker => (
+								<li key={marker.id} className="rounded-full bg-black h-auto text-white text-sm max-h-[20px] px-3">
+									{marker.name}
+								</li>
 							)
-						}
-					</ul>
-				</div>
-			</SourceLink>
+						)
+					}
+				</ul>
+			</div>
 		</li>
 	)
 }

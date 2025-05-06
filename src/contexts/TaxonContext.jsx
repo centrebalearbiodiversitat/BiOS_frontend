@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 
-const TaxonContext = createContext();
+const TaxonContext = createContext(null);
 
 export function TaxonProvider({children, initialState}) {
 	const [taxon, setTaxon] = useState(initialState);

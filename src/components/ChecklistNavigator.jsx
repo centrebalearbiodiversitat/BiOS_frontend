@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Accordion, AccordionItem} from "@heroui/react";
+import {Accordion, AccordionItem} from "@heroui/accordion";
 import taxonomy from "@/API/taxonomy";
 
 

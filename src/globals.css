@@ -50,3 +50,7 @@
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
 }
+
+.link {
+    @apply text-blue-700
+}

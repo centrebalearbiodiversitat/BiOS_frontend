@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {use, useCallback, useEffect, useMemo, useState} from "react";
 import {t} from "@/i18n/i18n";
 import genetics from "@/API/genetics";
 import Section from "@/components/common/Section";
@@ -17,7 +17,9 @@ import Hidden from "@/components/common/Hidden";
 import DownloadButton from "@/components/common/DownloadButton";
 import ToggleButton from "@/components/common/ToggleButton";
 
-export default function Genetics({params: {id, lang}}) {
+export default function Genetics({params}) {
+	const {id, lang} = use(params);
+
 	const [taxon] = useTaxon();
 	const [markers, setMarkers] = useState(undefined);
 	const [totalMarker, setTotalMarker] = useState(undefined);
@@ -118,7 +120,7 @@ export default function Genetics({params: {id, lang}}) {
 					</div>
 					<div className="bg-white rounded-full border border-slate-200 flex px-3">
 						<ToggleButton label="taxon.genetics.filter.inGeographyScope" onToggle={onGeographyToggle}
-						              className="m-auto flex flex-row items-center gap-4" isEnabled={inGeographyScope ?? false}/>
+						              className="m-auto flex flex-row items-center gap-4" isEnabled={!!inGeographyScope}/>
 					</div>
 				</div>
 				<SubSection className="!p-0">

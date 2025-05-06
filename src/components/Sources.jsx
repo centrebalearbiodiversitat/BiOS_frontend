@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Chip} from "@heroui/react";
+import {Chip} from "@heroui/chip";
 import Link from "next/link";
 import {RxExternalLink} from "react-icons/rx";
 import clsx from "clsx";
@@ -43,7 +43,7 @@ export default function Sources({sources, className}) {
 		{
 			sources?.map(
 				s => (
-					<li key={s.id} className="">
+					<li key={s.externalId}>
 						<ChipExternalLink originSource={s}/>
 					</li>
 				)

@@ -2,7 +2,7 @@
 
 import taxonomy from "@/API/taxonomy";
 import tags from "@/API/tags";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {use, useEffect, useMemo, useState} from "react";
 import TaxonHabitats from "@/components/TaxonHabitats";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
@@ -19,7 +19,9 @@ import NoData from "@/components/common/NoData";
 import IUCNCard from "@/components/IUCNCard";
 
 
-export default function Taxon({params: {lang, id}}) {
+export default function Taxon({params}) {
+	const {lang, id} = use(params);
+
 	const [taxon] = useTaxon();
 	const [composition, setComposition] = useState(undefined);
 	const [taxonData, setTaxonData] = useState(undefined);

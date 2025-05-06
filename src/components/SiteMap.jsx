@@ -1,5 +1,7 @@
+"use client"
+
 import React, {useMemo} from "react";
-import {Accordion, AccordionItem, Link} from "@heroui/react";
+import {Link} from "@heroui/link";
 import {t} from "@/i18n/i18n";
 
 

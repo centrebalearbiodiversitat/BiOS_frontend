@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {Slider} from "@heroui/react";
+import {Slider} from "@heroui/slider";
 
 
 function filterDataMinMax(occurences, feature, min, max) {

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {use, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useSearchParams, useRouter, usePathname} from 'next/navigation'
 import taxonomy from "@/API/taxonomy"
 import occurrences from "@/API/occurrences";
@@ -12,7 +12,7 @@ import MapLibre from "@/components/maplibre/MapLibre";
 import TaxonName from "@/components/common/TaxonName";
 import {MapLibrePopup, TwoLineText} from "@/components/maplibre/MapLibrePopup";
 import Sources from "@/components/Sources";
-import {Accordion, AccordionItem, Button, Divider} from "@heroui/react";
+import {Accordion, AccordionItem} from "@heroui/accordion";
 import HighlightText from "@/components/common/HighlightText";
 import Filters from "@/components/Filters";
 import {FiDownload} from "react-icons/fi";
@@ -138,7 +138,9 @@ async function fetchGeographicalLocations(locationsIDs, savedLocations) {
 }
 
 
-export default function MapPage({params: {lang}}) {
+export default function MapPage({params}) {
+	const {lang} = use(params);
+
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const router = useRouter();
@@ -150,7 +152,7 @@ export default function MapPage({params: {lang}}) {
 	const [filteredTaxaToLoc, setFilteredTaxaToLoc] = useState({});
 	const [taxaColors, setTaxaColors] = useState({});
 	const [hidden, setHidden] = useState({});
-	const mapRef = useRef();
+	const mapRef = useRef(null);
 
 	useEffect(() => {
 		document.title = generatePageTitle(lang, t(lang, 'components.header.button.map'))

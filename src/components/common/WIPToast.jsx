@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import {t} from "@/i18n/i18n";
 import {useLang} from "@/contexts/LangContext";
-import {Image} from "@heroui/react";
+import {Image} from "@heroui/image";
 import clsx from "clsx";
 
 export default function WIPToast({}) {

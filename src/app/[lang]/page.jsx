@@ -1,18 +1,22 @@
 import {t} from "@/i18n/i18n";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import {Button, Image} from "@heroui/react";
-import React from "react";
+import {Button} from "@heroui/button";
+import {Image} from "@heroui/image";
+import React, {use} from "react";
 import Statistics from "@/components/Statistics";
 import Link from "next/link";
 import {MdTune} from "react-icons/md";
 
-export async function generateMetadata({params: {lang}}) {
+export async function generateMetadata(props) {
+	const {lang} = await props.params;
+	
 	return {
 		title: t(lang, 'web.title'),
 	}
 }
 
-export default function Home({params: {lang}}) {
+export default function Home({params}) {
+	const {lang} = use(params);
 
 	return (
 		<>

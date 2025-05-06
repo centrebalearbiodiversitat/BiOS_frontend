@@ -2,7 +2,7 @@
 
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import Map, {Layer, Source, NavigationControl, ScaleControl} from 'react-map-gl/maplibre';
-import {Spinner} from "@heroui/react";
+import {Spinner} from "@heroui/spinner";
 import html2canvas from "html2canvas";
 
 const MAP_STYLE = {
@@ -135,7 +135,7 @@ const MapLibre = forwardRef(({
 	const [zoom] = useState(7);
 	const [bearing] = useState(-8);
 	const [pitch] = useState(0);
-	const mapRef = useRef();
+	const mapRef = useRef(null);
 
 	const exportMap = useCallback(async () => {
 		const scaleDom = document.getElementsByClassName('maplibregl-ctrl-bottom-left');

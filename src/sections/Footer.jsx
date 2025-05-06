@@ -1,5 +1,7 @@
+"use client"
+
 import React from "react";
-import {Image} from "@heroui/react";
+import {Image} from "@heroui/image";
 import SiteMap from "@/components/SiteMap";
 import Legal from "@/components/Legal";
 import Contact from "@/components/Contact";

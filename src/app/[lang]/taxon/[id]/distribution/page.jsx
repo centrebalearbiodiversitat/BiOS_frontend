@@ -1,7 +1,7 @@
 "use client"
 
 import occurrences from "@/API/occurrences";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {use, useEffect, useMemo, useState} from "react";
 import {t} from "@/i18n/i18n";
 import {occurrencesToGeoJson} from "@/utils/geojson";
 import MapLibre from "@/components/maplibre/MapLibre";
@@ -13,8 +13,11 @@ import Loading from "@/components/common/Loading";
 import {Card, Description} from "@/components/common/DescriptionCard";
 import {useTaxon} from "@/contexts/TaxonContext";
 import {generatePageTitle} from "@/utils/utils";
+import {ChartContainer} from "@mui/x-charts";
 
-export default function Taxon({params: {lang, id}}) {
+export default function Taxon({params}) {
+	const {lang, id} = use(params);
+
 	const [taxon] = useTaxon();
 	const [occs, setOccs] = useState(undefined);
 	const [occsStatsByMonth, setOccsStatsByMonth] = useState(undefined);
@@ -104,7 +107,7 @@ export default function Taxon({params: {lang, id}}) {
 								{t(lang, 'taxon.distribution.statistics.graph.y2yAcc')}
 							</Card.Description>
 							<Loading loading={occsStatsByYearAccumulated} width="100%" height="100%">
-								<StatsChart color="#94C635CC" colorR={"#94C635"} hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
+								<StatsChart color="#94C635" colorR="#3DBBCC" hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
 							</Loading>
 						</Card>
 					</div>

@@ -6,10 +6,10 @@ import {AVAILABLE_LOCALES, t} from "@/i18n/i18n"
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import "@/globals.css";
-import React from "react";
-import {LangProvider} from "@/contexts/LangContext";
+import React, {use} from "react";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import WIPToast from "@/components/common/WIPToast";
+import {Providers} from "@/app/providers";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],
@@ -17,13 +17,15 @@ const roboto = Roboto_Flex({
 });
 
 
-export default function RootLayout({children, params: {lang}}) {
+export default function RootLayout({children, params}) {
+	const {lang} = use(params);
+
 	return (
 		<html lang={lang} className={roboto.className}>
 			<head>
 				<meta name="description" content={t(lang, 'web.description')}/>
 				<meta charSet="UTF-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 				<link rel="canonical" href="https://balearica.uib.eu"/>
 				<link rel="alternate" hrefLang="en" href="https://balearica.uib.eu"/>
 				<link rel="alternate" hrefLang="es" href="https://balearica.uib.es"/>
@@ -35,14 +37,21 @@ export default function RootLayout({children, params: {lang}}) {
 				<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
 				<meta name="apple-mobile-web-app-title" content="Balearica"/>
 				<link rel="manifest" href="/images/favicon/site.webmanifest"/>
+
+				<meta property="og:title" content="PM Lavauto - Limpieza y cuidado de vehículos en Palma"/>
+				<meta property="og:description"
+				      content="Servicio de limpieza de vehículos de alta calidad en Palma. Tapicería, interior, exterior, y más."/>
+				<meta property="og:image" content="https://www.tusitio.com/images/preview.jpg"/>
+				<meta property="og:url" content="https://www.tusitio.com"/>
+				<meta property="og:type" content="website"/>
 			</head>
 			<body className="w-full min-h-screen m-0">
 				<Header lang={lang} className="min-h-[64px] py-[12px]" locales={AVAILABLE_LOCALES}/>
 				<main className="min-h-[calc(100vh-64px-12px*2)] w-full">
-					<LangProvider initialState={lang}>
+					<Providers lang={lang}>
 						{children}
 						<WIPToast/>
-					</LangProvider>
+					</Providers>
 				</main>
 				<Footer lang={lang}/>
 			</body>

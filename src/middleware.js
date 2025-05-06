@@ -13,6 +13,7 @@ export function middleware(request) {
 	// const preferredLocale = request.cookies.get('preferredLocale')?.value;
 	// const acceptLanguage = request.headers.get('accept-language')?.split(',')[0];
 	// const locale = preferredLocale || acceptLanguage || DEFAULT_LOCALE;
+
 	let domainLang;
 	try {
 		const host = (new URL(request.headers.get('host'))).hostname;

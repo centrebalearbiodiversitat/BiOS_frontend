@@ -1,8 +1,6 @@
 import React from "react";
-import {
-	Link,
-} from "@heroui/react";
-import {Image} from "@heroui/react";
+import {Link} from "@heroui/link";
+import {Image} from "@heroui/image";
 import {t} from "@/i18n/i18n";
 
 export default function AboutApp({lang}) {

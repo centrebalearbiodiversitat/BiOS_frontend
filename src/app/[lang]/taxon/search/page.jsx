@@ -1,12 +1,14 @@
 "use client"
 
-import React, {useEffect} from "react";
+import React, {use, useEffect} from "react";
 import taxonomy from "@/API/taxonomy";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Spinner} from "@heroui/react";
+import {Spinner} from "@heroui/spinner";
 
 
-export default function Search({params: {lang}}) {
+export default function Search({params}) {
+	const {lang} = use(params);
+
 	const router = useRouter();
 	const searchParams = useSearchParams()
 

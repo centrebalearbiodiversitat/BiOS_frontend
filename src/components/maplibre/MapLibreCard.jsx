@@ -26,7 +26,7 @@ export default function MapLibreCard({lang, taxon, dragControls, colorSelector =
 	}, [taxon, onDelete]);
 
 	return (
-		<li className={clsx(`bg-white py-2 pe-2 px-4 flex flex-row items-center rounded-2xl transition-all select-none min-h-[68px]`, isHidden && "bg-opacity-65")}>
+		<div className={clsx(`bg-white py-2 pe-2 px-4 flex flex-row items-center rounded-2xl transition-all select-none min-h-[68px]`, isHidden && "bg-opacity-65")}>
 			{colorSelector &&
 				<PopoverColorPicker isDisabled={!taxon || isHidden} color={color}
 				                    className={clsx(isHidden && "opacity-65")}
@@ -65,6 +65,6 @@ export default function MapLibreCard({lang, taxon, dragControls, colorSelector =
 					<MdDragIndicator/>
 				</CBBButton>
 			</div>
-		</li>
+		</div>
 	);
 }

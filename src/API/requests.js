@@ -5,6 +5,10 @@ function request(method) {
 		const requestOptions = {
 			method,
 			headers: authHeader(),
+			next: {
+		      revalidate: 60, // ISR-like behavior (in seconds)
+		    },
+		    cache: 'force-cache', // or 'default' | 'no-store' | 'reload'
 			// cache: 'no-store',
 		};
 		const url = new URL(`${process.env.API_BASE_URL}${process.env.API_PATH}${path}`);
@@ -22,7 +26,10 @@ function request(method) {
 		if (method === 'URL')
 			return url
 
-		return fetch(url, requestOptions).then(handleResponse)
+		return fetch(
+			url,
+			requestOptions
+		).then(handleResponse)
 	}
 }
 

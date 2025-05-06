@@ -1,10 +1,10 @@
 "use client"
 
 import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {Autocomplete, AutocompleteItem, Input} from "@heroui/react";
 import HighlightText from "@/components/common/HighlightText";
 import {t} from "@/i18n/i18n";
 import clsx from "clsx";
+import {Autocomplete, AutocompleteItem} from "@heroui/autocomplete";
 
 
 function SearchBarIcon() {

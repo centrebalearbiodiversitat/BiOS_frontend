@@ -3,8 +3,6 @@ import {Popup} from "react-map-gl/maplibre";
 import Figure from "@/components/common/Figure";
 import CBBButton from "@/components/common/CBBButton";
 import {IoClose} from "react-icons/io5";
-import {Divider} from "@heroui/react";
-
 
 export function TwoLineText({title, text, titleClassName = "", textClassName = ""}) {
 	return (

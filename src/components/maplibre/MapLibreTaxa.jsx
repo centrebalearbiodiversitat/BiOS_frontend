@@ -1,4 +1,3 @@
-import React, {useEffect, useMemo, useState} from "react";
 import CBBSearchBar from "@/components/common/CBBSearchBar";
 import taxonomy from "@/API/taxonomy";
 import MapLibreCard from "@/components/maplibre/MapLibreCard";
@@ -21,27 +20,25 @@ function ReorderMapLibre({lang, taxon, onDeleted, taxaColors, onColorChanged, on
 
 export default function MapLibreTaxa({lang, taxa, onSelectedSearch, onReorder, onDeleted, taxaColors, onColorChanged, onHide}) {
 	return (
-		<Reorder.Group values={taxa} onReorder={onReorder} axis="y">
-			<div className="mx-2">
-				<CBBSearchBar showFilters={false} lang={lang} rounded={true}
-				              label="components.searchbar.label.taxonomy"
-			                  placeholder="components.searchbar.placeholder.taxonomy"
-			                  filters={[{
-					              textKey: "components.searchbar.filter.taxonomy",
-					              onSelected: e => onSelectedSearch('taxon', e),
-					              onInput: e => taxonomy.search(e)
-				              }]}/>
-
-				<ul className="col-span-1 sm:col-span-2 py-4 space-y-2">
-					{
-						taxa.map((taxon) => (
-							<ReorderMapLibre key={taxon.id} taxon={taxon} lang={lang}
-							                 onDeleted={onDeleted} taxaColors={taxaColors}
-							                 onColorChanged={onColorChanged} onHide={onHide}/>
-						))
-					}
-				</ul>
-			</div>
-		</Reorder.Group>
+		<div className="mx-2">
+			<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+			              label="components.searchbar.label.taxonomy"
+		                  placeholder="components.searchbar.placeholder.taxonomy"
+		                  filters={[{
+				              textKey: "components.searchbar.filter.taxonomy",
+				              onSelected: e => onSelectedSearch('taxon', e),
+				              onInput: e => taxonomy.search(e)
+			              }]}/>
+			<Reorder.Group values={taxa} onReorder={onReorder} axis="y"
+			               className="col-span-1 sm:col-span-2 py-4 space-y-2">
+				{
+					taxa.map((taxon) => (
+						<ReorderMapLibre key={taxon.id} taxon={taxon} lang={lang}
+						                 onDeleted={onDeleted} taxaColors={taxaColors}
+						                 onColorChanged={onColorChanged} onHide={onHide}/>
+					))
+				}
+			</Reorder.Group>
+		</div>
 	);
 }

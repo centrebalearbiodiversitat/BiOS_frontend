@@ -1,7 +1,6 @@
 import {t} from "@/i18n/i18n";
 import React from "react";
 import {useLang} from "@/contexts/LangContext";
-import {Divider} from "@heroui/react";
 import SubSection from "@/components/common/SubSection";
 
 export default function MarkerInfo({marker}) {

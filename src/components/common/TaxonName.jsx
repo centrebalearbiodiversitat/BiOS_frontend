@@ -27,7 +27,7 @@ export default function TaxonName({lang, className, as = 'p', taxon, author = fa
 
 	const href = useMemo(() => {
 		if (!redirect) {
-			return '';
+			return null;
 		} else if (pathname.search(/\/taxon\/\d+/) === -1) {
 			return `/${lang}/taxon/${taxon.id}`;
 		} else {

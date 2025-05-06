@@ -48,7 +48,7 @@ function TaxonListBlockCard({lang, taxon}) {
 }
 
 export default function TaxaList({taxa}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 
 	return (
 		<Loading loading={taxa} width="100%" height="100%">

@@ -1,9 +1,9 @@
 "use client"
 
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {use, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import {useRouter, useSearchParams} from "next/navigation";
-import {Pagination} from "@heroui/react";
+import {Pagination} from "@heroui/pagination";
 import {t} from "@/i18n/i18n";
 import {generatePageTitle, handleScrollTop} from "@/utils/utils";
 import DownloadModal from "@/components/DownloadModal";
@@ -32,7 +32,9 @@ function translateParamToAPI(param) {
 
 const TAXA_DEFAULT_VALUE = Array(15).fill({});
 
-export default function List({params: {lang}}) {
+export default function List({params}) {
+	const {lang} = use(params);
+
 	const router = useRouter();
 	const [taxa, setTaxa] = useState(TAXA_DEFAULT_VALUE);
 	const [exportHref, setExportHref] = useState('');

@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useMemo} from "react";
 import {
 	Navbar,
@@ -7,8 +9,8 @@ import {
 	NavbarMenuToggle,
 	NavbarMenu,
 	NavbarMenuItem,
-	Link,
-} from "@heroui/react";
+} from "@heroui/navbar";
+import {Link} from "@heroui/link";
 import Image from "next/image";
 import LangSelector from "@/components/LangSelector";
 import HoverLink from "@/components/common/HoverLink";
