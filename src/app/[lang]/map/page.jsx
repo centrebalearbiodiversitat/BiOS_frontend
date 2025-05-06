@@ -274,12 +274,12 @@ export default function MapPage({params}) {
 								<MapLibrePopup key={occu.id} images={occu.taxonomy.images}
 								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
 								               title={
-									               <>
+									               <p className="text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
 										               <TaxonName taxon={occu.taxonomy} author={false}/>
-										               <p className={`text-lg font-extralight w-full`}>
+										               <span className={`block text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
-										               </p>
-									               </>
+										               </span>
+									               </p>
 								               }
 								               longitude={occu.decimalLongitude} latitude={occu.decimalLatitude}>
 									<div className="space-y-0.5">

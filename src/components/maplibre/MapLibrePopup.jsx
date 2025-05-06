@@ -13,14 +13,10 @@ export function TwoLineText({title, text, titleClassName = "", textClassName = "
 	)
 }
 
-
 export function MapLibrePopup({longitude, title, latitude, images, children, onClose, ...extra}) {
 	return (
 		<Popup longitude={longitude} latitude={latitude} closeOnClick={true} onClose={onClose}
 		       closeOnMove={false} className="w-[375px] !max-w-[86vw]" closeButton={false} {...extra}>
-			{/*<div className="flex flex-row justify-end">*/}
-
-			{/*</div>*/}
 			<div className={`space-x-4`}>
 				<div className="w-full max-h-[190px] h-[190px] aspect-video">
 					<Figure className="rounded-t-2xl" images={images}/>
@@ -31,10 +27,7 @@ export function MapLibrePopup({longitude, title, latitude, images, children, onC
 				</CBBButton>
 			</div>
 			<div className="px-8 py-4">
-				<p className="text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
-					{title}
-				</p>
-				{/*<Divider className="my-3"/>*/}
+				{title}
 				{children}
 			</div>
 		</Popup>
