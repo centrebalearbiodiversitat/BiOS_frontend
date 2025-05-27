@@ -15,7 +15,7 @@ function map(taxonomyId, geographicalLocationId, params) {
 			...params
 		},
 		null,
-		cache='no-store'
+		'no-store'
 	)
 }
 
