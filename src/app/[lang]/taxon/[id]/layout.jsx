@@ -1,125 +1,76 @@
-"use client"
-
 import {t} from "@/i18n/i18n"
 
 import 'maplibre-gl/dist/maplibre-gl.css';
-import VerticalTaxonomy from "@/components/VerticalTaxonomy";
 import MainContent from "@/sections/MainContent";
 import Figure from "@/components/common/Figure";
 import TaxonName from "@/components/common/TaxonName";
 import Sources from "@/components/Sources";
-import {use, useEffect, useMemo, useState} from "react";
 import taxonomy from "@/API/taxonomy";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
-import TabButtonGroup from "@/components/common/TabButtonGroup";
-import {Accordion, AccordionItem} from "@heroui/accordion";
-import Loading from "@/components/common/Loading";
-import {FaDna, FaInfo} from "react-icons/fa";
-import {FaLocationDot} from "react-icons/fa6";
+import {TabButtonGroup, TabButton} from "@/components/common/TabButtonGroup";
 import DownloadModal from "@/components/DownloadModal";
 import {TaxonProvider} from "@/contexts/TaxonContext";
 import occurrences from "@/API/occurrences";
 import genetics from "@/API/genetics";
-import {useRouter} from "next/navigation";
-import {useLang} from "@/contexts/LangContext";
-import clsx from "clsx";
+import {notFound} from "next/navigation";
+import {AccordionTaxonomy} from "@/app/[lang]/taxon/[id]/components/AccordionTaxonomy";
+import {FaDna, FaInfo} from "react-icons/fa";
+import {FaLocationDot} from "react-icons/fa6";
+import {Suspense} from "react";
 
 
-function AccordionTaxonomy({taxon, className, higherTaxonomy, descendants, synonyms, ...extra}) {
-	const [lang] = useLang();
+export default async function RootLayout({children, params}) {
+	const {lang, id} = await params;
 
-	return (
-		<Accordion className={clsx(className, "!space-y-3")} {...extra}>
-			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.classification')}</h3>}
-			               key="1" classNames={{trigger: "py-0"}}>
-				<Loading loading={[taxon, higherTaxonomy]} width="100%" height="300px">
-					{taxon && higherTaxonomy && <VerticalTaxonomy taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}
-					<div className="mt-3">
-						<h4 className="pt-2 text-lg font-extralight">{t(lang, 'taxon.sidebar.children')} ({descendants?.length ?? 0})</h4>
-						<Loading loading={descendants} width="100%" height="100px">
-							{descendants && <VerticalTaxonomy overflow={true} taxonomy={descendants}/>}
-						</Loading>
-					</div>
-				</Loading>
-			</AccordionItem>
-			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.synonyms')} ({synonyms?.length ?? 0})</h3>}
-			               key="3" classNames={{trigger: "py-0"}}>
-				<Loading loading={synonyms} width="100%" height="200px">
-					{synonyms && <VerticalTaxonomy title={`${t(lang, 'taxon.sidebar.synonyms')} (${synonyms.length})`}
-					                   overflow={true} taxonomy={synonyms}/>}
-				</Loading>
-			</AccordionItem>
-		</Accordion>
-	)
-}
+	const taxon = await taxonomy.get(id);
 
+	if (!taxon) {
+		notFound();
+	}
 
-export default function RootLayout({children, params}) {
-	const {lang, id} = use(params);
-	const router = useRouter();
-
-	const [taxon, setTaxon] = useState(undefined);
-	const [higherTaxonomy, setHigherTaxonomy] = useState(undefined);
-	const [descendants, setDescendants] = useState(undefined);
-	const [synonyms, setSynonyms] = useState(undefined);
-	const [sources, setSources] = useState(undefined);
-	const [checklistLink, setChecklistLink] = useState('');
-	const [occurrencesLink, setOccurrencesLink] = useState('');
-	const [geneticsLink, setGeneticsLink] = useState('');
-
-	useEffect(() => {
-		taxonomy.get(id)
-			.then(r => {
-				if (r)
-					setTaxon(r)
-				else
-					router.replace("/404")
-			})
-		taxonomy.parent(id)
-			.then(r => setHigherTaxonomy(r))
-		taxonomy.children(id, true)
-			.then(r => setDescendants(r))
-		taxonomy.synonyms(id)
-			.then(r => setSynonyms(r))
-		taxonomy.sources(id)
-			.then(r => setSources(r))
-		taxonomy.checklist(id)
-			.then(r => setChecklistLink(r))
-		occurrences.listDownload(id)
-			.then(r => setOccurrencesLink(r))
+	const [
+		higherTaxonomy,
+		descendants,
+		synonyms,
+		sources,
+		checklistLink,
+		occurrencesLink,
+		geneticsLink
+	] = await Promise.all([
+		taxonomy.parent(id),
+		taxonomy.children(id, true),
+		taxonomy.synonyms(id),
+		taxonomy.sources(id),
+		taxonomy.checklist(id),
+		occurrences.listDownload(id),
 		genetics.listSequenceDownload(id)
-			.then(r => setGeneticsLink(r))
-	}, [id]);
+	]);
 
-	const availableDownloads = useMemo(() => {
-		return [
-			{
-				title: t(lang, "taxon.layout.modal.checklist"),
-				description: t(lang, "taxon.layout.modal.checklist.help"),
-				link: checklistLink,
-			},
-			{
-				title: t(lang, "taxon.layout.modal.occurrences"),
-				description: t(lang, "taxon.layout.modal.occurrences.help"),
-				link: occurrencesLink,
-			},
-			{
-				title: t(lang, "taxon.layout.modal.sequences"),
-				description: t(lang, "taxon.layout.modal.sequences.help"),
-				link: geneticsLink,
-			},
-		]
-	}, [lang, checklistLink, occurrencesLink, geneticsLink]);
+	const availableDownloads = [
+		{
+			title: t(lang, "taxon.layout.modal.checklist"),
+			description: t(lang, "taxon.layout.modal.checklist.help"),
+			link: checklistLink.toString(),
+		},
+		{
+			title: t(lang, "taxon.layout.modal.occurrences"),
+			description: t(lang, "taxon.layout.modal.occurrences.help"),
+			link: occurrencesLink.toString(),
+		},
+		{
+			title: t(lang, "taxon.layout.modal.sequences"),
+			description: t(lang, "taxon.layout.modal.sequences.help"),
+			link: geneticsLink.toString(),
+		},
+	];
 
-	const TAB_BUTTONS = useMemo(() => [
-		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon'), icon: <FaInfo />},
-		{href: `/${lang}/taxon/${id}/distribution`, text: t(lang, 'taxon.layout.button.distribution'), icon: <FaLocationDot />},
-		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics'), icon: <FaDna />},
-	], [lang, id])
+	const TAB_BUTTONS = [
+		{href: `/${lang}/taxon/${id}`, text: t(lang, 'taxon.layout.button.taxon'), icon: <FaInfo/>},
+		{href: `/${lang}/taxon/${id}/distribution`, text: t(lang, 'taxon.layout.button.distribution'), icon: <FaLocationDot/>},
+		{href: `/${lang}/taxon/${id}/genetics`, text: t(lang, 'taxon.layout.button.genetics'), icon: <FaDna/>},
+	];
 
-	const taxonRank = useMemo(() => {
-		return taxon ? t(lang, `general.taxon_rank.${taxon.taxonRank}`) : ""
-	}, [lang, taxon])
+	const taxonRank = t(lang, `general.taxon_rank.${taxon.taxonRank}`);
 
 	return (
 		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
@@ -129,7 +80,7 @@ export default function RootLayout({children, params}) {
 						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
 					</div>
 					<div className="hidden lg:block custom-scrollbar overflow-y-auto flex-grow h-0">
-						<AccordionTaxonomy hideIndicator={true} showDivider={false}
+						<AccordionTaxonomy lang={lang} hideIndicator={true} showDivider={false}
 						                   selectionMode="multiple" defaultSelectedKeys="all"
 						                   className="px-0 pe-2.5" higherTaxonomy={higherTaxonomy}
 						                   taxon={taxon} synonyms={synonyms} descendants={descendants}/>
@@ -140,64 +91,62 @@ export default function RootLayout({children, params}) {
 				<header className="flex flex-row justify-center mb-6">
 					<div className="w-full grid grid-cols-5 gap-1 md:gap-6">
 						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">
-							<Loading loading={taxon} width="100%" height="100%">
-								{taxon && <Figure alt={`Representative image of ${taxon.name}`}
-								                  className="rounded-lg h-auto w-full max-h-full"
-												  images={taxon?.images}/>}
-							</Loading>
+							{taxon && <Figure alt={`Representative image of ${taxon.name}`}
+							                  className="rounded-lg h-auto w-full max-h-full"
+											  images={taxon?.images}/>}
 						</div>
 						<div className="flex flex-col col-span-full md:col-span-2">
 							<div className="ms-auto mt-4">
 								<DownloadModal availableDownloads={availableDownloads}/>
 							</div>
 							<div className="my-auto">
-								<Loading loading={taxon} className="mb-4" width="40%" height="32px">
-									{taxon &&
-										<h2 className="first-letter:uppercase font-extralight text-3xl">
-											{taxonRank}
-										</h2>
-									}
-								</Loading>
-								<Loading loading={taxon} className="mb-4" width="80%" height="58px">
-									{taxon &&
-										<TaxonName as="h1" className="first-letter:uppercase font-medium text-4xl" taxon={taxon} redirect={false}/>
-									}
-								</Loading>
-								<Loading loading={taxon} className="mb-4" width="60%" height="30px">
-									{taxon &&
-										<>
-											{taxon.scientificNameAuthorship &&
-												<h3 className="first-letter:uppercase font-normal text-xl">
-													{taxon.scientificNameAuthorship}
-												</h3>
-											}
-											<p className="font-semibold first-letter:uppercase">
-												{taxon?.acceptedModifier &&
-													<span className="capitalize me-1">{taxon.acceptedModifier}</span>}
-													{taxon?.accepted ?
-														<span>{t(lang, 'general.taxonStatus.accepted')}</span> :
-														<span className="text-secondary font-bold">{t(lang, 'general.taxonStatus.synonym')}</span>}
-											</p>
-											<p className="text-small italic font-light">
-												<span className="font-semibold me-1">ID:</span>{taxon?.id}
-											</p>
-										</>
-									}
-								</Loading>
-								<Loading loading={sources} width="100%" height="80px">
-									<Sources sources={sources} className="my-3"/>
-								</Loading>
+								{taxon &&
+									<h2 className="first-letter:uppercase font-extralight text-3xl">
+										{taxonRank}
+									</h2>
+								}
+								{taxon &&
+									<TaxonName as="h1" className="first-letter:uppercase font-medium text-4xl" taxon={taxon} redirect={false}/>
+								}
+								{taxon &&
+									<>
+										{taxon.scientificNameAuthorship &&
+											<h3 className="first-letter:uppercase font-normal text-xl">
+												{taxon.scientificNameAuthorship}
+											</h3>
+										}
+										<p className="font-semibold first-letter:uppercase">
+											{taxon?.acceptedModifier &&
+												<span className="capitalize me-1">{taxon.acceptedModifier}</span>}
+												{taxon?.accepted ?
+													<span>{t(lang, 'general.taxonStatus.accepted')}</span> :
+													<span className="text-secondary font-bold">{t(lang, 'general.taxonStatus.synonym')}</span>}
+										</p>
+										<p className="text-small italic font-light">
+											<span className="font-semibold me-1">ID:</span>{taxon?.id}
+										</p>
+									</>
+								}
+								<Sources sources={sources} className="my-3"/>
 							</div>
 						</div>
 					</div>
 				</header>
-				<AccordionTaxonomy showDivider={false} selectionMode="multiple"
+				<AccordionTaxonomy lang={lang} showDivider={false} selectionMode="multiple"
 				                   className="lg:hidden mt-3 mb-8" higherTaxonomy={higherTaxonomy}
 				                   taxon={taxon} synonyms={synonyms} descendants={descendants}/>
-				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200"/>
+				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200">
+					{
+						TAB_BUTTONS.map((button, index) => (
+							<TabButton key={button.href} text={button.text} href={button.href} icon={button.icon}/>
+						))
+					}
+				</TabButtonGroup>
 				<MainContent>
 					<TaxonProvider initialState={taxon}>
-						{children}
+						<Suspense>
+							{children}
+						</Suspense>
 					</TaxonProvider>
 				</MainContent>
 			</article>

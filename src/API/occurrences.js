@@ -13,7 +13,9 @@ function map(taxonomyId, geographicalLocationId, params) {
 			taxonomy: taxonomyId,
 			geographicalLocation: geographicalLocationId ? geographicalLocationId : '',
 			...params
-		}
+		},
+		null,
+		cache='no-store'
 	)
 }
 
@@ -32,7 +34,7 @@ async function listDownload(id) {
 	return requests.URL(`${OCCURRENCES_PATH}/list/download`, {taxonomy: id})
 }
 
-function listCount(taxonomyId, geographicalLocationId) {
+async function listCount(taxonomyId, geographicalLocationId) {
 	return requests.GET(
 		`${OCCURRENCES_PATH}/list/count`,
 		{

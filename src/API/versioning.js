@@ -6,6 +6,10 @@ function list() {
 	return requests.GET(`${VERSIONING_PATH}/source/list`)
 }
 
+async function aList() {
+	return requests.GET(`${VERSIONING_PATH}/source/list`)
+}
+
 async function search(name) {
 	if (name) {
 		return requests.GET(`${VERSIONING_PATH}/search`, {name})
@@ -20,6 +24,7 @@ function get(id) {
 
 module.exports = {
 	list,
+	aList,
 	search,
 	get,
 }

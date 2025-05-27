@@ -1,13 +1,10 @@
-"use client"
-
 import taxonomy from "@/API/taxonomy";
 import tags from "@/API/tags";
-import React, {use, useEffect, useMemo, useState} from "react";
+import React from "react";
 import TaxonHabitats from "@/components/TaxonHabitats";
 import TaxonComposition from "@/components/TaxonComposition";
 import Section from "@/components/common/Section";
 import TaxonDescendants from "@/components/TaxonDescendants";
-import {useTaxon} from "@/contexts/TaxonContext";
 import Hidden from "@/components/common/Hidden";
 import {t} from "@/i18n/i18n";
 import {generatePageTitle} from "@/utils/utils";
@@ -18,74 +15,78 @@ import TaxonDirectives from "@/components/TaxonDirectives";
 import NoData from "@/components/common/NoData";
 import IUCNCard from "@/components/IUCNCard";
 
+// export async function generateStaticParams({params}) {
+// 	console.log(params)
+// 	const {id} = await params;
+// 	console.log(id)
+//
+// 	return [{
+// 		taxon
+// 	}]
+// }
 
-export default function Taxon({params}) {
-	const {lang, id} = use(params);
+export async function generateMetadata({params, searchParams}) {
+	const {lang, id} = await params;
+	const taxon = await taxonomy.get(id);
 
-	const [taxon] = useTaxon();
-	const [composition, setComposition] = useState(undefined);
-	const [taxonData, setTaxonData] = useState(undefined);
-	const [taxonTags, setTaxonTags] = useState(undefined);
-	const [taxonHabitats, setTaxonHabitats] = useState(undefined);
-	const [taxonDirectives, setTaxonDirectives] = useState(undefined);
-	const [taxonSystems, setTaxonSystems] = useState(undefined);
-	const [descendants, setDescendants] = useState(undefined);
+	return {
+		title: generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')}`)
+	}
+}
 
-	useEffect(() => {
-		taxonomy.composition(id)
-			.then(r => {
-				if (r && r.length > 0) {
-					setComposition(r.map(taxon => ({id: taxon.id, value: taxon.totalSpecies, label: taxon.name})));
-				} else
-					setComposition(null);
-			});
-		taxonomy.descendantCount(id)
-			.then(r => setDescendants(r));
-		tags.taxonIUCN(id)
-			.then(r => setTaxonData(r));
-		tags.listTagsByTaxon(id)
-			.then(r => setTaxonTags(r));
-		tags.listHabitats(id)
-			.then(r => setTaxonHabitats(r));
-		tags.listDirectives(id)
-			.then(r => setTaxonDirectives(r));
-		tags.listSystem(id)
-			.then(r => setTaxonSystems(r));
-	}, [id]);
+export default async function Taxon({params}) {
+	const {lang, id} = await params;
+	const taxon = await taxonomy.get(id);
 
-	useEffect(() => {
-		if (taxon)
-			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')}`)
-	}, [taxon, lang]);
+	const [
+		composition,
+		taxonData,
+		taxonTags,
+		taxonHabitats,
+		taxonDirectives,
+		taxonSystems,
+		descendants,
+	] = await Promise.all([
+		taxonomy.composition(id).then(r => {
+			if (r && r.length > 0) {
+				return r.map(taxon => ({id: taxon.id, value: taxon.totalSpecies, label: taxon.name}));
+			} else
+				return null;
+		}),
+		tags.taxonIUCN(id),
+		tags.listTagsByTaxon(id),
+		tags.listHabitats(id),
+		tags.listDirectives(id),
+		tags.listSystem(id),
+		taxonomy.descendantCount(id),
+	])
 
-	const isSpeciesOrLower = useMemo(() => {
-		return ['species', 'subspecies', 'variety'].includes(taxon?.taxonRank);
-	}, [taxon]);
+	const isSpeciesOrLower = ['species', 'subspecies', 'variety'].includes(taxon.taxonRank);
 
 	return (
 		<>
 			<Hidden hide={!isSpeciesOrLower}>
-				<Section title="taxon.overview.status" subtitle="taxon.overview.status.description">
+				<Section lang={lang} title="taxon.overview.status" subtitle="taxon.overview.status.description">
 					<div className="grid grid-cols-4 md:grid-cols-5 xl:grid-cols-4 gap-4">
 						<SubSection className="col-span-full md:col-span-2 xl:col-span-1 !p-0">
-							<NoData isDataAvailable={taxonTags?.at(0)}>
-								<TaxonDOE doe={taxonTags?.at(0)}/>
+							<NoData lang={lang} isDataAvailable={taxonTags?.at(0)}>
+								<TaxonDOE lang={lang} doe={taxonTags?.at(0)}/>
 							</NoData>
 						</SubSection>
 						<SubSection className="col-span-full md:col-span-3 xl:col-span-3 !p-0">
-							<IUCNCard scopes={taxonData}/>
+							<IUCNCard lang={lang} scopes={taxonData}/>
 						</SubSection>
 					</div>
 				</Section>
 			</Hidden>
 
 			<Hidden hide={descendants === null || descendants !== undefined && Object.keys(descendants).length === 0}>
-				<Section title="taxon.overview.statistics" subtitle="taxon.overview.statistics.description">
+				<Section lang={lang} title="taxon.overview.statistics" subtitle="taxon.overview.statistics.description">
 					<TaxonDescendants taxonId={id} descendants={descendants}/>
 				</Section>
 			</Hidden>
 
-			<Section title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
+			<Section lang={lang} title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
 				<TaxonSystem className="justify-center mb-4" systems={taxonSystems}/>
 				{/*<SubSection className="!p-3">*/}
 					<TaxonHabitats habitats={taxonHabitats}/>
@@ -93,7 +94,7 @@ export default function Taxon({params}) {
 			</Section>
 
 			<Hidden hide={!isSpeciesOrLower}>
-				<Section title="taxon.overview.directives" subtitle="taxon.overview.directives.description">
+				<Section lang={lang} title="taxon.overview.directives" subtitle="taxon.overview.directives.description">
 					<SubSection>
 						<TaxonDirectives directives={taxonDirectives}/>
 					</SubSection>
@@ -101,7 +102,7 @@ export default function Taxon({params}) {
 			</Hidden>
 
 			<Hidden hide={isSpeciesOrLower}>
-				<Section title="taxon.overview.composition">
+				<Section lang={lang} title="taxon.overview.composition">
 					<SubSection>
 						<TaxonComposition lang={lang} composition={composition}/>
 					</SubSection>

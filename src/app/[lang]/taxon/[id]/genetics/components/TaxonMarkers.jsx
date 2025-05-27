@@ -1,6 +1,10 @@
+"use client"
+
 import {useCallback, useMemo} from "react";
 import Loading from "@/components/common/Loading";
 import clsx from "clsx";
+import {useRouter, useSearchParams} from "next/navigation";
+import {getParam} from "@/utils/utils";
 
 function Marker({marker, selected, onClick}) {
 	const onClickMarker = useCallback(() => {
@@ -28,21 +32,30 @@ function Marker({marker, selected, onClick}) {
 	)
 }
 
-export default function TaxonMarkers({markers, selectedMarker, onSelectMarker}) {
+export default function TaxonMarkers({markers}) {
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const selectedMarker = getParam(searchParams, "marker")
+
 	const handleSelection = useCallback((marker) => {
-		if (selectedMarker == marker.id) {
-			onSelectMarker(null);
+		const params = new URLSearchParams(searchParams.toString());
+
+		if (getParam(searchParams, "marker") == marker.id) {
+			params.delete("marker");
 		} else {
-			onSelectMarker(marker.id);
+			params.set("marker", marker.id);
 		}
-	}, [selectedMarker, onSelectMarker]);
+
+		router.push(`?${params.toString()}`, {scroll: false});
+	}, [router, searchParams]);
 
 	return (
 		<Loading loading={markers} width="100%" height="150px">
 			<ul className="grid grid-cols-3 md:grid-cols-6 2xl:grid-cols-8 w-full h-full [clip-path:inset(0_1px_0px_0)] *:border-b-[1px] *:border-r-[1px] *:border-slate-200 min-h-[72px]">
 				{markers &&
 					markers.map(
-						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selectedMarker == marker.id} />
+						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selectedMarker == marker.id}/>
 					)
 				}
 			</ul>

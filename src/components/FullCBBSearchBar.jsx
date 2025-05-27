@@ -6,9 +6,11 @@ import {usePathname, useRouter} from "next/navigation";
 import taxonomy from "@/API/taxonomy";
 import CBBSearchBar from "@/components/common/CBBSearchBar";
 import {handleScrollTop} from "@/utils/utils";
+import {useLang} from "@/contexts/LangContext";
 
 
-export default function FullCBBSearchBar({lang, showFilters = true, rounded = true, filters = null}) {
+export default function FullCBBSearchBar({showFilters = true, rounded = true, filters = null}) {
+	const [lang] = useLang();
 	const router = useRouter();
 	const pathname = usePathname();
 

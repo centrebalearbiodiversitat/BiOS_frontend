@@ -15,3 +15,12 @@ export function generateSourceUrl(basis, DEFAULT =  "") {
 		return DEFAULT
 	}
 }
+
+export function getParam(searchParams, key, defaultValue) {
+	const value = searchParams.get(key);
+
+	if (typeof defaultValue === "boolean")
+		return value === "true";
+
+	return value ?? defaultValue;
+}

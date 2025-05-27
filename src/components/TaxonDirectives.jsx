@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import {t} from "@/i18n/i18n";
 import clsx from "clsx";
@@ -37,11 +39,11 @@ function DirectiveCard({lang, directive, enabled}) {
 }
 
 export default function TaxonDirectives({directives, className}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 
 	return (
 		<Loading loading={directives} width="100%" height="100%">
-			<NoData isDataAvailable={directives?.cites !== null}>
+			<NoData lang={lang} isDataAvailable={directives?.cites !== null}>
 				<div className="flex flex-col gap-8 justify-center flex-grow py-3">
 					<div className={clsx("flex flex-wrap my-auto justify-center px-5 gap-x-3 gap-y-2", className)}>
 						{directives &&

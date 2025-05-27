@@ -1,14 +1,13 @@
+"use client"
+
 import React from "react";
 import {t} from "@/i18n/i18n";
 import {Tooltip} from "@heroui/tooltip";
 import {TiArrowSortedUp} from "react-icons/ti";
 import clsx from "clsx";
-import {GiEarthAfricaEurope, GiEuropeanFlag} from "react-icons/gi";
 import {BiDotsHorizontalRounded} from "react-icons/bi";
 import {useLang} from "@/contexts/LangContext";
 import Link from "next/link";
-import {FiExternalLink} from "react-icons/fi";
-import {sources} from "@/API/taxonomy";
 
 const IUCN_CATEGORIES = {
 	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "#fd3636"},

@@ -1,9 +1,10 @@
+"use client"
+
 import React from "react";
 import {t} from "@/i18n/i18n";
 import clsx from "clsx";
 import Loading from "@/components/common/Loading";
 import {useLang} from "@/contexts/LangContext";
-import NoData from "@/components/common/NoData";
 
 const SYSTEM_TYPES = [
 	{
@@ -45,7 +46,7 @@ function LegendItem({text, className}) {
 }
 
 export default function TaxonSystem({systems, className}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 
 	return (
 		<Loading loading={!systems} width="100%" height="100%">

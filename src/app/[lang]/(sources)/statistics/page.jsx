@@ -3,17 +3,16 @@
 import React, {use, useEffect, useMemo, useRef, useState} from "react";
 import versioning from "@/API/versioning"
 import {t} from "@/i18n/i18n";
-import {Image} from "@heroui/image";
-import Link from "next/link";
 import StatsChart from "@/components/StatsChart";
 import {VscGraph} from "react-icons/vsc";
 import LoadMore from "@/components/LoadMore";
-import TabButtonGroup from "@/components/common/TabButtonGroup";
+import {TabButtonGroup} from "@/components/common/TabButtonGroup";
 import {FaDna, FaImages, FaInfo} from "react-icons/fa";
 import {GiDragonfly} from "react-icons/gi";
 import {PiMagnifyingGlassBold} from "react-icons/pi";
 import Loading from "@/components/common/Loading";
 import {generatePageTitle} from "@/utils/utils";
+import ArticleHeader from "@/app/[lang]/(sources)/components/ArticleHeader";
 
 const SOURCE_DATA_TYPES = {
 	"taxon": {icon: <GiDragonfly/>, graphDescription: "partners.list.taxon.graph"},
@@ -91,18 +90,13 @@ export default function Page({params}) {
 
 	return (
 		<article className="w-full text-pretty break-words max-w-[900px] mx-auto space-y-6">
-			<header className="w-full px-4 pt-8 mx-auto">
-				<h1 className="text-4xl font-extralight">{t(lang, `partners.title`)}</h1>
-				<h2 className="text-lg font-extralight">{t(lang, `partners.subtitle`)}</h2>
-			</header>
-			<div className="w-full mx-auto">
-				<Link href={`/${lang}/taxon/search?q=Sympetrum fonscolombii`}>
-					<Image alt="Female Red-veined darter dragonfly (Sympetrum fonscolombii)" removeWrapper={true}
-					       src="/images/pages/sources/odonata.jpg"
-					       title="Wikipedia | Alvesgaspar, Edited by Fir0002, some rights reserved (CC BY-2.5)"
-					       className="object-cover w-full h-full max-h-[400px] rounded-none saturate-[120%] brightness-110"/>
-				</Link>
-			</div>
+			<ArticleHeader header="partners.title" subheader="partners.subtitle"
+			               redirect={`/${lang}/taxon/search?q=Sympetrum fonscolombii`}
+			               image={{
+							   alt: "Female Red-veined darter dragonfly (Sympetrum fonscolombii)",
+							   src: "/images/pages/sources/odonata.jpg",
+							   title: "Wikipedia | Alvesgaspar, Edited by Fir0002, some rights reserved (CC BY-2.5)",
+						   }}/>
 			<nav className="flex justify-center sticky top-[110px] z-10 w-full px-6">
 				<div className="max-w-full px-3 py-2 shadow-small rounded-full border border-slate-100 bg-white gap-4 ">
 					<div className="w-full h-auto overflow-x-auto">

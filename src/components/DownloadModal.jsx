@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useCallback, useMemo, useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalContent, useDisclosure} from "@heroui/modal";
 import {Radio, RadioGroup} from "@heroui/radio";
@@ -83,7 +85,7 @@ export default function DownloadModal({availableDownloads}) {
 								<CBBButton color="danger" variant="light" onPress={onClose}>
 									{t(lang, "taxon.layout.modal.close_button")}
 								</CBBButton>
-								<DownloadButton href={selectedLink}/>
+								<DownloadButton lang={lang} href={selectedLink}/>
 							</ModalFooter>
 						</>
 					)}

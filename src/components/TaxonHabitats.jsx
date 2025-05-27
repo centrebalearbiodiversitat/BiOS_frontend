@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useMemo} from "react";
 import {t} from "@/i18n/i18n";
 import {
@@ -72,7 +74,7 @@ const HABITAT_MOCKUP = [
 ]
 
 export default function TaxonHabitats({habitats}) {
-	const [lang, _] = useLang();
+	const [lang] = useLang();
 
 	const isLoading = habitats === undefined;
 	const noData = habitats === null;
@@ -91,7 +93,7 @@ export default function TaxonHabitats({habitats}) {
 	}, [habitats]);
 
 	return (
-			<NoData isDataAvailable={!noData}>
+			<NoData lang={lang} isDataAvailable={!noData}>
 				<ul className="rounded-xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 m-auto">
 					{habitatStyles?.map((habitatStyle) => (
 						<Loading key={habitatStyle.habitatKey} loading={isLoading} width="100%" height={280}>

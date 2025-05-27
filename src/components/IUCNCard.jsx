@@ -2,9 +2,9 @@ import IUCN from "@/components/IUCN";
 import NoData from "@/components/common/NoData";
 import Loading from "@/components/common/Loading";
 
-export default function IUCNCard({scopes}) {
+export default function IUCNCard({lang, scopes}) {
 	return (
-		<NoData isDataAvailable={scopes}>
+		<NoData lang={lang} isDataAvailable={scopes}>
 			<div className="divide-y xl:divide-y-0 sm:divide-x w-full m-auto h-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
 				<div className="col-span-1 sm:col-span-2 xl:col-span-1">
 					<Loading loading={scopes}>

@@ -1,92 +1,77 @@
-"use client"
-
 import occurrences from "@/API/occurrences";
-import React, {use, useEffect, useMemo, useState} from "react";
+import React from "react";
 import {t} from "@/i18n/i18n";
-import {occurrencesToGeoJson} from "@/utils/geojson";
-import MapLibre from "@/components/maplibre/MapLibre";
 import LinkButton from "@/components/common/LinkButton";
 import {IoOpenOutline} from "react-icons/io5";
 import Section from "@/components/common/Section";
 import StatsChart from "@/components/StatsChart";
-import Loading from "@/components/common/Loading";
-import {Card, Description} from "@/components/common/DescriptionCard";
-import {useTaxon} from "@/contexts/TaxonContext";
+import {Card} from "@/components/common/DescriptionCard";
 import {generatePageTitle} from "@/utils/utils";
-import {ChartContainer} from "@mui/x-charts";
+import taxonomy from "@/API/taxonomy";
+import MapLibreAPIWrapper from "@/components/maplibre/MapLibreAPIWrapper";
 
-export default function Taxon({params}) {
-	const {lang, id} = use(params);
+export async function generateMetadata({params, searchParams}) {
+	const {lang, id} = await params;
+	const taxon = await taxonomy.get(id);
 
-	const [taxon] = useTaxon();
-	const [occs, setOccs] = useState(undefined);
-	const [occsStatsByMonth, setOccsStatsByMonth] = useState(undefined);
-	const [occsStatsByYear, setOccsStatsByYear] = useState(undefined);
-	const [occsStatsBySource, setOccsStatsBySource] = useState(undefined);
+	return {
+		title: generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')}`)
+	}
+}
 
-	useEffect(() => {
-		occurrences.map(id, null)
-			.then(r => setOccs([occurrencesToGeoJson(id, r)]));
-		occurrences.statsByMonth(id)
-			.then(r => setOccsStatsByMonth(r));
-		occurrences.statsByYear(id)
-			.then(r => setOccsStatsByYear(r));
+export default async function Taxon({params}) {
+	const {lang, id} = await params;
+
+	const [
+		occsStatsByMonth,
+		occsStatsByYear,
+		occsStatsBySource,
+	] = await Promise.all([
+		occurrences.statsByMonth(id),
+		occurrences.statsByYear(id),
 		occurrences.statsBySource(id)
-			.then(r => setOccsStatsBySource(r));
-	}, [id])
+	]);
 
-	useEffect(() => {
-		if (taxon)
-			document.title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')}`)
-	}, [taxon, lang]);
+	let occsStatsByMonthTranslated = occsStatsByMonth;
+	if (occsStatsByMonth) {
+		occsStatsByMonthTranslated = occsStatsByMonth.map(e => ({
+				...e,
+				month: t(lang, `taxon.distribution.statistics.month_${e.month}`)
+			})
+		)
+	}
 
-	const occsStatsByMonthTranslated = useMemo(() => {
-		if (occsStatsByMonth)
-			return occsStatsByMonth.map(e => ({
-					...e,
-					month: t(lang, `taxon.distribution.statistics.month_${e.month}`)
-				})
-			)
+	let occsStatsByYearAccumulated = occsStatsByYear;
+	if (occsStatsByYear)
+		occsStatsByYearAccumulated = occsStatsByYear.reduce((acc, elem) => {
+			acc[1].push({...elem, count: acc[0] + elem.count});
 
-		return occsStatsByMonth
-	}, [lang, occsStatsByMonth]);
-
-	const occsStatsByYearAccumulated = useMemo(() => {
-		if (occsStatsByYear)
-			return occsStatsByYear.reduce((acc, elem) => {
-				acc[1].push({...elem, count: acc[0] + elem.count});
-
-				return [acc[0] + elem.count, acc[1]];
-			}, [0, []])[1]
-
-		return occsStatsByYear
-	}, [occsStatsByYear]);
+			return [acc[0] + elem.count, acc[1]];
+		}, [0, []])[1]
 
 	return (
 		<>
-			<Section title="taxon.distribution.title" subtitle="taxon.distribution.subtitle">
-				<MapLibre nav={true} loading={occs === undefined} style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}} data={occs}
-				          taxaColors={{[id]: '#ff6900'}}>
+			<Section lang={lang} title="taxon.distribution.title" subtitle="taxon.distribution.subtitle">
+				<MapLibreAPIWrapper id={id} nav={true} color="#ff6900"
+				                    style={{borderRadius: '8px', aspectRatio: '16 / 16', maxHeight: '450px'}}>
 					<div className="m-6" style={{position: 'absolute', top: 0, left: 0}}>
 						<LinkButton variant="bordered" className="font-medium text-white" color="white"
 						            href={`/${lang}/map?taxon=${id}`}>
 							{t(lang, 'taxon.main.map.button.redirect')}<IoOpenOutline className="text-xl"/>
 						</LinkButton>
 					</div>
-				</MapLibre>
+				</MapLibreAPIWrapper>
 			</Section>
-			<Section title="taxon.distribution.statistics" subtitle="taxon.distribution.statistics.subtitle">
+			<Section lang={lang} title="taxon.distribution.statistics" subtitle="taxon.distribution.statistics.subtitle">
 				<div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
 					<div className="w-full aspect-video">
 						<Card>
 							<Card.Description>
 								{t(lang, 'taxon.distribution.statistics.graph.months')}
 							</Card.Description>
-							<Loading loading={occsStatsByMonthTranslated} width="100%" height="100%">
-								<Card.Body className="px-3">
-									<StatsChart color="#3DBBCC" hideLegend data={occsStatsByMonthTranslated} yLabel="month" type="bar"/>
-								</Card.Body>
-							</Loading>
+							<Card.Body className="px-3">
+								<StatsChart color="#3DBBCC" hideLegend data={occsStatsByMonthTranslated} yLabel="month" type="bar"/>
+							</Card.Body>
 						</Card>
 					</div>
 					<div className="w-full aspect-video">
@@ -94,11 +79,9 @@ export default function Taxon({params}) {
 							<Card.Description>
 								{t(lang, 'taxon.distribution.statistics.graph.sources')}
 							</Card.Description>
-							<Loading loading={occsStatsBySource} width="100%" height="100%">
-								<Card.Body className="px-3">
-									<StatsChart color="#BA3C4C" hideLegend data={occsStatsBySource} yLabel="source" type="bar"/>
-								</Card.Body>
-							</Loading>
+							<Card.Body className="px-3">
+								<StatsChart color="#BA3C4C" hideLegend data={occsStatsBySource} yLabel="source" type="bar"/>
+							</Card.Body>
 						</Card>
 					</div>
 					<div className="w-full aspect-video col-span-full">
@@ -106,9 +89,7 @@ export default function Taxon({params}) {
 							<Card.Description>
 								{t(lang, 'taxon.distribution.statistics.graph.y2yAcc')}
 							</Card.Description>
-							<Loading loading={occsStatsByYearAccumulated} width="100%" height="100%">
-								<StatsChart color="#94C635" colorR="#3DBBCC" hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
-							</Loading>
+							<StatsChart color="#94C635" colorR="#3DBBCC" hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
 						</Card>
 					</div>
 				</div>

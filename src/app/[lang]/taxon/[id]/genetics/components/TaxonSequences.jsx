@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useCallback, useRef} from "react";
 import Loading from "@/components/common/Loading";
 import {Divider} from "@heroui/divider";
@@ -7,9 +9,8 @@ import Hidden from "@/components/common/Hidden";
 import {useRouter, useSearchParams} from "next/navigation";
 import TaxonName from "@/components/common/TaxonName";
 import Empty from "@/components/Empty";
-import Sources from "@/components/Sources";
-import Link from "next/link";
 import {RxExternalLink} from "react-icons/rx";
+import {useLang} from "@/contexts/LangContext";
 
 
 function Sequence({seq}) {
@@ -54,6 +55,7 @@ function Sequence({seq}) {
 
 
 export default function TaxonSequences({sequences}) {
+	const [lang] = useLang();
 	const titlesRef = useRef(null);
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -94,7 +96,7 @@ export default function TaxonSequences({sequences}) {
 							</p>
 						</div>
 						<Divider/>
-						<Empty isEmpty={sequences?.data.length === 0}>
+						<Empty lang={lang} isEmpty={sequences?.data.length === 0}>
 							<ul className="outline outline-1 outline-slate-200">
 								{sequences &&
 									sequences.data.map(

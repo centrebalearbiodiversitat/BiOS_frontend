@@ -1,15 +1,13 @@
-"use client"
-
 function request(method) {
-	return (path, params = null, body = null) => {
+	return (path, params = null, body = null, cache = "default") => {
 		const requestOptions = {
 			method,
 			headers: authHeader(),
 			next: {
-		      revalidate: 60, // ISR-like behavior (in seconds)
+		      revalidate: process.env.DEBUG === "true" ? 60 : 86400, // ISR-like behavior (in seconds)
 		    },
-		    cache: 'force-cache', // or 'default' | 'no-store' | 'reload'
-			// cache: 'no-store',
+		    // cache: 'no-store', // or 'default' | 'no-store' | 'reload'
+			cache,
 		};
 		const url = new URL(`${process.env.API_BASE_URL}${process.env.API_PATH}${path}`);
 

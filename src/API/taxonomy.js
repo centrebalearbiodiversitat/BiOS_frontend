@@ -6,7 +6,7 @@ function list(params) {
 	return requests.GET(`${TAXONOMY_PATH}/list`, params)
 }
 
-async function search(name, exact = false) {
+function search(name, exact = false) {
 	if (name) {
 		return requests.GET(`${TAXONOMY_PATH}/search`, {name, exact})
 	} else {
@@ -42,15 +42,15 @@ function sources(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/sources`, {id})
 }
 
-async function checklist(id) {
+function checklist(id) {
 	return requests.URL(`${TAXONOMY_PATH}/taxon/checklist`, {id})
 }
 
-async function listExport(params) {
+function listExport(params) {
 	return requests.URL(`${TAXONOMY_PATH}/list/csv`, params)
 }
 
-async function descendantCount(id) {
+function descendantCount(id) {
 	return requests.GET(`${TAXONOMY_PATH}/taxon/descendants/count`, {id})
 }
 

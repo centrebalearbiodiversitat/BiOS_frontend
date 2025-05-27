@@ -1,6 +1,5 @@
 import React from "react";
 import {t} from "@/i18n/i18n";
-import clsx from "clsx";
 import Loading from "@/components/common/Loading";
 import {
 	AiOutlineCheckCircle, AiOutlineWarning,
@@ -12,7 +11,6 @@ import {BiSolidInvader} from "react-icons/bi";
 import {GiFlowerPot, GiShoonerSailboat} from "react-icons/gi";
 import {RiCloseLargeFill} from "react-icons/ri";
 import {MdForest} from "react-icons/md";
-import {useLang} from "@/contexts/LangContext";
 
 const DOE_DEFINITIONS = {
 	"unknown": { "color": "#cfd8dc", "icon": <AiOutlineQuestionCircle/>, "text": "components.doe.unknown"},
@@ -32,9 +30,7 @@ const DOE_DEFINITIONS = {
 	"widespreadInvasive": { "color": "#d32f2f", "icon": <AiOutlineGlobal/>, "text": "components.doe.widespreadInvasive"},
 }
 
-export default function TaxonDOE({doe, className}) {
-	const [lang, _] = useLang();
-
+export default function TaxonDOE({lang, doe, className}) {
 	const doeDef = DOE_DEFINITIONS[doe ?  doe?.tag?.name : "unknown"]
 	// var doeDef = DOE_DEFINITIONS["unknown"]
 	// var doeDef = DOE_DEFINITIONS["doubtful"]

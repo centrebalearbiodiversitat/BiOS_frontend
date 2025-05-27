@@ -1,12 +1,9 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React from 'react';
 import CBBButton from "@/components/common/CBBButton";
 import Link from "next/link";
 import {t} from "@/i18n/i18n";
-import {useLang} from "@/contexts/LangContext";
 
-export default function DownloadButton({className, href, children}) {
-	const [lang] = useLang();
-
+export default function DownloadButton({lang, className, href, children}) {
 	if (href) {
 		return (
 			<Link href={href}>

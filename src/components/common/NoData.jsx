@@ -1,10 +1,6 @@
-import {useLang} from "@/contexts/LangContext";
 import {t} from "@/i18n/i18n";
 
-
-export default function NoData({isDataAvailable, children, message = true}) {
-	const [lang, _] = useLang();
-
+export default function NoData({lang, isDataAvailable, children, message = true}) {
 	if (isDataAvailable) {
 		return children;
 	} else {

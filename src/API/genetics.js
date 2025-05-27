@@ -14,7 +14,7 @@ function listSequences(taxonomy, marker, inGeographyScope, page) {
 	return requests.GET(`${GENETICS_PATH}/sequence/list`, {taxonomy, marker, inGeographyScope, page});
 }
 
-function listCountSequences(taxonomy, params= {}) {
+async function listCountSequences(taxonomy, params= {}) {
 	return requests.GET(`${GENETICS_PATH}/sequence/list/count`, {taxonomy, ...params})
 }
 
