@@ -17,7 +17,7 @@ function ChipExternalLink({originSource}) {
 	if (url) {
 		return (
 			<Link href={url} target="_blank">
-				<Chip as={"div"} className="bg-transparent border-1 border-black/20 text-blue-700">
+				<Chip as={"div"} className="bg-transparent border-1 border-black/20 text-blue-700 transition duration-600 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
 					<p className="flex flex-row space-x-2">
 						<span>{originSource.source.basis.acronym}</span>
 						<RxExternalLink className="text-md my-auto align-baseline "/>

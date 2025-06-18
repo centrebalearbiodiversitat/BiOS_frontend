@@ -21,18 +21,18 @@ function Sequence({seq}) {
 			{/*<p className="font-extralight">*/}
 			{/*	{seq.definition}*/}
 			{/*</p>*/}
-			<div className="grid grid-cols-5 py-4 text-sm">
+			<div className="grid grid-cols-5 py-4 text-sm gap-x-1.5">
 				<p>
 					<TaxonName taxon={seq.occurrence.taxonomy}/>
 				</p>
 				<p>
-					{basis.source?.name}
+					{basis.source?.basis.acronym ?? basis.source?.basis.name}
 				</p>
 				<SourceLink source={basis}>
 					{/*<Sources sources={seq.sources} className="my-3"/>*/}
-					<span className="inline-flex gap-1 link">
-						{basis.externalId} <RxExternalLink className="text-md my-auto align-baseline"/>
-					</span>
+					<p className="inline-flex link w-full">
+						<span className="truncate overflow-hidden whitespace-nowrap">{basis.externalId}</span> <RxExternalLink className="text-md my-auto align-baseline flex-shrink-0"/>
+					</p>
 				</SourceLink>
 				<p>
 					{seq.publishedDate ?? "-"}

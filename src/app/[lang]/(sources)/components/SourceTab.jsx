@@ -25,7 +25,7 @@ function SourceCard({lang, source}) {
 					}
 				</div>
 				<p className={clsx(
-					"text-sm @sm:text-xl my-auto font-bold",
+					"text-sm my-auto font-bold",
 				)}>
 					{source.name}
 				</p>
