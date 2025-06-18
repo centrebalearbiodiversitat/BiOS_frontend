@@ -10,6 +10,7 @@ import React, {use} from "react";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import WIPToast from "@/components/common/WIPToast";
 import {Providers} from "@/app/providers";
+import {CanonicalHead} from "@/components/CanonicalHead";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],
@@ -17,7 +18,7 @@ const roboto = Roboto_Flex({
 });
 
 
-export default function RootLayout({children, params}) {
+export default function RootLayout({children, params, ...extra}) {
 	const {lang} = use(params);
 
 	return (
@@ -26,11 +27,15 @@ export default function RootLayout({children, params}) {
 				<meta name="description" content={t(lang, 'web.description')}/>
 				<meta charSet="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-				<link rel="canonical" href="https://balearica.uib.eu"/>
-				<link rel="alternate" hrefLang="en" href="https://balearica.uib.eu"/>
-				<link rel="alternate" hrefLang="es" href="https://balearica.uib.es"/>
-				<link rel="alternate" hrefLang="ca" href="https://balearica.uib.ca"/>
-				<link rel="alternate" hrefLang="x-default" href="https://balearica.uib.eu"/>
+
+				<meta name="language" content={lang}/>
+				<CanonicalHead lang={lang}/>
+				{/*<link rel="canonical" href="https://balearica.uib.eu"/>*/}
+				{/*<link rel="alternate" hrefLang="en" href="https://balearica.uib.eu"/>*/}
+				{/*<link rel="alternate" hrefLang="es" href="https://balearica.uib.es"/>*/}
+				{/*<link rel="alternate" hrefLang="ca" href="https://balearica.uib.ca"/>*/}
+				{/*<link rel="alternate" hrefLang="x-default" href="https://balearica.uib.eu"/>*/}
+
 				<link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96"/>
 				<link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg"/>
 				<link rel="shortcut icon" href="/images/favicon/favicon.ico"/>
@@ -38,11 +43,10 @@ export default function RootLayout({children, params}) {
 				<meta name="apple-mobile-web-app-title" content="Balearica"/>
 				<link rel="manifest" href="/images/favicon/site.webmanifest"/>
 
-				<meta property="og:title" content="PM Lavauto - Limpieza y cuidado de vehículos en Palma"/>
-				<meta property="og:description"
-				      content="Servicio de limpieza de vehículos de alta calidad en Palma. Tapicería, interior, exterior, y más."/>
-				<meta property="og:image" content="https://www.tusitio.com/images/preview.jpg"/>
-				<meta property="og:url" content="https://www.tusitio.com"/>
+				<meta property="og:title" content={t(lang, 'web.title')}/>
+				<meta property="og:description" content={t(lang, 'web.description')}/>
+				<meta property="og:image" content="images/pages/home/home.jpg"/>
+				<meta property="og:url" content="https://balearica.uib.eu"/>
 				<meta property="og:type" content="website"/>
 			</head>
 			<body className="w-full min-h-screen m-0">

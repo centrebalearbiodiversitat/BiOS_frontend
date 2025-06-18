@@ -298,6 +298,18 @@
     "cookies.usage.title": "Uso de cookies",
     "cookies.usage.p": "Esta página web usa cookies para recopilar datos con finalidad estadística, en ningún caso identifica información personal del usuario. Se utilizan para obtener información de acceso de manera anónima y para facilitar al usuario la accesibilidad del espacio web.\n\nEl uso de cookies de sesión (que no son memorizadas de manera persistente en el ordenador del usuario y desaparecen con el cierre del navegador), en caso de ser utilizadas, se limitarán únicamente a recopilar información técnica para identificar la sesión con el objetivo de facilitar la exploración segura y eficiente del espacio web.\n\nLas cookies con finalidades estadísticas sirven para recoger datos como fecha, navegador utilizado, sistema operativo y país de origen entre otros, y se manipulan con Google Analytics, un servicio de análisis web ofrecido por Google una empresa de Delaware, la sede principal de la cual se encuentra en 1600 Amphitheatre Parkway, Mountain View (California), CA 94043, Estados Unidos («Google»).\n\nGoogle trasmitirá y almacenará directamente la información que genera la galleta sobre vuestro uso del espacio web (incluida vuestra dirección IP) a los servidores de Estados Unidos. Google utilizará esta información en nuestro nombre con la finalidad de hacer el seguimiento de vuestro uso del espacio web, mediante la recogida de informes de la actividad del espacio web y la presentación de los servicios relacionados con la actividad del espacio web y el uso de Internet.\n\nNo obstante, el usuario puede impedir la generación de cookies con la opción correspondiente que posea su programa navegador. En este caso, la página continuará siendo operativa, pero sin las ventajas de la personalización.",
 
+	"sources.title": "Nuestras fuentes datos",
+	"sources.subtitle": "Consulta todas nuestras bases de datos confiables que impulsan Balearica",
+	"sources.learn_more": "Más información",
+	"sources.description": "Descripción",
+	"sources.types.database": "Bases de datos",
+	"sources.types.journal_article": "Artículos",
+	"sources.types.book": "Libros",
+	"sources.types.web_page": "Páginas web",
+	"sources.types.document": "Documentos",
+	"sources.types.expert": "Expertos",
+	"sources.types.museum": "Museos",
+
 	"partners.title": "Estadísitcas sobre los datos",
 	"partners.subtitle": "Todos los datos están conectados a sus respectivas fuentes. Aquí puedes encontrar estadísticas relacionadas sobre esto.",
 
@@ -318,6 +330,8 @@
 	"partners.list.image.graph": "Conteo total de imágenes recuperadas de para cada fuente de datos",
 	"partners.list.taxon_data": "Información relacionada al taxón",
 	"partners.list.taxon_data.graph": "Conteo total de metadatos taxonómicos recuperados de para cada fuente de datos",
+
+	"error.back_home": "Volver a la página principal",
 
     "lang": "Castellano"
 }

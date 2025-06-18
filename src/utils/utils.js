@@ -24,3 +24,9 @@ export function getParam(searchParams, key, defaultValue) {
 
 	return value ?? defaultValue;
 }
+
+export function defaultDict(dictionary, defaultValue) {
+	return new Proxy(dictionary, {
+		get: (target, name) => target[name] ?? defaultValue
+	});
+}

@@ -20,7 +20,7 @@ export default function Home({params}) {
 
 	return (
 		<>
-			<div className="absolute top-0  w-full min-h-full flex flex-col justify-center items-center lg:grid lg:grid-cols-12"
+			<div className="absolute top-0 w-full min-h-full flex flex-col justify-center items-center lg:grid lg:grid-cols-12"
 			     style={{
 				     backgroundRepeat: 'no-repeat',
 				     backgroundSize: 'cover',

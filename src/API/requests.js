@@ -22,12 +22,12 @@ function request(method) {
 			requestOptions.body = JSON.stringify(body);
 
 		if (method === 'URL')
-			return url
+			return Promise.resolve(url)
 
 		return fetch(
 			url,
 			requestOptions
-		).then(handleResponse)
+		).then(handleResponse).catch(() => Promise.reject("Failed to fetch"))
 	}
 }
 

@@ -300,6 +300,15 @@
 
 	"sources.title": "Our data sources",
 	"sources.subtitle": "Check out all our trusted databases powering Balearica",
+	"sources.learn_more": "Learn more",
+	"sources.description": "Description",
+	"sources.types.database": "Databases",
+	"sources.types.journal_article": "Articles",
+	"sources.types.book": "Books",
+	"sources.types.web_page": "Web pages",
+	"sources.types.document": "Documents",
+	"sources.types.expert": "Experts",
+	"sources.types.museum": "Museums",
 
 	"partners.title": "Statistics about the data",
 	"partners.subtitle": "Every piece of data is linked to its source. Find related statistics about that here.",
@@ -321,6 +330,8 @@
 	"partners.list.image.graph": "Total count of images retrieved from each data source",
 	"partners.list.taxon_data": "Releated taxon info",
 	"partners.list.taxon_data.graph": "Total count of taxonomic related meta data retrieved from each data source",
+
+	"error.back_home": "Go back home",
 
 	"lang": "English"
 }

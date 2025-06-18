@@ -2,11 +2,19 @@ const requests = require("@/API/requests");
 
 const VERSIONING_PATH = '/versioning'
 
-function list() {
-	return requests.GET(`${VERSIONING_PATH}/source/list`)
+function getBasis(id) {
+	return requests.GET(`${VERSIONING_PATH}/basis`, {id})
 }
 
-async function aList() {
+function basisStats(id) {
+	return requests.GET(`${VERSIONING_PATH}/basis/statistics`, {id})
+}
+
+function basisList(type) {
+	return requests.GET(`${VERSIONING_PATH}/basis/list`, {type})
+}
+
+function sourceList() {
 	return requests.GET(`${VERSIONING_PATH}/source/list`)
 }
 
@@ -18,13 +26,10 @@ async function search(name) {
 	}
 }
 
-function get(id) {
-	return requests.GET(`${VERSIONING_PATH}`, {id})
-}
-
 module.exports = {
-	list,
-	aList,
+	getBasis,
+	basisList,
+	sourceList,
+	basisStats,
 	search,
-	get,
 }
