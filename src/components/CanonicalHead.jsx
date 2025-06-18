@@ -9,7 +9,6 @@ export function CanonicalHead({lang}) {
 	const [domain, setDomain] = useState(null);
 
 	useEffect(() => {
-		console.log(window.location.origin)
 		setDomain(window.location.origin);
 	}, []);
 
@@ -18,11 +17,6 @@ export function CanonicalHead({lang}) {
 	const segments = pathname.split('/').filter(Boolean).slice(1);
 	const newPath = segments.join('/');
 	const alternateLocales = AVAILABLE_LOCALES.filter(locale => locale !== lang);
-	console.log(alternateLocales)
-	// console.log(segments)
-	// console.log(newPath)
-	// console.log(domain)
-	// console.log(`${domain}/${lang}/${newPath}`)
 
 	return (
 		<>

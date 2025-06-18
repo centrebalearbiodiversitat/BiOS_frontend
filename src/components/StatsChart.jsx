@@ -23,7 +23,7 @@ function parseData(data, show_null, yLabel) {
 			_y.push(e.count);
 		}
 	});
-	console.log(_x, _y)
+
 	return {x: _x, y: _y, isLong};
 }
 

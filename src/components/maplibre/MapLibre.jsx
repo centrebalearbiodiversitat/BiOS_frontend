@@ -165,7 +165,7 @@ const MapLibre = forwardRef(({
 	});
 
 	function flyTo() {
-		console.log(mapRef.current.getPitch())
+
 		// const i = Math.floor(Math.random() * data[layer].features.length);
 		mapRef.current?.flyTo({
 			// center: data[layer].features[i].geometry.coordinates,
