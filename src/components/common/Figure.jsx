@@ -30,7 +30,7 @@ export default function Figure({alt, hoverEffect = true, images, className= "rou
 			if (images[i]) {
 				src = generateSourceUrl(images[i], src);
 			}
-			title = `${images[i].source.name} | ${images[i].attribution}`;
+			title = `${images[i].source.basis.name} | ${images[i].attribution}`;
 			loading = false;
 		}
 

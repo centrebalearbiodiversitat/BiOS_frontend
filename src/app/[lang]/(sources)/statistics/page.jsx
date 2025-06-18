@@ -162,7 +162,7 @@ function SourceList({source}) {
 	return (
 		<div className="flex flex-row px-6 py-3 items-center hover:bg-slate-100">
 			<div className="block flex-grow">
-				<p className="font-light text-xl">{source.name}</p>
+				<p className="font-light text-xl">{source.basis.name}</p>
 				<p className="font-light text-gray-500">{source.origin}</p>
 			</div>
 			<p className="p-4 text-center text-3xl md:text-4xl"><span>{source.count.toLocaleString()}</span></p>

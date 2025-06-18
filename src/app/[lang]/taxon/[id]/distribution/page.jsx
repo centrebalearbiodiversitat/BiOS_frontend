@@ -10,7 +10,7 @@ import {generatePageTitle} from "@/utils/utils";
 import taxonomy from "@/API/taxonomy";
 import MapLibreAPIWrapper from "@/components/maplibre/MapLibreAPIWrapper";
 
-export async function generateMetadata({params, searchParams}) {
+export async function generateMetadata({params}) {
 	const {lang, id} = await params;
 	const taxon = await taxonomy.get(id);
 
@@ -89,7 +89,8 @@ export default async function Taxon({params}) {
 							<Card.Description>
 								{t(lang, 'taxon.distribution.statistics.graph.y2yAcc')}
 							</Card.Description>
-							<StatsChart color="#94C635" colorR="#3DBBCC" hideLegend data={occsStatsByYear} dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined" show_null={false}/>
+							<StatsChart color="#94C635" colorR="#3DBBCC" hideLegend data={occsStatsByYear}  show_null={false}
+							            dataRight={occsStatsByYearAccumulated} yLabel="year" type="combined"/>
 						</Card>
 					</div>
 				</div>

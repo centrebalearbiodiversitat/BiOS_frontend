@@ -8,26 +8,35 @@ import {t} from "@/i18n/i18n";
 
 export default function CBBSearchBar({lang, label, placeholder, filters, showFilters = true, border = true, rounded = true, children}) {
     const [query, setQuery] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [filter, setFilter] = useState(0);
     const timeoutRef = useRef(null);
 
     const onSelected = useCallback((payload) => {
+        setIsLoading(true);
         filters[filter].onSelected(payload)
     }, [filters, filter]);
 
     const onInput = useCallback((input) => {
         if (timeoutRef.current) {
+            setIsLoading(false);
             clearTimeout(timeoutRef.current);
         }
         timeoutRef.current = setTimeout(() => {
-            filters[filter].onInput(input).then(q => setQuery(q))
+            setIsLoading(true);
+            filters[filter].onInput(input).then(q => {
+                setIsLoading(false);
+                setQuery(q);
+            })
         }, 250);
 
     }, [filters, filter]);
 
     const onSubmit = useCallback((input) => {
-        if (filters[filter].onSubmit)
+        if (filters[filter].onSubmit) {
+            setIsLoading(true);
             filters[filter].onSubmit(input)
+        }
     }, [filters, filter]);
 
     return (
@@ -47,7 +56,7 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
             }
             <SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-[100%]"
                        label={label} placeholder={placeholder} lang={lang} border={border}
-                       onSubmit={onSubmit} onInput={onInput}>
+                       onSubmit={onSubmit} onInput={onInput} isLoading={isLoading}>
                 {children}
             </SearchBar>
         </>

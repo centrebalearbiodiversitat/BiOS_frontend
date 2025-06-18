@@ -30,7 +30,7 @@ const DOE_DEFINITIONS = {
 	"widespreadInvasive": { "color": "#d32f2f", "icon": <AiOutlineGlobal/>, "text": "components.doe.widespreadInvasive"},
 }
 
-export default function TaxonDOE({lang, doe, className}) {
+export default function TaxonDOE({lang, doe}) {
 	const doeDef = DOE_DEFINITIONS[doe ?  doe?.tag?.name : "unknown"]
 	// var doeDef = DOE_DEFINITIONS["unknown"]
 	// var doeDef = DOE_DEFINITIONS["doubtful"]
@@ -68,7 +68,7 @@ export default function TaxonDOE({lang, doe, className}) {
 						<span className="text-xs block text-gray-500 text-pretty">
 							{t(lang, "components.doe.source")}
 							{doe?.sources.map(
-								s => s.source.name
+								s => s.source?.basis.acronym ?? s.source?.basis.name
 							)}
 						</span>
 					}

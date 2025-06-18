@@ -9,7 +9,7 @@ export default function SiteMap({lang}) {
 	const links = useMemo(() => [
 		{path: `/${lang}`, text: t(lang, "footer.sitemap.home")},
 		{path: `/${lang}/map`, text: t(lang, "footer.sitemap.map")},
-		{path: `/${lang}/methodology`, text: t(lang, "footer.sitemap.methodology")},
+		{path: "/method/index.html", text: t(lang, "footer.sitemap.methodology")},
 		{path: `/${lang}/team`, text: t(lang, "footer.sitemap.team")},
 	], [lang])
 

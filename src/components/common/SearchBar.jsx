@@ -24,19 +24,11 @@ const defaultChildren = (obj, search) => {
 	)
 }
 
-function RightArrowPlaceHolder(placeholder) {
-	return (
-		<span>
-			{placeholder}
-			<span className="ml-1">&#8592;</span>
-		</span>
-	)
-}
-
 
 export default function SearchBar({
 	className, data, onSelected, onInput, onSubmit, children = defaultChildren,
-	label, placeholder, rounded = true, border = false, lang
+	label, placeholder, rounded = true, border = false, lang,
+	isLoading = false
 }) {
 	const [search, setSearch] = useState("");
 	const [selected, setSelected] = useState(null);
@@ -115,7 +107,9 @@ export default function SearchBar({
 			              className={`w-full transition-all text-center`} radius={rounded ? "full" : "sm"}
 			              listboxProps={{
 				              shouldHighlightOnFocus: true,
+				              emptyContent: t(lang, 'taxon.list.notFound'),
 			              }}
+			              isLoading={isLoading}
 			              classNames={{popoverContent: "rounded-2xl"}}
 			              inputProps={{
 				              classNames: {
