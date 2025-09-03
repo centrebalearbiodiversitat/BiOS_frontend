@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import CBBButton from "@/components/common/CBBButton";
 import {IoIosArrowForward} from "react-icons/io";
 import {IoClose} from "react-icons/io5";
@@ -28,6 +28,11 @@ function DrawerBody({children}) {
 
 const Drawer = ({children}) => {
 	const [isOpen, setIsOpen] = useState(true);
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(max-width: 768px)");
+	    setIsOpen(!mediaQuery.matches);
+	}, []);
 
 	return (
 		<DrawerStatusContext.Provider value={[isOpen, setIsOpen]}>

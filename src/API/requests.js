@@ -1,5 +1,8 @@
 function request(method) {
-	return (path, params = null, body = null, cache = "default") => {
+	return (path, params = null, body = null, cache = "force-cache") => {
+		if (process.env.DEBUG)
+			cache = "no-cache"
+
 		const requestOptions = {
 			method,
 			headers: authHeader(),
@@ -9,6 +12,11 @@ function request(method) {
 		    // cache: 'no-store', // or 'default' | 'no-store' | 'reload'
 			cache,
 		};
+
+		if (requestOptions.cache === "no-store") {
+			delete requestOptions.next.revalidate;
+		}
+
 		const url = new URL(`${process.env.API_BASE_URL}${process.env.API_PATH}${path}`);
 
 		if (params)

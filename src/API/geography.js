@@ -2,10 +2,6 @@ const requests = require("@/API/requests");
 
 const GEOGRAPHY_PATH = '/geography'
 
-function list() {
-	return requests.GET(`${GEOGRAPHY_PATH}/list`)
-}
-
 async function search(name) {
 	if (name) {
 		return requests.GET(`${GEOGRAPHY_PATH}/search`, {name})
@@ -19,7 +15,6 @@ function get(id) {
 }
 
 module.exports = {
-	list,
 	search,
 	get,
 }

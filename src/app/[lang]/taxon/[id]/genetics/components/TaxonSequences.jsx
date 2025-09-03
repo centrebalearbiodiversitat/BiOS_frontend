@@ -14,7 +14,7 @@ import {useLang} from "@/contexts/LangContext";
 
 
 function Sequence({seq}) {
-	const basis = seq.sources[0];
+	const source = seq.sources[0];
 
 	return (
 		<li className="hover:bg-slate-50 border-b border-gray-200">
@@ -26,12 +26,12 @@ function Sequence({seq}) {
 					<TaxonName taxon={seq.occurrence.taxonomy}/>
 				</p>
 				<p>
-					{basis.source?.basis.acronym ?? basis.source?.basis.name}
+					{source.source?.basis.acronym ?? source.source?.basis.name}
 				</p>
-				<SourceLink source={basis}>
+				<SourceLink source={source}>
 					{/*<Sources sources={seq.sources} className="my-3"/>*/}
 					<p className="inline-flex gap-x-1 link w-full">
-						<span className="truncate overflow-hidden whitespace-nowrap">{basis.externalId}</span> <RxExternalLink className="text-md my-auto align-baseline flex-shrink-0"/>
+						<span className="truncate overflow-hidden whitespace-nowrap">{source.externalId}</span> <RxExternalLink className="text-md my-auto align-baseline flex-shrink-0"/>
 					</p>
 				</SourceLink>
 				<p>

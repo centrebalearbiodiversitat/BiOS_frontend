@@ -54,3 +54,16 @@
 .link {
     @apply text-blue-700
 }
+
+@keyframes shrinkWidth {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.countdown-bar {
+  animation: shrinkWidth 10s linear forwards;
+}

@@ -16,6 +16,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import taxonomy from "@/API/taxonomy";
 import {GiAlgae} from "react-icons/gi";
 import SwitchButton from "@/components/common/SwitchButton";
+import {Accordion, AccordionItem} from "@heroui/accordion";
 
 const TAXON_RANKS = [
 	{key: "kingdom", label: 'general.taxon_rank.kingdom'},
@@ -140,9 +141,14 @@ export default function TaxonFilters({className}) {
 			<h3 className="text-2xl font-extralight text-start">
 				{t(lang, "taxon.list.aside.title")}
 			</h3>
-			<form className="flex flex-col"
+			<form className="flex flex-col gap-6"
 			      action={() => generateSearchPath()}>
-				<div className="gap-5 grid grid-cols-2 lg:grid-cols-1 pe-4">
+				<CBBButton color="primary" onPress={() => generateSearchPath()} variant="solid"
+				           type="submit" className="w-full col-span-full">
+					{t(lang, 'taxon.list.aside.search')}
+				</CBBButton>
+				<div className="flex flex-col gap-5 pe-4">
+					<hr className="col-span-full hidden lg:block"/>
 					<div className="col-span-full">
 						<FilterLabel lang={lang} label="taxon.list.aside.ancestor" icon={RiParentFill}/>
 						{ancestor &&
@@ -167,81 +173,83 @@ export default function TaxonFilters({className}) {
 						       placeholder={t(lang, "taxon.list.search.term.placeholder")}
 						       defaultValue={searchParams.get('q')}/>
 					</div>
-					<hr className="col-span-full my-2 hidden lg:block"/>
-					<div>
-						<FilterLabel lang={lang} label="taxon.list.aside.rankSelector" icon={TbHierarchy3}/>
-						<KeySelector items={TAXON_RANKS} onSelected={r => generateSearchPath('rank', r)}
-						             lang={lang} defaultValue={searchParams.get('rank')}
-						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}/>
-					</div>
-					<div>
-						<FilterLabel lang={lang} label="taxon.list.aside.statusSelector" icon={FaCheck}/>
-						<KeySelector items={TAXON_STATUS} lang={lang}
-						             onSelected={s => generateSearchPath('accepted', s)}
-						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
-						             defaultValue={searchParams.get('accepted')}/>
-					</div>
-					<div>
-						<FilterLabel lang={lang} label="taxon.list.aside.hasImage" icon={FaCamera}/>
-						<KeySelector items={HAS_IMAGE} lang={lang}
-						             onSelected={s => generateSearchPath('hasImage', s)}
-						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
-						             defaultValue={searchParams.get('hasImage')}/>
-					</div>
-					<div>
-						<FilterLabel lang={lang} label="taxon.list.aside.doe" icon={FaMapMarkerAlt}/>
-						<KeySelector items={TAXON_DOE} lang={lang}
-						             onSelected={s => generateSearchPath('tag', s)}
-						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
-						             defaultValue={searchParams.get('tag')}/>
-					</div>
-					<div className="col-span-full">
-						<FilterLabel lang={lang} label="taxon.list.aside.iucn.status" icon={IUCNIcon}/>
-						<KeySelector items={TAXON_IUCN} lang={lang}
-						             onSelected={s => generateSearchPath('iucnMediterranean', s)}
-						             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
-						             defaultValue={searchParams.get('iucnMediterranean')}/>
-					</div>
-					<div className="col-span-full">
-						<FilterLabel lang={lang} label="taxon.list.aside.directive" icon={FaGavel}/>
-						<div className="flex flex-wrap gap-2">
-							<SwitchButton label="components.directives.cites"
-							              isPushed={searchParams.get('cites') === "true"}
-							              onPush={s => handleSystem('cites', s)}/>
-							<SwitchButton label="components.directives.lespre"
-							              isPushed={searchParams.get('lespre') === "true"}
-							              onPush={s => handleSystem('lespre', s)}/>
-							<SwitchButton label="components.directives.ceea"
-							              isPushed={searchParams.get('ceea') === "true"}
-							              onPush={s => handleSystem('ceea', s)}/>
-							<SwitchButton label="components.directives.directivaAves"
-							              isPushed={searchParams.get('directivaAves') === "true"}
-							              onPush={s => handleSystem('directivaAves', s)}/>
-							<SwitchButton label="components.directives.directivaHabitats"
-							              isPushed={searchParams.get('directivaHabitats') === "true"}
-							              onPush={s => handleSystem('directivaHabitats', s)}/>
-						</div>
-					</div>
-					<div className="col-span-full">
-						<FilterLabel lang={lang} label="taxon.list.aside.system" icon={GiAlgae}/>
-						<div className="flex flex-wrap gap-2">
-							<SwitchButton label="component.system.marine"
-							              isPushed={searchParams.get('marine') === "true"}
-							              onPush={s => handleSystem('marine', s)}/>
-							<SwitchButton label="component.system.terrestrial"
-							              isPushed={searchParams.get('terrestrial') === "true"}
-							              onPush={s => handleSystem('terrestrial', s)}/>
-							<SwitchButton label="component.system.freshwater"
-							              isPushed={searchParams.get('freshwater') === "true"}
-							              onPush={s => handleSystem('freshwater', s)}/>
-						</div>
-					</div>
+					<hr className="col-span-full hidden lg:block"/>
+					<Accordion className="!col-span-full px-0" defaultExpandedKeys={searchParams.size > 0 && ["advanced_filters"]}>
+						<AccordionItem classNames={{title: "font-extralight text-xl", trigger: "py-0"}} key="advanced_filters"
+						               title={t(lang, "components.header.button.advancedSearch")}>
+							<div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
+								<div>
+									<FilterLabel lang={lang} label="taxon.list.aside.rankSelector" icon={TbHierarchy3}/>
+									<KeySelector items={TAXON_RANKS} onSelected={r => generateSearchPath('rank', r)}
+									             lang={lang} defaultValue={searchParams.get('rank')}
+									             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}/>
+								</div>
+								<div>
+									<FilterLabel lang={lang} label="taxon.list.aside.statusSelector" icon={FaCheck}/>
+									<KeySelector items={TAXON_STATUS} lang={lang}
+									             onSelected={s => generateSearchPath('accepted', s)}
+									             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
+									             defaultValue={searchParams.get('accepted')}/>
+								</div>
+								<div>
+									<FilterLabel lang={lang} label="taxon.list.aside.hasImage" icon={FaCamera}/>
+									<KeySelector items={HAS_IMAGE} lang={lang}
+									             onSelected={s => generateSearchPath('hasImage', s)}
+									             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
+									             defaultValue={searchParams.get('hasImage')}/>
+								</div>
+								<div>
+									<FilterLabel lang={lang} label="taxon.list.aside.doe" icon={FaMapMarkerAlt}/>
+									<KeySelector items={TAXON_DOE} lang={lang}
+									             onSelected={s => generateSearchPath('tag', s)}
+									             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
+									             defaultValue={searchParams.get('tag')}/>
+								</div>
+								<div className="col-span-full">
+									<FilterLabel lang={lang} label="taxon.list.aside.iucn.status" icon={IUCNIcon}/>
+									<KeySelector items={TAXON_IUCN} lang={lang}
+									             onSelected={s => generateSearchPath('assessment', s)}
+									             placeHolder={t(lang, 'taxon.list.aside.defaultSelector')}
+									             defaultValue={searchParams.get('assessment')}/>
+								</div>
+								<div className="col-span-full">
+									<FilterLabel lang={lang} label="taxon.list.aside.directive" icon={FaGavel}/>
+									<div className="flex flex-wrap gap-2">
+										<SwitchButton label="components.directives.cites"
+										              isPushed={searchParams.get('cites') === "true"}
+										              onPush={s => handleSystem('cites', s)}/>
+										<SwitchButton label="components.directives.lespre"
+										              isPushed={searchParams.get('lespre') === "true"}
+										              onPush={s => handleSystem('lespre', s)}/>
+										<SwitchButton label="components.directives.ceea"
+										              isPushed={searchParams.get('ceea') === "true"}
+										              onPush={s => handleSystem('ceea', s)}/>
+										<SwitchButton label="components.directives.directivaAves"
+										              isPushed={searchParams.get('directivaAves') === "true"}
+										              onPush={s => handleSystem('directivaAves', s)}/>
+										<SwitchButton label="components.directives.directivaHabitats"
+										              isPushed={searchParams.get('directivaHabitats') === "true"}
+										              onPush={s => handleSystem('directivaHabitats', s)}/>
+									</div>
+								</div>
+								<div className="col-span-full">
+									<FilterLabel lang={lang} label="taxon.list.aside.system" icon={GiAlgae}/>
+									<div className="flex flex-wrap gap-2">
+										<SwitchButton label="component.system.marine"
+										              isPushed={searchParams.get('marine') === "true"}
+										              onPush={s => handleSystem('marine', s)}/>
+										<SwitchButton label="component.system.terrestrial"
+										              isPushed={searchParams.get('terrestrial') === "true"}
+										              onPush={s => handleSystem('terrestrial', s)}/>
+										<SwitchButton label="component.system.freshwater"
+										              isPushed={searchParams.get('freshwater') === "true"}
+										              onPush={s => handleSystem('freshwater', s)}/>
+									</div>
+								</div>
+							</div>
+						</AccordionItem>
+					</Accordion>
 				</div>
-				<Divider className="mt-4"/>
-				<CBBButton color="primary" onPress={() => generateSearchPath()} variant="solid"
-				           type="submit" className="w-full col-span-full mt-6">
-					{t(lang, 'taxon.list.aside.search')}
-				</CBBButton>
 			</form>
 		</div>
 	)

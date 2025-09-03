@@ -1,5 +1,6 @@
 "use client"
-import React, {useState} from "react";
+
+import React, {useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
 import {useLang} from "@/contexts/LangContext";
 import {Image} from "@heroui/image";
@@ -8,6 +9,10 @@ import clsx from "clsx";
 export default function WIPToast({}) {
 	const [hidden, setHidden] = useState(false);
 	const [lang] = useLang();
+
+	useEffect(() => {
+		setTimeout(() => setHidden(true), 10000);
+	}, [])
 
 	if (hidden)
 		return ;
@@ -22,6 +27,7 @@ export default function WIPToast({}) {
 			<div className="flex-grow text-sm my-auto border-s border-warning-600 ps-3">
 				<p className="text-warning-600 font-medium">{t(lang, "components.wipToast.title")}</p>
 				<p className="text-warning-500 leading-4 text-pretty">{t(lang, "components.wipToast.subtitle")}</p>
+				<hr className="w-full border-t-1 mt-1 border-primary countdown-bar"/>
 			</div>
 		</div>
 	)

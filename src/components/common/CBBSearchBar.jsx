@@ -6,16 +6,17 @@ import CBBButton from "@/components/common/CBBButton";
 import {t} from "@/i18n/i18n";
 
 
-export default function CBBSearchBar({lang, label, placeholder, filters, showFilters = true, border = true, rounded = true, children}) {
+export default function CBBSearchBar({lang, label, placeholder, filters, loadOnSubmit = true, showFilters = true, border = true, rounded = true, children}) {
     const [query, setQuery] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [filter, setFilter] = useState(0);
     const timeoutRef = useRef(null);
 
     const onSelected = useCallback((payload) => {
-        setIsLoading(true);
+        loadOnSubmit && setIsLoading(true);
         filters[filter].onSelected(payload)
-    }, [filters, filter]);
+        setQuery([]);
+    }, [filters, filter, loadOnSubmit]);
 
     const onInput = useCallback((input) => {
         if (timeoutRef.current) {
@@ -34,10 +35,11 @@ export default function CBBSearchBar({lang, label, placeholder, filters, showFil
 
     const onSubmit = useCallback((input) => {
         if (filters[filter].onSubmit) {
-            setIsLoading(true);
+            loadOnSubmit && setIsLoading(true);
             filters[filter].onSubmit(input)
+            setQuery([]);
         }
-    }, [filters, filter]);
+    }, [filters, filter, loadOnSubmit]);
 
     return (
         <>

@@ -23,7 +23,7 @@ function TaxonListBlockCard({lang, taxon}) {
 	const onClick = useCallback(() => {
 		router.push(`/${lang}/taxon/${taxon.id}`)
 		handleScrollTop();
-	}, []);
+	}, [router, lang, taxon]);
 
 	return (
 		<div onClick={onClick} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
@@ -36,7 +36,7 @@ function TaxonListBlockCard({lang, taxon}) {
 			<div className="flex flex-row rounded-lg px-4 pt-2 pb-3 min-h-[80px] flex-shrink-0">
 				<div className={clsx("flex flex-col w-full justify-center gap-1")}>
 					<Loading loading={isLoading} className="mb-1" width="40%" height="16px">
-						{!isLoading && <AncestorsList className="text-xs font-extralight truncate flex-shrink-0"
+						{!isLoading && taxon.ancestors && <AncestorsList className="text-xs font-extralight truncate flex-shrink-0"
 						                              ancestors={taxon.ancestors.length > 4 ? taxon.ancestors.slice(1, 5) : taxon.ancestors}/>}
 					</Loading>
 					<Loading loading={isLoading} width="80%" height="22px">
@@ -57,7 +57,7 @@ export default function TaxaList({taxa}) {
 
 	return (
 		<Loading loading={taxa} width="100%" height="100%">
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 				{taxa?.map((taxon, idx) => <TaxonListBlockCard key={taxon.id || (-idx - 1)} lang={lang} taxon={taxon}/>)}
 			</div>
 			{typeof taxa === 'object' && taxa.length === 0 &&

@@ -179,7 +179,7 @@
 	"components.header.button.genetics": "Genetics",
 	"components.header.button.about": "About",
 	"components.header.button.sources": "Sources",
-	"components.header.button.advancedSearch": "Search",
+	"components.header.button.advancedSearch": "Advanced search",
 	"components.header.button.API": "API",
 
 	"components.no_data": "No data available",

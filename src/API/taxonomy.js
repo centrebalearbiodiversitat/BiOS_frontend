@@ -3,6 +3,9 @@ const requests = require("@/API/requests");
 const TAXONOMY_PATH = '/taxonomy'
 
 function list(params) {
+	if (params.assessment !== undefined && params.region === undefined) {
+		params.region = "mediterranean"
+	}
 	return requests.GET(`${TAXONOMY_PATH}/list`, params)
 }
 

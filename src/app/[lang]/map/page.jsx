@@ -23,10 +23,10 @@ import {generatePageTitle} from "@/utils/utils";
 
 const TAXA_PALETTE = [
 	"#D55E00",
-	"#56B4E9",
+	"#56e4e9",
 	"#F0E442",
 	"#009E73",
-	"#CC79A7",
+	"#f178b9",
 	"#FF6F61",
 	"#008080",
 	"#D9B44A",
@@ -35,7 +35,7 @@ const TAXA_PALETTE = [
 	"#66C2A5",
 	"#FC8D62",
 	"#8DA0CB",
-	"#E78AC3",
+	"#ef60bd",
 	"#A6D854",
 	"#FFD92F",
 	"#E60000",
@@ -274,9 +274,9 @@ export default function MapPage({params}) {
 								<MapLibrePopup key={occu.id} images={occu.taxonomy.images}
 								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
 								               title={
-									               <p className="text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
+									               <p className="text-lg md:text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
 										               <TaxonName taxon={occu.taxonomy} author={false}/>
-										               <span className={`block text-lg font-extralight w-full`}>
+										               <span className={`block text-sm md:text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
 										               </span>
 									               </p>
@@ -318,7 +318,7 @@ export default function MapPage({params}) {
 						               className="border-b-1 border-slate-400"
 						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
 							<div className="mx-2">
-								<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+								<CBBSearchBar showFilters={false} lang={lang} rounded={true} loadOnSubmit={false}
 								              label="components.searchbar.label.geography" redirect={true}
 								              placeholder="components.searchbar.placeholder.geography"
 								              filters={[{

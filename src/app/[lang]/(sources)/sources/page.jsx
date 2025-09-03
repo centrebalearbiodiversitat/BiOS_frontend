@@ -16,9 +16,10 @@ export async function generateMetadata({params}) {
 	}
 }
 
+const DEFAULT_SOURCE_TYPE_SELECTED = "database"
 const SOURCE_TYPES = [
-	"expert",
 	"database",
+	"expert",
 	"museum",
 	"journal_article",
 	"book",
@@ -31,7 +32,7 @@ export default async function About({params, searchParams}) {
 	let {type} = await searchParams;
 
 	if (type === undefined) {
-		type = "expert";
+		type = DEFAULT_SOURCE_TYPE_SELECTED;
 	}
 
 	const sources = await versioning.basisList(type);

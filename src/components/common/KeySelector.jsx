@@ -15,7 +15,7 @@ export default function KeySelector({lang, items, label, placeHolder, onSelected
 
 	return (
 		<div className="flex flex-row gap-2">
-	        <Select items={items} label={label} labelPlacement="outside" onChange={onChange} defaultSelectedKeys={[defaultValue]}
+	        <Select items={items} aria-label={placeHolder} onChange={onChange} defaultSelectedKeys={[defaultValue]}
 	                selectedKeys={isSelected ? [isSelected] : []}
 	                placeholder={placeHolder} classNames={{
 						value: "first-letter:capitalize font-extralight group-data-[has-value=true]:font-normal group-data-[has-value=true]:text-gray-700",

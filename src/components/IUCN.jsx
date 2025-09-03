@@ -98,7 +98,7 @@ export default function IUCN({scope, status, source, className}) {
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<Link target="_blank" rel="nofollow" href={`https://apiv3.iucnredlist.org/api/v3/taxonredirect/${source?.externalId}/${scope}`}>
+			<Link target="_blank" rel="nofollow" href={`https://www.iucnredlist.org/species/${source?.externalId}`}>
 				<div className={clsx("w-full h-full", className)}>
 					<div className={"flex flex-col w-full h-full gap-5 p-6"}>
 						<div className="flex flex-row">

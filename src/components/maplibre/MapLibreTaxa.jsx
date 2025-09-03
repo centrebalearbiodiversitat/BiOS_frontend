@@ -21,7 +21,7 @@ function ReorderMapLibre({lang, taxon, onDeleted, taxaColors, onColorChanged, on
 export default function MapLibreTaxa({lang, taxa, onSelectedSearch, onReorder, onDeleted, taxaColors, onColorChanged, onHide}) {
 	return (
 		<div className="mx-2">
-			<CBBSearchBar showFilters={false} lang={lang} rounded={true}
+			<CBBSearchBar showFilters={false} lang={lang} rounded={true} loadOnSubmit={false}
 			              label="components.searchbar.label.taxonomy"
 		                  placeholder="components.searchbar.placeholder.taxonomy"
 		                  filters={[{

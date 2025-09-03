@@ -30,13 +30,13 @@ function translateParamToAPI(param) {
 	return API_TRANSLATION_PARAMS[param] || param;
 }
 
-const TAXA_DEFAULT_VALUE = Array(15).fill({});
+const TAXA_DEFAULT_LOADING_VALUE = Array(15).fill({});
 
 export default function List({params}) {
 	const {lang} = use(params);
 
 	const router = useRouter();
-	const [taxa, setTaxa] = useState(TAXA_DEFAULT_VALUE);
+	const [taxa, setTaxa] = useState(TAXA_DEFAULT_LOADING_VALUE);
 	const [exportHref, setExportHref] = useState('');
 	const [totalTaxa, setTotalTaxa] = useState(0);
 	const [totalPages, setTotalPages] = useState(1);
@@ -47,7 +47,7 @@ export default function List({params}) {
 	}, [lang]);
 
 	useEffect(() => {
-		setTaxa(TAXA_DEFAULT_VALUE);
+		setTaxa(TAXA_DEFAULT_LOADING_VALUE);
 		setTotalTaxa(undefined);
 		setTotalPages(1);
 
@@ -65,7 +65,7 @@ export default function List({params}) {
 					setTotalTaxa(r.total);
 					setTotalPages(r.pages);
 				} else {
-					setTaxa(TAXA_DEFAULT_VALUE);
+					setTaxa(TAXA_DEFAULT_LOADING_VALUE);
 					setTotalTaxa(undefined);
 					setTotalPages(1);
 				}
@@ -98,10 +98,10 @@ export default function List({params}) {
 				{t(lang, "taxon.list.title")}
 			</h1>
 			<div className="mx-auto grid grid-cols-12 gap-6">
-				<aside className="col-span-full lg:col-span-4 xl:col-span-3">
+				<aside className="col-span-full md:col-span-4 xl:col-span-3">
 					<TaxonFilters/>
 				</aside>
-				<article className="flex flex-col col-span-full lg:col-span-8 xl:col-span-9 gap-6">
+				<article className="flex flex-col col-span-full md:col-span-8 xl:col-span-9 gap-6">
 					<div className="flex flex-col-reverse gap-4 sm:flex-row">
 						<h2 className="text-2xl font-extralight text-start leading-10">
 							{t(lang, "taxon.list.results")} {totalTaxa !== undefined ? `(${totalTaxa.toLocaleString()})` : ''}
