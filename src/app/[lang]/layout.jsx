@@ -11,6 +11,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import WIPToast from "@/components/common/WIPToast";
 import {Providers} from "@/app/providers";
 import {CanonicalHead} from "@/components/CanonicalHead";
+import Maintenance from "@/components/Maintenance";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],
@@ -53,8 +54,10 @@ export default function RootLayout({children, params, ...extra}) {
 				<Header lang={lang} className="min-h-[64px] py-[12px]" locales={AVAILABLE_LOCALES}/>
 				<main className="min-h-[calc(100vh-64px-12px*2)] w-full">
 					<Providers lang={lang}>
-						{children}
-						<WIPToast/>
+						<Maintenance>
+							{children}
+							<WIPToast/>
+						</Maintenance>
 					</Providers>
 				</main>
 				<Footer lang={lang}/>
