@@ -12,8 +12,10 @@ export default function IUCNCard({lang, scopes}) {
 		scope_map[scope.region] = scope;
 	}
 
+	const isDataAvailable = scope_map.mediterranean || scope_map.europe || scope_map.global;
+
 	return (
-		<NoData lang={lang} isDataAvailable={scopes}>
+		<NoData lang={lang} isDataAvailable={isDataAvailable}>
 			<div className="divide-y xl:divide-y-0 sm:divide-x w-full m-auto h-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
 				<div className="col-span-1 sm:col-span-2 xl:col-span-1">
 					<IUCN scope="global" status={scope_map.global?.assessment} source={scope_map.global?.sources[0]}/>

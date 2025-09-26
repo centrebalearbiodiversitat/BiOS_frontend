@@ -7,7 +7,7 @@ import {TiArrowSortedUp} from "react-icons/ti";
 import clsx from "clsx";
 import {BiDotsHorizontalRounded} from "react-icons/bi";
 import {useLang} from "@/contexts/LangContext";
-import Link from "next/link";
+import LinkWrapper from "@/components/common/LinkWrapper";
 
 const IUCN_CATEGORIES = {
 	'ex': {color: "#000000", text: 'components.iucn.EX', textColor: "#fd3636"},
@@ -95,10 +95,14 @@ export default function IUCN({scope, status, source, className}) {
 	// status = 'ne'
 
 	const iucn_cat = IUCN_CATEGORIES[status];
+	let href = source?.externalId;
+	if (href) {
+		href = `https://www.iucnredlist.org/species/${source?.externalId}`;
+	}
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<Link target="_blank" rel="nofollow" href={`https://www.iucnredlist.org/species/${source?.externalId}`}>
+			<LinkWrapper target="_blank" rel="nofollow" href={href}>
 				<div className={clsx("w-full h-full", className)}>
 					<div className={"flex flex-col w-full h-full gap-5 p-6"}>
 						<div className="flex flex-row">
@@ -129,7 +133,7 @@ export default function IUCN({scope, status, source, className}) {
 						</div>
 					</div>
 				</div>
-			</Link>
+			</LinkWrapper>
 		</IUCNToolTip>
 	)
 }
