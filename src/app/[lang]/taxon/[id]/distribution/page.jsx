@@ -36,7 +36,8 @@ export default async function Taxon({params}) {
 	if (occsStatsByMonth) {
 		occsStatsByMonthTranslated = occsStatsByMonth.map(e => ({
 				...e,
-				month: t(lang, `taxon.distribution.statistics.month_${e.month}`)
+				month: `${e.month}`
+				// month: t(lang, `taxon.distribution.statistics.month_${e.month}`)
 			})
 		)
 	}

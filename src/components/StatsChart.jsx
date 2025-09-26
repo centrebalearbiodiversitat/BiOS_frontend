@@ -67,10 +67,10 @@ export default function StatsChart({color = null, colorR = null, data, dataRight
 				xAxis={[{
 					scaleType: 'band',
 					data: x,
-					tickLabelStyle: isLong && {
-						angle: 33,
-						textAnchor: 'start'
-					}
+					// tickLabelStyle: isLong && {
+					// 	angle: 10,
+					// 	textAnchor: 'start'
+					// }
 				}]}
 			>
 				<BarPlot/>
