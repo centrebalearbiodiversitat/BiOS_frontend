@@ -1,6 +1,6 @@
 "use client"
 
-import {useCallback, useMemo} from "react";
+import {useCallback} from "react";
 import Loading from "@/components/common/Loading";
 import clsx from "clsx";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -41,7 +41,7 @@ export default function TaxonMarkers({markers}) {
 	const handleSelection = useCallback((marker) => {
 		const params = new URLSearchParams(searchParams.toString());
 
-		if (getParam(searchParams, "marker") == marker.id) {
+		if (marker.id === null || getParam(searchParams, "marker") == marker.id) {
 			params.delete("marker");
 		} else {
 			params.set("marker", marker.id);
