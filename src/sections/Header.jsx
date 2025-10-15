@@ -33,7 +33,8 @@ export default function Header({lang, locales, className}) {
 		]
 	}, [lang]);
 
-	const isHome = pathname === `/${lang}`;
+	const isUnderMaintenance= process.env.MAINTENANCE === "true";
+	const isHome = isUnderMaintenance ? false : pathname === `/${lang}`;
 
 	return (
 		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" classNames={{wrapper: "md:px-14"}} className={clsx(
