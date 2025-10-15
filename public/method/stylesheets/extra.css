@@ -1,3 +1,9 @@
+/* Paragraph */
+p {
+  text-align: justify;
+}
+
+/*
 [data-md-color-scheme="balearica-light"] {
   --md-primary-fg-color: #00ACBA;
   --md-primary-fg-color--light: #BE4358;
@@ -5,9 +11,39 @@
 }
 
 [data-md-color-scheme="slate"] {
-  /* --md-primary-fg-color: #7EBC00; */
+  --md-primary-fg-color: #7EBC00;
   --md-primary-fg-color: #00ACBA;
   --md-hue: 210;
+}
+*/
+
+/* Navbar */
+/* Light mode navbar */
+[data-md-color-scheme="balearica-light"] {
+  --md-primary-fg-color: #2c3e50;   /* navbar background */
+  --md-primary-bg-color: #ffffff;   /* navbar text */
+}
+
+/* Dark mode navbar */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2c3e50;   /* navbar background */
+  --md-primary-bg-color: #ffffff;   /* navbar text */
+}
+
+/* Hide the site title near the logo in the navbar */
+.md-header-nav .md-logo .md-title {
+    display: none;
+}
+
+/* Hide the site title in the navbar using md-header__topic class on all pages */
+.md-header-nav .md-logo .md-header__topic {
+    display: none !important;
+}
+
+/* Adjust logo size in the header */
+.md-header__button.md-logo img {
+  height: 50px; /* adjust as needed */
+  width: auto;
 }
 
 :root {
@@ -49,4 +85,62 @@
 
 :root {
     --md-parallax-perspective: 2.5rem;
+}
+
+/* Team member */
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* optional: center the row */
+  gap: 2rem; /* space between items */
+  align-items: flex-start; /* ensures all items align to the top */
+}
+
+.team-member {
+  flex: 1 1 calc(33.33% - 2rem); /* three per line with spacing */
+  max-width: 300px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-member img {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 0.2em;
+}
+
+.team-member img.team-collaborator {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 0.2em;
+}
+
+.team-member figcaption {
+  margin-top: 0px;
+}
+
+.team-member h3 {
+  margin-top: 15px;
+  margin-bottom: 0.2em;
+}
+
+.team-member h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.team-member hr {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.team-member cite {
+  font-size: 14px;
+  line-height: 1.2;
 }

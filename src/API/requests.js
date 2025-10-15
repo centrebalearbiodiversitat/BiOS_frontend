@@ -1,6 +1,6 @@
 function request(method) {
 	return (path, params = null, body = null, cache = "force-cache") => {
-		if (process.env.DEBUG)
+		if (process.env.DEBUG === "true")
 			cache = "no-cache"
 
 		const requestOptions = {

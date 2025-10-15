@@ -12,6 +12,7 @@ import WIPToast from "@/components/common/WIPToast";
 import {Providers} from "@/app/providers";
 import {CanonicalHead} from "@/components/CanonicalHead";
 import Maintenance from "@/components/Maintenance";
+import FooterSeparator from "@/components/FooterSeparator";
 
 const roboto = Roboto_Flex({
 	subsets: ["latin"],
@@ -19,11 +20,11 @@ const roboto = Roboto_Flex({
 });
 
 
-export default function RootLayout({children, params, ...extra}) {
+export default function RootLayout({children, params}) {
 	const {lang} = use(params);
 
 	return (
-		<html lang={lang} className={roboto.className}>
+		<html lang={lang} className={roboto.className} suppressHydrationWarning>
 			<head>
 				<meta name="description" content={t(lang, 'web.description')}/>
 				<meta charSet="UTF-8"/>
@@ -60,6 +61,7 @@ export default function RootLayout({children, params, ...extra}) {
 						</Maintenance>
 					</Providers>
 				</main>
+				<FooterSeparator lang={lang}/>
 				<Footer lang={lang}/>
 			</body>
 			<GoogleAnalytics gaId="G-5T5J9YQ15G"/>

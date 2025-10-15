@@ -1,24 +1,31 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {t} from "@/i18n/i18n";
 import {useLang} from "@/contexts/LangContext";
 import {Image} from "@heroui/image";
 import clsx from "clsx";
+import {useLocalStorageState} from "@/contexts/LocalStorageContext";
 
 export default function WIPToast({}) {
 	const [hidden, setHidden] = useState(false);
 	const [lang] = useLang();
+	const [clicked, setClicked] = useLocalStorageState('itemClicked', true);
 
 	useEffect(() => {
 		setTimeout(() => setHidden(true), 10000);
-	}, [])
+	}, []);
 
-	if (hidden)
+	const onToastClick = useCallback(() => {
+		setHidden(true);
+		setClicked(true);
+	}, [setClicked]);
+
+	if (hidden || clicked)
 		return ;
 
 	return (
-		<div onClick={() => setHidden(true)} className={clsx(
+		<div onClick={onToastClick} className={clsx(
 			"z-50 fixed flex flex-row gap-4 p-2 cursor-pointer w-[376px] max-w-[90svw] min-h-[65px] m-2 bottom-0 right-0 box-border outline-none border rounded-medium shadow-small bg-warning-50 border-warning-100",
 			hidden && "hidden"
 		)}>
