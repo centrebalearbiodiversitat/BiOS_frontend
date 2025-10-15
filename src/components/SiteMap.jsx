@@ -10,7 +10,7 @@ export default function SiteMap({lang}) {
 		{path: `/${lang}`, text: t(lang, "footer.sitemap.home")},
 		{path: `/${lang}/map`, text: t(lang, "footer.sitemap.map")},
 		{path: "/method/index.html", text: t(lang, "footer.sitemap.methodology")},
-		{path: `/${lang}/team`, text: t(lang, "footer.sitemap.team")},
+		{path: `/method/team/team.html`, text: t(lang, "footer.sitemap.team")},
 	], [lang])
 
 	return (
