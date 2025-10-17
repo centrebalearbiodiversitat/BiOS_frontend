@@ -17,7 +17,7 @@ import {AccordionTaxonomy} from "@/app/[lang]/taxon/[id]/components/AccordionTax
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import {Suspense} from "react";
-import {generatePageTitle, generateSourceUrl} from "@/utils/utils";
+import {generateSourceUrl} from "@/utils/utils";
 import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
 
 export async function generateMetadata({params, searchParams}) {
@@ -30,7 +30,9 @@ export async function generateMetadata({params, searchParams}) {
 		description,
 		openGraph: {
 			description,
-			images: [generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)]
+			images: [
+				{url: generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)},
+			]
 		}
 	}
 }
