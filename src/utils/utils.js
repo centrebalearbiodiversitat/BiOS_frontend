@@ -9,7 +9,7 @@ export function handleScrollTop() {
 }
 
 export function generateSourceUrl(basis, DEFAULT = "") {
-	if (basis.source.url) {
+	if (basis?.source?.url) {
 		return basis.source.url.replace('{id}', basis.externalId)
 	} else {
 		return DEFAULT

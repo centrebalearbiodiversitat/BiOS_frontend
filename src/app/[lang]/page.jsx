@@ -9,9 +9,13 @@ import {MdTune} from "react-icons/md";
 
 export async function generateMetadata(props) {
 	const {lang} = await props.params;
-	
+	const title = t(lang, 'web.title');
+
 	return {
-		title: t(lang, 'web.title'),
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

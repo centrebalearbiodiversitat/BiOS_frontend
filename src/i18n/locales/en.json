@@ -37,6 +37,7 @@
 	"general.taxonStatus.false": "Synonym",
 	"taxon.main.map.button.redirect": "Open in Maps",
 
+	"taxon.overview.description": "{name}: taxonomic status overview, distribution and genetic data",
 	"taxon.overview.status": "Conservation status",
 	"taxon.overview.status.description": "Explore the degree of establishment in the Balearic Islands reviewed by an expert and the IUCN conservation status for this species.",
 	"taxon.overview.iucn_global": "Global",

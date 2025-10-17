@@ -1,0 +1,1 @@
+export const IMAGE_NOT_FOUND_SRC = "https://balearica.uib.cat/images/image-not-found.webp";

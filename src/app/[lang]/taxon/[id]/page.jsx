@@ -7,13 +7,14 @@ import Section from "@/components/common/Section";
 import TaxonDescendants from "@/components/TaxonDescendants";
 import Hidden from "@/components/common/Hidden";
 import {t} from "@/i18n/i18n";
-import {generatePageTitle} from "@/utils/utils";
+import {generatePageTitle, generateSourceUrl} from "@/utils/utils";
 import TaxonDOE from "@/components/TaxonDOE";
 import SubSection from "@/components/common/SubSection";
 import TaxonSystem from "@/components/TaxonSystem";
 import TaxonDirectives from "@/components/TaxonDirectives";
 import NoData from "@/components/common/NoData";
 import IUCNCard from "@/components/IUCNCard";
+import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
 
 // export async function generateStaticParams({params}) {
 // 	console.log(params)
@@ -29,8 +30,13 @@ export async function generateMetadata({params, searchParams}) {
 	const {lang, id} = await params;
 	const taxon = await taxonomy.get(id);
 
+	const title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')}`)
+
 	return {
-		title: generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.taxon')}`)
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

@@ -18,9 +18,13 @@ const DATA_TYPE_TRANSLATE = {
 export async function generateMetadata({params}) {
 	const {lang, id} = await params;
 	const basis = await versioning.getBasis(id);
+	const title = generatePageTitle(lang, basis.name);
 
 	return {
-		title: generatePageTitle(lang, basis.name)
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

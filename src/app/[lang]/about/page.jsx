@@ -6,10 +6,13 @@ import {t} from "@/i18n/i18n";
 
 export async function generateMetadata({params}) {
 	const {lang} = await params;
+	const title = generatePageTitle(lang, t(lang, 'components.header.button.about'));
 
 	return {
-		title: generatePageTitle(lang, t(lang, 'components.header.button.about')),
-		"og:title": generatePageTitle(lang, t(lang, 'components.header.button.about')),
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

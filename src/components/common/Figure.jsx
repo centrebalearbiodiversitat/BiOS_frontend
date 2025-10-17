@@ -4,6 +4,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {Image} from "@heroui/image";
 import clsx from "clsx";
 import {generateSourceUrl} from "@/utils/utils";
+import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
 
 export default function Figure({alt, hoverEffect = true, images, className= "rounded-xl", ...extra}) {
 	const [error, setError] = useState(false);
@@ -18,7 +19,7 @@ export default function Figure({alt, hoverEffect = true, images, className= "rou
 	}, [i, images?.length]);
 
 	const {src, title, loading} = useMemo(() => {
-		let src = "/images/image-not-found.webp";
+		let src = IMAGE_NOT_FOUND_SRC;
 		let title, loading;
 		if (!images) {
 			loading = true;

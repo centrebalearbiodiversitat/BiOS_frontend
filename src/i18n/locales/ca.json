@@ -36,6 +36,8 @@
 	"general.taxonStatus.false": "Sinònim",
 	"taxon.main.map.button.redirect": "Veure en Mapes",
 
+
+	"taxon.overview.description": "{name}: informació taxonòmica, distribució i dades genètiques",
 	"taxon.overview.status": "Estat de conservació",
 	"taxon.overview.status.description": "Consulta el grau d'establiment a les Illes Balears revisat per un expert i l'estat de conservació segons la IUCN d'aquesta espècie.",
 	"taxon.overview.iucn_global": "Global",

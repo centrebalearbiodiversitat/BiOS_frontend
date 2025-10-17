@@ -9,10 +9,13 @@ import Empty from "@/components/Empty";
 
 export async function generateMetadata({params}) {
 	const {lang} = await params;
+	const title = generatePageTitle(lang, t(lang, 'components.header.button.sources'));
 
 	return {
-		title: generatePageTitle(lang, t(lang, 'components.header.button.sources')),
-		"og:title": generatePageTitle(lang, t(lang, 'components.header.button.sources')),
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

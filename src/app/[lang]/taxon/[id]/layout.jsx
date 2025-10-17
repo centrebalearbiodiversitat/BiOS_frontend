@@ -17,7 +17,23 @@ import {AccordionTaxonomy} from "@/app/[lang]/taxon/[id]/components/AccordionTax
 import {FaDna, FaInfo} from "react-icons/fa";
 import {FaLocationDot} from "react-icons/fa6";
 import {Suspense} from "react";
+import {generatePageTitle, generateSourceUrl} from "@/utils/utils";
+import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
 
+export async function generateMetadata({params, searchParams}) {
+	const {lang, id} = await params;
+	const taxon = await taxonomy.get(id);
+
+	const description = t(lang, 'taxon.overview.description').replace("{name}", taxon.name)
+
+	return {
+		description,
+		openGraph: {
+			description,
+			images: [generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)]
+		}
+	}
+}
 
 export default async function RootLayout({children, params}) {
 	const {lang, id} = await params;

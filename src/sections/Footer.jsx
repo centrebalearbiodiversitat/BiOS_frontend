@@ -18,21 +18,10 @@ export default function Footer({lang}) {
 						       alt={"CBB logo"} width={339} height={120}/>
 					</div>
 				</div>
-				{/*<div className="w-[400px]">*/}
-				{/*	<CBBLogo className="w-full h-[px] flex justify-center items-center" imageProps={{className: "w-full h-auto"}}/>*/}
-				{/*</div>*/}
 				<div className="grid grid-cols-2 sm:flex sm:flex-row !text-sm gap-x-8 justify-center gap-y-6">
 					<SiteMap lang={lang}/>
 					<Legal lang={lang}/>
 					<Contact lang={lang}/>
-					{/*<div className="sm:hidden gap-4 flex flex-col items-center w-full">*/}
-					{/*	<Image className="object-contain" src="/images/logos/balearica-logo-full_small.png" alt={"Balearica full logo"} width={101} height={51}/>*/}
-					{/*	<hr className=" border-slate-200 w-full"/>*/}
-					{/*	<div className="flex flex-col w-full">*/}
-					{/*		<Image src="/images/logos/uib-logo-split.png" className="w-full object-contain" alt={"UIB logo"} width={160} height={51} style={{scale: 0.8}}/>*/}
-					{/*		<Image src="/images/logos/cbb-logo-split.png" className="w-full object-contain" alt={"CBB logo"} width={196} height={43}/>*/}
-					{/*	</div>*/}
-					{/*</div>*/}
 				</div>
 			</div>
 		</footer>

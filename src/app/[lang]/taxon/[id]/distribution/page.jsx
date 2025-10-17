@@ -13,9 +13,13 @@ import MapLibreAPIWrapper from "@/components/maplibre/MapLibreAPIWrapper";
 export async function generateMetadata({params}) {
 	const {lang, id} = await params;
 	const taxon = await taxonomy.get(id);
+	const title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')}`)
 
 	return {
-		title: generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.distribution')}`)
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

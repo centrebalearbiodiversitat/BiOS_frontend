@@ -9,9 +9,13 @@ const LAST_UPDATE = "2024-10-30"
 
 export async function generateMetadata({params}) {
 	const {lang} = await params;
+	const title = generatePageTitle(lang, t(lang, 'cookies.title'));
 
 	return {
-		title: generatePageTitle(lang, t(lang, 'cookies.title')),
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

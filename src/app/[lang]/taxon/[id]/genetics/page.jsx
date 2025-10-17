@@ -15,9 +15,13 @@ import OnGeoToggleButton from "@/app/[lang]/taxon/[id]/genetics/components/OnGeo
 export async function generateMetadata({params, searchParams}) {
 	const {lang, id} = await params;
 	const taxon = await taxonomy.get(id);
+	const title = generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')}`)
 
 	return {
-		title: generatePageTitle(lang, `${taxon.name} - ${t(lang, 'taxon.layout.button.genetics')}`)
+		title,
+		openGraph: {
+			title
+		}
 	}
 }
 

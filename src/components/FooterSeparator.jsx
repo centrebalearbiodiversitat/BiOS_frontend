@@ -10,5 +10,5 @@ export default function FooterSeparator({lang}) {
 		return null;
 	}
 
-	return <hr className="mx-auto w-[80%] max-w-4xl mt-20"/>
+	return <hr className="mx-auto w-[80%] max-w-sm mt-10"/>
 }
