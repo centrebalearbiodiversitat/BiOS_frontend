@@ -114,7 +114,7 @@ export default function SearchBar({
 			              inputProps={{
 				              classNames: {
 					              input: "text-base font-light md:text-small kbd-rght-arrow",
-					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border-1' : 'border-0'),
+					              inputWrapper: clsx('min-h-[50px] bg-white', border ? 'border' : 'border-0'),
 				              },
 			              }}
 			              isClearable={true}

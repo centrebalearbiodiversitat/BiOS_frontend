@@ -46,7 +46,7 @@ export default function Home({params}) {
 					<div className="space-y-2 py-8">
 						<div className="flex flex-row gap-1.5 h-[56px]">
 							<FullCBBSearchBar lang={lang} showFilters={false} rounded={true}/>
-							<Button as={Link} href={`/${lang}/taxon/list`} className="h-full rounded-full bg-white border-1 text-2xl text-foreground-500 hover:!opacity-100">
+							<Button as={Link} href={`/${lang}/taxon/list`} className="h-full rounded-full bg-white border text-2xl text-foreground-500">
 								<MdTune/>
 							</Button>
 						</div>

@@ -121,7 +121,7 @@ export default function IUCN({scope, status, source, className}) {
 								<BiDotsHorizontalRounded/>
 							</div>
 						</div>
-						<div className="flex-grow flex">
+						<div className="grow flex">
 							<div className="mt-auto w-full flex flex-col text-pretty self-center justify-self-center">
 								<p className="text-end text-md font-medium">
 									{t(lang, iucn_cat.text)}

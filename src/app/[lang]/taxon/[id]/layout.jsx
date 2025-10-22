@@ -91,13 +91,13 @@ export default async function RootLayout({children, params}) {
 	const taxonRank = t(lang, `general.taxon_rank.${taxon.taxonRank}`);
 
 	return (
-		<div className="flex flex-col lg:grid lg:grid-cols-12 mx-4 md:mx-8 2xl:mx-16 mt-5 lg:gap-3">
-			<aside className="col-span-3 w-full h-full space-y-2 mb-5 xl:me-8 m-auto">
-				<div className="sticky max-h-[80svh] lg:h-[80svh] top-[100px] flex flex-col gap-6">
+		<div className="flex flex-col lg:flex-row lg:gap-11 mx-4 md:mx-8 2xl:mx-16 mt-5">
+			<aside className="basis-1/4 w-full h-full space-y-2 mb-5 sticky top-[110px]">
+				<div className="max-h-[80svh] lg:h-[80svh] flex flex-col gap-6">
 					<div className="rounded-full ms-auto w-full">
 						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
 					</div>
-					<div className="hidden lg:block custom-scrollbar overflow-y-auto flex-grow h-0">
+					<div className="hidden lg:block custom-scrollbar overflow-y-auto grow h-0">
 						<AccordionTaxonomy lang={lang} hideIndicator={true} showDivider={false}
 						                   selectionMode="multiple" defaultSelectedKeys="all"
 						                   className="px-0 pe-2.5" higherTaxonomy={higherTaxonomy}
@@ -105,7 +105,7 @@ export default async function RootLayout({children, params}) {
 					</div>
 				</div>
 			</aside>
-			<article className="rounded-lg col-span-9 xl:ps-8 space-y-6">
+			<article className="basis-3/4 rounded-lg col-span-9 space-y-6">
 				<header className="flex flex-row justify-center mb-6">
 					<div className="w-full grid grid-cols-5 gap-1 md:gap-6">
 						<div className="col-span-full md:col-span-3 w-full h-[275px] xl:h-[350px] m-auto justify-center border-accent">

@@ -45,7 +45,7 @@ export default function TaxonComposition({composition}) {
 										{/*<p className="container text-end ">{taxon.value}</p>*/}
 										{/*<p className="container text-end ">{taxon.total}</p>*/}
 									</div>
-									<div className="rounded-full bg-slate-100 border-1 border-slate-100 w-full px-0.5 py-0.5 basis-4/5">
+									<div className="rounded-full bg-slate-100 border border-slate-100 w-full px-0.5 py-0.5 basis-4/5">
 										<div className="h-full py-1 rounded-full bg-primary"
 										     style={{width: `${taxon.valueNorm}%`}}/>
 									</div>

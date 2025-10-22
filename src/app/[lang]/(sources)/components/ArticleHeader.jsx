@@ -21,7 +21,7 @@ export default function ArticleHeader({header, subheader, redirect, image: {alt,
 					<Image alt={alt} removeWrapper={true}
 					       src={src} radius={null}
 					       title={title}
-					       className="object-cover w-full h-full max-h-[400px] rounded-none saturate-[120%] brightness-110"/>
+					       className="object-cover w-full h-full max-h-[400px] rounded-none saturate-120 brightness-110"/>
 				</Link>
 			</div>
 		</header>

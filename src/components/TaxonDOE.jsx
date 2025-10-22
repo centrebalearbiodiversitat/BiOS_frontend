@@ -57,7 +57,7 @@ export default function TaxonDOE({lang, doe}) {
 						{doeDef.icon}
 					</p>
 				</div>
-				<div className="flex-grow flex justify-center items-center py-6">
+				<div className="grow flex justify-center items-center py-6">
 					<p className="text-2xl font-extralight justify-center align-middle text-center">
 						{t(lang, doeDef.text)}
 					</p>

@@ -38,7 +38,7 @@ export default function Header({lang, locales, className}) {
 
 	return (
 		<Navbar maxWidth="full" shouldHideOnScroll={false} position="sticky" classNames={{wrapper: "md:px-14"}} className={clsx(
-			"transition-all z-50 shadow-sm backdrop-blur-sm hover:backdrop-blur-xl border-b-1 border-white/10",
+			"transition-all z-50 shadow-xs backdrop-blur-sm hover:backdrop-blur-xl border-b border-white/10",
 			isHome ? "bg-transparent" : "bg-white/60",
 			className
 		)}>
@@ -78,7 +78,7 @@ export default function Header({lang, locales, className}) {
 					menuItems.map((section, idx) => (
 						<NavbarMenuItem key={section.href} className="w-full">
 							<Link href={section.href} target={section.external ? "_blank" : "_self"}
-							      className={clsx("w-full justify-center text-3xl font-extralight", isHome ? "!text-white" : "!text-black")}>
+							      className={clsx("w-full justify-center text-3xl font-extralight", isHome ? "text-white!" : "text-black!")}>
 								{section.text} {section.external && <LuExternalLink className="mb-auto ms-1"/>}
 							</Link>
 						</NavbarMenuItem>

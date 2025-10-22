@@ -31,7 +31,7 @@ function Sequence({seq}) {
 				<SourceLink source={source}>
 					{/*<Sources sources={seq.sources} className="my-3"/>*/}
 					<p className="inline-flex gap-x-1 link w-full">
-						<span className="truncate overflow-hidden whitespace-nowrap">{source.externalId}</span> <RxExternalLink className="text-md my-auto align-baseline flex-shrink-0"/>
+						<span className="truncate overflow-hidden whitespace-nowrap">{source.externalId}</span> <RxExternalLink className="text-md my-auto align-baseline shrink-0"/>
 					</p>
 				</SourceLink>
 				<p>

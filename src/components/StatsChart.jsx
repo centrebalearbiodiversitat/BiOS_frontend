@@ -62,7 +62,7 @@ export default function StatsChart({color = null, colorR = null, data, dataRight
 	} else if (type === "bar") {
 		return (
 			<ChartContainer
-				className="w-full h-full min-h-full flex-grow"
+				className="w-full h-full min-h-full grow"
 				series={[{type: 'bar', data: y, label: yLabel, color}]}
 				xAxis={[{
 					scaleType: 'band',

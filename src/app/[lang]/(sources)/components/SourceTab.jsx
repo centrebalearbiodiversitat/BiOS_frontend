@@ -30,7 +30,7 @@ function SourceCard({lang, source}) {
 					{source.name}
 				</p>
 			</div>
-			<div className="flex flex-col flex-grow">
+			<div className="flex flex-col grow">
 				<p className="my-4 text-sm font-light text-pretty line-clamp-3 h-[4.5em] leading-[1.5em]">
 					{source.description}
 				</p>

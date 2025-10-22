@@ -4,7 +4,7 @@ import React from "react";
 
 export function Card({children, className}) {
 	return (
-		<div className={clsx('w-full aspect-video rounded-xl border-1 border-slate-200', className)}>
+		<div className={clsx('w-full aspect-video rounded-xl border border-slate-200', className)}>
 			{children}
 		</div>
 	)

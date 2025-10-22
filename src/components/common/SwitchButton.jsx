@@ -16,8 +16,8 @@ export default function SwitchButton({label, isPushed, onPush, className}) {
 		<span onClick={isPushedCallback}
 			className={clsx(
 				"text-center cursor-pointer px-4 text-white font-light rounded-full transition-all",
-				isPushed ? "!bg-accent" : "bg-slate-300",
-				"hover:bg-accent/30",
+				isPushed ? "bg-accent" : "bg-slate-300",
+				!isPushed && "hover:bg-accent/30",
 				className
 			)}
 			>

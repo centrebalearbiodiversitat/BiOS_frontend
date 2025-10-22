@@ -5,10 +5,10 @@ import {LangProvider} from "@/contexts/LangContext";
 
 export function Providers({children, lang}) {
 	return (
-		// <HeroUIProvider>
-		<LangProvider initialState={lang}>
-			{children}
-		</LangProvider>
-		// </HeroUIProvider>
+		<HeroUIProvider>
+			<LangProvider initialState={lang}>
+				{children}
+			</LangProvider>
+		</HeroUIProvider>
 	)
 }

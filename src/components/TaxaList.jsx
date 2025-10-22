@@ -33,10 +33,10 @@ function TaxonListBlockCard({lang, taxon}) {
 				        className="grow rounded-t-xl" hoverEffect={false}
 				        images={taxon.images}/>
 			</Loading>
-			<div className="flex flex-row rounded-lg px-4 pt-2 pb-3 min-h-[80px] flex-shrink-0">
+			<div className="flex flex-row rounded-lg px-4 pt-2 pb-3 min-h-[80px] shrink-0">
 				<div className={clsx("flex flex-col w-full justify-center gap-1")}>
 					<Loading loading={isLoading} className="mb-1" width="40%" height="16px">
-						{!isLoading && taxon.ancestors && <AncestorsList className="text-xs font-extralight truncate flex-shrink-0"
+						{!isLoading && taxon.ancestors && <AncestorsList className="text-xs font-extralight truncate shrink-0"
 						                              ancestors={taxon.ancestors.length > 4 ? taxon.ancestors.slice(1, 5) : taxon.ancestors}/>}
 					</Loading>
 					<Loading loading={isLoading} width="80%" height="22px">

@@ -8,7 +8,7 @@ export function TwoLineText({title, text, titleClassName = "", textClassName = "
 	return (
 		<p className="flex flex-row text-xs md:text-sm font-extralight text-pretty break-all gap-2">
 			<span className={`font-bold ${titleClassName}`}>{title}:</span>
-			<span className={`border-b text-end flex-grow  ${textClassName}`}>{text ? text : "-"}</span>
+			<span className={`border-b text-end grow  ${textClassName}`}>{text ? text : "-"}</span>
 		</p>
 	)
 }
@@ -21,7 +21,7 @@ export function MapLibrePopup({longitude, title, latitude, images, children, onC
 				<div className="w-full max-h-[120px] h-[120px] md:max-h-[190px] md:h-[190px] aspect-video">
 					<Figure className="rounded-t-2xl" images={images}/>
 				</div>
-				<CBBButton isIconOnly className="z-50 !m-3 absolute right-0 top-0 text-black text-xl border-none rounded-full bg-white aspect-square"
+				<CBBButton isIconOnly className="z-50 m-3 absolute right-0 top-0 text-black text-xl border-none rounded-full bg-white aspect-square"
 				           onPress={onClose}>
 					<IoClose/>
 				</CBBButton>

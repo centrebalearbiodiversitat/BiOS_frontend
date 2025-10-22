@@ -28,10 +28,10 @@ export default function LoadMore({items, children, overflow = false, initialSize
 	} else {
 		return (
 			<p className="text-center font-extralight flex py-2">
-				<span className="flex flex-1 border-1 h-0 m-4 my-auto"/>
+				<span className="flex flex-1 border h-0 m-4 my-auto"/>
 				{t(lang, 'components.verticalTaxonomy.empty')}
 				<span/>
-				<span className="flex flex-1 border-1 h-0 m-4 my-auto"/>
+				<span className="flex flex-1 border h-0 m-4 my-auto"/>
 			</p>
 		)
 	}

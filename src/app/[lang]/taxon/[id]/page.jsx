@@ -66,6 +66,7 @@ export default async function Taxon({params}) {
 		tags.listSystem(id),
 		taxonomy.descendantCount(id),
 	])
+	// http://localhost:3000/en/taxon/5580/genetics
 
 	const isSpeciesOrLower = ['species', 'subspecies', 'variety'].includes(taxon.taxonRank);
 
@@ -74,12 +75,12 @@ export default async function Taxon({params}) {
 			<Hidden hide={!isSpeciesOrLower}>
 				<Section lang={lang} title="taxon.overview.status" subtitle="taxon.overview.status.description">
 					<div className="grid grid-cols-4 md:grid-cols-5 xl:grid-cols-4 gap-4">
-						<SubSection className="col-span-full md:col-span-2 xl:col-span-1 !p-0">
+						<SubSection className="col-span-full md:col-span-2 xl:col-span-1" style={{padding: "0 !important"}}>
 							<NoData lang={lang} isDataAvailable={taxonTags?.at(0)}>
 								<TaxonDOE lang={lang} doe={taxonTags?.at(0)}/>
 							</NoData>
 						</SubSection>
-						<SubSection className="col-span-full md:col-span-3 xl:col-span-3 !p-0">
+						<SubSection className="col-span-full md:col-span-3 xl:col-span-3" style={{padding: "0 !important"}}>
 							<IUCNCard lang={lang} scopes={taxonData}/>
 						</SubSection>
 					</div>
@@ -94,7 +95,7 @@ export default async function Taxon({params}) {
 
 			<Section lang={lang} title="taxon.overview.habitats" subtitle="taxon.overview.habitats.description">
 				<TaxonSystem className="justify-center mb-4" systems={taxonSystems}/>
-				{/*<SubSection className="!p-3">*/}
+				{/*<SubSection className="p-3!">*/}
 					<TaxonHabitats habitats={taxonHabitats}/>
 				{/*</SubSection>*/}
 			</Section>

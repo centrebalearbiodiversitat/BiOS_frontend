@@ -28,7 +28,7 @@ const DIRECTIVES = [
 function DirectiveCard({lang, directive, enabled}) {
 	return (
 		<div className={clsx(
-				"border flex flex-1 aspect-square !rounded-full text-center max-w-[85px] min-w-[85px]",
+				"border flex flex-1 aspect-square rounded-full text-center max-w-[85px] min-w-[85px]",
 				enabled ? "border-amber-400 text-black" : "border-slate-200 text-slate-300"
 			)}>
 			<p className="m-auto text-sm">
@@ -44,7 +44,7 @@ export default function TaxonDirectives({directives, className}) {
 	return (
 		<Loading loading={directives} width="100%" height="100%">
 			<NoData lang={lang} isDataAvailable={directives?.cites !== null}>
-				<div className="flex flex-col gap-8 justify-center flex-grow py-3">
+				<div className="flex flex-col gap-8 justify-center grow py-3">
 					<div className={clsx("flex flex-wrap my-auto justify-center px-5 gap-x-3 gap-y-2", className)}>
 						{directives &&
 							DIRECTIVES.map((directive) => (

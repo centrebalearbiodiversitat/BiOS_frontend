@@ -7,7 +7,7 @@ import VerticalTaxonomy from "@/components/VerticalTaxonomy";
 
 export function AccordionTaxonomy({lang, taxon, className, higherTaxonomy, descendants, synonyms, ...extra}) {
 	return (
-		<Accordion className={clsx(className, "!space-y-3")} {...extra}>
+		<Accordion className={clsx(className, "flex flex-col gap-y-3")} {...extra}>
 			<AccordionItem title={<h3 className="text-2xl font-extralight">{t(lang, 'taxon.sidebar.classification')}</h3>}
 			               key="1" classNames={{trigger: "py-0"}}>
 					{taxon && higherTaxonomy && <VerticalTaxonomy taxonomy={[...higherTaxonomy, taxon]} markLast={true}/>}

@@ -24,12 +24,12 @@ export default function AboutApp({lang}) {
 					<Link href={`/${lang}/taxon/search?q=Upupa epops`} className="mb-20">
 						<Image alt="Upupa epops" removeWrapper={true} src="/images/pages/about/upupa.jpg"
 						       title="iNaturalist | (c) jakemellor, some rights reserved (CC BY-NC)"
-						       className="object-cover w-full h-full min-h-[340px] saturate-[120%]"/>
+						       className="object-cover w-full h-full min-h-[340px] saturate-120"/>
 					</Link>
 					<Link href={`/${lang}/taxon/search?q=Alytes muletensis`} className="mt-20">
 						<Image alt="Alytes muletensis" removeWrapper={true} src="/images/pages/about/ferreret.jpg"
 						       title="Wikipedia | (c) tuurio and wallie, some rights reserved (CC BY-SA)"
-						       className="object-cover w-full h-full saturate-[120%] brightness-110"/>
+						       className="object-cover w-full h-full saturate-120 brightness-110"/>
 					</Link>
 				</div>
 			</div>

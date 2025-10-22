@@ -129,7 +129,7 @@ function DataType({id, lang, refs, dtSources, dataType}) {
 	return (
 		<div id={id} ref={refs} className="w-full space-y-6 min-h-[400px]">
 			<h3 className="text-3xl font-extralight">{t(lang, `partners.list.${dataType}`)}</h3>
-			<div className="w-full aspect-video rounded-xl border-1 border-slate-200">
+			<div className="w-full aspect-video rounded-xl border border-slate-200">
 				<p className="font-extralight text-gray-600 bg-slate-100 px-4 py-3 rounded-t-xl">
 					<VscGraph className="inline-block me-2"/>
 					{t(lang, `partners.list.${dataType}.graph`)}
@@ -161,7 +161,7 @@ function DataType({id, lang, refs, dtSources, dataType}) {
 function SourceList({source}) {
 	return (
 		<div className="flex flex-row px-6 py-3 items-center hover:bg-slate-100">
-			<div className="block flex-grow">
+			<div className="block grow">
 				<p className="font-light text-xl">{source.basis.name}</p>
 				<p className="font-light text-gray-500">{source.origin}</p>
 			</div>

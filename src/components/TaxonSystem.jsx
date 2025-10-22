@@ -24,7 +24,7 @@ const SYSTEM_TYPES = [
 function SystemChip({lang, system, enabled}) {
 	return (
 		<span className={clsx(
-			"py-[1px] w-[120px] font-extralight text-sm text-center rounded-full border border-slate-200",
+			"py-px w-[120px] font-extralight text-sm text-center rounded-full border border-slate-200",
 			enabled ? "text-white" : "text-slate-300"
 		)}
 		      style={{backgroundColor: enabled  ? system.color : "transparent"}}>

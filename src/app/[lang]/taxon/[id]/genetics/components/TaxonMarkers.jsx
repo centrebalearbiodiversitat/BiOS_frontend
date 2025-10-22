@@ -14,9 +14,9 @@ function Marker({marker, selected, onClick}) {
 	return (
 		<li className={
 			clsx(
-				"text-slate-400 px-4 py-3 flex flex-col items-center col-span-1 transition overflow-hidden",
-				selected && "!text-black !border-b-primary",
-				"hover:cursor-pointer hover:!text-black hover:!border-b-primary",
+				"px-4 py-3 flex flex-col items-center col-span-1 transition overflow-hidden cursor-pointer",
+			    selected ? "text-black border-b-primary" : "text-slate-400 border-b-border-slate-200",
+			    "hover:text-black hover:border-b-primary"
 			)}
 		    onClick={onClickMarker}
 		>
@@ -52,7 +52,7 @@ export default function TaxonMarkers({markers}) {
 
 	return (
 		<Loading loading={markers} width="100%" height="150px">
-			<ul className="grid grid-cols-3 md:grid-cols-6 2xl:grid-cols-8 w-full h-full [clip-path:inset(0_1px_0px_0)] *:border-b-[1px] *:border-r-[1px] *:border-slate-200 min-h-[72px]">
+			<ul className="grid grid-cols-3 md:grid-cols-6 2xl:grid-cols-8 w-full h-full [clip-path:inset(0_1px_0px_0)] *:border-b *:border-r min-h-[72px]">
 				{markers &&
 					markers.map(
 						marker => <Marker key={marker.id} marker={marker} onClick={handleSelection} selected={selectedMarker == marker.id}/>

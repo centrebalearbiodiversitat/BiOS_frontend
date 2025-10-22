@@ -90,7 +90,7 @@ export default async function Source({params}) {
 						{
 							stats.filter(e => DATA_TYPE_TRANSLATE[e.dataType] !== undefined).map(
 								e => (
-									<div key={e.id} className="flex flex-col items-center px-10 flex-grow">
+									<div key={e.id} className="flex flex-col items-center px-10 grow">
 										<span className="text-2xl font-medium">
 											{e.count.toLocaleString()}
 										</span>

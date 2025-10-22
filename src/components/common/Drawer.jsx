@@ -19,7 +19,7 @@ function DrawerBody({children}) {
 					<IoClose/>
 				</CBBButton>
 			</div>
-			<div className="flex-grow overflow-y-auto relative custom-scrollbar max-h-full">
+			<div className="grow overflow-y-auto relative custom-scrollbar max-h-full">
 				{children}
 			</div>
 		</>

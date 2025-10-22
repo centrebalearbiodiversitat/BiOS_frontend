@@ -274,7 +274,7 @@ export default function MapPage({params}) {
 								<MapLibrePopup key={occu.id} images={occu.taxonomy.images}
 								               onClose={() => selectedOccus.splice(idx, 1) && setSelectedOccus([...selectedOccus])}
 								               title={
-									               <p className="text-lg md:text-2xl !font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
+									               <p className="text-lg md:text-2xl font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
 										               <TaxonName taxon={occu.taxonomy} author={false}/>
 										               <span className={`block text-sm md:text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
@@ -308,14 +308,14 @@ export default function MapPage({params}) {
 					<Accordion className="px-6 pt-4" defaultExpandedKeys={["taxa", "geo", "filters"]}
 					           selectionMode={"multiple"}>
 						<AccordionItem key="taxa" aria-label={t(lang, 'map.drawer.selectedTaxa')}
-						               className="border-b-1 border-slate-400"
+						               className="border-b border-slate-400"
 						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedTaxa')}</h4>}>
 							<MapLibreTaxa lang={lang} taxa={taxa} taxaColors={taxaColors} onColorChanged={onColorChanged}
 							              onHide={onHide} onReorder={onReorder}
 							              onDeleted={onDeletedSearch} onSelectedSearch={onSelectedSearch}/>
 						</AccordionItem>
 						<AccordionItem key="geo" aria-label={t(lang, 'map.drawer.selectedLocalities')}
-						               className="border-b-1 border-slate-400"
+						               className="border-b border-slate-400"
 						               title={<h4 className="flex justify-start text-xl font-extralight">{t(lang, 'map.drawer.selectedLocalities')}</h4>}>
 							<div className="mx-2">
 								<CBBSearchBar showFilters={false} lang={lang} rounded={true} loadOnSubmit={false}

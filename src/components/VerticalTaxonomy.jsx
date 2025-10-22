@@ -28,7 +28,7 @@ export default function VerticalTaxonomy({taxonomy, markLast= false, overflow = 
 					(taxon, idx) => (
 						<li key={taxon.id} className={
 							clsx(
-								idx + 1 < taxa.length ? "border-b-1" : markLast ? "bg-gray-100 border-s-2 border-primary" : "",
+								idx + 1 < taxa.length ? "border-b" : markLast ? "bg-gray-100 border-s-2 border-primary" : "",
 								"py-3 px-1 flex items-end"
 							)
 						}>

@@ -1,11 +1,10 @@
 import {t} from "@/i18n/i18n";
 import React from "react";
-import {useLang} from "@/contexts/LangContext";
 import SubSection from "@/components/common/SubSection";
 
 export default function MarkerInfo({lang, marker}) {
 	return (
-		<SubSection className="!p-4 flex flex-col gap-3">
+		<SubSection className="flex flex-col gap-3" style={{padding: "1rem !important"}}>
 			<h4 className="font-extralight text-sm">
 				{t(lang, "components.markerInfo.selected")}
 			</h4>

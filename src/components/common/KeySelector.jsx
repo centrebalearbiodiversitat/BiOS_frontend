@@ -31,7 +31,7 @@ export default function KeySelector({lang, items, label, placeHolder, onSelected
 				}
 	        </Select>
 			{isSelected &&
-							<Button className="bg-white border-1 border-slate-200" onPress={() => onChange({target: {value: ""}})} isIconOnly>
+							<Button className="bg-white border border-slate-200" onPress={() => onChange({target: {value: ""}})} isIconOnly>
 		                        <IoClose/>
 							</Button>
 						}

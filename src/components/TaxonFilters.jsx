@@ -159,7 +159,7 @@ export default function TaxonFilters({className}) {
 								</Chip>
 							</div>
 						}
-						<div className="!rounded-full">
+						<div className="rounded-full">
 							<FullCBBSearchBar lang={lang} rounded={false} filters={ancestorSearch}
 							                  showFilters={false}/>
 						</div>
@@ -174,8 +174,8 @@ export default function TaxonFilters({className}) {
 						       defaultValue={searchParams.get('q')}/>
 					</div>
 					<hr className="col-span-full hidden lg:block"/>
-					<Accordion className="!col-span-full px-0" defaultExpandedKeys={searchParams.size > 0 && ["advanced_filters"]}>
-						<AccordionItem classNames={{title: "font-extralight text-xl", trigger: "py-0"}} key="advanced_filters"
+					<Accordion className="col-span-full px-0" defaultExpandedKeys={searchParams.size > 0 && ["advanced_filters"]}>
+						<AccordionItem classNames={{title: "font-extralight text-xl cursor-pointer", trigger: "py-0"}} key="advanced_filters"
 						               title={t(lang, "components.header.button.advancedSearch")}>
 							<div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
 								<div>

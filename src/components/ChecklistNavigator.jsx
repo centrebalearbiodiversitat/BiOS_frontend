@@ -31,7 +31,7 @@ function RecursiveChecklistNav({checklist, updateChecklist, className}) {
 						               title={taxon.children ? `${taxon.name} (${taxon.children.length})` : `${taxon.name}`}>
 							{taxon.children &&
 								<RecursiveChecklistNav checklist={taxon.children}
-						               className="border-gray-300 border-s-1 ps-4"
+						               className="border-gray-300 border-s ps-4"
 				                       updateChecklist={cl => updateUpwards(cl, idx)}/>
 							}
 						</AccordionItem>

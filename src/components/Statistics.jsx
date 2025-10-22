@@ -54,7 +54,7 @@ async function DataCard({lang, title, icon, fetchData}) {
 export default function Statistics({lang, className}) {
 
 	return (
-		<div className={clsx("bg-white/100 py-3 sm:py-5 divide-x grid grid-cols-3 rounded-2xl", className)}>
+		<div className={clsx("bg-white py-3 sm:py-5 divide-x grid grid-cols-3 rounded-2xl", className)}>
 			{
 				CBB_STATISTICS.map((item, index) => (
 					<DataCard {...item} key={index} lang={lang}/>

@@ -42,9 +42,9 @@ function ClickableLevelBlock({taxonId, level, count}) {
 
 	return (
 		<li key={level} className="w-full">
-			<BlockWrapper className="w-full h-full font-extralight  text-sm p-3.5 bg-white rounded-xl transition-all border-1 flex flex-col"
+			<BlockWrapper className="w-full h-full font-extralight  text-sm p-3.5 bg-white rounded-xl transition-all border flex flex-col"
 			      href={`/${lang}/taxon/list?ancestor=${taxonId}&rank=${level}`} isClickable={count !== undefined}>
-				<p className="flex-grow text-center font-[250] text-2xl xl:text-lg 2xl:text-2xl">
+				<p className="grow text-center font-[250] text-2xl xl:text-lg 2xl:text-2xl">
 					{countFormat}
 				</p>
 				<p className="capitalize mt-auto text-center max-w-full text-sm truncate">

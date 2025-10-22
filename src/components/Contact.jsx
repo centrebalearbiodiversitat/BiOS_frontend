@@ -20,7 +20,7 @@ export default function Contact({lang}) {
 			{
 				links.map((link) => (
 					<li key={link.path}>
-						<Link href={link.path} className="!text-sm font-extralight hover:underline text-slate-500" target={link.target || "_self"}>
+						<Link href={link.path} className="text-sm font-extralight hover:underline text-slate-500" target={link.target || "_self"}>
 							{link.text}
 						</Link>
 					</li>

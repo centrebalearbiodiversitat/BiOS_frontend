@@ -19,7 +19,7 @@ export default function Legal({lang}) {
 			{
 				links.map((link) => (
 					<li key={link.path}>
-						<Link href={link.path} className="!text-sm font-extralight hover:underline text-slate-500">
+						<Link href={link.path} className="text-sm font-extralight hover:underline text-slate-500">
 							{link.text}
 						</Link>
 					</li>

@@ -18,7 +18,7 @@ export default function Footer({lang}) {
 						       alt={"CBB logo"} width={339} height={120}/>
 					</div>
 				</div>
-				<div className="grid grid-cols-2 sm:flex sm:flex-row !text-sm gap-x-8 justify-center gap-y-6">
+				<div className="grid grid-cols-2 sm:flex sm:flex-row text-sm gap-x-8 justify-center gap-y-6">
 					<SiteMap lang={lang}/>
 					<Legal lang={lang}/>
 					<Contact lang={lang}/>

@@ -59,7 +59,7 @@ export default function MapLibreCard({lang, taxon, dragControls, colorSelector =
 					<IoMdClose/>
 				</CBBButton>
 			</div>
-			<div className="ms-4 border-s-1 ps-2">
+			<div className="ms-4 border-s ps-2">
 				<CBBButton isIconOnly className="border-0 text-lg hover:contrast-50 transition-all min-w-[20px] max-w-[20px]"
 				           onPointerDown={(event) => dragControls.start(event)}>
 					<MdDragIndicator/>
