@@ -14,17 +14,6 @@ import TaxonSystem from "@/components/TaxonSystem";
 import TaxonDirectives from "@/components/TaxonDirectives";
 import NoData from "@/components/common/NoData";
 import IUCNCard from "@/components/IUCNCard";
-import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
-
-// export async function generateStaticParams({params}) {
-// 	console.log(params)
-// 	const {id} = await params;
-// 	console.log(id)
-//
-// 	return [{
-// 		taxon
-// 	}]
-// }
 
 export async function generateMetadata({params, searchParams}) {
 	const {lang, id} = await params;
