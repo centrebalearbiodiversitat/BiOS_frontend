@@ -63,7 +63,7 @@ export default async function Genetics({params, searchParams}) {
 					<OnGeoToggleButton/>
 				</div>
 			</div>
-			<SubSection style={{padding: "0px !important"}}>
+			<SubSection padding="p-0">
 				<TaxonMarkers markers={totalMarker !== undefined && markers !== undefined && [totalMarker, ...markers]}/>
 			</SubSection>
 			<Hidden hide={!selectedMarker}>

@@ -75,12 +75,12 @@ export default async function Taxon({params}) {
 			<Hidden hide={!isSpeciesOrLower}>
 				<Section lang={lang} title="taxon.overview.status" subtitle="taxon.overview.status.description">
 					<div className="grid grid-cols-4 md:grid-cols-5 xl:grid-cols-4 gap-4">
-						<SubSection className="col-span-full md:col-span-2 xl:col-span-1" style={{padding: "0 !important"}}>
+						<SubSection className="col-span-full md:col-span-2 xl:col-span-1" padding="p-0">
 							<NoData lang={lang} isDataAvailable={taxonTags?.at(0)}>
 								<TaxonDOE lang={lang} doe={taxonTags?.at(0)}/>
 							</NoData>
 						</SubSection>
-						<SubSection className="col-span-full md:col-span-3 xl:col-span-3" style={{padding: "0 !important"}}>
+						<SubSection className="col-span-full md:col-span-3 xl:col-span-3" padding="p-0">
 							<IUCNCard lang={lang} scopes={taxonData}/>
 						</SubSection>
 					</div>

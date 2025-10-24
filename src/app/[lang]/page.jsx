@@ -6,6 +6,8 @@ import Statistics from "@/components/Statistics";
 import Link from "next/link";
 import Image from "next/image";
 import {MdTune} from "react-icons/md";
+import {generateSourceUrl} from "@/utils/utils";
+import {IMAGE_NOT_FOUND_SRC} from "@/utils/CONSTANTS";
 
 export async function generateMetadata(props) {
 	const {lang} = await props.params;
@@ -14,7 +16,10 @@ export async function generateMetadata(props) {
 	return {
 		title,
 		openGraph: {
-			title
+			title,
+			images: [
+				{url: "https://balearica.uib.cat/images/pages/home/home.jpg"},
+			]
 		}
 	}
 }

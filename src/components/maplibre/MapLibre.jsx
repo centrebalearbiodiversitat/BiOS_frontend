@@ -1,9 +1,11 @@
 "use client"
 
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react';
-import Map, {Layer, Source, NavigationControl, ScaleControl} from 'react-map-gl/maplibre';
+import {Map, Layer, Source, NavigationControl, ScaleControl, AttributionControl} from 'react-map-gl/maplibre';
 import {Spinner} from "@heroui/spinner";
 import html2canvas from "html2canvas";
+import {useLang} from "@/contexts/LangContext";
+import {t} from "@/i18n/i18n";
 
 const MAP_STYLE = {
 	version: 8,
@@ -135,7 +137,10 @@ const MapLibre = forwardRef(({
 	const [zoom] = useState(7);
 	const [bearing] = useState(-8);
 	const [pitch] = useState(0);
+	const [lang] = useLang();
+
 	const mapRef = useRef(null);
+	const attribution = `<p class="text-slate-500">${t(lang, "map.viewfinder.attribution")}</p>`
 
 	const exportMap = useCallback(async () => {
 		const scaleDom = document.getElementsByClassName('maplibregl-ctrl-bottom-left');
@@ -181,6 +186,7 @@ const MapLibre = forwardRef(({
 		     mapStyle={MAP_STYLE} doubleClickZoom={false} preserveDrawingBuffer={true} maxZoom={14} minZoom={7}
 		     interactiveLayerIds={data?.map((el, idx) => idx.toString())} style={{flex: 1, ...style}}
 		     onDblClick={(e) => nav && flyTo()}
+		     attributionControl={false}
 		     maxBounds={[
 			     [-4.46368, 36.26470],
 				 [9.49993, 42.27980],
@@ -202,6 +208,8 @@ const MapLibre = forwardRef(({
 					)
 				})
 			}
+			<AttributionControl position="bottom-right" compact={false} customAttribution={attribution}/>
+			<AttributionControl position="bottom-right" compact={true} customAttribution='<p class="text-slate-500">Designed by Balearica using MapLibre</p>'/>
 			<ScaleControl position="bottom-left" style={{zIndex: -10, position: "relative"}} maxWidth={200}/>
 			{nav &&
 				<NavigationControl showCompass={true} position={navPos} visualizePitch={true} showZoom={true}/>}

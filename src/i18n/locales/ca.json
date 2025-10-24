@@ -149,6 +149,7 @@
 	"geography.rank.town": "Població",
 	"geography.rank.wb_0": "Aigua",
 
+	"map.viewfinder.attribution": "Dades del mapa: CC-BY 4.0 ign.es 2015-2021 | Obra derivada de MDT02-cob2 2015-2021 CC-BY 4.0 scne.es",
 	"map.drawer.close": "Tanca",
 	"map.drawer.selectedTaxa": "Tàxons seleccionats",
 	"map.drawer.selectedLocalities": "Localitats seleccionades",

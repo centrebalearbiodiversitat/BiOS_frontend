@@ -4,7 +4,7 @@ import SubSection from "@/components/common/SubSection";
 
 export default function MarkerInfo({lang, marker}) {
 	return (
-		<SubSection className="flex flex-col gap-3" style={{padding: "1rem !important"}}>
+		<SubSection className="flex flex-col gap-3" padding="p-4">
 			<h4 className="font-extralight text-sm">
 				{t(lang, "components.markerInfo.selected")}
 			</h4>

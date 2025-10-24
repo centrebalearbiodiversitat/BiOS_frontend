@@ -50,13 +50,14 @@ export default function RootLayout({children, params}) {
 
 			<meta property="og:title" content={t(lang, 'web.title')}/>
 			<meta property="og:description" content={t(lang, 'web.description')}/>
-			<meta property="og:image" content="https://balearica.uib.cat/images/pages/home/home.jpg"/>
+			{/*Meta og:image is commented to avoid multiple meta images generated in children pages*/}
+			{/*<meta property="og:image" content="https://balearica.uib.cat/images/pages/home/home.jpg"/>*/}
 			<meta property="og:url" content="https://balearica.uib.cat"/>
 			<meta property="og:type" content="website"/>
 
 			<meta property="twitter:title" content={t(lang, 'web.title')}/>
 			<meta property="twitter:description" content={t(lang, 'web.description')}/>
-			<meta property="twitter:image" content="https://balearica.uib.cat/images/pages/home/home.jpg"/>
+			{/*<meta property="twitter:image" content="https://balearica.uib.cat/images/pages/home/home.jpg"/>*/}
 			<meta property="twitter:url" content="https://balearica.uib.cat"/>
 			<meta property="twitter:type" content="website"/>
 		</head>

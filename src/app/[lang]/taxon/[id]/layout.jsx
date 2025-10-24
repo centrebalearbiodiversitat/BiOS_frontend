@@ -25,13 +25,14 @@ export async function generateMetadata({params, searchParams}) {
 	const taxon = await taxonomy.get(id);
 
 	const description = t(lang, 'taxon.overview.description').replace("{name}", taxon.name)
+	console.log(generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC))
 
 	return {
 		description,
 		openGraph: {
 			description,
 			images: [
-				{url: generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)},
+				{url: generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)}
 			]
 		}
 	}

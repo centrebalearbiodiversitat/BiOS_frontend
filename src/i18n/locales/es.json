@@ -148,6 +148,7 @@
 	"geography.rank.town": "Población",
 	"geography.rank.wb_0": "Agua",
 
+	"map.viewfinder.attribution": "Datos del mapa: CC-BY 4.0 ign.es 2015-2021 | Obra derivada de MDT02-cob2 2015-2021 CC-BY 4.0 scne.es",
 	"map.drawer.close": "Cerrar",
 	"map.drawer.selectedTaxa": "Taxones seleccionados",
 	"map.drawer.selectedLocalities": "Localidades seleccionadas",

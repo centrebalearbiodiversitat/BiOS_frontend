@@ -19,7 +19,7 @@ function ChipExternalLink({originSource}) {
 			<Link href={url} target="_blank">
 				<Chip as={"div"} className="bg-transparent border border-black/20 text-blue-700 transition duration-600 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
 					<p className="flex flex-row space-x-2">
-						<span>{originSource.source?.basis.acronym ?? originSource.source?.basis.name}</span>
+						<span>{originSource.source?.basis.acronym ?? originSource.source?.basis.name} {originSource.source?.dataType === "dataset_key" && <span>(Dataset)</span>}</span>
 						<RxExternalLink className="text-md my-auto align-baseline "/>
 					</p>
 				</Chip>
