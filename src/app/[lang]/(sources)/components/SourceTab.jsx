@@ -20,7 +20,7 @@ function SourceCard({lang, source}) {
 					minHeight: size,
 				}}>
 					{source.image ?
-						<Image className="m-auto" radius="none" removeWrapper src={source.image}/> :
+						<Image className="m-auto" radius="none" removeWrapper alt={source.name} src={source.image}/> :
 						<span className="text-lg text-slate-600">{ICON_BASIS_TYPE[source.type]()}</span>
 					}
 				</div>

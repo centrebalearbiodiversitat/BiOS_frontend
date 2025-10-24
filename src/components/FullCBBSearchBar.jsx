@@ -9,7 +9,7 @@ import {handleScrollTop} from "@/utils/utils";
 import {useLang} from "@/contexts/LangContext";
 
 
-export default function FullCBBSearchBar({showFilters = true, rounded = true, filters = null}) {
+export default function FullCBBSearchBar({showFilters = true, rounded = true, filters = null, disableLoading = false}) {
 	const [lang] = useLang();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -39,7 +39,7 @@ export default function FullCBBSearchBar({showFilters = true, rounded = true, fi
 	}, [lang, filters, pathname, router])
 
 	return (
-		<CBBSearchBar filters={FILTER_BUTTONS} lang={lang}
+		<CBBSearchBar filters={FILTER_BUTTONS} lang={lang} disableLoading={disableLoading}
 		              label="components.searchbar.label.taxonomy" border={true}
 		              placeholder="components.searchbar.placeholder.taxonomy"
 		              showFilters={showFilters} rounded={rounded}/>

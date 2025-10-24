@@ -1,7 +1,6 @@
 import {t} from "@/i18n/i18n";
 import {RiParentFill} from "react-icons/ri";
 import {Chip} from "@heroui/chip";
-import {Divider} from "@heroui/divider";
 import {Input} from "@heroui/input";
 import TaxonName from "@/components/common/TaxonName";
 import FullCBBSearchBar from "@/components/FullCBBSearchBar";
@@ -161,7 +160,7 @@ export default function TaxonFilters({className}) {
 						}
 						<div className="rounded-full">
 							<FullCBBSearchBar lang={lang} rounded={false} filters={ancestorSearch}
-							                  showFilters={false}/>
+							                  showFilters={false} disableLoading={true}/>
 						</div>
 					</div>
 					<div className="col-span-full">

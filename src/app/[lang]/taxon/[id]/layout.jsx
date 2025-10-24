@@ -31,7 +31,7 @@ export async function generateMetadata({params, searchParams}) {
 		openGraph: {
 			description,
 			images: [
-				{url: generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)},
+				{url: generateSourceUrl(taxon?.images[0], IMAGE_NOT_FOUND_SRC)}
 			]
 		}
 	}

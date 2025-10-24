@@ -7,7 +7,7 @@ import {t} from "@/i18n/i18n";
 import clsx from "clsx";
 
 
-export default function CBBSearchBar({lang, label, placeholder, filters, loadOnSubmit = true, showFilters = true, border = true, rounded = true, children}) {
+export default function CBBSearchBar({lang, label, placeholder, filters, loadOnSubmit = true, showFilters = true, border = true, rounded = true, disableLoading = false, children}) {
     const [query, setQuery] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [filter, setFilter] = useState(0);
@@ -45,7 +45,7 @@ export default function CBBSearchBar({lang, label, placeholder, filters, loadOnS
     return (
         <SearchBar data={query} onSelected={onSelected} rounded={rounded} className="w-full"
                    label={label} placeholder={placeholder} lang={lang} border={border}
-                   onSubmit={onSubmit} onInput={onInput} isLoading={isLoading}>
+                   onSubmit={onSubmit} onInput={onInput} isLoading={!disableLoading && isLoading}>
             {children}
         </SearchBar>
     )

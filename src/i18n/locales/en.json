@@ -148,6 +148,8 @@
 	"geography.rank.town": "Town",
 	"geography.rank.wb_0": "Water",
 
+	"map.viewfinder.designed": "Developed by Balearica using MapLibre",
+	"map.viewfinder.attribution": "Map data: CC-BY 4.0 ign.es 2015-2021 | Derivative work from MDT02-cob2 2015-2021 CC-BY 4.0 scne.es",
 	"map.drawer.close": "Close",
 	"map.drawer.selectedTaxa": "Selected taxa",
 	"map.drawer.selectedLocalities": "Selected localities",

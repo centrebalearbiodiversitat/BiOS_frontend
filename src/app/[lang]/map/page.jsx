@@ -276,7 +276,8 @@ export default function MapPage({params}) {
 								               title={
 									               <p className="text-lg md:text-2xl font-extralight text-start leading-6 my-auto mb-3 text-pretty mx-auto">
 										               <TaxonName taxon={occu.taxonomy} author={false}/>
-										               <span className={`block text-sm md:text-lg font-extralight w-full`}>
+										               <span
+											               className={`block text-sm md:text-lg font-extralight w-full`}>
 											               {occu ? occu.taxonomy.scientificNameAuthorship : ""}
 										               </span>
 									               </p>
@@ -290,7 +291,8 @@ export default function MapPage({params}) {
 												<span>± {occu.coordinateUncertaintyInMeters} m.</span>)}</span>
 										}/>
 										<TwoLineText title={t(lang, "map.popup.elevation")} text={occu.elevation}/>
-										<TwoLineText title={t(lang, "map.popup.depth")} text={occu.depth ? `${occu.depth} m.` : null}/>
+										<TwoLineText title={t(lang, "map.popup.depth")}
+										             text={occu.depth ? `${occu.depth} m.` : null}/>
 										<TwoLineText title={t(lang, "map.popup.eventDate")} text={occu.eventDate}/>
 										<TwoLineText title={t(lang, "map.popup.basisRecord")}
 										             text={occu.basisOfRecord}/>
