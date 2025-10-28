@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://balearica.uib.eu/en</loc>
+        <loc>https://balearica.uib.cat/en</loc>
     </url>
     <url>
-        <loc>https://balearica.uib.eu/es</loc>
+        <loc>https://balearica.uib.cat/es</loc>
     </url>
     <url>
-        <loc>https://balearica.uib.eu/cat</loc>
+        <loc>https://balearica.uib.cat/ca</loc>
     </url>
     <url>
-        <loc>https://balearica.uib.eu/en/map</loc>
+        <loc>https://balearica.uib.cat/en/map</loc>
     </url>
     <url>
-        <loc>https://balearica.uib.eu/en/about</loc>
+        <loc>https://balearica.uib.cat/en/about</loc>
     </url>
     <url>
-        <loc>https://balearica.uib.eu/en/taxon/1</loc>
+        <loc>https://balearica.uib.cat/en/taxon/1</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/es/map</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/es/about</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/es/taxon/1</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/ca/map</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/ca/about</loc>
+    </url>
+    <url>
+        <loc>https://balearica.uib.cat/ca/taxon/1</loc>
     </url>
 </urlset>
