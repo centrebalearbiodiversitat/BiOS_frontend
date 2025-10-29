@@ -156,7 +156,7 @@ export default async function RootLayout({children, params}) {
 				<TabButtonGroup buttons={TAB_BUTTONS} colorPrimary="bg-gray-100" colorSecondary="bg-gray-200">
 					{
 						TAB_BUTTONS.map((button, index) => (
-							<TabButton key={button.href} text={button.text} href={button.href} icon={button.icon}/>
+							<TabButton key={button.href} text={button.text} href={button.href} icon={button.icon} rel="nofollow"/>
 						))
 					}
 				</TabButtonGroup>

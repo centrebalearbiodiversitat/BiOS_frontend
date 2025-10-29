@@ -6,7 +6,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import {useParams, usePathname} from "next/navigation";
 
-export function TabButton({href, text, icon, small = false}) {
+export function TabButton({href, text, icon, small = false, rel}) {
 	const pathname = usePathname();
 	const params = useParams();
 	const [fullPath, setFullPath] = useState(undefined);
@@ -21,6 +21,7 @@ export function TabButton({href, text, icon, small = false}) {
 
 	return (
 		<Button as={Link} radius="full" href={href} key={href}
+		        rel={rel}
 		        className={clsx(
 			        "w-[50px] max-w-[50px] text-center text-lg font-extralight",
 			        !small && "md:w-[150px] md:max-w-[150px]",

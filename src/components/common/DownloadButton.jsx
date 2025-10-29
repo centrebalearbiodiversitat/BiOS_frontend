@@ -6,7 +6,7 @@ import {t} from "@/i18n/i18n";
 export default function DownloadButton({lang, className, href, children}) {
 	if (href) {
 		return (
-			<Link href={href} rel="nofollow">
+			<Link href={href} rel="nofollow" prefetch={false}>
 				<CBBButton isDisabled={!href} color="primary" className={className}>
 					{children || t(lang, "taxon.layout.modal.download_button")}
 				</CBBButton>

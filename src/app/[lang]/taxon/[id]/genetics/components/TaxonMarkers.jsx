@@ -46,6 +46,8 @@ export default function TaxonMarkers({markers}) {
 		} else {
 			params.set("marker", marker.id);
 		}
+		params.delete("page");
+
 
 		router.push(`?${params.toString()}`, {scroll: false});
 	}, [router, searchParams]);

@@ -102,7 +102,7 @@ export default function IUCN({scope, status, source, className}) {
 
 	return (
 		<IUCNToolTip lang={lang} status={status}>
-			<LinkWrapper target="_blank" rel="nofollow" href={href}>
+			<LinkWrapper target="_blank" rel="nofollow" prefetch={false} href={href}>
 				<div className={clsx("w-full h-full", className)}>
 					<div className={"flex flex-col w-full h-full gap-5 p-6"}>
 						<div className="flex flex-row">
