@@ -92,7 +92,7 @@ export default async function RootLayout({children, params}) {
 
 	return (
 		<div className="flex flex-col lg:flex-row lg:gap-11 mx-4 md:mx-8 2xl:mx-16 mt-5">
-			<aside className="basis-1/4 w-full h-full space-y-2 mb-5 sticky top-[110px]">
+			<aside className="basis-1/4 w-full h-full space-y-2 mb-5 lg:sticky top-[110px]">
 				<div className="max-h-[80svh] lg:h-[80svh] flex flex-col gap-6">
 					<div className="rounded-full ms-auto w-full">
 						<FullCBBSearchBar lang={lang} rounded={true} showFilters={false}/>
